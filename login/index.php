@@ -61,11 +61,12 @@
 					<!-- Login Button-->
 					<div class="container-login100-form-btn">
 						<input type="submit" name="login" value="Login" class="login100-form-btn"></input>
+						<?php   //error message here?                                                   ?>
 					</div>
 					
 					<div class="text-center p-t-46 p-b-20">
 						<span class="txt2">
-							or sign up using
+							or sign up 
 						</span>
 					</div>	
 				</form>
