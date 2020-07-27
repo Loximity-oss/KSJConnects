@@ -12,24 +12,25 @@ if (isset($_POST['login'])) {
 	$result = mysqli_query($con, $sql);
 	$count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
 	$row = mysqli_fetch_assoc($result);
-	if ($count == 1)
-		if($row['userType'] == 'ADMIN'){
+	if ($count == 1){
+		if($row['userType'] == 'ADMIN' and $row['verification'] == TRUE){
 			header("Location: usergroups/admin/admin_dashboard.html");
-		} else if ($row['userType'] == 'STAFF'){
+		} else if ($row['userType'] == 'STAFF' and $row['verification'] == TRUE){
 			header("Location: usergroups/staff/staff_dashboard.html");
-		} else if ($row['userType'] == 'USER'){
+		} else if ($row['userType'] == 'USER' and $row['verification'] == TRUE){
 			header("Location: usergroups/admin/admin_dashboard.html");
-		} else if ($row['userType'] == 'GUEST'){
+		} else if ($row['userType'] == 'GUEST' and $row['verification'] == TRUE){
 			header("Location: usergroups/admin/admin_dashboard.html");
+		} else if ($row['verification'] == false) {
+			header("Location: error.html");
 		}
-
-	else {
-		echo ' <br>
-		<span class="txt1 p-b-9">
-			Your username/password is incorrect.
-		</span>
-		';
-
 	}
-} 
+	else {
+		$_SESSION['error'] = 1;
+		header("Location: index.php");
+	}
+} else {
+	$_SESSION['error'] = 1;
+	header("Location: index.php");
+}
 ?>

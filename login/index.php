@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +40,7 @@
 						Login to continue
 					</span>
 					
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					<div class="wrap-input100 validate-input" data-validate = "Username is required">
 						<input class="input100" type="text" name="username">
 						<span class="focus-input100"></span>
 						<span class="label-input100">User ID</span>
@@ -54,19 +56,19 @@
 						<div>
 							<a href="#" class="txt1">
 								Forgot Password?
-							</a>
+							</a> <br>
+							<?php if(isset($_SESSION['error'])) echo ' <br> <span class="txt2"> Your username/password is incorrect. </span>  '; session_destroy();?>
 						</div>
 					</div>
 			
 					<!-- Login Button-->
 					<div class="container-login100-form-btn">
 						<input type="submit" name="login" value="Login" class="login100-form-btn"></input>
-						<?php   //error message here?                                                   ?>
 					</div>
 					
 					<div class="text-center p-t-46 p-b-20">
 						<span class="txt2">
-							or sign up 
+							or <a href="../register/index.php">sign up</a> 
 						</span>
 					</div>	
 				</form>
