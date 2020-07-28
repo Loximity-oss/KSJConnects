@@ -6,8 +6,10 @@ if (isset($_POST['register'])) {
         exit;
     }
     //todo check userid
+
+    $hash = md5( rand(0,1000) );
     $sql = "INSERT INTO `users` (`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`) VALUES ('" . $_POST['username'] . "',
-     '" . $_POST['fullname'] . "', '" . $_POST['pass'] . "', '" . $_POST['email'] . "', '" . $_POST['phonenumber'] . "', 'GUEST' , '0');";
+     '" . $_POST['fullname'] . "', '" . $_POST['pass'] . "', '" . $_POST['email'] . "', '" . $_POST['phonenumber'] . "', 'GUEST' , '" . $hash . "');";
     $result = mysqli_query($con, $sql);
 
     if ($result) {
