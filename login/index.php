@@ -54,7 +54,7 @@
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div>
-							<a href="#" class="txt1">
+							<a href="forgetpass/index.php" class="txt1">
 								Forgot Password?
 							</a> <br>
 							<?php if(isset($_SESSION['error'])) echo ' <br> <span class="txt2"> Your username/password is incorrect. </span>  '; session_destroy();?>
