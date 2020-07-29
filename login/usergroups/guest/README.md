@@ -1,29 +1,29 @@
-# [Start Bootstrap - SB Admin](https://startbootstrap.com/templates/sb-admin/)
+# [Start Bootstrap - Simple Sidebar](https://startbootstrap.com/templates/simple-sidebar/)
 
-[SB Admin](https://startbootstrap.com/templates/sb-admin/) is an open source, admin dashboard template for [Bootstrap](https://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).
+[Simple Sidebar](https://startbootstrap.com/templates/simple-sidebar/) is an off canvas sidebar navigation template for [Bootstrap](https://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).
 
 ## Preview
 
-[![SB Admin Preview](https://startbootstrap.com/assets/img/screenshots/templates/sb-admin.png)](https://startbootstrap.github.io/startbootstrap-sb-admin/)
+[![Simple Sidebar Preview](https://startbootstrap.com/assets/img/screenshots/templates/simple-sidebar.png)](https://startbootstrap.github.io/startbootstrap-simple-sidebar/)
 
-**[View Live Preview](https://startbootstrap.github.io/startbootstrap-sb-admin/)**
+**[View Live Preview](https://startbootstrap.github.io/startbootstrap-simple-sidebar/)**
 
 ## Status
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/StartBootstrap/startbootstrap-sb-admin/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/startbootstrap-sb-admin.svg)](https://www.npmjs.com/package/startbootstrap-sb-admin)
-[![Build Status](https://travis-ci.org/StartBootstrap/startbootstrap-sb-admin.svg?branch=master)](https://travis-ci.org/StartBootstrap/startbootstrap-sb-admin)
-[![dependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin/status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin)
-[![devDependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin/dev-status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin?type=dev)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/StartBootstrap/startbootstrap-simple-sidebar/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/startbootstrap-simple-sidebar.svg)](https://www.npmjs.com/package/startbootstrap-simple-sidebar)
+[![Build Status](https://travis-ci.org/StartBootstrap/startbootstrap-simple-sidebar.svg?branch=master)](https://travis-ci.org/StartBootstrap/startbootstrap-simple-sidebar)
+[![dependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-simple-sidebar/status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-simple-sidebar)
+[![devDependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-simple-sidebar/dev-status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-simple-sidebar?type=dev)
 
 ## Download and Installation
 
 To begin using this template, choose one of the following options to get started:
 
-* [Download the latest release on Start Bootstrap](https://startbootstrap.com/templates/sb-admin/)
-* Install via npm: `npm i startbootstrap-sb-admin`
-* Clone the repo: `git clone https://github.com/StartBootstrap/startbootstrap-sb-admin.git`
-* [Fork, Clone, or Download on GitHub](https://github.com/StartBootstrap/startbootstrap-sb-admin)
+* [Download the latest release on Start Bootstrap](https://startbootstrap.com/templates/simple-sidebar/)
+* Install via npm: `npm i startbootstrap-simple-sidebar`
+* Clone the repo: `git clone https://github.com/StartBootstrap/startbootstrap-simple-sidebar.git`
+* [Fork, Clone, or Download on GitHub](https://github.com/StartBootstrap/startbootstrap-simple-sidebar)
 
 ## Usage
 
@@ -33,15 +33,13 @@ After downloading, simply edit the HTML and CSS files included with the template
 
 ### Advanced Usage
 
-After installation, run `npm install` and then run `npm start` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `scripts/` directory to see which tasks are included with the dev environment.
+After installation, run `npm install` and then run `npm start` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `gulpfile.js` to see which tasks are included with the dev environment.
+
+You must have npm and Gulp installed globally on your machine in order to use these features.
 
 ## Bugs and Issues
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/StartBootstrap/startbootstrap-sb-admin/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](https://startbootstrap.com/templates/sb-admin/).
-
-## Custom Builds
-
-You can hire Start Bootstrap to create a custom build of any template, or create something from scratch using Bootstrap. For more information, visit the **[custom design services page](https://startbootstrap.com/bootstrap-design-services/)**.
+Have a bug or an issue with this template? [Open a new issue](https://github.com/StartBootstrap/startbootstrap-simple-sidebar/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](https://startbootstrap.com/templates/simple-sidebar/).
 
 ## About
 
@@ -60,4 +58,4 @@ Start Bootstrap is based on the [Bootstrap](https://getbootstrap.com/) framework
 
 ## Copyright and License
 
-Copyright 2013-2020 Start Bootstrap LLC. Code released under the [MIT](https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/gh-pages/LICENSE) license.
+Copyright 2013-2020 Start Bootstrap LLC. Code released under the [MIT](https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/gh-pages/LICENSE) license.

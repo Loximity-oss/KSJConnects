@@ -20,7 +20,7 @@ if (isset($_POST['login'])) {
 		} else if ($row['userType'] == 'USER' and $row['verification'] == TRUE){
 			header("Location: usergroups/admin/admin_dashboard.html");
 		} else if ($row['userType'] == 'GUEST' and $row['verification'] == TRUE){
-			header("Location: usergroups/admin/admin_dashboard.html");
+			header("Location: usergroups/guest/index.php");
 		} else if ($row['verification'] == false) {
 			header("Location: error.html");
 		}
