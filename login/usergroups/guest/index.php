@@ -56,11 +56,8 @@
 
       <div class="container-fluid">
         <?php echo '<h1 class="mt-4">Welcome back! ' . $_SESSION["username"] . '</h1>'; ?>
-        <p>Welcome to KSJConnects Application System for
-          larger screens. When toggled using the button below, the menu will change.</p>
-        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional,
-          and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the
-          menu when clicked.</p>
+        <p>Welcome to KSJConnects Application System for Guests.</p>
+        <p></p>
       </div>
 
       <div class="container-fluid">
@@ -83,7 +80,7 @@
         while ($row = mysqli_fetch_assoc($result2)) {
           if ($row['status'] == 1) {
             echo '<div class="col-sm-12">
-            <div class="card">
+            <div class="card  border-primary mb-3">
               <div class="card-header">
                 Application ID : ' . $row['no'] . '
               </div>
@@ -97,7 +94,7 @@
           }
         }
       } else {
-        echo '<p>No current application pending.</p>';
+        echo '<div class="container-fluid"><p>No Active applications.</p></div>';
       }
       ?>
       <div class="container-fluid">
@@ -120,7 +117,7 @@
         while ($row = mysqli_fetch_assoc($result2)) {
           if ($row['status'] == 2) {
             echo '<div class="col-sm-12">
-            <div class="card">
+            <div class="card   border-success mb-3">
               <div class="card-header">
                 Application ID : ' . $row['no'] . '
               </div>
@@ -135,7 +132,7 @@
           }
         }
       } else {
-        echo '<p>No successful application.</p>';
+        echo '<div class="container-fluid"><p>No successfull applications.</p></div>';
       }
       ?>
 
@@ -160,7 +157,7 @@
         while ($row = mysqli_fetch_assoc($result2)) {
           if ($row['status'] == 3) {
             echo '<div class="col-sm-12">
-            <div class="card">
+            <div class="card   border-danger mb-3">
               <div class="card-header">
                 Application ID : ' . $row['no'] . '
               </div>
@@ -175,7 +172,7 @@
           }
         }
       } else {
-        echo '<p>No rejected applications.</p>';
+        echo '<div class="container-fluid"><p>No rejected applications.</p></div>';
       }
       ?>
 

@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php session_start();
+$con = mysqli_connect("localhost", "root", "", "ksjdb");
+if (!$con) {
+  echo  mysqli_connect_error();
+  exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,124 +67,159 @@
       </div>
 
 
-      <div class="container-fluid">
-        <div class="col-sm-12">
-          <div class="card">
-            <h5 class="card-header">Registration Form</h5>
-            <div class="card-body">
-              <form>
 
-                <!--userID-->
-                <div class="form-group">
-                  <label for="userID">User ID</label>
-                  <input class="form-control" type="text" placeholder="USER ID" name="userid" readonly>
-                </div>
-                <!--name-->
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input class="form-control" type="text" placeholder="NAME" name="name" readonly>
-                </div>
-                <!--ic-->
-                <div class="form-group">
-                  <label for="ic">Malaysian Identification Card</label>
-                  <input type="text" class="form-control" name="ic" placeholder="Enter IC" required>
-                </div>
-                <!--year/course-->
-                <div class="form-group">
-                  <label for="">Year/Course (UTM STUDENT ONLY)</label>
-                  <input type="text" class="form-control" name="year/course" placeholder="Enter Year/Course">
-                </div>
-                <!--matric id-->
-                <div class="form-group">
-                  <label for="Matric ID">Matric ID (UTM STUDENT ONLY)</label>
-                  <input type="text" class="form-control" name="matid" placeholder="Enter Matric ID">
-                </div>
-                <!--phone-->
-                <div class="form-group">
-                  <label for="phone">Phone Number</label>
-                  <input class="form-control" type="text" placeholder="Phone Number" name="phone" readonly>
-                </div>
-                <!--address-->
-                <div class="form-group">
-                  <label for="address">Enter Full Address</label>
-                  <input class="form-control" type="text" placeholder="Address" name="address">
-                </div>
+      <?php
 
-                <!--religion-->
-                <!--sex-->
-                <div class="form-row">
-                  <div class="col">
-                    <label for="religion">Enter Religion</label>
-                    <input type="text" class="form-control" name="religion" placeholder="Religion">
+      $sql = "SELECT users.userID, users.fullname, users.phone_no, merit.merit, registration.status FROM users, registration, merit WHERE users.userID = '" . $_SESSION["username"] . "' ORDER BY `registration`.`status` ASC";
+      $result = mysqli_query($con, $sql);
+      $count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
+      $row = mysqli_fetch_assoc($result);
+      if ($row['status'] != 1) {
+        if ($count > 0) {
+          echo '<div class="container-fluid">
+                    <div class="col-sm-12">
+                      <div class="card">
+                        <h5 class="card-header">Registration Form</h5>
+                        <div class="card-body">
+                          <form enctype="multipart/form-data" action="edit/application.php" method="POST">
+
+
+                    <!--userID-->
+                    <div class="form-group">
+                      <label for="userID">User ID</label>
+                      <input class="form-control" type="text" value="' . $row['userID'] . '" name="userID" readonly>
+                    </div>
+  
+                    <!--name-->
+                    <div class="form-group">
+                      <label for="name">Name</label>
+                      <input class="form-control" type="text" value="' . $row['fullname'] . '" name="name" readonly>
+                    </div>
+  
+                    <!--ic-->
+                    <div class="form-group">
+                      <label for="ic">Malaysian Identification Card</label>
+                      <input type="text" class="form-control" name="ic" placeholder="Enter IC" required>
+                    </div>
+  
+                    <!--year/course-->
+                    <div class="form-group">
+                      <label for="">Year/Course (UTM STUDENT ONLY)</label>
+                      <input type="text" class="form-control" name="year/course" placeholder="Enter Year/Course">
+                    </div>
+  
+                    <!--matric id-->
+                    <div class="form-group">
+                      <label for="Matric ID">Matric ID (UTM STUDENT ONLY)</label>
+                      <input type="text" class="form-control" name="matid" placeholder="Enter Matric ID">
+                    </div>
+  
+                    <!--phone-->
+                    <div class="form-group">
+                      <label for="phone">Phone Number</label>
+                      <input class="form-control" type="text" value="' . $row['phone_no'] . '" name="phone" readonly>
+                    </div>
+  
+                    <!--address-->
+                    <div class="form-group">
+                      <label for="address">Enter Full Address</label>
+                      <input class="form-control" type="text" placeholder="Address" name="address">
+                    </div>
+    
+                    <!--religion-->
+                    <!--sex-->
+                    <div class="form-group">
+                      <div class="form-row">
+                        <div class="col">
+                          <label for="religion">Enter Religion</label>
+                          <input type="text" class="form-control" name="religion" placeholder="Religion">
+                        </div>
+                        <div class="col">
+                          <label for="sex">Sex</label>
+                          <select class="form-control" name="sex">
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Prefer not to say</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+    
+    
+                    <!--parentjob-->
+                    <div class="form-group">
+                      <label for="parentjob">Parent Job</label>
+                      <input class="form-control" type="text" placeholder="Parent Job Name" name="parentjob" required>
+                    </div>
+    
+                    <!--payslip-->
+                    <label for="name">Pay Slip (PDF Only)</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Pay Slip</span>
+                      </div>
+                      <div class="custom-file">
+                        <input type="file" name="payslip" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" required>
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                      </div>
+                    </div>
+                    <small class="form-text text-muted">PDF Files only. Max size 2MB</small><br>
+    
+    
+                    <!--acadslip-->
+                    <label for="name">Academic Slip (PMR,SPM, UTM CGPA) (PDF Only)</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon02">Academic Slip</span>
+                      </div>
+                      <div class="custom-file">
+                        <input type="file" name="acadslip" class="custom-file-input" id="inputGroupFile02" aria-describedby="inputGroupFileAddon02" required>
+                        <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                      </div>
+                    </div>
+                    <small class="form-text text-muted">PDF Files only. Max size 2MB</small><br>
+    
+                    <!--merit-->
+                    <div class="form-group">
+                      <label for="merit">Merit Points</label>
+                      <input class="form-control" type="text" value="' . $row['merit'] . '" name="merit" readonly>
+                    </div>
+    
+                    <!--box-->
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    
+                    </form>
+                    </div>
                   </div>
-                  <div class="col">
-                    <label for="sex">Sex</label>
-                    <select class="form-control" name="sex">
-                      <option>Male</option>
-                      <option>Female</option>
-                      <option>Prefer not to say</option>
-                    </select>
+                  </div>
+                  </div>';
+        }
+      } else {
+        echo '
+        <div class="container-fluid">
+            <div class="col-sm-12">
+              <div class="card border-info mb-3">
+                  <div class="card-header">
+                    Information
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">You currently have an application pending.</h5>
+                    <p class="card-text">Kindly wait until your application has been approved.</p>
+                    <a href="index.php" class="btn btn-primary">Return to Dashboard</a>
                   </div>
                 </div>
-
-
-                <!--parentjob-->
-                <div class="form-group">
-                  <label for="parentjob">Parent Job</label>
-                  <input class="form-control" type="text" placeholder="Parent Job Name" name="parentjob">
-                </div>
-
-                <!--payslip-->
-                <label for="name">Pay Slip (PDF Only)</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01">Pay Slip</span>
-                  </div>
-                  <div class="custom-file">
-                    <input type="file" name="payslip" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                  </div>
-                </div>
-                <small class="form-text text-muted">PDF Files only. Max size 2MB</small><br>
-
-
-                <!--acadslip-->
-                <label for="name">Academic Slip (PMR,SPM, UTM CGPA) (PDF Only)</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon02">Academic Slip</span>
-                  </div>
-                  <div class="custom-file">
-                    <input type="file" name="acadslip" class="custom-file-input" id="inputGroupFile02" aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                  </div>
-                </div>
-                <small class="form-text text-muted">PDF Files only. Max size 2MB</small><br>
-
-                <!--merit-->
-                <div class="form-group">
-                  <label for="merit">Merit Points</label>
-                  <input class="form-control" type="text" placeholder="merit" name="merit" readonly>
-                </div>
-
-                <!--dateApplied-->
-                <div class="form-group">
-                  <label for="merit">Date Application</label>
-                  <input class="form-control" type="date" placeholder="" name="merit" readonly>
-                </div>
-                
-                <!--box-->
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        ';
+      }
 
+      ?>
+
+
+      <br>
+      <br>
       <!-- /#page-content-wrapper -->
 
     </div>
@@ -209,8 +251,30 @@
             }
           });
       }
+
+      $('#inputGroupFile01').on('change', function() {
+      //get the file name
+      var fileName = $(this).val();
+      //replace the "Choose a file" label
+      $(this).next('.custom-file-label').html(fileName);
+    })
+
+
+    $('#inputGroupFile02').on('change', function() {
+      //get the file name
+      var fileName = $(this).val();
+      //replace the "Choose a file" label
+      $(this).next('.custom-file-label').html(fileName);
+    })
     </script>
 
 </body>
 
 </html>
+
+
+<?php
+
+
+
+?>

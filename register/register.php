@@ -8,9 +8,10 @@ if (isset($_POST['register'])) {
     //todo check userid
 
     $hash = md5(rand(0, 1000));
-    $sql = "INSERT INTO `users` (`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`) VALUES ('" . $_POST['username'] . "',
-     '" . $_POST['fullname'] . "', '" . $_POST['pass'] . "', '" . $_POST['email'] . "', '" . $_POST['phonenumber'] . "', 'GUEST' , '" . $hash . "');";
+    $sql = "INSERT INTO `users` (`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) VALUES ('0x0','" . $_POST['username'] . "','" . $_POST['fullname'] . "', '" . $_POST['pass'] . "', '" . $_POST['email'] . "', '" . $_POST['phonenumber'] . "', 'GUEST' , '" . $hash . "', 'HELLOFUCKER');";
+    $sql2 = "INSERT INTO `merit` (`userID`,`merit`) VALUES ('" . $_POST['username'] . "','0');";
     $result = mysqli_query($con, $sql);
+    $result2 = mysqli_query($con, $sql2);
 
     if ($result) {
         $to = $_POST['email'];
@@ -27,10 +28,9 @@ if (isset($_POST['register'])) {
         ';
         $headers = 'From: ssah37@gmail.com';
         if (mail($to, $subject, $message, $headers))
-        header("Location: succesful.html");
+            header("Location: succesful.html");
         else
             header("Location: error.html");
-        
     } else {
         header("Location: error.html");
     }
