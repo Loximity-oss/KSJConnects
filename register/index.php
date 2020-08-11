@@ -81,10 +81,9 @@
 						<span class="focus-input100"></span>
 						<span class="label-input100">Verify Password</span>
 					</div>
-
 					<!-- Register Button-->
 					<div class="container-login100-form-btn">
-						<input type="submit" name="register" value="Register" class="login100-form-btn"></input>
+						<input type="submit" name="register" value="Register"  class="login100-form-btn"></input>
 					</div>
 
 					<div class="text-center p-t-46 p-b-20">

@@ -66,16 +66,13 @@ if (!$con) {
         <p>Here you can apply for Kolej Siswa Jaya. Please note room selection is random.</p>
       </div>
 
-
-
       <?php
-
+      $count=0;
       $sql = "SELECT users.userID, users.fullname, users.phone_no, merit.merit, registration.status FROM users, registration, merit WHERE users.userID = '" . $_SESSION["username"] . "' ORDER BY `registration`.`status` ASC";
       $result = mysqli_query($con, $sql);
       $count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
       $row = mysqli_fetch_assoc($result);
-      if ($row['status'] != 1) {
-        if ($count > 0) {
+ 
           echo '<div class="container-fluid">
                     <div class="col-sm-12">
                       <div class="card">
@@ -193,27 +190,8 @@ if (!$con) {
                   </div>
                   </div>
                   </div>';
-        }
-      } else {
-        echo '
-        <div class="container-fluid">
-            <div class="col-sm-12">
-              <div class="card border-info mb-3">
-                  <div class="card-header">
-                    Information
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">You currently have an application pending.</h5>
-                    <p class="card-text">Kindly wait until your application has been approved.</p>
-                    <a href="index.php" class="btn btn-primary">Return to Dashboard</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        ';
-      }
+                  
+                  
 
       ?>
 
@@ -253,19 +231,19 @@ if (!$con) {
       }
 
       $('#inputGroupFile01').on('change', function() {
-      //get the file name
-      var fileName = $(this).val();
-      //replace the "Choose a file" label
-      $(this).next('.custom-file-label').html(fileName);
-    })
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+      })
 
 
-    $('#inputGroupFile02').on('change', function() {
-      //get the file name
-      var fileName = $(this).val();
-      //replace the "Choose a file" label
-      $(this).next('.custom-file-label').html(fileName);
-    })
+      $('#inputGroupFile02').on('change', function() {
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+      })
     </script>
 
 </body>

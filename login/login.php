@@ -12,25 +12,27 @@ if (isset($_POST['login'])) {
 	$result = mysqli_query($con, $sql);
 	$count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
 	$row = mysqli_fetch_assoc($result);
-	if ($count == 1){
-		if($row['userType'] == 'ADMIN' and $row['verification'] == TRUE){
-			header("Location: usergroups/admin/admin_dashboard.html");
-		} else if ($row['userType'] == 'STAFF' and $row['verification'] == TRUE){
-			header("Location: usergroups/staff/staff_dashboard.html");
-		} else if ($row['userType'] == 'USER' and $row['verification'] == TRUE){
-			header("Location: usergroups/admin/admin_dashboard.html");
-		} else if ($row['userType'] == 'GUEST' and $row['verification'] == TRUE){
-			header("Location: usergroups/guest/index.php");
-		} else if ($row['verification'] == false) {
+
+	echo $count;
+	if ($count == 1) {
+		if ($row['verification'] != 1) {
 			header("Location: error.html");
+		} else {
+			if ($row['userType'] == 'ADMIN') {
+				header("Location: usergroups/admin/base/html/index.php");
+			} else if ($row['userType'] == 'STAFF') {
+				header("Location: usergroups/staff/staff_dashboard.html");
+			} else if ($row['userType'] == 'USER') {
+				header("Location: usergroups/admin/admin_dashboard.html");
+			} else if ($row['userType'] == 'GUEST') {
+				header("Location: usergroups/guest/index.php");
+			} else {
+				header("Location: error.html");
+			}
 		}
-	}
-	else {
+	}else{
 		$_SESSION['error'] = 1;
 		header("Location: index.php");
+			
 	}
-} else {
-	$_SESSION['error'] = 1;
-	header("Location: index.php");
 }
-?>

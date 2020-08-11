@@ -5,13 +5,17 @@ if (isset($_POST['register'])) {
         echo  mysqli_connect_error();
         exit;
     }
-    //todo check userid
 
+    //randomize md5 address for verification.
     $hash = md5(rand(0, 1000));
-    $sql = "INSERT INTO `users` (`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) VALUES ('0x0','" . $_POST['username'] . "','" . $_POST['fullname'] . "', '" . $_POST['pass'] . "', '" . $_POST['email'] . "', '" . $_POST['phonenumber'] . "', 'GUEST' , '" . $hash . "', 'HELLOFUCKER');";
+
+  
+
+    //insert into sql.
+    $sql = "INSERT INTO `users` (`imageType`,`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) VALUES ('','0x0','" . $_POST['username'] . "','" . $_POST['fullname'] . "', '" . $_POST['pass'] . "', '" . $_POST['email'] . "', '" . $_POST['phonenumber'] . "', 'GUEST' , '" . $hash . "', 'Default');";
     $sql2 = "INSERT INTO `merit` (`userID`,`merit`) VALUES ('" . $_POST['username'] . "','0');";
-    $result = mysqli_query($con, $sql);
-    $result2 = mysqli_query($con, $sql2);
+    $result = mysqli_query($con, $sql);  
+    $result2 = mysqli_query($con, $sql2); 
 
     if ($result) {
         $to = $_POST['email'];
@@ -23,7 +27,7 @@ if (isset($_POST['register'])) {
         
          
         Please click this link to activate your account:
-        http://60.48.188.31/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
+        http://175.144.181.53/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
          
         ';
         $headers = 'From: ssah37@gmail.com';

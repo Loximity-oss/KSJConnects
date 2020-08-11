@@ -69,7 +69,7 @@ if (!$con) {
       <div class="container-fluid">
         <div class="row">
           <?php
-          $sql = "SELECT * FROM users,merit where users.userID = '" . $_SESSION['username'] . "'";
+          $sql = "SELECT * FROM users,merit where users.userID = '" . $_SESSION['username'] . "' and merit.userID = '" . $_SESSION['username'] . "'";
           $result = mysqli_query($con, $sql);
           $count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
           $list = mysqli_fetch_assoc($result);
@@ -169,11 +169,11 @@ if (!$con) {
               </div>
               <div class="form-group">
                 <label for="newpass">New Password</label>
-                <input type="password" name="bioedit" class="form-control" id="newpass" placeholder="Enter New Password">
+                <input type="password" name="newpass" class="form-control" id="newpass" placeholder="Enter New Password">
               </div>
               <div class="form-group">
                 <label for="confirmnewpass">Confirm new Password</label>
-                <input type="password" name="bioedit" class="form-control" id="confirmnewpass" placeholder="Confirm New Password">
+                <input type="password" name="confirmnewpass" class="form-control" id="confirmnewpass" placeholder="Confirm New Password">
               </div>
               <button type="submit" name="passwordedit" class="btn btn-primary">Submit</button>
             </form>
@@ -184,7 +184,7 @@ if (!$con) {
                 <br>
                 <h6 class="card-subtitle mb-2">Change Bio</h6>
                 <p class="card-text">Here you can change bio.</p>
-                <textarea class="form-control" maxlength="100" placeholder="Enter your new bio (max 100)" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" name="bio" maxlength="100" placeholder="Enter your new bio (max 100)" id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
               <button type="submit" name="bioedit" class="btn btn-primary">Submit</button>
             </form>
