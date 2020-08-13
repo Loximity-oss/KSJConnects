@@ -57,7 +57,7 @@
 
 					<!-- Forgot Button-->
 					<div class="container-login100-form-btn">
-						<input type="submit" name="Go" value="Go" class="login100-form-btn"></input>
+						<input type="submit" id="Go" name="Go" value="Go" class="login100-form-btn"></input>
 					</div>
 				</form>
 

@@ -13,7 +13,6 @@ if (isset($_POST['login'])) {
 	$count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
 	$row = mysqli_fetch_assoc($result);
 
-	echo $count;
 	if ($count == 1) {
 		if ($row['verification'] != 1) {
 			header("Location: error.html");
@@ -21,9 +20,9 @@ if (isset($_POST['login'])) {
 			if ($row['userType'] == 'ADMIN') {
 				header("Location: usergroups/admin/base/html/index.php");
 			} else if ($row['userType'] == 'STAFF') {
-				header("Location: usergroups/staff/staff_dashboard.html");
+				header("Location: usergroups/staff/base/html/index.php");
 			} else if ($row['userType'] == 'USER') {
-				header("Location: usergroups/admin/admin_dashboard.html");
+				header("Location: usergroups/resident/base/html/index.php");
 			} else if ($row['userType'] == 'GUEST') {
 				header("Location: usergroups/guest/index.php");
 			} else {

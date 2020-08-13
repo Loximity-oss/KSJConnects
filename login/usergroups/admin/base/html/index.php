@@ -194,34 +194,18 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="index.php">
+                  <a class="animsition-link" href="addcomplaint.php">
+                    <span class="site-menu-title">Add Resident's Complaint</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="viewcomplaint.php">
                     <span class="site-menu-title">View Resident's Complaint</span>
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="index.php">
+                  <a class="animsition-link" href="manipulatecomplaint.php">
                     <span class="site-menu-title">Manage Resident's Complaints</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <!-- Facility Booking Stuff-->
-            <li class="site-menu-category">Facility Booking System</li>
-            <li class="site-menu-item has-sub">
-              <a href="javascript:void(0)">
-                <i class="site-menu-icon wb-stats-bars" aria-hidden="true"></i>
-                <span class="site-menu-title">Facility Booking Submenu</span>
-              </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item ">
-                  <a class="animsition-link" href="index.php">
-                    <span class="site-menu-title">View Resident's Facility Bookings</span>
-                  </a>
-                </li>
-                <li class="site-menu-item ">
-                  <a class="animsition-link" href="index.php">
-                    <span class="site-menu-title">Manage Resident's Facility Bookings</span>
                   </a>
                 </li>
               </ul>
@@ -412,8 +396,8 @@
             <div class="card-block">
               <h4 class="card-title">KSJConnects Disclaimer</h4>
               <p class="card-text">This web application contains confidential information and is intended only for the individual named and the management of KSJConnects.
-                If you are not the individual or managment you should not disseminate, distribute or copy this of this information.. 
-</p>
+                If you are not the individual or managment you should not disseminate, distribute or copy this of this information..
+              </p>
             </div>
           </div>
         </div>
@@ -480,7 +464,7 @@
   <script src="../../global/js/Plugin/gmaps.js"></script>
   <script src="../../global/js/Plugin/matchheight.js"></script>
   <script src="../../global/js/Plugin/asscrollable.js"></script>
-
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="../assets/examples/js/dashboard/v2.js"></script>
   <script>
     function JSconfirm() {

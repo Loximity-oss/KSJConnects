@@ -203,12 +203,17 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
+                                    <a class="animsition-link" href="viewcomplaint.php">
+                                        <span class="site-menu-title">Add Resident's Complaint</span>
+                                    </a>
+                                </li>
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="viewcomplaint.php">
                                         <span class="site-menu-title">View Resident's Complaint</span>
                                     </a>
                                 </li>
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
+                                    <a class="animsition-link" href="manipulatecomplaint.php">
                                         <span class="site-menu-title">Manage Resident's Complaints</span>
                                     </a>
                                 </li>
@@ -476,4 +481,3 @@
 </body>
 
 </html>
-

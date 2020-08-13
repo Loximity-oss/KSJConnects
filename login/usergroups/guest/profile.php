@@ -73,6 +73,7 @@ if (!$con) {
           $result = mysqli_query($con, $sql);
           $count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
           $list = mysqli_fetch_assoc($result);
+        
           if ($count == 1) {
             echo '
           <div class="col-sm-3">
@@ -158,7 +159,7 @@ if (!$con) {
                       </div>';
           }
           ?>
-
+    
           <div class="tab-pane" id="modify" role="tabpanel" aria-labelledby="history-tab">
             <h6 class="card-subtitle mb-2">Change Password</h6>
             <p class="card-text">Here you can change password.</p>

@@ -101,7 +101,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                            <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
                                 <i></i>
                             </span>
                         </a>
@@ -197,12 +197,17 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
+                                    <a class="animsition-link" href="addcomplaint.php">
+                                        <span class="site-menu-title">Add Resident's Complaint</span>
+                                    </a>
+                                </li>
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="viewcomplaint.php">
                                         <span class="site-menu-title">View Resident's Complaint</span>
                                     </a>
                                 </li>
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
+                                    <a class="animsition-link" href="manipulatecomplaint.php">
                                         <span class="site-menu-title">Manage Resident's Complaints</span>
                                     </a>
                                 </li>
@@ -463,21 +468,19 @@
         }
 
         function JSconfirm() {
-        swal({
-            title: "Are you sure?",
-            text: "Are you sure you want to logout out of KSJConnects?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((logout) => {
-            if (logout) {
-              location.href = '../../../../logout.php';
-            }
-          });
-      }
-
-
+            swal({
+                    title: "Are you sure?",
+                    text: "Are you sure you want to logout out of KSJConnects?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((logout) => {
+                    if (logout) {
+                        location.href = '../../../../logout.php';
+                    }
+                });
+        }
     </script>
 </body>
 
@@ -516,11 +519,11 @@ if (isset($_POST['submit'])) {
             
              
             Please click this link to activate your account:
-            http://60.53.134.152/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
+            http://118.101.107.162/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
              
             ';
             $headers = 'From: ssah37@gmail.com';
-            
+
             if (mail($to, $subject, $message, $headers))
                 echo '<script>swal({
                 title: "Success",

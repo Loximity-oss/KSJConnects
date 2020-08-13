@@ -9,7 +9,6 @@ if (isset($_POST['register'])) {
     //randomize md5 address for verification.
     $hash = md5(rand(0, 1000));
 
-  
 
     //insert into sql.
     $sql = "INSERT INTO `users` (`imageType`,`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) VALUES ('','0x0','" . $_POST['username'] . "','" . $_POST['fullname'] . "', '" . $_POST['pass'] . "', '" . $_POST['email'] . "', '" . $_POST['phonenumber'] . "', 'GUEST' , '" . $hash . "', 'Default');";
@@ -27,8 +26,7 @@ if (isset($_POST['register'])) {
         
          
         Please click this link to activate your account:
-        http://175.144.181.53/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
-         
+        http://118.101.107.162/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
         ';
         $headers = 'From: ssah37@gmail.com';
         if (mail($to, $subject, $message, $headers))

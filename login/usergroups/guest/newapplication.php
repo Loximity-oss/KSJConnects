@@ -68,7 +68,7 @@ if (!$con) {
 
       <?php
       $count=0;
-      $sql = "SELECT users.userID, users.fullname, users.phone_no, merit.merit, registration.status FROM users, registration, merit WHERE users.userID = '" . $_SESSION["username"] . "' ORDER BY `registration`.`status` ASC";
+      $sql = "SELECT users.userID, users.fullname, users.phone_no, merit.merit FROM users, merit WHERE users.userID = '" . $_SESSION["username"] . "'";
       $result = mysqli_query($con, $sql);
       $count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
       $row = mysqli_fetch_assoc($result);

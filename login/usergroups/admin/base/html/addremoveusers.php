@@ -203,12 +203,17 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
+                                    <a class="animsition-link" href="addcomplaint.php">
+                                        <span class="site-menu-title">Add Resident's Complaint</span>
+                                    </a>
+                                </li>
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="viewcomplaint.php">
                                         <span class="site-menu-title">View Resident's Complaint</span>
                                     </a>
                                 </li>
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
+                                    <a class="animsition-link" href="manipulatecomplaint.php">
                                         <span class="site-menu-title">Manage Resident's Complaints</span>
                                     </a>
                                 </li>
@@ -372,10 +377,10 @@
                         <!--buttons-->
                         <div class="btn-toolbar" role="toolbar">
                             <div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button type="submit" name="update" class="btn btn-primary">Update User Details</button>
+                                <button type="submit" name="update" class="btn btn-primary">Update User Details</button>
                             </div>
                             <div class="btn-group mr-2" role="group" aria-label="Second group">
-                            <button type="submit" name="delete" class="btn btn-primary">Delete User Details</button>
+                                <button type="submit" name="delete" class="btn btn-primary">Delete User Details</button>
                             </div>
                         </div>
 
@@ -611,7 +616,6 @@ if (isset($_POST['update'])) {
                 window.location.href = "addremoveusers.php";
                }
             ); </script>';
-              
     } else {
         echo '<script>swal({
                 title: "Oh no",
@@ -652,4 +656,3 @@ if (isset($_POST['delete'])) {
     }
 }
 ?>
-
