@@ -432,7 +432,7 @@
                             <div class="form-group row">
                                 <label for="staticstatus_string" class="col-sm-2 col-form-label">Academic Results</label>
                                 <div class="col-sm-10">
-                                    <button class="btn btn-primary" data-target="#examplePositionCenter2" data-toggle="modal" type="button" disabled>View ACAD</button>
+                                    <button class="btn btn-primary" data-target="#examplePositionCenter2" data-toggle="modal" type="button">View ACAD</button>
 
                                     <div class="modal fade" id="examplePositionCenter2" aria-labelledby="examplePositionCenter2" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
                                         <div class="modal-dialog modal-simple modal-center">
@@ -796,12 +796,17 @@ if (!$con) {
     echo  mysqli_connect_error();
     exit;
 }
+$con2 = mysqli_connect("localhost", "root", "", "ksjdb");
+if (!$con2) {
+    echo  mysqli_connect_error();
+    exit;
+}
 $date = date('Y-m-d');
 if (isset($_POST['accept'])) {
     $sql = "UPDATE `registration` SET `status` = '2', `status_string` = '" . $_POST['staticstatus_string'] . "', `dateAccepted` = '" . $date . "' WHERE `registration`.`no` = '" . $_POST['appid'] . "' ";
     $sql2 = "UPDATE `roomlist` SET `userID` = '" . $_POST['staticuserID'] . "' WHERE `roomlist`.`roomID` = '" . $_POST['roomID'] . "'";
     $result = mysqli_query($con, $sql);
-    $result2 = mysqli_query($con, $sql2);
+    $result2 = mysqli_query($con2, $sql2);
     if ($result) {
         echo '<script>
                swal({

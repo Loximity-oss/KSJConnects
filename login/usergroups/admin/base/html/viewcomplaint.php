@@ -326,10 +326,79 @@
                     <h3 class="panel-title">Complaint List</h3>
                 </header>
                 <div class="panel-body">
+                    <!-- Add Data Button -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-15">
+                                <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal for Data Button -->
+                    <div class="modal fade" id="examplePositionCenter2" aria-labelledby="examplePositionCenter2" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-simple modal-center">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h4 class="modal-title">Add User Complaint</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="POST">
+                                        <!--user ID-->
+                                        <div class="form-group ">
+                                            <label for="staticuserID" class="form-label">User ID</label>
+                                            <input type="text" class="form-control" id="staticuserID" name="staticuserID" required>
+                                            <span id="user-availability-status"></span>
+                                        </div>
+
+                                        <!--complaint-->
+                                        <div class="form-group ">
+                                            <label for="staticcomplaintid" class="form-label">Complaint ID</label>
+                                            <input type="text" class="form-control" id="staticcomplaintid" name="staticcomplaintid" value="Auto-assigned" disabled>
+                                        </div>
+
+                                        <!--reason-->
+                                        <div class="form-group ">
+                                            <label for="staticreason" class="form-label">Reason</label>
+                                            <input type="text" class="form-control" id="staticreason" name="staticreason" value="" required>
+                                        </div>
+
+                                        <!--status-->
+                                        <div class="form-group ">
+                                            <label for="staticstatus" class="form-label">Status</label>
+                                            <input type="text" class="form-control" id="staticstatus" name="staticstatus" required>
+                                        </div>
+
+                                        <!--supervisor-->
+                                        <div class="form-group ">
+                                            <label for="staticsupervisor" class="form-label">Supervisor</label>
+                                            <input type="text" class="form-control" id="staticsupervisor" name="staticsupervisor" required>
+                                        </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <!--buttons-->
+                                    <div class="btn-toolbar" role="toolbar">
+                                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                                            <button type="submit" name="update" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full dtr-inline" data-plugin="dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="width: 823px;">
+                                <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+
+
                                     <?php
                                     $con = mysqli_connect("localhost", "root", "", "ksjdb");
                                     if (!$con) {
@@ -342,43 +411,111 @@
                                     mysqli_close($con);
                                     $qry = $result;
                                     $list = mysqli_num_rows($qry);
+
+                                    $counter = 1;
                                     if ($list > 0) {
                                         echo '<thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 127.992px;" aria-sort="ascending" aria-label="User ID: activate to sort column descending">User ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 162.992px;" aria-label="Reason: activate to sort column ascending">Complaint ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 162.992px;" aria-label="Reason: activate to sort column ascending">Reason</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 162.992px;" aria-label="Status: activate to sort column ascending">Status</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 162.992px;" aria-label="Supervisor: activate to sort column ascending">Supervisor</th>
+                                            <th>No</th>
+                                            <th>User ID</th>
+                                            <th>Complaint ID</th>
+                                            <th>Reason</th>
+                                            <th>Status</th>
+                                            <th>Supervisor</th>
+                                            <th>Actions</th>
                                         </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">User ID</th>
-                                                <th rowspan="1" colspan="1" style="">Complaint ID</th>
-                                                <th rowspan="1" colspan="1" style="">Reason</th>
-                                                <th rowspan="1" colspan="1" style="">Status</th>
-                                                <th rowspan="1" colspan="1" style="">Supervisor</th>
-                                            </tr>
-                                        </tfoot>';
+                                        <tbody>
+';
                                         while ($row = mysqli_fetch_assoc($qry)) {
                                             echo '
-                                            <tr role="row" >
-                                                <td class="sorting_1" tabindex="0">' . $row['userID'] . '</td>
-                                                <td style="">' . $row['complaintID'] . '</td>
-                                                <td style="">' . $row['complaint_str'] . '</td>
-                                                <td style="">' . $row['status'] . '</td>                                              
-                                                <td style="">' . $row['supervisor'] . '</td>
-                                            ';
+                                            <tr>
+                                                <td class="nr">' . $counter . '</td>
+                                                <td>' . $row['userID'] . '</td>
+                                                <td>' . $row['complaintID'] . '</td>
+                                                <td>' . $row['complaint_str'] . '</td>
+                                                <td>' . $row['status'] . '</td>                                              
+                                                <td>' . $row['supervisor'] . '</td>
+                                                <td class="actions">
+                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
+                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
+                                            
+                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                    data-toggle="tooltip" data-original-title="Remove"><i class="icon wb-trash" aria-hidden="true"></i></a>
+                                                </td>
+                                                
+                                            </tr>';
+                                            $counter++;
                                         }
                                     }
+
+                                    //modal
+                                    echo '</tbody>                                                   
+                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog modal-simple modal-center">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title">Edit User Complaint</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="" method="POST">
+                                                    <!--user ID-->
+                                                    <div class="form-group ">
+                                                        <label for="staticuserID" class="form-label">User ID</label>
+                                                        <input type="text" class="form-control" id="staticuserID" name="staticuserID" disabled>
+                                                        <span id="user-availability-status"></span>
+                                                    </div>
+                                                    
+                                                    <!--complaint-->
+                                                    <div class="form-group ">
+                                                        <label for="staticcomplaintid" class="form-label">Complaint ID</label>
+                                                        <input type="text" class="form-control" id="staticcomplaintid" name="staticcomplaintid" value="" disabled>
+                                                    </div>
+
+                                                    <!--reason-->
+                                                    <div class="form-group ">
+                                                        <label for="staticreason" class="form-label">Reason</label>
+                                                        <input type="text" class="form-control" id="staticreason" name="staticreason" value="" required>
+                                                    </div>
+
+                                                    <!--status-->
+                                                    <div class="form-group ">
+                                                        <label for="staticstatus" class="form-label">Status</label>
+                                                        <input type="text" class="form-control" id="staticstatus" name="staticstatus" required>
+                                                    </div>
+
+                                                    <!--supervisor-->
+                                                    <div class="form-group ">
+                                                        <label for="staticsupervisor" class="form-label">supervisor</label>
+                                                        <input type="text" class="form-control" id="staticsupervisor" name="staticsupervisor" required>
+                                                    </div>                                       
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <!--buttons-->
+                                                <div class="btn-toolbar" role="toolbar">
+                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                                        <button type="submit" name="update" class="btn btn-primary">Update</button>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>';
                                     ?>
-                                    </tbody>
+
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
     </div>
@@ -449,8 +586,10 @@
     <script src="../../global/js/Plugin/slidepanel.js"></script>
     <script src="../../global/js/Plugin/switchery.js"></script>
     <script src="../../global/js/Plugin/datatables.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../assets/examples/js/tables/datatable.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+
 
 
     <!-- for live editing -->
@@ -470,6 +609,21 @@
                     }
                 });
         }
+
+        $(".edit_row").click(function() {
+
+            var $row = $(this).closest("tr"); // Find the row
+            var $text = $row.find(".nr").text(); // Find the text
+            var table = $('#exampleTableTools').DataTable();
+
+            var data = table.row($text - 1).data();
+
+            $("#staticuserID").val(data[1]);
+            $("#staticcomplaintid").val(data[2]);
+            $("#staticreason").val(data[3]);
+            $("#staticstatus").val(data[4]);
+            $("#staticsupervisor").val(data[5]);
+        });
     </script>
 </body>
 
