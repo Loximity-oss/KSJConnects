@@ -429,22 +429,24 @@
 ';
                                         while ($row = mysqli_fetch_assoc($qry)) {
                                             echo '
+                                            <form action="" id="deleted" method="POST">
                                             <tr>
                                                 <td class="nr">' . $counter . '</td>
-                                                <td>' . $row['userID'] . '</td>
-                                                <td>' . $row['complaintID'] . '</td>
-                                                <td>' . $row['complaint_str'] . '</td>
-                                                <td>' . $row['status'] . '</td>                                              
-                                                <td>' . $row['supervisor'] . '</td>
+                                                <td>' . $row['userID'] . '</td>         <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                <td>' . $row['complaintID'] . '</td>    <input type="hidden" name="complaintID" value="' . $row['complaintID'] . '">
+                                                <td>' . $row['complaint_str'] . '</td>  <input type="hidden" name="complaint_str" value="' . $row['complaint_str'] . '">
+                                                <td>' . $row['status'] . '</td>         <input type="hidden" name="status" value="' . $row['status'] . '">                                             
+                                                <td>' . $row['supervisor'] . '</td>     <input type="hidden" name="supervisor" value="' . $row['supervisor'] . '">
                                                 <td class="actions">
                                                     <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
                                                     data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
                                             
-                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                    data-toggle="tooltip" data-original-title="Remove"><i class="icon wb-trash" aria-hidden="true"></i></a>
+                                                    <a class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                    data-toggle="tooltip" data-original-title="Remove" name="delete" onclick="document.getElementById("").submit();"><i class="icon wb-trash" aria-hidden="true"></i></a>
                                                 </td>
                                                 
-                                            </tr>';
+                                            </tr>
+                                            </form>';
                                             $counter++;
                                         }
                                     }
@@ -472,7 +474,7 @@
                                                     <!--complaint-->
                                                     <div class="form-group ">
                                                         <label for="staticcomplaintid" class="form-label">Complaint ID</label>
-                                                        <input type="text" class="form-control" id="staticcomplaintid" name="staticcomplaintid" value="" disabled>
+                                                        <input type="text" readonly class="form-control" id="staticcomplaintid" name="staticcomplaintid" size="50">
                                                     </div>
 
                                                     <!--reason-->
@@ -590,8 +592,6 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
 
-
-
     <!-- for live editing -->
     <!--jQuery Stuff-->
     <script>
@@ -692,57 +692,46 @@ if (isset($_POST['add'])) {
 }
 
 if (isset($_POST['update'])) {
-    $sql = "UPDATE `users` SET `fullname` = '" . $_POST['staticfullname'] . "', `password` = '" . $_POST['staticpassword'] . "', `email` = '" . $_POST['staticemail'] . "', `phone_no` = '" . $_POST['staticusertype'] . "', 
-        `userType` = '" . $_POST['staticusertype'] . "', `verification` = '" . $_POST['staticverification'] . "' WHERE `users`.`userID` = '" . $_POST['staticuserID'] . "' ";
+    $sql = "UPDATE `complaint` SET
+     `complaint_str` = '" . $_POST['staticreason'] . "',
+     `status` = '" . $_POST['staticstatus'] . "',
+      `supervisor` = '" . $_POST['staticsupervisor'] . "' 
+      WHERE `complaint`.`complaintID` = '" . $_POST['staticcomplaintid'] . "'";
+
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The user account has been modified",
+                text: "The complaint has been modified.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "addremoveusers.php";
+                window.location.href = "viewcomplaint.php";
                }
             ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "User account is not modified.",
+                text: "The complaint has not been modified.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "addremoveusers.php";
+                window.location.href = "viewcomplaint.php";
                }
             ); </script>';
     }
 }
 
 if (isset($_POST['delete'])) {
-    $sql = "DELETE FROM `users` WHERE `users`.`userID` = '" . $_POST['staticuserID'] . "' ";
-    $result = mysqli_query($con, $sql);
-    mysqli_close($con);
-    if ($result) {
-        echo '<script>swal({
-                title: "Success",
-                text: "The user account has been deleted",
-                icon: "success",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "addremoveusers.php";
-               }
-            ); </script>';
-    } else {
-        echo '<script>swal({
-                title: "Oh no",
-                text: "User account is has not been deleted",
-                icon: "error",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "addremoveusers.php";
-               }
-            ); </script>';
-    }
+    echo '<script>swal({
+        title: "Success",
+        text: "The user account has been deleted",
+        icon: "success",
+        button: "Ok",
+      }).then(function(){ 
+        window.location.href = "addremoveusers.php";
+       }
+    ); </script>';
 }
 ?>
