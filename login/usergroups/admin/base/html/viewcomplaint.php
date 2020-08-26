@@ -351,32 +351,32 @@
                                         <!--user ID-->
                                         <div class="form-group ">
                                             <label for="staticuserID" class="form-label">User ID</label>
-                                            <input type="text" class="form-control" id="staticuserID" name="staticuserID" required>
+                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability()" required>
                                             <span id="user-availability-status"></span>
                                         </div>
 
                                         <!--complaint-->
                                         <div class="form-group ">
                                             <label for="staticcomplaintid" class="form-label">Complaint ID</label>
-                                            <input type="text" class="form-control" id="staticcomplaintid" name="staticcomplaintid" value="Auto-assigned" disabled>
+                                            <input type="text" class="form-control" id="complaintid" name="complaintid" value="Auto-assigned" disabled>
                                         </div>
 
                                         <!--reason-->
                                         <div class="form-group ">
                                             <label for="staticreason" class="form-label">Reason</label>
-                                            <input type="text" class="form-control" id="staticreason" name="staticreason" value="" required>
+                                            <input type="text" class="form-control" id="reason" name="reason" value="" required>
                                         </div>
 
                                         <!--status-->
                                         <div class="form-group ">
                                             <label for="staticstatus" class="form-label">Status</label>
-                                            <input type="text" class="form-control" id="staticstatus" name="staticstatus" required>
+                                            <input type="text" class="form-control" id="status" name="status" required>
                                         </div>
 
                                         <!--supervisor-->
                                         <div class="form-group ">
                                             <label for="staticsupervisor" class="form-label">Supervisor</label>
-                                            <input type="text" class="form-control" id="staticsupervisor" name="staticsupervisor" required>
+                                            <input type="text" class="form-control" id="supervisor" name="supervisor" required>
                                         </div>
                                 </div>
 
@@ -384,7 +384,7 @@
                                     <!--buttons-->
                                     <div class="btn-toolbar" role="toolbar">
                                         <div class="btn-group mr-2" role="group" aria-label="First group">
-                                            <button type="submit" name="update" class="btn btn-primary">Update</button>
+                                            <button type="submit" name="add" class="btn btn-primary">Add</button>
                                         </div>
                                     </div>
                                     </form>
@@ -624,7 +624,125 @@
             $("#staticstatus").val(data[4]);
             $("#staticsupervisor").val(data[5]);
         });
+
+        function checkAvailability() {
+            jQuery.ajax({
+                url: "verification/livedit.php",
+                data: 'username=' + $("#userID").val(),
+                type: "POST",
+                dataType: "json",
+                cache: false,
+                success: function(data) {
+                    //conversion from object to array
+                    var userData = $.map(data, function(value, index) {
+                        return [value];
+                    });
+                    //edit USERNAME AVAILABLE status
+                    $("#user-availability-status").html("<span class='status-available'> User ID available. </span>");
+                },
+                error: function(data) {
+                    //append to input boxes...
+                    $("#user-availability-status").html("<span class='status-available'> User ID not available. </span>");
+                }
+            });
+        }
     </script>
 </body>
 
 </html>
+
+<?php
+$con = mysqli_connect("localhost", "root", "", "ksjdb");
+if (!$con) {
+    echo  mysqli_connect_error();
+    exit;
+}
+if (isset($_POST['add'])) {
+    $sql = "INSERT INTO `complaint` (`complaintID`, `userID`, `complaint_str`, `status`, `supervisor`) VALUES 
+(NULL, 
+'" . $_POST['userID'] . "',
+'" . $_POST['reason'] . "',
+'" . $_POST['status'] . "',
+'" . $_POST['supervisor'] . "')";
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+            title: "Success",
+            text: "The complaint has been added.",
+            icon: "success",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "viewcomplaint.php";
+           }
+        ); </script>';
+    } else {
+        echo '<script>swal({
+            title: "Oh no",
+            text: "Complaint is not added.",
+            icon: "error",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "viewcomplaint.php";
+           }
+        ); </script>';
+    }
+}
+
+if (isset($_POST['update'])) {
+    $sql = "UPDATE `users` SET `fullname` = '" . $_POST['staticfullname'] . "', `password` = '" . $_POST['staticpassword'] . "', `email` = '" . $_POST['staticemail'] . "', `phone_no` = '" . $_POST['staticusertype'] . "', 
+        `userType` = '" . $_POST['staticusertype'] . "', `verification` = '" . $_POST['staticverification'] . "' WHERE `users`.`userID` = '" . $_POST['staticuserID'] . "' ";
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The user account has been modified",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "User account is not modified.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['delete'])) {
+    $sql = "DELETE FROM `users` WHERE `users`.`userID` = '" . $_POST['staticuserID'] . "' ";
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The user account has been deleted",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "User account is has not been deleted",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    }
+}
+?>
