@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin (Add/Update/Delete User Complaints)</title>
+    <title>KSJConnects - Admin (Add/Update/Delete Facility Records)</title>
 
     <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../assets/images/favicon.ico">
@@ -315,15 +315,15 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Complaint Management / (Add/Update/Delete User Complaints)</li>
+                <li class="breadcrumb-item active">Facility Management / (Add/Update/Delete Facility Records)</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete User Complaints</h1>
+            <h1 class="page-title">Add/Update/Delete Facility Records</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Complaint List</h3>
+                    <h3 class="panel-title">Facility List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->
@@ -344,7 +344,7 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add User Complaint</h4>
+                                    <h4 class="modal-title">Add New Facility</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">

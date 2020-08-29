@@ -315,15 +315,15 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Complaint Management / View User Complaints</li>
+                <li class="breadcrumb-item active">Facility Management / (Add/Update/Delete User Facility Bookings)</li>
             </ol>
-            <h1 class="page-title">View User Complaints List</h1>
+            <h1 class="page-title">View Add/Update/Delete User Facility Bookings</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Complaint List</h3>
+                    <h3 class="panel-title">Facility Bookings List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->
@@ -344,7 +344,7 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add User Complaint</h4>
+                                    <h4 class="modal-title">Add Bookings List</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">
