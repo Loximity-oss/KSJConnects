@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin (Add/Update/Delete User Complaints)</title>
+    <title>KSJConnects - Admin (Add/Update/Delete User Bookings)</title>
 
     <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../assets/images/favicon.ico">
