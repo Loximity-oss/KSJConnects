@@ -350,7 +350,7 @@
                                     <form action="" method="POST">
                                         <!--user ID-->
                                         <div class="form-group ">
-                                            <label for="staticfacID" class="form-label">User ID</label>
+                                            <label for="staticfacID" class="form-label">Facility ID</label>
                                             <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
                                             <span id="fac-availability-status"></span>
                                         </div>
@@ -370,7 +370,7 @@
                                         <!--Maximum Occupants-->
                                         <div class="form-group ">
                                             <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                            <input type="text" class="form-control" id="facMaxPax" name="facMaxPax" required>
+                                            <input type="number" class="form-control" id="facMaxPax" name="facMaxPax" required>
                                         </div>
 
 
@@ -455,33 +455,33 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                                     <span aria-hidden="true">×</span>
                                                 </button>
-                                                <h4 class="modal-title">Edit User Complaint</h4>
+                                                <h4 class="modal-title">Edit Facility Details</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <form action="" method="POST">
                                                     <!--facID-->
                                                     <div class="form-group ">
-                                                        <label for="staticfacID" class="form-label">Facility ID/label>
-                                                        <input type="text" class="form-control" id="staticfacID" name="staticfacID" disabled>
+                                                        <label for="staticfacID" class="form-label">Facility ID</label>
+                                                        <input type="text" class="form-control" id="staticfacID" name="staticfacID" readonly>
                                                         <span id="fac-availability-status"></span>
                                                     </div>
                                                     
                                                     <!--fac Name-->
                                                     <div class="form-group ">
                                                         <label for="staticfacName" class="form-label">Facility Name</label>
-                                                        <input type="text" readonly class="form-control" id="staticfacName" name="staticfacName" size="50">
+                                                        <input type="text" class="form-control" id="staticfacName" name="staticfacName" size="50" required>
                                                     </div>
 
                                                     <!--facDesc-->
                                                     <div class="form-group ">
-                                                        <label for="staticfacDesc" class="form-label">facDesc</label>
+                                                        <label for="staticfacDesc" class="form-label">Facility Description</label>
                                                         <input type="text" class="form-control" id="staticfacDesc" name="staticfacDesc" value="" required>
                                                     </div>
 
                                                     <!--Maximum Occupants-->
                                                     <div class="form-group ">
                                                         <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                                        <input type="text" class="form-control" id="staticfacMaxPax" name="staticfacMaxPax" required>
+                                                        <input type="number" class="form-control" id="staticfacMaxPax" name="staticfacMaxPax" required>
                                                     </div>
                                  
                                             </div>
@@ -615,6 +615,7 @@
         });
 
         function checkAvailability() {
+
             jQuery.ajax({
                 url: "verification/liveeditfaclist.php",
                 data: 'facID=' + $("#facID").val(),
@@ -627,13 +628,21 @@
                         return [value];
                     });
                     //edit USERNAME AVAILABLE status
-                    $("#fac-availability-status").html("<span class='status-available'> Facility Name available. </span>");
+                    $("#fac-availability-status").html("<span class='status-available'> Facility Name not available. </span>");
                 },
                 error: function(data) {
                     //append to input boxes...
-                    $("#fac-availability-status").html("<span class='status-available'> Facility Name not available. </span>");
+                    $("#fac-availability-status").html("<span class='status-available'> Facility Name available. </span>");
                 }
             });
+
+
+
+
+
+
+
+
         }
 
         function unappend(){
@@ -651,7 +660,9 @@ if (!$con) {
     exit;
 }
 if (isset($_POST['add'])) {
-    $sql = "";
+    $sql = "INSERT INTO `facilitieslist` (`facID`, `facName`, `facDesc`, `facMaxPax`) 
+    VALUES ('" . $_POST['facID'] . "', '" . $_POST['facName'] . "', '" . $_POST['facDesc'] . "', '" . $_POST['facMaxPax'] . "')";
+
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
 
@@ -659,77 +670,78 @@ if (isset($_POST['add'])) {
     if ($result) {
         echo '<script>swal({
             title: "Success",
-            text: "The complaint has been added.",
+            text: "The facility has been added.",
             icon: "success",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "viewcomplaint.php";
+            window.location.href = "facilitylist.php";
            }
         ); </script>';
     } else {
         echo '<script>swal({
             title: "Oh no",
-            text: "Complaint is not added.",
+            text: "Facility is not added.",
             icon: "error",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "viewcomplaint.php";
+            window.location.href = "facilitylist.php";
            }
         ); </script>';
     }
 }
 
 if (isset($_POST['update'])) {
-    $sql = "";
+    $sql = "UPDATE `facilitieslist` SET `facName` = '" . $_POST['staticfacName'] . "', `facDesc` = '" . $_POST['staticfacID'] . "', `facMaxPax` = '" . $_POST['staticfacMaxPax'] . "' 
+    WHERE `facilitieslist`.`facID` = '" . $_POST['staticfacID'] . "'";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The complaint has been modified.",
+                text: "The facility has been modified.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "facilitylist.php";
                }
             ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The complaint has not been modified.",
+                text: "The facility has not been modified.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "facilitylist.php";
                }
             ); </script>';
     }
 }
 
 if (isset($_POST['delete'])) {
-    $sql = "";
+    $sql = "DELETE FROM `facilitieslist` WHERE `facilitieslist`.`facID` = '" . $_POST['staticfacID'] . "' ";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The complaint has been delete.",
+                text: "The facility has been deleted.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "facilitylist.php";
                }
             ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The complaint has not been deleted.",
+                text: "The facility has not been deleted.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "facilitylist.php";
                }
             ); </script>';
     }

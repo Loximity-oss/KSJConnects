@@ -1,13 +1,10 @@
-<?php
-if (isset($_POST['update'])) {
-    print_r($_POST);
-    $sql = "UPDATE `complaint` SET
-     `complaint_str` = '" . $_POST['staticreason'] . "',
-     `status` = '" . $_POST['staticstatus'] . "',
-      `supervisor` = '" . $_POST['staticsupervisor'] . "' 
-      WHERE `complaint`.`complaintID` = '" . $_POST['staticcomplaintid'] . "'";
+<?php    
+  print_r($_POST);
+    $sql = "UPDATE `facilitieslist` SET `facName` = '" . $_POST['staticfacName'] . "', `facDesc` = '" . $_POST['staticfacDesc'] . "', `facMaxPax` = '" . $_POST['staticfacMaxPax'] . "' 
+    WHERE `facilitieslist`.`facID` = '" . $_POST['staticfacID'] . "'";
+
+echo $sql;
 
 
-    echo $sql;
-}
+
 ?>
