@@ -8,10 +8,17 @@ if (isset($_POST['register'])) {
 
     //randomize md5 address for verification.
     $hash = md5(rand(0, 1000));
-
+    $password = $_POST['pass'];
+    $salt = "palsdkas;lkdasl;kd";
+    $hash2 = md5($password,$salt);
 
     //insert into sql.
-    $sql = "INSERT INTO `users` (`imageType`,`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) VALUES ('','0x0','" . $_POST['username'] . "','" . $_POST['fullname'] . "', '" . $_POST['pass'] . "', '" . $_POST['email'] . "', '" . $_POST['phonenumber'] . "', 'GUEST' , '" . $hash . "', 'Default');";
+    $sql = "INSERT INTO `users` (`imageType`,`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) 
+    VALUES ('','0x0','" . $_POST['username'] . "',
+    '" . $_POST['fullname'] . "',
+    '" . $hash2 . "',
+    '" . $_POST['email'] . "',
+    '" . $_POST['phonenumber'] . "', 'GUEST' , '" . $hash . "', 'Default');";
     $sql2 = "INSERT INTO `merit` (`userID`,`merit`) VALUES ('" . $_POST['username'] . "','0');";
     $result = mysqli_query($con, $sql);  
     $result2 = mysqli_query($con, $sql2); 

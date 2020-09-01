@@ -389,7 +389,7 @@
                         </div>
                     </div>
 
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                    
                         <div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
@@ -437,7 +437,7 @@
                                                     data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
                                             
                                                     <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                    data-toggle="tooltip" data-original-title="Remove" name="delete" onclick=""><i class="icon wb-trash" aria-hidden="true"></i></button>
+                                                    data-toggle="tooltip" data-original-title="Remove" name="delete"><i class="icon wb-trash" aria-hidden="true"></i></button>
                                                 </td>
                                             </form>
                                             </tr>
@@ -504,7 +504,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                
 
 
 
@@ -720,7 +720,7 @@ if (isset($_POST['update'])) {
 }
 
 if (isset($_POST['delete'])) {
-    $sql = "DELETE FROM `facilitieslist` WHERE `facilitieslist`.`facID` = '" . $_POST['staticfacID'] . "' ";
+    $sql = "DELETE FROM `facilitieslist` WHERE `facilitieslist`.`facID` = '" . $_POST['facID'] . "' ";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);

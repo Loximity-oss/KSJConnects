@@ -344,13 +344,20 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add New Facility</h4>
+                                    <h4 class="modal-title">Add New Booking</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">
                                         <!--user ID-->
                                         <div class="form-group ">
                                             <label for="staticfacID" class="form-label">Facility ID</label>
+                                            <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
+                                            <span id="fac-availability-status"></span>
+                                        </div>
+
+                                        <!--user ID-->
+                                        <div class="form-group ">
+                                            <label for="staticfacID" class="form-label">User ID</label>
                                             <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
                                             <span id="fac-availability-status"></span>
                                         </div>
@@ -363,15 +370,11 @@
 
                                         <!--facDesc-->
                                         <div class="form-group ">
-                                            <label for="staticfacDesc" class="form-label">Facility Description</label>
-                                            <input type="text" class="form-control" id="facDesc" name="facDesc" value="" required>
+                                            <label for="dateStart" class="form-label">Facility Description</label>
+                                            <input type="date" class="form-control" id="dateStart" name="dateStart" value="" required>
                                         </div>
 
-                                        <!--Maximum Occupants-->
-                                        <div class="form-group ">
-                                            <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                            <input type="number" class="form-control" id="facMaxPax" name="facMaxPax" required>
-                                        </div>
+
 
 
                                 </div>
@@ -389,28 +392,28 @@
                         </div>
                     </div>
 
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
 
-                                    <?php
-                                    $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                    if (!$con) {
-                                        echo  mysqli_connect_error();
-                                        exit;
-                                    }
-                                    $sql = "SELECT * FROM facilitiesbooking";
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 0";
 
-                                    $result = mysqli_query($con, $sql);
-                                    mysqli_close($con);
-                                    $qry = $result;
-                                    $list = mysqli_num_rows($qry);
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
 
-                                    $counter = 1;
-                                    if ($list > 0) {
-                                        echo '<thead>
+                                $counter = 1;
+                                if ($list > 0) {
+                                    echo '<thead>
                                         <tr role="row">
                                             <th>No</th>
                                             <th>Booking ID</th>
@@ -424,93 +427,107 @@
                                         </thead>
                                         <tbody>
 ';
-                                        while ($row = mysqli_fetch_assoc($qry)) {
-                                            echo '
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
+                                            <tr>
+                                                <form action=""  method="POST">
+                                                    <td class="nr">' . $counter . '</td>
+                                                    <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
+                                                    <td>' . $row['BookID'] . '</td>         
+                                                    <td>' . $row['facID'] . '</td>    
+                                                    <td>' . $row['facName'] . '</td>  
+                                                    <td>' . $row['userID'] . '</td>            
+                                                    <td>' . $row['dateStart'] . '</td> 
+                                                    <td>' . $row['dateEnd'] . '</td>                                 
+                                                    <td class="actions">
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                        data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
+                                                
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                        data-original-title="Remove" name="delete"><i class="icon wb-close" aria-hidden="true"></i></button>
+                                                    </td>
+                                                </form>
+                                            </tr>
+';
+                                        $counter++;
+                                    }
+                                }
+                                ?>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+        <div class="page-content container-fluid">
+            <div class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions"></div>
+                    <h3 class="panel-title">Rejected Bookings</h3>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+
+
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 2 ";
+
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
+
+                                $counter = 1;
+                                if ($list > 0) {
+                                    echo '<thead>
+                                        <tr role="row">
+                                            <th>No</th>
+                                            <th>Booking ID</th>
+                                            <th>Facility ID</th>
+                                            <th>Facility Name</th>
+                                            <th>User ID</th>
+                                            <th>Date Start</th>
+                                            <th>Date End</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+';
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
                                             <tr>
                                             <form action=""  method="POST">
                                                 <td class="nr">' . $counter . '</td>
-                                                <input type="hidden" name="facID" value="' . $row['BookID'] . '">
+                                                <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
                                                 <td>' . $row['BookID'] . '</td>         
                                                 <td>' . $row['facID'] . '</td>    
                                                 <td>' . $row['facName'] . '</td>  
                                                 <td>' . $row['userID'] . '</td>            
                                                 <td>' . $row['dateStart'] . '</td> 
-                                                <td>' . $row['dateEnd'] . '</td>                                  
-                                                <td class="actions">
-                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
-                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
-                                            
-                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                    data-toggle="tooltip" data-original-title="Remove" name="delete" onclick=""><i class="icon wb-trash" aria-hidden="true"></i></button>
-                                                </td>
+                                                <td>' . $row['dateEnd'] . '</td>                                 
                                             </form>
                                             </tr>
 ';
-                                            $counter++;
-                                        }
+                                        $counter++;
                                     }
+                                }
+                                ?>
 
-                                    //modal
-                                    echo '</tbody>                                                   
-                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog modal-simple modal-center">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                                <h4 class="modal-title">Edit User Complaint</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="" method="POST">
-                                                    <!--facID-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacID" class="form-label">Facility ID</label>
-                                                        <input type="text" class="form-control" id="staticfacID" name="staticfacID" readonly>
-                                                        <span id="fac-availability-status"></span>
-                                                    </div>
-                                                    
-                                                    <!--fac Name-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacName" class="form-label">Facility Name</label>
-                                                        <input type="text" class="form-control" id="staticfacName" name="staticfacName" size="50" required>
-                                                    </div>
-
-                                                    <!--facDesc-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacDesc" class="form-label">Facility Description</label>
-                                                        <input type="text" class="form-control" id="staticfacDesc" name="staticfacDesc" value="" required>
-                                                    </div>
-
-                                                    <!--Maximum Occupants-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                                        <input type="number" class="form-control" id="staticfacMaxPax" name="staticfacMaxPax" required>
-                                                    </div>
-                                 
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <!--buttons-->
-                                                <div class="btn-toolbar" role="toolbar">
-                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                        <button type="submit" name="update" class="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>';
-                                    ?>
-
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
-
-
-
+                </div>
             </div>
         </div>
     </div>
@@ -653,9 +670,8 @@ if (!$con) {
     echo  mysqli_connect_error();
     exit;
 }
-if (isset($_POST['add'])) {
-    $sql = "INSERT INTO `facilitieslist` (`facID`, `facName`, `facDesc`, `facMaxPax`) 
-    VALUES ('" . $_POST['facID'] . "', '" . $_POST['facName'] . "', '" . $_POST['facDesc'] . "', '" . $_POST['facMaxPax'] . "')";
+if (isset($_POST['approve'])) {
+    $sql = "UPDATE `facilitiesbooking` SET `Approval` = '1' WHERE `facilitiesbooking`.`BookID` = '" . $_POST['BookID'] . "'";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
@@ -664,52 +680,23 @@ if (isset($_POST['add'])) {
     if ($result) {
         echo '<script>swal({
             title: "Success",
-            text: "The facility has been added.",
+            text: "The booking has been approved.",
             icon: "success",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "facilitylist.php";
+            window.location.href = "facilitybooking.php";
            }
         ); </script>';
     } else {
         echo '<script>swal({
             title: "Oh no",
-            text: "Facility is not added.",
+            text: "The booking has not been approved.",
             icon: "error",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "facilitylist.php";
+            window.location.href = "facilitybooking.php";
            }
         ); </script>';
-    }
-}
-
-if (isset($_POST['update'])) {
-    $sql = "UPDATE `facilitieslist` SET `facName` = '" . $_POST['staticfacName'] . "', `facDesc` = '" . $_POST['staticfacID'] . "', `facMaxPax` = '" . $_POST['staticfacMaxPax'] . "' 
-    WHERE `facilitieslist`.`facID` = '" . $_POST['staticfacID'] . "'";
-
-    $result = mysqli_query($con, $sql);
-    mysqli_close($con);
-    if ($result) {
-        echo '<script>swal({
-                title: "Success",
-                text: "The facility has been modified.",
-                icon: "success",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "facilitylist.php";
-               }
-            ); </script>';
-    } else {
-        echo '<script>swal({
-                title: "Oh no",
-                text: "The facility has not been modified.",
-                icon: "error",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "facilitylist.php";
-               }
-            ); </script>';
     }
 }
 
@@ -725,7 +712,7 @@ if (isset($_POST['delete'])) {
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "facilitylist.php";
+                window.location.href = "facilitybooking.php";
                }
             ); </script>';
     } else {
@@ -735,7 +722,7 @@ if (isset($_POST['delete'])) {
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "facilitylist.php";
+                window.location.href = "facilitybooking.php";
                }
             ); </script>';
     }
