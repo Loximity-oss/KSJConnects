@@ -157,6 +157,23 @@
                             </ul>
                         </li>
 
+                        <!-- Payment Management-->
+                        <li class="site-menu-category">Payment Management</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <a>
+                                    <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
+                                    <span class="site-menu-title">Payment Submenu</span>
+                                </a>
+                                <ul class="site-menu-sub">
+                                    <li class="site-menu-item">
+                                        <a class="animsition-link" href="index.php">
+                                            <span class="site-menu-title">Payment </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                        </li>
+
                         <!-- User Management Stuff-->
                         <li class="site-menu-category">User Management</li>
                         <li class="site-menu-item has-sub">
@@ -165,13 +182,13 @@
                                 <span class="site-menu-title">User Management Submenu</span>
                             </a>
                             <ul class="site-menu-sub">
-                                <li class="site-menu-item active">
-                                    <a class="animsition-link" href="#">
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="addusers.php">
                                         <span class="site-menu-title">Add User Accounts</span>
                                     </a>
                                 </li>
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="viewuser.php">
+                                <li class="site-menu-item active">
+                                    <a class="animsition-link" href="#">
                                         <span class="site-menu-title">View User Accounts</span>
                                     </a>
                                 </li>
@@ -197,18 +214,8 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="addcomplaint.php">
-                                        <span class="site-menu-title">Add Resident's Complaint</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="viewcomplaint.php">
-                                        <span class="site-menu-title">View Resident's Complaint</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item">
                                     <a class="animsition-link" href="manipulatecomplaint.php">
-                                        <span class="site-menu-title">Manage Resident's Complaints</span>
+                                        <span class="site-menu-title">Resident's Complaints</span>
                                     </a>
                                 </li>
                             </ul>
@@ -218,18 +225,20 @@
                         <li class="site-menu-category">Facility Booking System</li>
                         <li class="site-menu-item has-sub">
                             <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-stats-bars" aria-hidden="true"></i>
+                                <i class="site-menu-icon wb-list" aria-hidden="true"></i>
                                 <span class="site-menu-title">Facility Booking Submenu</span>
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="index.php">
-                                        <span class="site-menu-title">View Resident's Facility Bookings</span>
+                                    <a class="animsition-link" href="facilitylist">
+                                        <span class="site-menu-title">Facility List</span>
                                     </a>
                                 </li>
+                            </ul>
+                            <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="index.php">
-                                        <span class="site-menu-title">Manage Resident's Facility Bookings</span>
+                                    <a class="animsition-link" href="facilitybooking">
+                                        <span class="site-menu-title">Facility Booking</span>
                                     </a>
                                 </li>
                             </ul>
@@ -282,21 +291,39 @@
                             </a>
                         </li>
 
+
+                        <!-- Announcement System-->
+                        <li class="site-menu-category">Announcement System</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-info" aria-hidden="true"></i>
+                                <span class="site-menu-title">Announcement Submenu</span>
+                                <ul class="site-menu-sub">
+                                    <li class="site-menu-item ">
+                                        <a class="animsition-link" href="index.php">
+                                            <span class="site-menu-title">Annoucement CRUD</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </a>
+                        </li>
+
+
                     </ul>
                     <div class="site-menubar-section">
                         <h5>
-                            Sprint 1 Progress
-                            <span class="float-right">80%</span>
+                            Sprint 3 Progress
+                            <span class="float-right">1%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 75%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">30%</span>
+                            <span class="float-right">80%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 30%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>

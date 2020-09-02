@@ -136,12 +136,12 @@
             <!-- End Site Navbar Seach -->
         </div>
     </nav>
+
     <div class="site-menubar">
         <div class="site-menubar-body">
             <div>
                 <div>
                     <ul class="site-menu" data-plugin="menu">
-
                         <!-- General Stuff-->
                         <li class="site-menu-category">General</li>
                         <li class="site-menu-item has-sub">
@@ -161,6 +161,23 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+
+                        <!-- Payment Management-->
+                        <li class="site-menu-category">Payment Management</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <a>
+                                    <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
+                                    <span class="site-menu-title">Payment Submenu</span>
+                                </a>
+                                <ul class="site-menu-sub">
+                                    <li class="site-menu-item">
+                                        <a class="animsition-link" href="index.php">
+                                            <span class="site-menu-title">Payment </span>
+                                        </a>
+                                    </li>
+                                </ul>
                         </li>
 
                         <!-- User Management Stuff-->
@@ -203,18 +220,8 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="viewcomplaint.php">
-                                        <span class="site-menu-title">Add Resident's Complaint</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="#">
-                                        <span class="site-menu-title">View Resident's Complaint</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item">
                                     <a class="animsition-link" href="manipulatecomplaint.php">
-                                        <span class="site-menu-title">Manage Resident's Complaints</span>
+                                        <span class="site-menu-title">Resident's Complaints</span>
                                     </a>
                                 </li>
                             </ul>
@@ -224,18 +231,20 @@
                         <li class="site-menu-category">Facility Booking System</li>
                         <li class="site-menu-item has-sub">
                             <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-stats-bars" aria-hidden="true"></i>
+                                <i class="site-menu-icon wb-list" aria-hidden="true"></i>
                                 <span class="site-menu-title">Facility Booking Submenu</span>
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="index.php">
-                                        <span class="site-menu-title">View Resident's Facility Bookings</span>
+                                    <a class="animsition-link" href="facilitylist">
+                                        <span class="site-menu-title">Facility List</span>
                                     </a>
                                 </li>
+                            </ul>
+                            <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="index.php">
-                                        <span class="site-menu-title">Manage Resident's Facility Bookings</span>
+                                    <a class="animsition-link" href="facilitybooking">
+                                        <span class="site-menu-title">Facility Booking</span>
                                     </a>
                                 </li>
                             </ul>
@@ -288,21 +297,39 @@
                             </a>
                         </li>
 
+
+                        <!-- Announcement System-->
+                        <li class="site-menu-category">Announcement System</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-info" aria-hidden="true"></i>
+                                <span class="site-menu-title">Announcement Submenu</span>
+                                <ul class="site-menu-sub">
+                                    <li class="site-menu-item ">
+                                        <a class="animsition-link" href="index.php">
+                                            <span class="site-menu-title">Annoucement CRUD</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </a>
+                        </li>
+
+
                     </ul>
                     <div class="site-menubar-section">
                         <h5>
-                            Sprint 1 Progress
-                            <span class="float-right">80%</span>
+                            Sprint 3 Progress
+                            <span class="float-right">1%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 75%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">30%</span>
+                            <span class="float-right">80%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 30%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>
@@ -389,28 +416,28 @@
                         </div>
                     </div>
 
-                    
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
 
-                                    <?php
-                                    $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                    if (!$con) {
-                                        echo  mysqli_connect_error();
-                                        exit;
-                                    }
-                                    $sql = "SELECT * FROM facilitieslist";
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM facilitieslist";
 
-                                    $result = mysqli_query($con, $sql);
-                                    mysqli_close($con);
-                                    $qry = $result;
-                                    $list = mysqli_num_rows($qry);
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
 
-                                    $counter = 1;
-                                    if ($list > 0) {
-                                        echo '<thead>
+                                $counter = 1;
+                                if ($list > 0) {
+                                    echo '<thead>
                                         <tr role="row">
                                             <th>No</th>
                                             <th>Facility ID</th>
@@ -422,8 +449,8 @@
                                         </thead>
                                         <tbody>
 ';
-                                        while ($row = mysqli_fetch_assoc($qry)) {
-                                            echo '
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
                                             <tr>
                                             <form action=""  method="POST">
                                                 <td class="nr">' . $counter . '</td>
@@ -442,12 +469,12 @@
                                             </form>
                                             </tr>
 ';
-                                            $counter++;
-                                        }
+                                        $counter++;
                                     }
+                                }
 
-                                    //modal
-                                    echo '</tbody>                                                   
+                                //modal
+                                echo '</tbody>                                                   
                                     <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
                                     <div class="modal-dialog modal-simple modal-center">
                                         <div class="modal-content">
@@ -498,13 +525,13 @@
                                         </div>
                                     </div>
                                 </div>';
-                                    ?>
+                                ?>
 
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
-                
+                </div>
+
 
 
 
@@ -645,7 +672,7 @@
 
         }
 
-        function unappend(){
+        function unappend() {
             $("#fac-availability-status").html("<span class='status-available'></span>");
         }
     </script>
