@@ -375,31 +375,43 @@
                                     <form action="" method="POST">
                                         <!--user ID-->
                                         <div class="form-group ">
-                                            <label for="staticfacID" class="form-label">Facility ID</label>
-                                            <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
-                                            <span id="fac-availability-status"></span>
+                                            <label for="userID" class="form-label">User ID</label>
+                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability_user()" required>
+                                            <span id="user-availability-status"></span>
                                         </div>
 
-                                        <!--user ID-->
+                                        <!--date start-->
                                         <div class="form-group ">
-                                            <label for="staticfacID" class="form-label">User ID</label>
-                                            <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
-                                            <span id="fac-availability-status"></span>
+                                            <label for="dateStart" class="form-label">Start Date</label>
+                                            <input type="date" class="form-control" id="dateStart" name="dateStart" value="" required>
+                                        </div>
+
+                                        <!--days-->
+                                        <div class="form-group ">
+                                            <label for="staticdays" class="form-label">Duration (in Days)</label>
+                                            <input type="number" class="form-control" onblur="checkAvailability_date()" id="days" name="days" required>
+                                        </div>
+
+                                        <!--date end-->
+                                        <div class="form-group ">
+                                            <label for="dateEnd" class="form-label">End Date</label>
+                                            <input type="date" class="form-control" id="dateEnd" name="dateEnd" value="" readonly>
                                         </div>
 
                                         <!--Faciility Name-->
                                         <div class="form-group ">
-                                            <label for="staticfacName" class="form-label">Facility Name</label>
-                                            <input type="text" class="form-control" id="facName" name="facName" required>
+                                            <label for="facName" class="form-label">Facility Name</label>
+                                            <select class="form-control" id="facName" name="facName" onchange="append()" required>
+                                            </select>
+                                            <input type="hidden" id="hiddenfacname" name="hiddenfacname">
                                         </div>
 
-                                        <!--facDesc-->
+                                        <!--Facility ID-->
                                         <div class="form-group ">
-                                            <label for="dateStart" class="form-label">Facility Description</label>
-                                            <input type="date" class="form-control" id="dateStart" name="dateStart" value="" required>
+                                            <label for="staticfacID" class="form-label">Facility ID</label>
+                                            <input type="text" class="form-control" id="facID" name="facID" readonly>
+                                            <span id="fac-availability-status"></span>
                                         </div>
-
-
 
 
                                 </div>
@@ -630,6 +642,9 @@
     <!-- for live editing -->
     <!--jQuery Stuff-->
     <script>
+        var list;
+        var i;
+
         function JSconfirm() {
             swal({
                     title: "Are you sure?",
@@ -645,44 +660,89 @@
                 });
         }
 
-        $(".edit_row").click(function() {
 
-            var $row = $(this).closest("tr"); // Find the row
-            var $text = $row.find(".nr").text(); // Find the text
-            var table = $('#exampleTableTools').DataTable();
+        function checkAvailability_date() {
 
-            var data = table.row($text - 1).data();
+            $('#facName').empty();
+            var dateStart_val = document.getElementById('dateStart').value;
+            var duration = parseInt(document.getElementById('days').value);
+            var newEndDate = new Date(dateStart_val);
+            var endDate;
 
-            $("#staticfacID").val(data[1]);
-            $("#staticfacName").val(data[2]);
-            $("#staticfacDesc").val(data[3]);
-            $("#staticfacMaxPax").val(data[4]);
-        });
+            newEndDate.setDate(newEndDate.getDate() + duration);
+            endDate = newEndDate.toISOString().slice(0, 10);
+            document.getElementById('dateEnd').value = endDate;
 
-        function checkAvailability() {
+
             jQuery.ajax({
-                url: "verification/liveeditfaclist.php",
-                data: 'facID=' + $("#facID").val(),
+                url: "verification/liveeditfacbook.php",
+                data: {
+                    dateStart: $("#dateStart").val(),
+                    dateEnd: $("#dateEnd").val(),
+                },
                 type: "POST",
                 dataType: "json",
                 cache: false,
                 success: function(data) {
                     //conversion from object to array
-                    var userData = $.map(data, function(value, index) {
+                    list = $.map(data, function(value, index) {
                         return [value];
                     });
-                    //edit USERNAME AVAILABLE status
-                    $("#fac-availability-status").html("<span class='status-available'> Facility Name not available. </span>");
+                    console.log(list);
+                    for (i = 0; i < list.length; i++) {
+                        if (i % 2) {
+                            $('#facName').append($('<option>', {
+                                value: i,
+                                text: list[i]
+                            }));
+                        }
+
+                    }
+
+                    $('#facID').val(list[0]);
+                    $('#hiddenfacname').val(list[1]);
                 },
                 error: function(data) {
                     //append to input boxes...
-                    $("#fac-availability-status").html("<span class='status-available'> Facility Name available. </span>");
+                    console.log(data);
+
                 }
+            });
+
+
+        }
+
+        function checkAvailability_user() {
+            jQuery.ajax({
+                url: "verification/check_availability.php",
+                data: 'username=' + $("#staticuserID").val(),
+                type: "POST",
+                success: function(data) {
+                    $("#user-availability-status").html(data);
+                },
+                error: function() {}
             });
         }
 
+        function append() {
+            var e = document.getElementById("facName");
+            var value = parseInt(e.options[e.selectedIndex].value);
+            var text = e.options[e.selectedIndex].text;
+            value--; //decerement because array odd = id of facility
+            document.getElementById("facID").value = list[value];
+            document.getElementById("hiddenfacname").value = text;
+
+        }
+
         function unappend() {
-            $("#fac-availability-status").html("<span class='status-available'></span>");
+            $("#user-availability-status").html("<span class='status-available'></span>");
+            //clear html
+            $("#userID").val("");
+            $("#dateStart").val("");
+            $("#dateEnd").val("");
+            $("#days").val("");
+            $("#facName").val("");
+            $("#facID").val("");
         }
     </script>
 </body>
@@ -695,6 +755,7 @@ if (!$con) {
     echo  mysqli_connect_error();
     exit;
 }
+
 if (isset($_POST['approve'])) {
     $sql = "UPDATE `facilitiesbooking` SET `Approval` = '1' WHERE `facilitiesbooking`.`BookID` = '" . $_POST['BookID'] . "'";
 
@@ -726,14 +787,45 @@ if (isset($_POST['approve'])) {
 }
 
 if (isset($_POST['delete'])) {
-    $sql = "";
+    $sql = "UPDATE `facilitiesbooking` SET `Approval` = '2' WHERE `facilitiesbooking`.`BookID` = '" . $_POST['BookID'] . "'";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+            title: "Success",
+            text: "The booking has been rejected.",
+            icon: "success",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "facilitybooking.php";
+           }
+        ); </script>';
+    } else {
+        echo '<script>swal({
+            title: "Oh no",
+            text: "The booking has not been rejected.",
+            icon: "error",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "facilitybooking.php";
+           }
+        ); </script>';
+    }
+}
+
+if (isset($_POST['add'])) {
+    $sql = "INSERT INTO `facilitiesbooking` (`BookID`, `facID`, `facName`, `userID`, `dateStart`, `dateEnd`, `Approval`) 
+    VALUES (NULL, '" . $_POST['facID'] . "', '" . $_POST['hiddenfacname'] . "', '" . $_POST['userID'] . "', '" . $_POST['dateStart'] . "', '" . $_POST['dateEnd'] . "', '0')";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The facility has been deleted.",
+                text: "The booking has been added.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
@@ -743,7 +835,7 @@ if (isset($_POST['delete'])) {
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The facility has not been deleted.",
+                text: "The booking has not been added.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 

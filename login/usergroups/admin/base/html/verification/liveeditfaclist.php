@@ -13,7 +13,7 @@
       header("Content-Type: application/json");
       echo json_encode($row);
   } else {
-    echo "<span class='status-available'> User ID not found. </span>";
+    echo "<span class='status-available'> Facility not found. </span>";
   }
 
 ?>
