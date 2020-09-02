@@ -447,21 +447,21 @@
                                 mysqli_close($con);
                                 $qry = $result;
                                 $list = mysqli_num_rows($qry);
-
+                                echo '<thead>
+                                <tr role="row">
+                                    <th>No</th>
+                                    <th>Booking ID</th>
+                                    <th>Facility ID</th>
+                                    <th>Facility Name</th>
+                                    <th>User ID</th>
+                                    <th>Date Start</th>
+                                    <th>Date End</th>
+                                    <th>Actions</th> 
+                                </tr>
+                                </thead>';
                                 $counter = 1;
                                 if ($list > 0) {
-                                    echo '<thead>
-                                        <tr role="row">
-                                            <th>No</th>
-                                            <th>Booking ID</th>
-                                            <th>Facility ID</th>
-                                            <th>Facility Name</th>
-                                            <th>User ID</th>
-                                            <th>Date Start</th>
-                                            <th>Date End</th>
-                                            <th>Actions</th> 
-                                        </tr>
-                                        </thead>
+                                    echo '
                                         <tbody>
 ';
                                     while ($row = mysqli_fetch_assoc($qry)) {
@@ -525,20 +525,20 @@
                                 mysqli_close($con);
                                 $qry = $result;
                                 $list = mysqli_num_rows($qry);
-
+                                echo '<thead>
+                                <tr role="row">
+                                    <th>No</th>
+                                    <th>Booking ID</th>
+                                    <th>Facility ID</th>
+                                    <th>Facility Name</th>
+                                    <th>User ID</th>
+                                    <th>Date Start</th>
+                                    <th>Date End</th>
+                                </tr>
+                                </thead>';
                                 $counter = 1;
                                 if ($list > 0) {
-                                    echo '<thead>
-                                        <tr role="row">
-                                            <th>No</th>
-                                            <th>Booking ID</th>
-                                            <th>Facility ID</th>
-                                            <th>Facility Name</th>
-                                            <th>User ID</th>
-                                            <th>Date Start</th>
-                                            <th>Date End</th>
-                                        </tr>
-                                        </thead>
+                                    echo '
                                         <tbody>
 ';
                                     while ($row = mysqli_fetch_assoc($qry)) {

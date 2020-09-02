@@ -298,10 +298,10 @@
 
 
                         <!-- Announcement System-->
-                        <li class="site-menu-category">Announcement System</li>
+                        <li class="site-menu-category">Announcement Application</li>
                         <li class="site-menu-item has-sub">
                             <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-info" aria-hidden="true"></i>
+                                <i class="site-menu-icon wb-file" aria-hidden="true"></i>
                                 <span class="site-menu-title">Announcement Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
@@ -335,92 +335,122 @@
             </div>
         </div>
     </div>
+
     <!-- Page -->
     <div class="page">
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">User Management / Search-Update-Delete User Merit</li>
+                <li class="breadcrumb-item active">Merit Management / Search-Update-Delete User Merit</li>
             </ol>
             <h1 class="page-title">User Merit Manipulation</h1>
         </div>
         <div class="page-content container-fluid">
-            <div class="card">
-                <div class="card-header">
-                    Featured
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">User Form</h5>
-                    <p class="card-text">Edit or Delete User Data here.</p>
-                    <form action="" method="POST">
-                        <!--user ID-->
-                        <div class="form-group ">
-                            <label for="staticuserID" class="form-label">User ID</label>
-                            <input type="text" class="form-control" id="staticuserID" name="staticuserID" onblur="checkAvailability()" required>
-                            <span id="user-availability-status"></span>
-                        </div>
-
-                        <!--Merit-->
-                        <div class="form-group ">
-                            <label for="staticuserID" class="form-label">Current Merit</label>
-                            <input type="number" class="form-control" id="staticmerit" name="staticmerit" required>
-                            <span id="user-availability-status"></span>
-                        </div>
-                        <button type="submit" name="update" class="btn btn-primary">Submit</button>
-                    </form>
-
-                </div>
-            </div>
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">User List</h3>
+                    <h3 class="panel-title">Merit List</h3>
                 </header>
                 <div class="panel-body">
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full dtr-inline" data-plugin="dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="width: 823px;">
-                                    <?php
-                                    $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                    if (!$con) {
-                                        echo  mysqli_connect_error();
-                                        exit;
-                                    }
-                                    $sql = "SELECT * FROM merit";
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
-                                    $result = mysqli_query($con, $sql);
-                                    mysqli_close($con);
-                                    $qry = $result;
-                                    $list = mysqli_num_rows($qry);
-                                    if ($list > 0) {
-                                        echo '<thead>
+
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM merit";
+
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
+
+                                $counter = 1;
+                                if ($list > 0) {
+                                    echo '<thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 127.992px;" aria-sort="ascending" aria-label="User: activate to sort column descending">User ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 162.992px;" aria-label="Merit: activate to sort column ascending">Merit</th>
+                                            <th>No</th>
+                                            <th>User ID</th>
+                                            <th>Merit</th>
+                                            <th>Actions</th>
                                         </tr>
                                         </thead>
-                                        <tfoot>
+                                        <tbody>
+';
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
                                             <tr>
-                                                <th rowspan="1" colspan="1">User ID</th>
-                                                <th rowspan="1" colspan="1" style="">Merit</th>
+                                            <form action=""  method="POST">
+                                                <td class="nr">' . $counter . '</td>
+                                                <input type="hidden" name="facID" value="' . $row['userID'] . '">
+                                                <td>' . $row['userID'] . '</td>         
+                                                <td>' . $row['merit'] . '</td>                                                        
+                                                <td class="actions">
+                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
+                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
+                                                </td>
+                                            </form>
                                             </tr>
-                                        </tfoot>';
-                                        while ($row = mysqli_fetch_assoc($qry)) {
-                                            echo '
-                                            <tr role="row" >
-                                                <td class="sorting_1" tabindex="0">' . $row['userID'] . '</td>
-                                                <td style="">' . $row['merit'] . '</td>
-                                            ';
-                                        }
+';
+                                        $counter++;
                                     }
-                                    ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                }
+
+                                //modal
+                                echo '</tbody>                                                   
+                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog modal-simple modal-center">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title">Edit Facility Details</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="" method="POST">
+                                                <!--user ID-->
+                                                <div class="form-group ">
+                                                    <label for="staticuserID" class="form-label">User ID</label>
+                                                    <input type="text" class="form-control" id="staticuserID" name="staticuserID" onblur="checkAvailability()" required>
+                                                    <span id="user-availability-status"></span>
+                                                </div>
+                        
+                                                <!--Merit-->
+                                                <div class="form-group ">
+                                                    <label for="staticuserID" class="form-label">Current Merit</label>
+                                                    <input type="number" class="form-control" id="staticmerit" name="staticmerit" required>
+                                                    <span id="user-availability-status"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <!--buttons-->
+                                                <div class="btn-toolbar" role="toolbar">
+                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                                        <button type="submit" name="update" class="btn btn-primary">Update</button>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>';
+                                ?>
+
+                            </table>
                         </div>
                     </div>
                 </div>
+
+
+
+
             </div>
         </div>
     </div>
@@ -528,6 +558,18 @@
                 }
             });
         }
+
+        $(".edit_row").click(function() {
+
+            var $row = $(this).closest("tr"); // Find the row
+            var $text = $row.find(".nr").text(); // Find the text
+            var table = $('#exampleTableTools').DataTable();
+
+            var data = table.row($text - 1).data();
+
+            $("#staticuserID").val(data[1]);
+            $("#staticmerit").val(data[2]);
+        });
 
         //exit
         function JSconfirm() {

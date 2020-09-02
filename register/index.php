@@ -53,14 +53,14 @@
 						<span class="focus-input100"></span>
 						<span class="label-input100">User ID</span> 
 					</div>
-						<span id="user-availability-status"></span> 
+						<span class="txt2" id="user-availability-status"></span> 
 
 					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
 						<input class="input100" id="email" onblur="checkAvailability_email()"  type="email" name="email">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Email</span>
 					</div>
-						<span id="email-availability-status"></span> 
+						<span class="txt2" id="email-availability-status"></span> 
 
 					<div class="wrap-input100 validate-input" data-validate="Phone number is required">
 						<input class="input100" type="text" name="phonenumber">

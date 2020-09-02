@@ -341,147 +341,249 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">User Management / Search-Update-Delete User Accounts</li>
+                <li class="breadcrumb-item active">User Management / Add-Search-Update-Delete User Accounts</li>
             </ol>
-            <h1 class="page-title">User Accounts Manipulation</h1>
+            <h1 class="page-title">Add-Search-Update-Delete User Account</h1>
         </div>
         <div class="page-content container-fluid">
-            <div class="card">
-                <div class="card-header">
-                    Featured
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">User Form</h5>
-                    <p class="card-text">Edit or Delete User Data here.</p>
-                    <form action="" method="POST">
-                        <!--user ID-->
-                        <div class="form-group ">
-                            <label for="staticuserID" class="form-label">User ID</label>
-                            <input type="text" class="form-control" id="staticuserID" name="staticuserID" onblur="checkAvailability()" required>
-                            <span id="user-availability-status"></span>
-                        </div>
-                        <!--fullname-->
-                        <div class="form-group ">
-                            <label for="staticfullname" class="form-label">Full Name</label>
-
-                            <input type="text" class="form-control" id="staticfullname" name="staticfullname" required>
-
-                        </div>
-                        <!--password-->
-                        <div class="form-group ">
-                            <label for="staticpassword" class="form-label">Password</label>
-                            <input type="text" class="form-control" id="staticpassword" name="staticpassword" required>
-                        </div>
-                        <!--email-->
-                        <div class="form-group ">
-                            <label for="staticemail" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="staticemail" name="staticemail" required>
-                        </div>
-                        <!--phone_no-->
-                        <div class="form-group ">
-                            <label for="staticphoneno" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" id="staticphoneno" name="staticphoneno" required>
-                        </div>
-                        <!-- user type -->
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">User Type</label>
-                            <select class="form-control" id="staticusertype" name="staticusertype" required>
-                                <option>ADMIN</option>
-                                <option>GUEST</option>
-                                <option>STAFF</option>
-                            </select>
-                        </div>
-                        <!-- verification -->
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">User Verification Level</label>
-                            <select class="form-control" id="staticverification" name="staticverification" required>
-                                <option>1</option>
-                                <option>2</option>
-                            </select>
-                        </div>
-
-                        <!--buttons-->
-                        <div class="btn-toolbar" role="toolbar">
-                            <div class="btn-group mr-2" role="group" aria-label="First group">
-                                <button type="submit" name="update" class="btn btn-primary">Update User Details</button>
-                            </div>
-                            <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                <button type="submit" name="delete" class="btn btn-primary">Delete User Details</button>
-                            </div>
-                        </div>
-
-
-
-                    </form>
-
-                </div>
-            </div>
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
                     <h3 class="panel-title">User List</h3>
                 </header>
                 <div class="panel-body">
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full dtr-inline" data-plugin="dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="width: 823px;">
-                                    <?php
-                                    $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                    if (!$con) {
-                                        echo  mysqli_connect_error();
-                                        exit;
-                                    }
-                                    $sql = "SELECT * FROM users";
-
-                                    $result = mysqli_query($con, $sql);
-                                    mysqli_close($con);
-                                    $qry = $result;
-                                    $list = mysqli_num_rows($qry);
-                                    if ($list > 0) {
-                                        echo '<thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 127.992px;" aria-sort="ascending" aria-label="User: activate to sort column descending">User ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 162.992px;" aria-label="Full Name: activate to sort column ascending">Fullname</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 142.992px;" aria-label="Password: activate to sort column ascending">Password</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 36.992px;" aria-label="Email: activate to sort column ascending">Email</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 68.992px;" aria-label="Phone Number: activate to sort column ascending">Phone Number</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 54.992px;" aria-label="User Type: activate to sort column ascending">User Type</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 54.992px;" aria-label="Verification: activate to sort column ascending">Verification</th>
-                                        </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">User ID</th>
-                                                <th rowspan="1" colspan="1" style="">Full Name</th>
-                                                <th rowspan="1" colspan="1" style="">Password</th>
-                                                <th rowspan="1" colspan="1" style="">Email</th>
-                                                <th rowspan="1" colspan="1" style="">Phone Number</th>
-                                                <th rowspan="1" colspan="1" style="">User Type</th>
-                                                <th rowspan="1" colspan="1" style="">Verification</th>
-                                            </tr>
-                                        </tfoot>';
-                                        while ($row = mysqli_fetch_assoc($qry)) {
-                                            echo '
-                                            <tr role="row" >
-                                                <td class="sorting_1" tabindex="0">' . $row['userID'] . '</td>
-                                                <td style="">' . $row['fullname'] . '</td>
-                                                <td style="">' . $row['password'] . '</td>
-                                                <td style="">' . $row['email'] . '</td>
-                                                <td style="">' . $row['phone_no'] . '</td>
-                                                <td style="">' . $row['userType'] . '</td>
-                                                <td style="">' . $row['verification'] . '</td>
-                                            </tr>
-                                            ';
-                                        }
-                                    }
-                                    ?>
-                                    </tbody>
-                                </table>
+                    <!-- Add Data Button -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-15">
+                                <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Add
+                                </button>
                             </div>
                         </div>
                     </div>
+                    <!-- Modal for Data Button -->
+                    <div class="modal fade" id="examplePositionCenter2" aria-labelledby="examplePositionCenter2" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-simple modal-center">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h4 class="modal-title">Add New User</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="POST">
+                                        <!--user ID-->
+                                        <div class="form-group ">
+                                            <label for="userID" class="form-label">Username</label>
+                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability()" required>
+                                            <span id="user-availability-status"></span>
+                                        </div>
+                                        <!--fullname-->
+                                        <div class="form-group ">
+                                            <label for="fullname" class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" id="fullname" name="fullname" required>
+                                        </div>
+                                        <!--password-->
+                                        <div class="form-group ">
+                                            <label for="password" class="form-label">Password</label>
+                                            <input type="text" class="form-control" id="password" name="password" required>
+                                        </div>
+                                        <!--email-->
+                                        <div class="form-group ">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="text" class="form-control" id="email" name="email" onblur="checkAvailability_email()" required>
+                                            <span id="email-availability-status"></span>
+                                        </div>
+                                        <!--phone_no-->
+                                        <div class="form-group ">
+                                            <label for="phoneno" class="form-label">Phone Number</label>
+                                            <input type="text" class="form-control" id="phoneno" name="phoneno" required>
+                                        </div>
+                                        <!-- user type -->
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect1">User Type</label>
+                                            <select class="form-control" id="usertype" name="usertype" required>
+                                                <option>ADMIN</option>
+                                                <option>GUEST</option>
+                                                <option>STAFF</option>
+                                            </select>
+                                        </div>
+                                        <!-- verification -->
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect1">User Verification Level</label>
+                                            <select class="form-control" id="verification" name="verification" required>
+                                                <option>1</option>
+                                                <option>2</option>
+                                            </select>
+                                        </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <!--buttons-->
+                                    <div class="btn-toolbar" role="toolbar">
+                                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                                            <button type="submit" name="submit" class="btn btn-primary">Add User</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+
+
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM users";
+
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
+
+                                $counter = 1;
+                                if ($list > 0) {
+                                    echo '<thead>
+                                        <tr role="row">
+                                            <th>No</th>
+                                            <th>Username</th>
+                                            <th>Fullname</th>
+                                            <th>Password</th>
+                                            <th>Email</th>
+                                            <th>Phone Number</th>
+                                            <th>User Type</th>
+                                            <th>Verification</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+';
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
+                                            <tr>
+                                            <form action=""  method="POST">
+                                                <td class="nr">' . $counter . '</td>
+                                                <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                <td>' . $row['userID'] . '</td>         
+                                                <td>' . $row['fullname'] . '</td>    
+                                                <td>' . $row['password'] . '</td>  
+                                                <td>' . $row['email'] . '</td> 
+                                                <td>' . $row['phone_no'] . '</td>    
+                                                <td>' . $row['userType'] . '</td> 
+                                                <td>' . $row['verification'] . '</td>                                                         
+                                                <td class="actions">
+                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
+                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
+                                            
+                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                    data-toggle="tooltip" data-original-title="Remove" name="delete"><i class="icon wb-trash" aria-hidden="true"></i></button>
+                                                </td>
+                                            </form>
+                                            </tr>
+';
+                                        $counter++;
+                                    }
+                                }
+
+                                //modal
+                                echo '</tbody>                                                   
+                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog modal-simple modal-center">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title">Edit User Details</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="" method="POST">
+                                                <!--user ID-->
+                                                <div class="form-group ">
+                                                    <label for="staticuserID" class="form-label">Username</label>
+                                                    <input type="text" class="form-control" id="staticuserID" name="staticuserID" onblur="checkAvailability()" required>
+                                                    <span id="user-availability-status"></span>
+                                                </div>
+                                                <!--fullname-->
+                                                <div class="form-group ">
+                                                    <label for="staticfullname" class="form-label">Full Name</label>
+                        
+                                                    <input type="text" class="form-control" id="staticfullname" name="staticfullname" required>
+                        
+                                                </div>
+
+                                                <!--password-->
+                                                <div class="form-group ">
+                                                    <label for="staticpassword" class="form-label">Password</label>
+                                                    <input type="text" class="form-control" id="staticpassword" name="staticpassword" required>
+                                                </div>
+
+                                                <!--email-->
+                                                <div class="form-group ">
+                                                    <label for="staticemail" class="form-label">Email</label>
+                                                    <input type="text" class="form-control" id="staticemail" name="staticemail" required>
+                                                </div>
+
+                                                <!--phone_no-->
+                                                <div class="form-group ">
+                                                    <label for="staticphoneno" class="form-label">Phone Number</label>
+                                                    <input type="text" class="form-control" id="staticphoneno" name="staticphoneno" required>
+                                                </div>
+
+                                                <!-- user type -->
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">User Type</label>
+                                                    <select class="form-control" id="staticusertype" name="staticusertype" required>
+                                                        <option>ADMIN</option>
+                                                        <option>GUEST</option>
+                                                        <option>STAFF</option>
+                                                    </select>
+                                                </div>
+
+                                                <!-- verification -->
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">User Verification Level</label>
+                                                    <select class="form-control" id="staticverification" name="staticverification" required>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                    </select>
+                                                </div>
+                            
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <!--buttons-->
+                                                <div class="btn-toolbar" role="toolbar">
+                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                                        <button type="submit" name="update" class="btn btn-primary">Update</button>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>';
+                                ?>
+
+                            </table>
+                        </div>
+                    </div>
                 </div>
+
+
+
+
             </div>
         </div>
     </div>
@@ -560,46 +662,47 @@
     <!--jQuery Stuff-->
     <script>
         function checkAvailability() {
-
+            console.log($("#userID").val());
             jQuery.ajax({
-                url: "verification/livedit.php",
-                data: 'username=' + $("#staticuserID").val(),
+                url: "verification/check_availability.php",
+                data: 'username=' + $("#userID").val(),
                 type: "POST",
-                dataType: "json",
-                cache: false,
                 success: function(data) {
-
-                    //conversion from object to array
-                    var userData = $.map(data, function(value, index) {
-                        return [value];
-                    });
-
-                    //append to input boxes...
-                    $("#staticfullname").val(userData[1]);
-                    $("#staticpassword").val(userData[2]);
-                    $("#staticemail").val(userData[3]);
-                    $("#staticphoneno").val(userData[4]);
-                    $("#staticusertype").val(userData[5]);
-                    $("#staticverification").val(userData[6]);
-
-                    //edit USERNAME AVAILABLE status
-                    $("#user-availability-status").html("<span class='status-available'> User ID available. </span>");
-
-
+                    $("#user-availability-status").html(data);
                 },
-                error: function(data) {
-                    //append to input boxes...
-                    $("#staticfullname").val("");
-                    $("#staticpassword").val("");
-                    $("#staticemail").val("");
-                    $("#staticphoneno").val("");
-                    $("#staticusertype").val("");
-                    $("#staticverification").val("");
-
-                    $("#user-availability-status").html("<span class='status-available'> User ID not available. </span>");
-                }
+                error: function() {}
             });
         }
+
+        function checkAvailability_email() {
+            //if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(myForm.emailAddr.value))
+            console.log($("#staticemail").val());
+            jQuery.ajax({
+                url: "verification/check_email.php",
+                data: 'email=' + $("#email").val(),
+                type: "POST",
+                success: function(data) {
+                    $("#email-availability-status").html(data);
+                },
+                error: function() {}
+            });
+        }
+
+        $(".edit_row").click(function() {
+
+            var $row = $(this).closest("tr"); // Find the row
+            var $text = $row.find(".nr").text(); // Find the text
+            var table = $('#exampleTableTools').DataTable();
+
+            var data = table.row($text - 1).data();
+            $("#staticuserID").val(data[1]);
+            $("#staticfullname").val(data[2]);
+            $("#staticpassword").val(data[3]);
+            $("#staticemail").val(data[4]);
+            $("#staticphoneno").val(data[5]);
+            $("#staticusertype").val(data[6]);
+            $("#staticverification").val(data[7]);
+        });
 
         function JSconfirm() {
             swal({
@@ -627,9 +730,100 @@ if (!$con) {
     exit;
 }
 
+if (isset($_POST['submit'])) {
+    $con = mysqli_connect("localhost", "root", "", "ksjdb");
+    if (!$con) {
+        echo  mysqli_connect_error();
+        exit;
+    }
+    //todo check userid
+    if ($_POST['verification'] == 2) {
+        $hash = md5(rand(0, 1000));
+    } else {
+        $hash = $_POST['verification'];
+    }
+
+    $salt = "palsdkas;lkdasl;kd";
+    $password = $_POST['password'];
+    $hash2 = md5($password,$salt);
+    
+    $sql = "INSERT INTO `users` (`imageType`,`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) 
+    VALUES ('','0x0','" . $_POST['userID'] . "',
+    '" . $_POST['fullname'] . "',
+     '$hash2', 
+     '" . $_POST['email'] . "',
+      '" . $_POST['phoneno'] . "', '" . $_POST['usertype'] . "' , '" . $hash . "', 'Default Bio');";
+    $sql2 = "INSERT INTO `merit` (`userID`,`merit`) VALUES ('" . $_POST['userID'] . "','0');";
+    $result = mysqli_query($con, $sql);
+    $result2 = mysqli_query($con, $sql2);
+
+    if ($result) {
+        if ($hash != 1) {
+            $to = $_POST['email'];
+            $subject = 'KSJConnects SIGN UP | Verification E-mail';
+            $message = '
+     
+            Thanks for signing up!
+            Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+            
+             
+            Please click this link to activate your account:
+            http://118.101.107.162/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
+             
+            ';
+            $headers = 'From: ssah37@gmail.com';
+
+            if (mail($to, $subject, $message, $headers))
+                echo '<script>swal({
+                title: "Success",
+                text: "The user account has been added!",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+            else
+                echo '<script>swal({
+                title: "Oh no",
+                text: "The verification email was not sent. However the account has been added.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+        } else {
+            echo '<script>swal({
+                title: "Success",
+                text: "The user account has been added!",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+        }
+    } else {
+        echo '<script>swal({
+            title: "Oh no",
+            text: "The account has not been added.",
+            icon: "error",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "addremoveusers.php";
+           }
+        ); </script>';
+    }
+}
+
 if (isset($_POST['update'])) {
-    $sql = "UPDATE `users` SET `fullname` = '" . $_POST['staticfullname'] . "', `password` = '" . $_POST['staticpassword'] . "', `email` = '" . $_POST['staticemail'] . "', `phone_no` = '" . $_POST['staticusertype'] . "', 
-        `userType` = '" . $_POST['staticusertype'] . "', `verification` = '" . $_POST['staticverification'] . "' WHERE `users`.`userID` = '" . $_POST['staticuserID'] . "' ";
+    $salt = "palsdkas;lkdasl;kd";
+    $password = $_POST['staticpassword'];
+    $hash2 = md5($password,$salt);
+
+    $sql = "UPDATE `users` SET `fullname` = '" . $_POST['staticfullname'] . "', `password` = '" . $hash2 . "', `email` = '" . $_POST['staticemail'] . "', `phone_no` = '" . $_POST['staticphoneno'] . "', 
+    `userType` = '" . $_POST['staticusertype'] . "', `verification` = '" . $_POST['staticverification'] . "' WHERE `users`.`userID` = '" . $_POST['staticuserID'] . "' ";
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
@@ -656,8 +850,11 @@ if (isset($_POST['update'])) {
 }
 
 if (isset($_POST['delete'])) {
-    $sql = "DELETE FROM `users` WHERE `users`.`userID` = '" . $_POST['staticuserID'] . "' ";
+    $sql = "DELETE FROM `users` WHERE `users`.`userID` = '" . $_POST['userID'] . "' ";
+    $sql2 = "DELETE FROM `merit` WHERE `merit`.`userID` = '" . $_POST['userID'] . "' );";
     $result = mysqli_query($con, $sql);
+    $result2 = mysqli_query($con, $sql2);
+    
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({

@@ -336,66 +336,204 @@
         </div>
     </div>
 
-    <!-- Page -->
-    <div class="page">
+       <!-- Page -->
+       <div class="page">
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Merit Management System / View User Account Merit</li>
+                <li class="breadcrumb-item active">Merit Management / (Add/Update/Delete Activities with QR)</li>
             </ol>
-            <h1 class="page-title">View User Account Merit</h1>
+            <h1 class="page-title">Add/Update/Delete Activities with QR</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">User Account Merit</h3>
+                    <h3 class="panel-title">Activity List</h3>
                 </header>
                 <div class="panel-body">
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full dtr-inline" data-plugin="dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="width: 823px;">
-                                    <?php
-                                    $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                    if (!$con) {
-                                        echo  mysqli_connect_error();
-                                        exit;
-                                    }
-                                    $sql = "SELECT * FROM merit";
-
-                                    $result = mysqli_query($con, $sql);
-                                    mysqli_close($con);
-                                    $qry = $result;
-                                    $list = mysqli_num_rows($qry);
-                                    if ($list > 0) {
-                                        echo '<thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 127.992px;" aria-sort="ascending" aria-label="User: activate to sort column descending">User ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 162.992px;" aria-label="Merit: activate to sort column ascending">Merit</th>
-                                        </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">User ID</th>
-                                                <th rowspan="1" colspan="1" style="">Merit</th>
-                                            </tr>
-                                        </tfoot>';
-                                        while ($row = mysqli_fetch_assoc($qry)) {
-                                            echo '
-                                            <tr role="row" >
-                                                <td class="sorting_1" tabindex="0">' . $row['userID'] . '</td>
-                                                <td style="">' . $row['merit'] . '</td>
-                                            ';
-                                        }
-                                    }
-                                    ?>
-                                    </tbody>
-                                </table>
+                    <!-- Add Data Button -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-15">
+                                <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Add
+                                </button>
                             </div>
                         </div>
                     </div>
+                    <!-- Modal for Data Button -->
+                    <div class="modal fade" id="examplePositionCenter2" aria-labelledby="examplePositionCenter2" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-simple modal-center">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h4 class="modal-title">Add New Facility</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="POST">
+                                        <!--user ID-->
+                                        <div class="form-group ">
+                                            <label for="staticfacID" class="form-label">Facility ID</label>
+                                            <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
+                                            <span id="fac-availability-status"></span>
+                                        </div>
+
+                                        <!--Faciility Name-->
+                                        <div class="form-group ">
+                                            <label for="staticfacName" class="form-label">Facility Name</label>
+                                            <input type="text" class="form-control" id="facName" name="facName" required>
+                                        </div>
+
+                                        <!--facDesc-->
+                                        <div class="form-group ">
+                                            <label for="staticfacDesc" class="form-label">Facility Description</label>
+                                            <input type="text" class="form-control" id="facDesc" name="facDesc" value="" required>
+                                        </div>
+
+                                        <!--Maximum Occupants-->
+                                        <div class="form-group ">
+                                            <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
+                                            <input type="number" class="form-control" id="facMaxPax" name="facMaxPax" required>
+                                        </div>
+
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <!--buttons-->
+                                    <div class="btn-toolbar" role="toolbar">
+                                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                                            <button type="submit" name="add" class="btn btn-primary">Add</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+
+
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM facilitieslist";
+
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
+
+                                $counter = 1;
+                                if ($list > 0) {
+                                    echo '<thead>
+                                        <tr role="row">
+                                            <th>No</th>
+                                            <th>Facility ID</th>
+                                            <th>Facility Name</th>
+                                            <th>Description</th>
+                                            <th>Max Occupants</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+';
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
+                                            <tr>
+                                            <form action=""  method="POST">
+                                                <td class="nr">' . $counter . '</td>
+                                                <input type="hidden" name="facID" value="' . $row['facID'] . '">
+                                                <td>' . $row['facID'] . '</td>         
+                                                <td>' . $row['facName'] . '</td>    
+                                                <td>' . $row['facDesc'] . '</td>  
+                                                <td>' . $row['facMaxPax'] . '</td>                                                     
+                                                <td class="actions">
+                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
+                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
+                                            
+                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                    data-toggle="tooltip" data-original-title="Remove" name="delete"><i class="icon wb-trash" aria-hidden="true"></i></button>
+                                                </td>
+                                            </form>
+                                            </tr>
+';
+                                        $counter++;
+                                    }
+                                }
+
+                                //modal
+                                echo '</tbody>                                                   
+                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog modal-simple modal-center">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title">Edit Facility Details</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="" method="POST">
+                                                    <!--facID-->
+                                                    <div class="form-group ">
+                                                        <label for="staticfacID" class="form-label">Facility ID</label>
+                                                        <input type="text" class="form-control" id="staticfacID" name="staticfacID" readonly>
+                                                        <span id="fac-availability-status"></span>
+                                                    </div>
+                                                    
+                                                    <!--fac Name-->
+                                                    <div class="form-group ">
+                                                        <label for="staticfacName" class="form-label">Facility Name</label>
+                                                        <input type="text" class="form-control" id="staticfacName" name="staticfacName" size="50" required>
+                                                    </div>
+
+                                                    <!--facDesc-->
+                                                    <div class="form-group ">
+                                                        <label for="staticfacDesc" class="form-label">Facility Description</label>
+                                                        <input type="text" class="form-control" id="staticfacDesc" name="staticfacDesc" value="" required>
+                                                    </div>
+
+                                                    <!--Maximum Occupants-->
+                                                    <div class="form-group ">
+                                                        <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
+                                                        <input type="number" class="form-control" id="staticfacMaxPax" name="staticfacMaxPax" required>
+                                                    </div>
+                                 
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <!--buttons-->
+                                                <div class="btn-toolbar" role="toolbar">
+                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                                        <button type="submit" name="update" class="btn btn-primary">Update</button>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>';
+                                ?>
+
+                            </table>
+                        </div>
+                    </div>
                 </div>
+
+
+
+
             </div>
         </div>
     </div>
