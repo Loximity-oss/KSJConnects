@@ -162,21 +162,20 @@
                             </ul>
                         </li>
 
-                        <!-- Payment Management-->
-                        <li class="site-menu-category">Payment Management</li>
+                        <!-- Payment Stuff-->
+                        <li class="site-menu-category">Payment System</li>
                         <li class="site-menu-item has-sub">
                             <a href="javascript:void(0)">
-                                <a>
-                                    <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Payment Submenu</span>
-                                </a>
-                                <ul class="site-menu-sub">
-                                    <li class="site-menu-item">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Payment </span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
+                                <span class="site-menu-title">Payment Submenu</span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="index.php">
+                                        <span class="site-menu-title">Resident Payment</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <!-- User Management Stuff-->
@@ -187,16 +186,6 @@
                                 <span class="site-menu-title">User Management Submenu</span>
                             </a>
                             <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="addusers.php">
-                                        <span class="site-menu-title">Add User Accounts</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item active">
-                                    <a class="animsition-link" href="#">
-                                        <span class="site-menu-title">View User Accounts</span>
-                                    </a>
-                                </li>
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="addremoveusers.php">
                                         <span class="site-menu-title">Manipulate User Accounts</span>
@@ -243,7 +232,7 @@
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
                                     <a class="animsition-link" href="facilitybooking">
-                                        <span class="site-menu-title">Facility Booking</span>
+                                        <span class="site-menu-title">Facility Bookings</span>
                                     </a>
                                 </li>
                             </ul>
@@ -257,13 +246,8 @@
                                 <span class="site-menu-title">Merit Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="viewmerit.php">
-                                            <span class="site-menu-title">View Resident's Merit</span>
-                                        </a>
-                                    </li>
-                                    <li class="site-menu-item ">
                                         <a class="animsition-link" href="manipulatemerit.php">
-                                            <span class="site-menu-title">Manage Resident's Merit</span>
+                                            <span class="site-menu-title">Resident's Merit</span>
                                         </a>
                                     </li>
                                     <li class="site-menu-item ">
@@ -284,12 +268,7 @@
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
                                         <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">View Resident's Sticker App</span>
-                                        </a>
-                                    </li>
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Manage Resident's Sticker App</span>
+                                            <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -745,8 +724,8 @@ if (isset($_POST['submit'])) {
 
     $salt = "palsdkas;lkdasl;kd";
     $password = $_POST['password'];
-    $hash2 = md5($password,$salt);
-    
+    $hash2 = md5($password, $salt);
+
     $sql = "INSERT INTO `users` (`imageType`,`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) 
     VALUES ('','0x0','" . $_POST['userID'] . "',
     '" . $_POST['fullname'] . "',
@@ -820,7 +799,7 @@ if (isset($_POST['submit'])) {
 if (isset($_POST['update'])) {
     $salt = "palsdkas;lkdasl;kd";
     $password = $_POST['staticpassword'];
-    $hash2 = md5($password,$salt);
+    $hash2 = md5($password, $salt);
 
     $sql = "UPDATE `users` SET `fullname` = '" . $_POST['staticfullname'] . "', `password` = '" . $hash2 . "', `email` = '" . $_POST['staticemail'] . "', `phone_no` = '" . $_POST['staticphoneno'] . "', 
     `userType` = '" . $_POST['staticusertype'] . "', `verification` = '" . $_POST['staticverification'] . "' WHERE `users`.`userID` = '" . $_POST['staticuserID'] . "' ";
@@ -854,7 +833,7 @@ if (isset($_POST['delete'])) {
     $sql2 = "DELETE FROM `merit` WHERE `merit`.`userID` = '" . $_POST['userID'] . "' );";
     $result = mysqli_query($con, $sql);
     $result2 = mysqli_query($con, $sql2);
-    
+
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
