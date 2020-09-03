@@ -23,13 +23,13 @@ if (isset($_POST['login'])) {
 			header("Location: error.html");
 		} else {
 			if ($row['userType'] == 'ADMIN') {
-				header("Location: usergroups/admin/base/html/index.php");
+				header("Location: main/base/html/admin/index.php");
 			} else if ($row['userType'] == 'STAFF') {
-				header("Location: usergroups/staff/base/html/index.php");
+				header("Location: main/base/html/staff/index.php");
 			} else if ($row['userType'] == 'USER') {
-				header("Location: usergroups/resident/base/html/index.php");
+				header("Location: main/base/html/resident/index.php");
 			} else if ($row['userType'] == 'GUEST') {
-				header("Location: usergroups/guest/index.php");
+				header("Location: main/base/html/guest/index.php");
 			} else {
 				header("Location: error.html");
 			}
