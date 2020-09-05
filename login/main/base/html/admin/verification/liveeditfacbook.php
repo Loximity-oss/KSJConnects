@@ -5,11 +5,10 @@
       echo  mysqli_connect_error();
       exit;
   }
-  $sql = "SELECT `facilitieslist`.`facID`,`facilitieslist`.`facName` FROM `facilitieslist` WHERE 
-  (`facilitieslist`.`facID`) NOT IN (select `facilitiesbooking`.`facID` from `facilitiesbooking` WHERE 
-  `facilitiesbooking`.`dateStart` NOT BETWEEN '" . $_POST['dateStart'] . "'  AND '" . $_POST['dateEnd'] . "' 
-  AND `facilitiesbooking`.`dateEnd` NOT BETWEEN '" . $_POST['dateStart'] . "'  AND '" . $_POST['dateEnd'] . "' 
-  AND `facilitiesbooking`.`Approval` = 0 AND `facilitiesbooking`.`Approval` != 1 )";
+  $sql = "select `facilitieslist`.`facID`,`facilitieslist`.`facName` from `facilitieslist` where 
+  `facID` not in((SELECT distinct `facilitiesbooking`.`facID` from `facilitiesbooking` where 
+  `facilitiesbooking`.`dateStart` BETWEEN '" . $_POST['dateStart'] . "' AND '" . $_POST['dateEnd'] . "' or `facilitiesbooking`.`dateEnd` 
+  BETWEEN '" . $_POST['dateStart'] . "' AND '" . $_POST['dateEnd'] . "' AND `facilitiesbooking`.`Approval` != 2 AND `facilitiesbooking`.`Approval` != 0 ))";
 
   $result = mysqli_query($con, $sql);
   $count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct

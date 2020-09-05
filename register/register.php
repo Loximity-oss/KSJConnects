@@ -14,7 +14,7 @@ if (isset($_POST['register'])) {
 
     //insert into sql.
     $sql = "INSERT INTO `users` (`imageType`,`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) 
-    VALUES ('','0x0','" . $_POST['username'] . "',
+    VALUES ('image/jpeg','','" . $_POST['username'] . "',
     '" . $_POST['fullname'] . "',
     '" . $hash2 . "',
     '" . $_POST['email'] . "',

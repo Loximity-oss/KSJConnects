@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin (View Merit of Residents)</title>
+    <title>KSJConnects - Staff (View Merit of Residents)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -162,21 +162,20 @@
                             </ul>
                         </li>
 
-                        <!-- Payment Management-->
-                        <li class="site-menu-category">Payment Management</li>
+                        <!-- Payment Stuff-->
+                        <li class="site-menu-category">Payment System</li>
                         <li class="site-menu-item has-sub">
                             <a href="javascript:void(0)">
-                                <a>
-                                    <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Payment Submenu</span>
-                                </a>
-                                <ul class="site-menu-sub">
-                                    <li class="site-menu-item">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Payment </span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
+                                <span class="site-menu-title">Payment Submenu</span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="index.php">
+                                        <span class="site-menu-title">Resident Payment</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <!-- User Management Stuff-->
@@ -187,21 +186,6 @@
                                 <span class="site-menu-title">User Management Submenu</span>
                             </a>
                             <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="addusers.php">
-                                        <span class="site-menu-title">Add User Accounts</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item active">
-                                    <a class="animsition-link" href="#">
-                                        <span class="site-menu-title">View User Accounts</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="addremoveusers.php">
-                                        <span class="site-menu-title">Manipulate User Accounts</span>
-                                    </a>
-                                </li>
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="residentapplication.php">
                                         <span class="site-menu-title">Resident Application</span>
@@ -243,7 +227,7 @@
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
                                     <a class="animsition-link" href="facilitybooking">
-                                        <span class="site-menu-title">Facility Booking</span>
+                                        <span class="site-menu-title">Facility Bookings</span>
                                     </a>
                                 </li>
                             </ul>
@@ -257,13 +241,8 @@
                                 <span class="site-menu-title">Merit Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="viewmerit.php">
-                                            <span class="site-menu-title">View Resident's Merit</span>
-                                        </a>
-                                    </li>
-                                    <li class="site-menu-item ">
                                         <a class="animsition-link" href="manipulatemerit.php">
-                                            <span class="site-menu-title">Manage Resident's Merit</span>
+                                            <span class="site-menu-title">Resident's Merit</span>
                                         </a>
                                     </li>
                                     <li class="site-menu-item ">
@@ -284,12 +263,7 @@
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
                                         <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">View Resident's Sticker App</span>
-                                        </a>
-                                    </li>
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Manage Resident's Sticker App</span>
+                                            <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
                                 </ul>

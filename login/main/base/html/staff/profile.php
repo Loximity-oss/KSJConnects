@@ -16,7 +16,7 @@ if (!$con) {
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin Homepage</title>
+    <title>KSJConnects - Staff Homepage</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -163,21 +163,20 @@ if (!$con) {
                             </ul>
                         </li>
 
-                        <!-- Payment Management-->
-                        <li class="site-menu-category">Payment Management</li>
+                        <!-- Payment Stuff-->
+                        <li class="site-menu-category">Payment System</li>
                         <li class="site-menu-item has-sub">
                             <a href="javascript:void(0)">
-                                <a>
-                                    <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Payment Submenu</span>
-                                </a>
-                                <ul class="site-menu-sub">
-                                    <li class="site-menu-item">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Payment </span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
+                                <span class="site-menu-title">Payment Submenu</span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="index.php">
+                                        <span class="site-menu-title">Resident Payment</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <!-- User Management Stuff-->
@@ -188,16 +187,6 @@ if (!$con) {
                                 <span class="site-menu-title">User Management Submenu</span>
                             </a>
                             <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="addusers.php">
-                                        <span class="site-menu-title">Add User Accounts</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item active">
-                                    <a class="animsition-link" href="#">
-                                        <span class="site-menu-title">View User Accounts</span>
-                                    </a>
-                                </li>
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="addremoveusers.php">
                                         <span class="site-menu-title">Manipulate User Accounts</span>
@@ -244,7 +233,7 @@ if (!$con) {
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
                                     <a class="animsition-link" href="facilitybooking">
-                                        <span class="site-menu-title">Facility Booking</span>
+                                        <span class="site-menu-title">Facility Bookings</span>
                                     </a>
                                 </li>
                             </ul>
@@ -258,13 +247,8 @@ if (!$con) {
                                 <span class="site-menu-title">Merit Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="viewmerit.php">
-                                            <span class="site-menu-title">View Resident's Merit</span>
-                                        </a>
-                                    </li>
-                                    <li class="site-menu-item ">
                                         <a class="animsition-link" href="manipulatemerit.php">
-                                            <span class="site-menu-title">Manage Resident's Merit</span>
+                                            <span class="site-menu-title">Resident's Merit</span>
                                         </a>
                                     </li>
                                     <li class="site-menu-item ">
@@ -285,12 +269,7 @@ if (!$con) {
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
                                         <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">View Resident's Sticker App</span>
-                                        </a>
-                                    </li>
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Manage Resident's Sticker App</span>
+                                            <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -370,28 +349,28 @@ if (!$con) {
                 <div class="col-sm-9">
                     <div class="card">
                         <div class="card-header card-header-transparent card-header-bordered">
-                            Basic Profile Information
+                            My Profile
                         </div>
                         <div class="card-block">
                             <!--userID-->
                             <div class="form-group row">
                                 <label for="staticuserID" class="col-sm-2 col-form-label">User ID</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticuserID" size="50" value="' . $_SESSION['username'] . '">
+                                    <input type="text" readonly class="form-control" id="staticuserID" size="50" value="' . $_SESSION['username'] . '">
                                 </div>
                             </div>
                             <!--Full Name-->
                             <div class="form-group row">
                                 <label for="staticfullname" class="col-sm-2 col-form-label">Full Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticfullname" size="50" value="' . $list['fullname'] . '">
+                                    <input type="text" readonly class="form-control" id="staticfullname" size="50" value="' . $list['fullname'] . '">
                                 </div>
                             </div>
                             <!--email-->
                             <div class="form-group row">
                                 <label for="staticEmail" class="col-sm-2 col-form-label">E-mail</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" size="50" value="' . $list['email'] . '">
+                                    <input type="text" readonly class="form-control" id="staticEmail" size="50" value="' . $list['email'] . '">
                                 </div>
                             </div>
 
@@ -399,7 +378,7 @@ if (!$con) {
                             <div class="form-group row">
                                 <label for="staticphoneno" class="col-sm-2 col-form-label">Phone Number</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticphoneno" size="50" value="' . $list['phone_no'] . '">
+                                    <input type="text" readonly class="form-control" id="staticphoneno" size="50" value="' . $list['phone_no'] . '">
                                 </div>
                             </div>
 
@@ -423,7 +402,7 @@ if (!$con) {
                 <div class="col-sm-9">
                     <div class="card">
                         <div class="card-header card-header-transparent card-header-bordered">
-                            Edit Profile Attributes
+                            Edit Profile 
                         </div>
                         <div class="card-block">
                             <h6 class="card-subtitle mb-2">Change Password</h6>
@@ -433,7 +412,8 @@ if (!$con) {
                             <form action="edit/edit.php" method="POST">
                                 <div class="form-group">
                                     <label for="oldpass">Old Password</label>
-                                    <input type="password" name="oldpass" class="form-control" id="oldpass" placeholder="Enter Old Password">
+                                    <input type="password" name="oldpass" class="form-control" id="oldpass" onblur="checkAvailability_pass()" placeholder="Enter Old Password">
+                                    <span id="pass-status"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="newpass">New Password</label>
@@ -441,7 +421,8 @@ if (!$con) {
                                 </div>
                                 <div class="form-group">
                                     <label for="confirmnewpass">Confirm new Password</label>
-                                    <input type="password" name="verifypass" class="form-control" id="confirmnewpass" placeholder="Confirm New Password">
+                                    <input type="password" name="verifypass" class="form-control" id="confirmnewpass" onblur="checkpass()" placeholder="Confirm New Password">
+                                    <span id="pass-status-2"></span>
                                 </div>
                                 <button type="submit" name="passwordedit" class="btn btn-primary">Submit</button>
                             </form>
@@ -563,7 +544,28 @@ if (!$con) {
                 });
         }
 
+        function checkAvailability_pass() {
+            jQuery.ajax({
+                url: "verification/pass.php",
+                data: {
+                    oldpass: $("#oldpass").val(),
+                    userID: $("#staticuserID").val(),
+                },
+                type: "POST",
+                success: function(data) {
+                    $("#pass-status").html(data);
+                },
+                error: function() {}
+            });
+        }
 
+        function checkpass(){
+            if($("#newpass").val() != $("#confirmnewpass").val()){
+                $("#pass-status-2").html("Your password does not match.");
+            } else {
+                $("#pass-status-2").html("Your password matches.");
+            }
+        }
     </script>
 </body>
 

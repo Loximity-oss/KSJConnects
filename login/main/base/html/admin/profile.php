@@ -349,28 +349,28 @@ if (!$con) {
                 <div class="col-sm-9">
                     <div class="card">
                         <div class="card-header card-header-transparent card-header-bordered">
-                            Basic Profile Information
+                            My Profile
                         </div>
                         <div class="card-block">
                             <!--userID-->
                             <div class="form-group row">
                                 <label for="staticuserID" class="col-sm-2 col-form-label">User ID</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticuserID" size="50" value="' . $_SESSION['username'] . '">
+                                    <input type="text" readonly class="form-control" id="staticuserID" size="50" value="' . $_SESSION['username'] . '">
                                 </div>
                             </div>
                             <!--Full Name-->
                             <div class="form-group row">
                                 <label for="staticfullname" class="col-sm-2 col-form-label">Full Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticfullname" size="50" value="' . $list['fullname'] . '">
+                                    <input type="text" readonly class="form-control" id="staticfullname" size="50" value="' . $list['fullname'] . '">
                                 </div>
                             </div>
                             <!--email-->
                             <div class="form-group row">
                                 <label for="staticEmail" class="col-sm-2 col-form-label">E-mail</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" size="50" value="' . $list['email'] . '">
+                                    <input type="text" readonly class="form-control" id="staticEmail" size="50" value="' . $list['email'] . '">
                                 </div>
                             </div>
 
@@ -378,7 +378,7 @@ if (!$con) {
                             <div class="form-group row">
                                 <label for="staticphoneno" class="col-sm-2 col-form-label">Phone Number</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticphoneno" size="50" value="' . $list['phone_no'] . '">
+                                    <input type="text" readonly class="form-control" id="staticphoneno" size="50" value="' . $list['phone_no'] . '">
                                 </div>
                             </div>
 
@@ -402,7 +402,7 @@ if (!$con) {
                 <div class="col-sm-9">
                     <div class="card">
                         <div class="card-header card-header-transparent card-header-bordered">
-                            Edit Profile Attributes
+                            Edit Profile 
                         </div>
                         <div class="card-block">
                             <h6 class="card-subtitle mb-2">Change Password</h6>
@@ -421,7 +421,8 @@ if (!$con) {
                                 </div>
                                 <div class="form-group">
                                     <label for="confirmnewpass">Confirm new Password</label>
-                                    <input type="password" name="verifypass" class="form-control" id="confirmnewpass" placeholder="Confirm New Password">
+                                    <input type="password" name="verifypass" class="form-control" id="confirmnewpass" onblur="checkpass()" placeholder="Confirm New Password">
+                                    <span id="pass-status-2"></span>
                                 </div>
                                 <button type="submit" name="passwordedit" class="btn btn-primary">Submit</button>
                             </form>
@@ -544,8 +545,6 @@ if (!$con) {
         }
 
         function checkAvailability_pass() {
-            console.log($("#staticuserID").val());
-            console.log($("#oldpass").val());oldpass
             jQuery.ajax({
                 url: "verification/pass.php",
                 data: {
@@ -558,6 +557,14 @@ if (!$con) {
                 },
                 error: function() {}
             });
+        }
+
+        function checkpass(){
+            if($("#newpass").val() != $("#confirmnewpass").val()){
+                $("#pass-status-2").html("Your password does not match.");
+            } else {
+                $("#pass-status-2").html("Your password matches.");
+            }
         }
     </script>
 </body>
