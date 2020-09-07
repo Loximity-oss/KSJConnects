@@ -9,44 +9,44 @@
   <meta name="description" content="bootstrap admin template">
   <meta name="author" content="">
 
-  <title>KSJConnects - User Homepage</title>
+  <title>KSJConnects - Staff Homepage</title>
 
-  <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
-  <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+  <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="../../../assets/images/favicon.ico">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="../../global/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../global/css/bootstrap-extend.min.css">
-  <link rel="stylesheet" href="../assets/css/site.min.css">
+  <link rel="stylesheet" href="../../../global/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../global/css/bootstrap-extend.min.css">
+  <link rel="stylesheet" href="../../assets/css/site.min.css">
 
   <!-- Plugins -->
-  <link rel="stylesheet" href="../../global/vendor/animsition/animsition.css">
-  <link rel="stylesheet" href="../../global/vendor/asscrollable/asScrollable.css">
-  <link rel="stylesheet" href="../../global/vendor/switchery/switchery.css">
-  <link rel="stylesheet" href="../../global/vendor/intro-js/introjs.css">
-  <link rel="stylesheet" href="../../global/vendor/slidepanel/slidePanel.css">
-  <link rel="stylesheet" href="../../global/vendor/flag-icon-css/flag-icon.css">
-  <link rel="stylesheet" href="../../global/vendor/chartist/chartist.css">
-  <link rel="stylesheet" href="../../global/vendor/aspieprogress/asPieProgress.css">
-  <link rel="stylesheet" href="../assets/examples/css/dashboard/v2.css">
+  <link rel="stylesheet" href="../../../global/vendor/animsition/animsition.css">
+  <link rel="stylesheet" href="../../../global/vendor/asscrollable/asScrollable.css">
+  <link rel="stylesheet" href="../../../global/vendor/switchery/switchery.css">
+  <link rel="stylesheet" href="../../../global/vendor/intro-js/introjs.css">
+  <link rel="stylesheet" href="../../../global/vendor/slidepanel/slidePanel.css">
+  <link rel="stylesheet" href="../../../global/vendor/flag-icon-css/flag-icon.css">
+  <link rel="stylesheet" href="../../../global/vendor/chartist/chartist.css">
+  <link rel="stylesheet" href="../../../global/vendor/aspieprogress/asPieProgress.css">
+  <link rel="stylesheet" href="../../assets/examples/css/dashboard/v2.css">
 
 
   <!-- Fonts -->
-  <link rel="stylesheet" href="../../global/fonts/web-icons/web-icons.min.css">
-  <link rel="stylesheet" href="../../global/fonts/brand-icons/brand-icons.min.css">
+  <link rel="stylesheet" href="../../../global/fonts/web-icons/web-icons.min.css">
+  <link rel="stylesheet" href="../../../global/fonts/brand-icons/brand-icons.min.css">
   <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
   <!--[if lt IE 9]>
-    <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
+    <script src="../../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
 
   <!--[if lt IE 10]>
-    <script src="../../../global/vendor/media-match/media.match.min.js"></script>
-    <script src="../../../global/vendor/respond/respond.min.js"></script>
+    <script src="../../../../global/vendor/media-match/media.match.min.js"></script>
+    <script src="../../../../global/vendor/respond/respond.min.js"></script>
     <![endif]-->
 
   <!-- Scripts -->
-  <script src="../../global/vendor/breakpoints/breakpoints.js"></script>
+  <script src="../../../global/vendor/breakpoints/breakpoints.js"></script>
   <script>
     Breakpoints();
   </script>
@@ -68,7 +68,7 @@
         <i class="icon wb-more-horizontal" aria-hidden="true"></i>
       </button>
       <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
-        <img class="navbar-brand-logo" src="../assets/images/logo.png" title="KSJConnects">
+        <img class="navbar-brand-logo" src="../../assets/images/logo.png" title="KSJConnects">
         <span class="navbar-brand-text hidden-xs-down"> KSJConnects</span>
       </div>
 
@@ -129,77 +129,140 @@
     </div>
   </nav>
   <div class="site-menubar">
-    <div class="site-menubar-body">
-      <div>
-        <div>
-          <ul class="site-menu" data-plugin="menu">
-            <!-- General Stuff-->
-            <li class="site-menu-category">General</li>
-            <li class="site-menu-item has-sub">
-              <a href="javascript:void(0)">
-                <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
-                <span class="site-menu-title">Dashboard Submenu</span>
-              </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item active">
-                  <a class="animsition-link" href="#">
-                    <span class="site-menu-title">Dashboard</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="profile.php">
-                    <span class="site-menu-title">Profile</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
+        <div class="site-menubar-body">
+            <div>
+                <div>
+                    <ul class="site-menu" data-plugin="menu">
+                        <!-- General Stuff-->
+                        <li class="site-menu-category">General</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
+                                <span class="site-menu-title">Dashboard Submenu</span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="index.php">
+                                        <span class="site-menu-title">Dashboard</span>
+                                    </a>
+                                </li>
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="profile.php">
+                                        <span class="site-menu-title">Profile</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Payment Stuff-->
+                        <li class="site-menu-category">Payment System</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
+                                <span class="site-menu-title">Payment Submenu</span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="index.php">
+                                        <span class="site-menu-title">Resident Payment</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Complaint System Information Stuff-->
+                        <li class="site-menu-category">Complaint System</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-alert" aria-hidden="true"></i>
+                                <span class="site-menu-title">Complaint System Submenu</span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="manipulatecomplaint.php">
+                                        <span class="site-menu-title">Resident's Complaints</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Facility Booking Stuff-->
+                        <li class="site-menu-category">Facility Booking System</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-list" aria-hidden="true"></i>
+                                <span class="site-menu-title">Facility Booking Submenu</span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item ">
+                                    <a class="animsition-link" href="facilitylist">
+                                        <span class="site-menu-title">Facility List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item ">
+                                    <a class="animsition-link" href="facilitybooking">
+                                        <span class="site-menu-title">Facility Bookings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Student Merit Stuff-->
+                        <li class="site-menu-category">Resident Merit System</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-emoticon" aria-hidden="true"></i>
+                                <span class="site-menu-title">Merit Submenu</span>
+                                <ul class="site-menu-sub">
+                                    <li class="site-menu-item ">
+                                        <a class="animsition-link" href="manipulatemerit.php">
+                                            <span class="site-menu-title">Resident's Merit</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </a>
+                        </li>
+
+                        <!-- Sticker App Stuff-->
+                        <li class="site-menu-category">Sticker Application</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-file" aria-hidden="true"></i>
+                                <span class="site-menu-title">Sticker Submenu</span>
+                                <ul class="site-menu-sub">
+                                    <li class="site-menu-item ">
+                                        <a class="animsition-link" href="index.php">
+                                            <span class="site-menu-title">Resident's Sticker App</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </a>
+                        </li>
 
 
-
-
-            <!-- Complaint System Information Stuff-->
-            <li class="site-menu-category">Complaint System</li>
-            <li class="site-menu-item has-sub">
-              <a href="javascript:void(0)">
-                <i class="site-menu-icon wb-alert" aria-hidden="true"></i>
-                <span class="site-menu-title">Complaint System Submenu</span>
-              </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="addcomplaint.php">
-                    <span class="site-menu-title">Add Complaint</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="viewcomplaint.php">
-                    <span class="site-menu-title">View Previous Complaints</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-          </ul>
-          <div class="site-menubar-section">
-            <h5>
-              Sprint 1 Progress
-              <span class="float-right">80%</span>
-            </h5>
-            <div class="progress progress-xs">
-              <div class="progress-bar active" style="width: 75%;" role="progressbar"></div>
+                    </ul>
+                    <div class="site-menubar-section">
+                        <h5>
+                            Sprint 3 Progress
+                            <span class="float-right">1%</span>
+                        </h5>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+                        </div>
+                        <h5>
+                            Product Release
+                            <span class="float-right">80%</span>
+                        </h5>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h5>
-              Product Release
-              <span class="float-right">30%</span>
-            </h5>
-            <div class="progress progress-xs">
-              <div class="progress-bar progress-bar-warning" style="width: 30%;" role="progressbar"></div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-
 
   <!-- Page -->
   <div class="page">
@@ -224,7 +287,7 @@
               </button>
               <span class="ml-15 font-weight-400">USER ACCESS LEVEL</span>
               <div class="content-text text-center mb-0">
-                <span class="font-size-40 font-weight-100">Resident</span>
+                <span class="font-size-40 font-weight-100">User</span>
               </div>
             </div>
           </div>
@@ -235,9 +298,9 @@
               <button type="button" class="btn btn-floating btn-sm btn-info">
                 <i class="icon wb-users"></i>
               </button>
-              <span class="ml-15 font-weight-400">Current Students</span>
+              <span class="ml-15 font-weight-400">Room Name</span>
               <div class="content-text text-center mb-0">
-                <span class="font-size-40 font-weight-100">1200</span>
+                <span class="font-size-40 font-weight-100">A-1-01</span>
               </div>
             </div>
           </div>
@@ -248,9 +311,9 @@
               <button type="button" class="btn btn-floating btn-sm btn-success">
                 <i class="icon wb-table"></i>
               </button>
-              <span class="ml-15 font-weight-400">Room</span>
+              <span class="ml-15 font-weight-400">Merit</span>
               <div class="content-text text-center mb-0">
-                <span class="font-size-40 font-weight-100">A-1-02</span>
+                <span class="font-size-40 font-weight-100">-</span>
               </div>
             </div>
           </div>
@@ -339,53 +402,53 @@
     </div>
   </footer>
   <!-- Core  -->
-  <script src="../../global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
-  <script src="../../global/vendor/jquery/jquery.js"></script>
-  <script src="../../global/vendor/popper-js/umd/popper.min.js"></script>
-  <script src="../../global/vendor/bootstrap/bootstrap.js"></script>
-  <script src="../../global/vendor/animsition/animsition.js"></script>
-  <script src="../../global/vendor/mousewheel/jquery.mousewheel.js"></script>
-  <script src="../../global/vendor/asscrollbar/jquery-asScrollbar.js"></script>
-  <script src="../../global/vendor/asscrollable/jquery-asScrollable.js"></script>
-  <script src="../../global/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+  <script src="../../../global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
+  <script src="../../../global/vendor/jquery/jquery.js"></script>
+  <script src="../../../global/vendor/popper-js/umd/popper.min.js"></script>
+  <script src="../../../global/vendor/bootstrap/bootstrap.js"></script>
+  <script src="../../../global/vendor/animsition/animsition.js"></script>
+  <script src="../../../global/vendor/mousewheel/jquery.mousewheel.js"></script>
+  <script src="../../../global/vendor/asscrollbar/jquery-asScrollbar.js"></script>
+  <script src="../../../global/vendor/asscrollable/jquery-asScrollable.js"></script>
+  <script src="../../../global/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
 
   <!-- Plugins -->
-  <script src="../../global/vendor/switchery/switchery.js"></script>
-  <script src="../../global/vendor/intro-js/intro.js"></script>
-  <script src="../../global/vendor/screenfull/screenfull.js"></script>
-  <script src="../../global/vendor/slidepanel/jquery-slidePanel.js"></script>
-  <script src="../../global/vendor/chartist/chartist.min.js"></script>
-  <script src="../../global/vendor/gmaps/gmaps.js"></script>
-  <script src="../../global/vendor/matchheight/jquery.matchHeight-min.js"></script>
+  <script src="../../../global/vendor/switchery/switchery.js"></script>
+  <script src="../../../global/vendor/intro-js/intro.js"></script>
+  <script src="../../../global/vendor/screenfull/screenfull.js"></script>
+  <script src="../../../global/vendor/slidepanel/jquery-slidePanel.js"></script>
+  <script src="../../../global/vendor/chartist/chartist.min.js"></script>
+  <script src="../../../global/vendor/gmaps/gmaps.js"></script>
+  <script src="../../../global/vendor/matchheight/jquery.matchHeight-min.js"></script>
 
   <!-- Scripts -->
-  <script src="../../global/js/Component.js"></script>
-  <script src="../../global/js/Plugin.js"></script>
-  <script src="../../global/js/Base.js"></script>
-  <script src="../../global/js/Config.js"></script>
+  <script src="../../../global/js/Component.js"></script>
+  <script src="../../../global/js/Plugin.js"></script>
+  <script src="../../../global/js/Base.js"></script>
+  <script src="../../../global/js/Config.js"></script>
 
-  <script src="../assets/js/Section/Menubar.js"></script>
-  <script src="../assets/js/Section/GridMenu.js"></script>
-  <script src="../assets/js/Section/Sidebar.js"></script>
-  <script src="../assets/js/Section/PageAside.js"></script>
-  <script src="../assets/js/Plugin/menu.js"></script>
+  <script src="../../assets/js/Section/Menubar.js"></script>
+  <script src="../../assets/js/Section/GridMenu.js"></script>
+  <script src="../../assets/js/Section/Sidebar.js"></script>
+  <script src="../../assets/js/Section/PageAside.js"></script>
+  <script src="../../assets/js/Plugin/menu.js"></script>
 
-  <script src="../../global/js/config/colors.js"></script>
-  <script src="../assets/js/config/tour.js"></script>
+  <script src="../../../global/js/config/colors.js"></script>
+  <script src="../../assets/js/config/tour.js"></script>
   <script>
-    Config.set('assets', '../assets');
+    Config.set('assets', '../../assets');
   </script>
 
   <!-- Page -->
-  <script src="../assets/js/Site.js"></script>
-  <script src="../../global/js/Plugin/asscrollable.js"></script>
-  <script src="../../global/js/Plugin/slidepanel.js"></script>
-  <script src="../../global/js/Plugin/switchery.js"></script>
-  <script src="../../global/js/Plugin/gmaps.js"></script>
-  <script src="../../global/js/Plugin/matchheight.js"></script>
-  <script src="../../global/js/Plugin/asscrollable.js"></script>
+  <script src="../../assets/js/Site.js"></script>
+  <script src="../../../global/js/Plugin/asscrollable.js"></script>
+  <script src="../../../global/js/Plugin/slidepanel.js"></script>
+  <script src="../../../global/js/Plugin/switchery.js"></script>
+  <script src="../../../global/js/Plugin/gmaps.js"></script>
+  <script src="../../../global/js/Plugin/matchheight.js"></script>
+  <script src="../../../global/js/Plugin/asscrollable.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="../assets/examples/js/dashboard/v2.js"></script>
+  <script src="../../assets/examples/js/dashboard/v2.js"></script>
   <script>
     function JSconfirm() {
       swal({

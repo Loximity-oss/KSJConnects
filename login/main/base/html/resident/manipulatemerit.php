@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (Add/Update/Delete User Complaints)</title>
+    <title>KSJConnects - Staff (manipulate accounts)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -111,7 +111,7 @@
                             </span>
                         </a>
                         <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="profile.php" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Profile</a>
+                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Profile</a>
                             <div class="dropdown-divider" role="presentation"></div>
                             <a class="dropdown-item" onclick="JSconfirm();" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
                         </div>
@@ -178,22 +178,6 @@
                             </ul>
                         </li>
 
-                        <!-- User Management Stuff-->
-                        <li class="site-menu-category">User Management</li>
-                        <li class="site-menu-item has-sub">
-                            <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-user" aria-hidden="true"></i>
-                                <span class="site-menu-title">User Management Submenu</span>
-                            </a>
-                            <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="residentapplication.php">
-                                        <span class="site-menu-title">Resident Application</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <!-- Complaint System Information Stuff-->
                         <li class="site-menu-category">Complaint System</li>
                         <li class="site-menu-item has-sub">
@@ -245,11 +229,6 @@
                                             <span class="site-menu-title">Resident's Merit</span>
                                         </a>
                                     </li>
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Create Programme</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </a>
                         </li>
@@ -264,23 +243,6 @@
                                     <li class="site-menu-item ">
                                         <a class="animsition-link" href="index.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </a>
-                        </li>
-
-
-                        <!-- Announcement System-->
-                        <li class="site-menu-category">Announcement System</li>
-                        <li class="site-menu-item has-sub">
-                            <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-info" aria-hidden="true"></i>
-                                <span class="site-menu-title">Announcement Submenu</span>
-                                <ul class="site-menu-sub">
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Annoucement CRUD</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -309,191 +271,98 @@
             </div>
         </div>
     </div>
+
     <!-- Page -->
     <div class="page">
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Complaint Management / (Add/Update/Delete User Complaints)</li>
+                <li class="breadcrumb-item active">Merit Management / Search-Update-Delete User Merit</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete User Complaints</h1>
+            <h1 class="page-title">User Merit Manipulation</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Complaint List</h3>
+                    <h3 class="panel-title">Merit List</h3>
                 </header>
                 <div class="panel-body">
-                    <!-- Add Data Button -->
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-15">
-                                <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
-                                    <i class="icon wb-plus" aria-hidden="true"></i> Add
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal for Data Button -->
-                    <div class="modal fade" id="examplePositionCenter2" aria-labelledby="examplePositionCenter2" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog modal-simple modal-center">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                    <h4 class="modal-title">Add User Complaint</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="" method="POST">
-                                        <!--user ID-->
-                                        <div class="form-group ">
-                                            <label for="staticuserID" class="form-label">User ID</label>
-                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability()" required>
-                                            <span id="user-availability-status"></span>
-                                        </div>
-
-                                        <!--complaint-->
-                                        <div class="form-group ">
-                                            <label for="staticcomplaintid" class="form-label">Complaint ID</label>
-                                            <input type="text" class="form-control" id="complaintid" name="complaintid" value="Auto-assigned" disabled>
-                                        </div>
-
-                                        <!--reason-->
-                                        <div class="form-group ">
-                                            <label for="staticreason" class="form-label">Reason</label>
-                                            <input type="text" class="form-control" id="reason" name="reason" value="" required>
-                                        </div>
-
-                                        <!--status-->
-                                        <div class="form-group ">
-                                            <label for="staticstatus" class="form-label">Status</label>
-                                            <input type="text" class="form-control" id="status" name="status" required>
-                                        </div>
-
-                                        <!--supervisor-->
-                                        <div class="form-group ">
-                                            <label for="staticsupervisor" class="form-label">Supervisor</label>
-                                            <input type="text" class="form-control" id="supervisor" name="supervisor" required>
-                                        </div>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <!--buttons-->
-                                    <div class="btn-toolbar" role="toolbar">
-                                        <div class="btn-group mr-2" role="group" aria-label="First group">
-                                            <button type="submit" name="add" class="btn btn-primary">Add</button>
-                                        </div>
-                                    </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+                        <div class="col-sm-12">
+                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
 
-                                    <?php
-                                    $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                    if (!$con) {
-                                        echo  mysqli_connect_error();
-                                        exit;
-                                    }
-                                    $sql = "SELECT * FROM complaint";
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM merit";
 
-                                    $result = mysqli_query($con, $sql);
-                                    mysqli_close($con);
-                                    $qry = $result;
-                                    $list = mysqli_num_rows($qry);
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
 
-                                    $counter = 1;
-                                    if ($list > 0) {
-                                        echo '<thead>
+                                $counter = 1;
+                                if ($list > 0) {
+                                    echo '<thead>
                                         <tr role="row">
                                             <th>No</th>
                                             <th>User ID</th>
-                                            <th>Complaint ID</th>
-                                            <th>Reason</th>
-                                            <th>Status</th>
-                                            <th>Supervisor</th>
+                                            <th>Merit</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
 ';
-                                        while ($row = mysqli_fetch_assoc($qry)) {
-                                            echo '
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
                                             <tr>
                                             <form action=""  method="POST">
                                                 <td class="nr">' . $counter . '</td>
+                                                <input type="hidden" name="facID" value="' . $row['userID'] . '">
                                                 <td>' . $row['userID'] . '</td>         
-                                                <td>' . $row['complaintID'] . '</td>    
-                                                <input type="hidden" name="complaintID" value="' . $row['complaintID'] . '">
-                                                <td>' . $row['complaint_str'] . '</td>  
-                                                <td>' . $row['status'] . '</td>                                                    
-                                                <td>' . $row['supervisor'] . '</td>     
+                                                <td>' . $row['merit'] . '</td>                                                        
                                                 <td class="actions">
                                                     <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
                                                     data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
-                                            
-                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                    data-toggle="tooltip" data-original-title="Remove" name="delete" onclick=""><i class="icon wb-trash" aria-hidden="true"></i></button>
                                                 </td>
                                             </form>
                                             </tr>
 ';
-                                            $counter++;
-                                        }
+                                        $counter++;
                                     }
+                                }
 
-                                    //modal
-                                    echo '</tbody>                                                   
+                                //modal
+                                echo '</tbody>                                                   
                                     <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
                                     <div class="modal-dialog modal-simple modal-center">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                                     <span aria-hidden="true">×</span>
                                                 </button>
-                                                <h4 class="modal-title">Edit User Complaint</h4>
+                                                <h4 class="modal-title">Edit Facility Details</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <form action="" method="POST">
-                                                    <!--user ID-->
-                                                    <div class="form-group ">
-                                                        <label for="staticuserID" class="form-label">User ID</label>
-                                                        <input type="text" class="form-control" id="staticuserID" name="staticuserID" disabled>
-                                                        <span id="user-availability-status"></span>
-                                                    </div>
-                                                    
-                                                    <!--complaint-->
-                                                    <div class="form-group ">
-                                                        <label for="staticcomplaintid" class="form-label">Complaint ID</label>
-                                                        <input type="text" readonly class="form-control" id="staticcomplaintid" name="staticcomplaintid" size="50">
-                                                    </div>
-
-                                                    <!--reason-->
-                                                    <div class="form-group ">
-                                                        <label for="staticreason" class="form-label">Reason</label>
-                                                        <input type="text" class="form-control" id="staticreason" name="staticreason" value="" required>
-                                                    </div>
-
-                                                    <!--status-->
-                                                    <div class="form-group ">
-                                                        <label for="staticstatus" class="form-label">Status</label>
-                                                        <input type="text" class="form-control" id="staticstatus" name="staticstatus" required>
-                                                    </div>
-
-                                                    <!--supervisor-->
-                                                    <div class="form-group ">
-                                                        <label for="staticsupervisor" class="form-label">supervisor</label>
-                                                        <input type="text" class="form-control" id="staticsupervisor" name="staticsupervisor" required>
-                                                    </div>                                       
+                                                <!--user ID-->
+                                                <div class="form-group ">
+                                                    <label for="staticuserID" class="form-label">User ID</label>
+                                                    <input type="text" class="form-control" id="staticuserID" name="staticuserID" onblur="checkAvailability()" required>
+                                                    <span id="user-availability-status"></span>
+                                                </div>
+                        
+                                                <!--Merit-->
+                                                <div class="form-group ">
+                                                    <label for="staticuserID" class="form-label">Current Merit</label>
+                                                    <input type="number" class="form-control" id="staticmerit" name="staticmerit" required>
+                                                    <span id="user-availability-status"></span>
+                                                </div>
                                             </div>
 
                                             <div class="modal-footer">
@@ -508,13 +377,13 @@
                                         </div>
                                     </div>
                                 </div>';
-                                    ?>
+                                ?>
 
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
                 </div>
+
 
 
 
@@ -588,13 +457,57 @@
     <script src="../../../global/js/Plugin/slidepanel.js"></script>
     <script src="../../../global/js/Plugin/switchery.js"></script>
     <script src="../../../global/js/Plugin/datatables.js"></script>
-    <script src="../../assets/examples/js/tables/datatable.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+    <script src="../../assets/examples/js/tables/datatable.js"></script>
+
 
     <!-- for live editing -->
     <!--jQuery Stuff-->
     <script>
+        //check availability
+        function checkAvailability() {
+            jQuery.ajax({
+                url: "verification/liveeditemerit.php",
+                data: 'username=' + $("#staticuserID").val(),
+                type: "POST",
+                dataType: "json",
+                cache: false,
+                success: function(data) {
+
+                    //conversion from object to array
+                    var userData = $.map(data, function(value, index) {
+                        return [value];
+                    });
+
+                    //append to input boxes...
+                    $("#staticmerit").val(userData[1]);
+
+                    //edit USERNAME AVAILABLE status
+                    $("#user-availability-status").html("<span class='status-available'> User ID available. </span>");
+
+
+                },
+                error: function(data) {
+                    //append to input boxes...
+                    $("#staticmerit").val("");
+                    $("#user-availability-status").html("<span class='status-available'> User ID not available. </span>");
+                }
+            });
+        }
+
+        $(".edit_row").click(function() {
+
+            var $row = $(this).closest("tr"); // Find the row
+            var $text = $row.find(".nr").text(); // Find the text
+            var table = $('#exampleTableTools').DataTable();
+
+            var data = table.row($text - 1).data();
+
+            $("#staticuserID").val(data[1]);
+            $("#staticmerit").val(data[2]);
+        });
+
+        //exit
         function JSconfirm() {
             swal({
                     title: "Are you sure?",
@@ -609,43 +522,6 @@
                     }
                 });
         }
-
-        $(".edit_row").click(function() {
-
-            var $row = $(this).closest("tr"); // Find the row
-            var $text = $row.find(".nr").text(); // Find the text
-            var table = $('#exampleTableTools').DataTable();
-
-            var data = table.row($text - 1).data();
-
-            $("#staticuserID").val(data[1]);
-            $("#staticcomplaintid").val(data[2]);
-            $("#staticreason").val(data[3]);
-            $("#staticstatus").val(data[4]);
-            $("#staticsupervisor").val(data[5]);
-        });
-
-        function checkAvailability() {
-            jQuery.ajax({
-                url: "verification/livedit.php",
-                data: 'username=' + $("#userID").val(),
-                type: "POST",
-                dataType: "json",
-                cache: false,
-                success: function(data) {
-                    //conversion from object to array
-                    var userData = $.map(data, function(value, index) {
-                        return [value];
-                    });
-                    //edit USERNAME AVAILABLE status
-                    $("#user-availability-status").html("<span class='status-available'> User ID available. </span>");
-                },
-                error: function(data) {
-                    //append to input boxes...
-                    $("#user-availability-status").html("<span class='status-available'> User ID not available. </span>");
-                }
-            });
-        }
     </script>
 </body>
 
@@ -657,97 +533,32 @@ if (!$con) {
     echo  mysqli_connect_error();
     exit;
 }
-if (isset($_POST['add'])) {
-    $sql = "INSERT INTO `complaint` (`complaintID`, `userID`, `complaint_str`, `status`, `supervisor`) VALUES 
-(NULL, 
-'" . $_POST['userID'] . "',
-'" . $_POST['reason'] . "',
-'" . $_POST['status'] . "',
-'" . $_POST['supervisor'] . "')";
-    $result = mysqli_query($con, $sql);
-    mysqli_close($con);
-
-
-    if ($result) {
-        echo '<script>swal({
-            title: "Success",
-            text: "The complaint has been added.",
-            icon: "success",
-            button: "Ok",
-          }).then(function(){ 
-            window.location.href = "viewcomplaint.php";
-           }
-        ); </script>';
-    } else {
-        echo '<script>swal({
-            title: "Oh no",
-            text: "Complaint is not added.",
-            icon: "error",
-            button: "Ok",
-          }).then(function(){ 
-            window.location.href = "viewcomplaint.php";
-           }
-        ); </script>';
-    }
-}
 
 if (isset($_POST['update'])) {
-    $sql = "UPDATE `complaint` SET
-     `complaint_str` = '" . $_POST['staticreason'] . "',
-     `status` = '" . $_POST['staticstatus'] . "',
-      `supervisor` = '" . $_POST['staticsupervisor'] . "' 
-      WHERE `complaint`.`complaintID` = '" . $_POST['staticcomplaintid'] . "'";
-
+    $sql = "UPDATE `merit` SET `merit` = '" . $_POST["staticmerit"] . "' WHERE `merit`.`userID` = '" . $_POST["staticuserID"] . "'";
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
-                title: "Success",
-                text: "The complaint has been modified.",
-                icon: "success",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+            title: "Good job", 
+            text: "The merit marks is updated.", 
+            icon: "success",
+            button: "Ok"}).then(function(){ 
+                window.location.href = "manipulatemerit.php";
                }
-            ); </script>';
+            );
+              </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The complaint has not been modified.",
+                text: "The merit marks is not updated.",
                 icon: "error",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
-               }
-            ); </script>';
+                button: "Ok"}).then(function(){ 
+                    window.location.href = "manipulatemerit.php";
+                   }
+                );
+              </script>';
     }
 }
 
-if (isset($_POST['delete'])) {
-    $sql = "DELETE FROM `complaint` WHERE `complaint`.`complaintID` = '" . $_POST['complaintID'] . "'";
-
-    $result = mysqli_query($con, $sql);
-    mysqli_close($con);
-    if ($result) {
-        echo '<script>swal({
-                title: "Success",
-                text: "The complaint has been delete.",
-                icon: "success",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
-               }
-            ); </script>';
-    } else {
-        echo '<script>swal({
-                title: "Oh no",
-                text: "The complaint has not been deleted.",
-                icon: "error",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
-               }
-            ); </script>';
-    }
-}
 ?>

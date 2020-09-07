@@ -16,46 +16,46 @@ if (!$con) {
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - User Homepage</title>
+    <title>KSJConnects - Staff Homepage</title>
 
-    <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../../global/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../global/css/bootstrap-extend.min.css">
-    <link rel="stylesheet" href="../assets/css/site.min.css">
+    <link rel="stylesheet" href="../../../global/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../global/css/bootstrap-extend.min.css">
+    <link rel="stylesheet" href="../../assets/css/site.min.css">
 
     <!-- Plugins -->
-    <link rel="stylesheet" href="../../global/vendor/animsition/animsition.css">
-    <link rel="stylesheet" href="../../global/vendor/asscrollable/asScrollable.css">
-    <link rel="stylesheet" href="../../global/vendor/switchery/switchery.css">
-    <link rel="stylesheet" href="../../global/vendor/intro-js/introjs.css">
-    <link rel="stylesheet" href="../../global/vendor/slidepanel/slidePanel.css">
-    <link rel="stylesheet" href="../../global/vendor/flag-icon-css/flag-icon.css">
-    <link rel="stylesheet" href="../../global/vendor/chartist/chartist.css">
-    <link rel="stylesheet" href="../../global/vendor/jvectormap/jquery-jvectormap.css">
-    <link rel="stylesheet" href="../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
-    <link rel="stylesheet" href="../assets/examples/css/dashboard/v1.css">
+    <link rel="stylesheet" href="../../../global/vendor/animsition/animsition.css">
+    <link rel="stylesheet" href="../../../global/vendor/asscrollable/asScrollable.css">
+    <link rel="stylesheet" href="../../../global/vendor/switchery/switchery.css">
+    <link rel="stylesheet" href="../../../global/vendor/intro-js/introjs.css">
+    <link rel="stylesheet" href="../../../global/vendor/slidepanel/slidePanel.css">
+    <link rel="stylesheet" href="../../../global/vendor/flag-icon-css/flag-icon.css">
+    <link rel="stylesheet" href="../../../global/vendor/chartist/chartist.css">
+    <link rel="stylesheet" href="../../../global/vendor/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="../../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" href="../../assets/examples/css/dashboard/v1.css">
 
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="../../global/fonts/weather-icons/weather-icons.css">
-    <link rel="stylesheet" href="../../global/fonts/web-icons/web-icons.min.css">
-    <link rel="stylesheet" href="../../global/fonts/brand-icons/brand-icons.min.css">
+    <link rel="stylesheet" href="../../../global/fonts/weather-icons/weather-icons.css">
+    <link rel="stylesheet" href="../../../global/fonts/web-icons/web-icons.min.css">
+    <link rel="stylesheet" href="../../../global/fonts/brand-icons/brand-icons.min.css">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
     <!--[if lt IE 9]>
-    <script src="../../global/vendor/html5shiv/html5shiv.min.js"></script>
+    <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
 
     <!--[if lt IE 10]>
-    <script src="../../global/vendor/media-match/media.match.min.js"></script>
-    <script src="../../global/vendor/respond/respond.min.js"></script>
+    <script src="../../../global/vendor/media-match/media.match.min.js"></script>
+    <script src="../../../global/vendor/respond/respond.min.js"></script>
     <![endif]-->
 
     <!-- Scripts -->
-    <script src="../../global/vendor/breakpoints/breakpoints.js"></script>
+    <script src="../../../global/vendor/breakpoints/breakpoints.js"></script>
     <script>
         Breakpoints();
     </script>
@@ -77,7 +77,7 @@ if (!$con) {
                 <i class="icon wb-more-horizontal" aria-hidden="true"></i>
             </button>
             <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
-                <img class="navbar-brand-logo" src="../assets/images/logo.png" title="KSJConnects">
+                <img class="navbar-brand-logo" src="../../assets/images/logo.png" title="KSJConnects">
                 <span class="navbar-brand-text hidden-xs-down"> KSJConnects</span>
             </div>
 
@@ -155,14 +155,29 @@ if (!$con) {
                                         <span class="site-menu-title">Dashboard</span>
                                     </a>
                                 </li>
-                                <li class="site-menu-item active">
-                                    <a class="animsition-link" href="#">
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="profile.php">
                                         <span class="site-menu-title">Profile</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
 
+                        <!-- Payment Stuff-->
+                        <li class="site-menu-category">Payment System</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
+                                <span class="site-menu-title">Payment Submenu</span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="index.php">
+                                        <span class="site-menu-title">Resident Payment</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                         <!-- Complaint System Information Stuff-->
                         <li class="site-menu-category">Complaint System</li>
@@ -173,39 +188,90 @@ if (!$con) {
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="addcomplaint.php">
-                                        <span class="site-menu-title">Add Complaint</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item active">
-                                    <a class="animsition-link" href="#">
-                                        <span class="site-menu-title">View Previous Complaints</span>
+                                    <a class="animsition-link" href="manipulatecomplaint.php">
+                                        <span class="site-menu-title">Resident's Complaints</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
+                        <!-- Facility Booking Stuff-->
+                        <li class="site-menu-category">Facility Booking System</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-list" aria-hidden="true"></i>
+                                <span class="site-menu-title">Facility Booking Submenu</span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item ">
+                                    <a class="animsition-link" href="facilitylist">
+                                        <span class="site-menu-title">Facility List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item ">
+                                    <a class="animsition-link" href="facilitybooking">
+                                        <span class="site-menu-title">Facility Bookings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Student Merit Stuff-->
+                        <li class="site-menu-category">Resident Merit System</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-emoticon" aria-hidden="true"></i>
+                                <span class="site-menu-title">Merit Submenu</span>
+                                <ul class="site-menu-sub">
+                                    <li class="site-menu-item ">
+                                        <a class="animsition-link" href="manipulatemerit.php">
+                                            <span class="site-menu-title">Resident's Merit</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </a>
+                        </li>
+
+                        <!-- Sticker App Stuff-->
+                        <li class="site-menu-category">Sticker Application</li>
+                        <li class="site-menu-item has-sub">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-file" aria-hidden="true"></i>
+                                <span class="site-menu-title">Sticker Submenu</span>
+                                <ul class="site-menu-sub">
+                                    <li class="site-menu-item ">
+                                        <a class="animsition-link" href="index.php">
+                                            <span class="site-menu-title">Resident's Sticker App</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </a>
+                        </li>
+
+
                     </ul>
                     <div class="site-menubar-section">
                         <h5>
-                            Sprint 1 Progress
-                            <span class="float-right">80%</span>
+                            Sprint 3 Progress
+                            <span class="float-right">1%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 75%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">30%</span>
+                            <span class="float-right">80%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 30%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
 
     <!-- Page -->
@@ -220,7 +286,7 @@ if (!$con) {
         <div class="page-content container-fluid">
             <div class="row">
                 <?php
-                $sql = "SELECT * FROM users,merit where users.userID = '" . $_SESSION['username'] . "'  and merit.userID = '" . $_SESSION['username'] . "' ";
+                $sql = "SELECT * FROM users where users.userID = '" . $_SESSION['username'] . "'";
                 $result = mysqli_query($con, $sql);
                 $count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
                 $list = mysqli_fetch_assoc($result);
@@ -239,28 +305,28 @@ if (!$con) {
                 <div class="col-sm-9">
                     <div class="card">
                         <div class="card-header card-header-transparent card-header-bordered">
-                            Basic Profile Information
+                            My Profile
                         </div>
                         <div class="card-block">
                             <!--userID-->
                             <div class="form-group row">
                                 <label for="staticuserID" class="col-sm-2 col-form-label">User ID</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticuserID" size="50" value="' . $_SESSION['username'] . '">
+                                    <input type="text" readonly class="form-control" id="staticuserID" size="50" value="' . $_SESSION['username'] . '">
                                 </div>
                             </div>
                             <!--Full Name-->
                             <div class="form-group row">
                                 <label for="staticfullname" class="col-sm-2 col-form-label">Full Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticfullname" size="50" value="' . $list['fullname'] . '">
+                                    <input type="text" readonly class="form-control" id="staticfullname" size="50" value="' . $list['fullname'] . '">
                                 </div>
                             </div>
                             <!--email-->
                             <div class="form-group row">
                                 <label for="staticEmail" class="col-sm-2 col-form-label">E-mail</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" size="50" value="' . $list['email'] . '">
+                                    <input type="text" readonly class="form-control" id="staticEmail" size="50" value="' . $list['email'] . '">
                                 </div>
                             </div>
 
@@ -268,7 +334,7 @@ if (!$con) {
                             <div class="form-group row">
                                 <label for="staticphoneno" class="col-sm-2 col-form-label">Phone Number</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticphoneno" size="50" value="' . $list['phone_no'] . '">
+                                    <input type="text" readonly class="form-control" id="staticphoneno" size="50" value="' . $list['phone_no'] . '">
                                 </div>
                             </div>
 
@@ -277,14 +343,6 @@ if (!$con) {
                                 <label for="staticbio" class="col-sm-2 col-form-label">Bio</label>
                                 <div class="col-sm-10">
                                     <p class="form-control-plaintext">' . $list['bio'] . '</p>
-                                </div>
-                            </div>
-
-                            <!--merit-->
-                            <div class="form-group row">
-                                <label for="staticmerit" class="col-sm-2 col-form-label">Merit</label>
-                                <div class="col-sm-10">
-                                    <p class="form-control-plaintext">' . $list['merit'] . '</p>
                                 </div>
                             </div>
 
@@ -300,7 +358,7 @@ if (!$con) {
                 <div class="col-sm-9">
                     <div class="card">
                         <div class="card-header card-header-transparent card-header-bordered">
-                            Edit Profile Attributes
+                            Edit Profile 
                         </div>
                         <div class="card-block">
                             <h6 class="card-subtitle mb-2">Change Password</h6>
@@ -310,7 +368,8 @@ if (!$con) {
                             <form action="edit/edit.php" method="POST">
                                 <div class="form-group">
                                     <label for="oldpass">Old Password</label>
-                                    <input type="password" name="oldpass" class="form-control" id="oldpass" placeholder="Enter Old Password">
+                                    <input type="password" name="oldpass" class="form-control" id="oldpass" onblur="checkAvailability_pass()" placeholder="Enter Old Password">
+                                    <span id="pass-status"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="newpass">New Password</label>
@@ -318,7 +377,8 @@ if (!$con) {
                                 </div>
                                 <div class="form-group">
                                     <label for="confirmnewpass">Confirm new Password</label>
-                                    <input type="password" name="verifypass" class="form-control" id="confirmnewpass" placeholder="Confirm New Password">
+                                    <input type="password" name="verifypass" class="form-control" id="confirmnewpass" onblur="checkpass()" placeholder="Confirm New Password">
+                                    <span id="pass-status-2"></span>
                                 </div>
                                 <button type="submit" name="passwordedit" class="btn btn-primary">Submit</button>
                             </form>
@@ -372,57 +432,57 @@ if (!$con) {
         </div>
     </footer>
     <!-- Core  -->
-    <script src="../../global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
-    <script src="../../global/vendor/jquery/jquery.js"></script>
-    <script src="../../global/vendor/popper-js/umd/popper.min.js"></script>
-    <script src="../../global/vendor/bootstrap/bootstrap.js"></script>
-    <script src="../../global/vendor/animsition/animsition.js"></script>
-    <script src="../../global/vendor/mousewheel/jquery.mousewheel.js"></script>
-    <script src="../../global/vendor/asscrollbar/jquery-asScrollbar.js"></script>
-    <script src="../../global/vendor/asscrollable/jquery-asScrollable.js"></script>
-    <script src="../../global/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+    <script src="../../../global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
+    <script src="../../../global/vendor/jquery/jquery.js"></script>
+    <script src="../../../global/vendor/popper-js/umd/popper.min.js"></script>
+    <script src="../../../global/vendor/bootstrap/bootstrap.js"></script>
+    <script src="../../../global/vendor/animsition/animsition.js"></script>
+    <script src="../../../global/vendor/mousewheel/jquery.mousewheel.js"></script>
+    <script src="../../../global/vendor/asscrollbar/jquery-asScrollbar.js"></script>
+    <script src="../../../global/vendor/asscrollable/jquery-asScrollable.js"></script>
+    <script src="../../../global/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
 
     <!-- Plugins -->
-    <script src="../../global/vendor/switchery/switchery.js"></script>
-    <script src="../../global/vendor/intro-js/intro.js"></script>
-    <script src="../../global/vendor/screenfull/screenfull.js"></script>
-    <script src="../../global/vendor/slidepanel/jquery-slidePanel.js"></script>
-    <script src="../../global/vendor/skycons/skycons.js"></script>
-    <script src="../../global/vendor/aspieprogress/jquery-asPieProgress.min.js"></script>
-    <script src="../../global/vendor/jvectormap/jquery-jvectormap.min.js"></script>
-    <script src="../../global/vendor/jvectormap/maps/jquery-jvectormap-au-mill-en.js"></script>
-    <script src="../../global/vendor/matchheight/jquery.matchHeight-min.js"></script>
+    <script src="../../../global/vendor/switchery/switchery.js"></script>
+    <script src="../../../global/vendor/intro-js/intro.js"></script>
+    <script src="../../../global/vendor/screenfull/screenfull.js"></script>
+    <script src="../../../global/vendor/slidepanel/jquery-slidePanel.js"></script>
+    <script src="../../../global/vendor/skycons/skycons.js"></script>
+    <script src="../../../global/vendor/aspieprogress/jquery-asPieProgress.min.js"></script>
+    <script src="../../../global/vendor/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="../../../global/vendor/jvectormap/maps/jquery-jvectormap-au-mill-en.js"></script>
+    <script src="../../../global/vendor/matchheight/jquery.matchHeight-min.js"></script>
 
     <!-- Scripts -->
-    <script src="../../global/js/Component.js"></script>
-    <script src="../../global/js/Plugin.js"></script>
-    <script src="../../global/js/Base.js"></script>
-    <script src="../../global/js/Config.js"></script>
+    <script src="../../../global/js/Component.js"></script>
+    <script src="../../../global/js/Plugin.js"></script>
+    <script src="../../../global/js/Base.js"></script>
+    <script src="../../../global/js/Config.js"></script>
 
-    <script src="../assets/js/Section/Menubar.js"></script>
-    <script src="../assets/js/Section/GridMenu.js"></script>
-    <script src="../assets/js/Section/Sidebar.js"></script>
-    <script src="../assets/js/Section/PageAside.js"></script>
-    <script src="../assets/js/Plugin/menu.js"></script>
+    <script src="../../assets/js/Section/Menubar.js"></script>
+    <script src="../../assets/js/Section/GridMenu.js"></script>
+    <script src="../../assets/js/Section/Sidebar.js"></script>
+    <script src="../../assets/js/Section/PageAside.js"></script>
+    <script src="../../assets/js/Plugin/menu.js"></script>
 
-    <script src="../../global/js/config/colors.js"></script>
-    <script src="../assets/js/config/tour.js"></script>
+    <script src="../../../global/js/config/colors.js"></script>
+    <script src="../../assets/js/config/tour.js"></script>
     <script>
-        Config.set('assets', '../assets');
+        Config.set('assets', '../../assets');
     </script>
 
     <!-- Page -->
-    <script src="../assets/js/Site.js"></script>
-    <script src="../../global/js/Plugin/asscrollable.js"></script>
-    <script src="../../global/js/Plugin/slidepanel.js"></script>
-    <script src="../../global/js/Plugin/switchery.js"></script>
-    <script src="../../global/js/Plugin/matchheight.js"></script>
-    <script src="../../global/js/Plugin/jvectormap.js"></script>
+    <script src="../../assets/js/Site.js"></script>
+    <script src="../../../global/js/Plugin/asscrollable.js"></script>
+    <script src="../../../global/js/Plugin/slidepanel.js"></script>
+    <script src="../../../global/js/Plugin/switchery.js"></script>
+    <script src="../../../global/js/Plugin/matchheight.js"></script>
+    <script src="../../../global/js/Plugin/jvectormap.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <script src="../assets/examples/js/dashboard/v1.js"></script>
-    <script src="../../global/js/Plugin/jquery-placeholder.js"></script>
-    <script src="../../global/js/Plugin/input-group-file.js"></script>
+    <script src="../../assets/examples/js/dashboard/v1.js"></script>
+    <script src="../../../global/js/Plugin/jquery-placeholder.js"></script>
+    <script src="../../../global/js/Plugin/input-group-file.js"></script>
 
     <script>
         function JSconfirm() {
@@ -438,6 +498,29 @@ if (!$con) {
                         location.href = '../../../../logout.php';
                     }
                 });
+        }
+
+        function checkAvailability_pass() {
+            jQuery.ajax({
+                url: "verification/pass.php",
+                data: {
+                    oldpass: $("#oldpass").val(),
+                    userID: $("#staticuserID").val(),
+                },
+                type: "POST",
+                success: function(data) {
+                    $("#pass-status").html(data);
+                },
+                error: function() {}
+            });
+        }
+
+        function checkpass(){
+            if($("#newpass").val() != $("#confirmnewpass").val()){
+                $("#pass-status-2").html("Your password does not match.");
+            } else {
+                $("#pass-status-2").html("Your password matches.");
+            }
         }
     </script>
 </body>

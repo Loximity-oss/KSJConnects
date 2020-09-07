@@ -179,11 +179,6 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="addremoveusers.php">
-                    <span class="site-menu-title">Manipulate User Accounts</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
                   <a class="animsition-link" href="residentapplication.php">
                     <span class="site-menu-title">Resident Application</span>
                   </a>
@@ -306,7 +301,6 @@
       </div>
     </div>
   </div>
-
 
   <!-- Page -->
   <div class="page">

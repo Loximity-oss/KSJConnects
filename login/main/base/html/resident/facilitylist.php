@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (Add/Update/Delete User Complaints)</title>
+    <title>KSJConnects -  View Facility List</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -136,6 +136,7 @@
             <!-- End Site Navbar Seach -->
         </div>
     </nav>
+
     <div class="site-menubar">
         <div class="site-menubar-body">
             <div>
@@ -173,22 +174,6 @@
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="index.php">
                                         <span class="site-menu-title">Resident Payment</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- User Management Stuff-->
-                        <li class="site-menu-category">User Management</li>
-                        <li class="site-menu-item has-sub">
-                            <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-user" aria-hidden="true"></i>
-                                <span class="site-menu-title">User Management Submenu</span>
-                            </a>
-                            <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="residentapplication.php">
-                                        <span class="site-menu-title">Resident Application</span>
                                     </a>
                                 </li>
                             </ul>
@@ -245,11 +230,6 @@
                                             <span class="site-menu-title">Resident's Merit</span>
                                         </a>
                                     </li>
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Create Programme</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </a>
                         </li>
@@ -264,23 +244,6 @@
                                     <li class="site-menu-item ">
                                         <a class="animsition-link" href="index.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </a>
-                        </li>
-
-
-                        <!-- Announcement System-->
-                        <li class="site-menu-category">Announcement System</li>
-                        <li class="site-menu-item has-sub">
-                            <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-info" aria-hidden="true"></i>
-                                <span class="site-menu-title">Announcement Submenu</span>
-                                <ul class="site-menu-sub">
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Annoucement CRUD</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -314,22 +277,22 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Complaint Management / (Add/Update/Delete User Complaints)</li>
+                <li class="breadcrumb-item active">Facility Management / View Facility List</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete User Complaints</h1>
+            <h1 class="page-title">View Facility List</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Complaint List</h3>
+                    <h3 class="panel-title">Facility List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-15">
-                                <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
+                                <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal" disabled>
                                     <i class="icon wb-plus" aria-hidden="true"></i> Add
                                 </button>
                             </div>
@@ -340,43 +303,39 @@
                         <div class="modal-dialog modal-simple modal-center">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add User Complaint</h4>
+                                    <h4 class="modal-title">Add New Facility</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">
                                         <!--user ID-->
                                         <div class="form-group ">
-                                            <label for="staticuserID" class="form-label">User ID</label>
-                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability()" required>
-                                            <span id="user-availability-status"></span>
+                                            <label for="staticfacID" class="form-label">Facility ID</label>
+                                            <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
+                                            <span id="fac-availability-status"></span>
                                         </div>
 
-                                        <!--complaint-->
+                                        <!--Faciility Name-->
                                         <div class="form-group ">
-                                            <label for="staticcomplaintid" class="form-label">Complaint ID</label>
-                                            <input type="text" class="form-control" id="complaintid" name="complaintid" value="Auto-assigned" disabled>
+                                            <label for="staticfacName" class="form-label">Facility Name</label>
+                                            <input type="text" class="form-control" id="facName" name="facName" required>
                                         </div>
 
-                                        <!--reason-->
+                                        <!--facDesc-->
                                         <div class="form-group ">
-                                            <label for="staticreason" class="form-label">Reason</label>
-                                            <input type="text" class="form-control" id="reason" name="reason" value="" required>
+                                            <label for="staticfacDesc" class="form-label">Facility Description</label>
+                                            <input type="text" class="form-control" id="facDesc" name="facDesc" value="" required>
                                         </div>
 
-                                        <!--status-->
+                                        <!--Maximum Occupants-->
                                         <div class="form-group ">
-                                            <label for="staticstatus" class="form-label">Status</label>
-                                            <input type="text" class="form-control" id="status" name="status" required>
+                                            <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
+                                            <input type="number" class="form-control" id="facMaxPax" name="facMaxPax" required>
                                         </div>
 
-                                        <!--supervisor-->
-                                        <div class="form-group ">
-                                            <label for="staticsupervisor" class="form-label">Supervisor</label>
-                                            <input type="text" class="form-control" id="supervisor" name="supervisor" required>
-                                        </div>
+
                                 </div>
 
                                 <div class="modal-footer">
@@ -392,108 +351,93 @@
                         </div>
                     </div>
 
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
 
-                                    <?php
-                                    $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                    if (!$con) {
-                                        echo  mysqli_connect_error();
-                                        exit;
-                                    }
-                                    $sql = "SELECT * FROM complaint";
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM facilitieslist";
 
-                                    $result = mysqli_query($con, $sql);
-                                    mysqli_close($con);
-                                    $qry = $result;
-                                    $list = mysqli_num_rows($qry);
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
 
-                                    $counter = 1;
-                                    if ($list > 0) {
-                                        echo '<thead>
+                                $counter = 1;
+                                if ($list > 0) {
+                                    echo '<thead>
                                         <tr role="row">
                                             <th>No</th>
-                                            <th>User ID</th>
-                                            <th>Complaint ID</th>
-                                            <th>Reason</th>
-                                            <th>Status</th>
-                                            <th>Supervisor</th>
-                                            <th>Actions</th>
+                                            <th>Facility ID</th>
+                                            <th>Facility Name</th>
+                                            <th>Description</th>
+                                            <th>Max Occupants</th>
                                         </tr>
                                         </thead>
                                         <tbody>
 ';
-                                        while ($row = mysqli_fetch_assoc($qry)) {
-                                            echo '
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
                                             <tr>
                                             <form action=""  method="POST">
                                                 <td class="nr">' . $counter . '</td>
-                                                <td>' . $row['userID'] . '</td>         
-                                                <td>' . $row['complaintID'] . '</td>    
-                                                <input type="hidden" name="complaintID" value="' . $row['complaintID'] . '">
-                                                <td>' . $row['complaint_str'] . '</td>  
-                                                <td>' . $row['status'] . '</td>                                                    
-                                                <td>' . $row['supervisor'] . '</td>     
-                                                <td class="actions">
-                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
-                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
-                                            
-                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                    data-toggle="tooltip" data-original-title="Remove" name="delete" onclick=""><i class="icon wb-trash" aria-hidden="true"></i></button>
-                                                </td>
+                                                <input type="hidden" name="facID" value="' . $row['facID'] . '">
+                                                <td>' . $row['facID'] . '</td>         
+                                                <td>' . $row['facName'] . '</td>    
+                                                <td>' . $row['facDesc'] . '</td>  
+                                                <td>' . $row['facMaxPax'] . '</td>                                                     
                                             </form>
                                             </tr>
 ';
-                                            $counter++;
-                                        }
+                                        $counter++;
                                     }
+                                }
 
-                                    //modal
-                                    echo '</tbody>                                                   
+                                //modal
+                                echo '</tbody>                                                   
                                     <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
                                     <div class="modal-dialog modal-simple modal-center">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                                     <span aria-hidden="true">×</span>
                                                 </button>
-                                                <h4 class="modal-title">Edit User Complaint</h4>
+                                                <h4 class="modal-title">Edit Facility Details</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <form action="" method="POST">
-                                                    <!--user ID-->
+                                                    <!--facID-->
                                                     <div class="form-group ">
-                                                        <label for="staticuserID" class="form-label">User ID</label>
-                                                        <input type="text" class="form-control" id="staticuserID" name="staticuserID" disabled>
-                                                        <span id="user-availability-status"></span>
+                                                        <label for="staticfacID" class="form-label">Facility ID</label>
+                                                        <input type="text" class="form-control" id="staticfacID" name="staticfacID" readonly>
+                                                        <span id="fac-availability-status"></span>
                                                     </div>
                                                     
-                                                    <!--complaint-->
+                                                    <!--fac Name-->
                                                     <div class="form-group ">
-                                                        <label for="staticcomplaintid" class="form-label">Complaint ID</label>
-                                                        <input type="text" readonly class="form-control" id="staticcomplaintid" name="staticcomplaintid" size="50">
+                                                        <label for="staticfacName" class="form-label">Facility Name</label>
+                                                        <input type="text" class="form-control" id="staticfacName" name="staticfacName" size="50" required>
                                                     </div>
 
-                                                    <!--reason-->
+                                                    <!--facDesc-->
                                                     <div class="form-group ">
-                                                        <label for="staticreason" class="form-label">Reason</label>
-                                                        <input type="text" class="form-control" id="staticreason" name="staticreason" value="" required>
+                                                        <label for="staticfacDesc" class="form-label">Facility Description</label>
+                                                        <input type="text" class="form-control" id="staticfacDesc" name="staticfacDesc" value="" required>
                                                     </div>
 
-                                                    <!--status-->
+                                                    <!--Maximum Occupants-->
                                                     <div class="form-group ">
-                                                        <label for="staticstatus" class="form-label">Status</label>
-                                                        <input type="text" class="form-control" id="staticstatus" name="staticstatus" required>
+                                                        <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
+                                                        <input type="number" class="form-control" id="staticfacMaxPax" name="staticfacMaxPax" required>
                                                     </div>
-
-                                                    <!--supervisor-->
-                                                    <div class="form-group ">
-                                                        <label for="staticsupervisor" class="form-label">supervisor</label>
-                                                        <input type="text" class="form-control" id="staticsupervisor" name="staticsupervisor" required>
-                                                    </div>                                       
+                                 
                                             </div>
 
                                             <div class="modal-footer">
@@ -508,13 +452,13 @@
                                         </div>
                                     </div>
                                 </div>';
-                                    ?>
+                                ?>
 
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
                 </div>
+
 
 
 
@@ -618,17 +562,17 @@
 
             var data = table.row($text - 1).data();
 
-            $("#staticuserID").val(data[1]);
-            $("#staticcomplaintid").val(data[2]);
-            $("#staticreason").val(data[3]);
-            $("#staticstatus").val(data[4]);
-            $("#staticsupervisor").val(data[5]);
+            $("#staticfacID").val(data[1]);
+            $("#staticfacName").val(data[2]);
+            $("#staticfacDesc").val(data[3]);
+            $("#staticfacMaxPax").val(data[4]);
         });
 
         function checkAvailability() {
+
             jQuery.ajax({
-                url: "verification/livedit.php",
-                data: 'username=' + $("#userID").val(),
+                url: "verification/liveeditfaclist.php",
+                data: 'facID=' + $("#facID").val(),
                 type: "POST",
                 dataType: "json",
                 cache: false,
@@ -638,13 +582,25 @@
                         return [value];
                     });
                     //edit USERNAME AVAILABLE status
-                    $("#user-availability-status").html("<span class='status-available'> User ID available. </span>");
+                    $("#fac-availability-status").html("<span class='status-available'> Facility Name not available. </span>");
                 },
                 error: function(data) {
                     //append to input boxes...
-                    $("#user-availability-status").html("<span class='status-available'> User ID not available. </span>");
+                    $("#fac-availability-status").html("<span class='status-available'> Facility Name available. </span>");
                 }
             });
+
+
+
+
+
+
+
+
+        }
+
+        function unappend() {
+            $("#fac-availability-status").html("<span class='status-available'></span>");
         }
     </script>
 </body>
@@ -658,12 +614,9 @@ if (!$con) {
     exit;
 }
 if (isset($_POST['add'])) {
-    $sql = "INSERT INTO `complaint` (`complaintID`, `userID`, `complaint_str`, `status`, `supervisor`) VALUES 
-(NULL, 
-'" . $_POST['userID'] . "',
-'" . $_POST['reason'] . "',
-'" . $_POST['status'] . "',
-'" . $_POST['supervisor'] . "')";
+    $sql = "INSERT INTO `facilitieslist` (`facID`, `facName`, `facDesc`, `facMaxPax`) 
+    VALUES ('" . $_POST['facID'] . "', '" . $_POST['facName'] . "', '" . $_POST['facDesc'] . "', '" . $_POST['facMaxPax'] . "')";
+
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
 
@@ -671,81 +624,78 @@ if (isset($_POST['add'])) {
     if ($result) {
         echo '<script>swal({
             title: "Success",
-            text: "The complaint has been added.",
+            text: "The facility has been added.",
             icon: "success",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "viewcomplaint.php";
+            window.location.href = "facilitylist.php";
            }
         ); </script>';
     } else {
         echo '<script>swal({
             title: "Oh no",
-            text: "Complaint is not added.",
+            text: "Facility is not added.",
             icon: "error",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "viewcomplaint.php";
+            window.location.href = "facilitylist.php";
            }
         ); </script>';
     }
 }
 
 if (isset($_POST['update'])) {
-    $sql = "UPDATE `complaint` SET
-     `complaint_str` = '" . $_POST['staticreason'] . "',
-     `status` = '" . $_POST['staticstatus'] . "',
-      `supervisor` = '" . $_POST['staticsupervisor'] . "' 
-      WHERE `complaint`.`complaintID` = '" . $_POST['staticcomplaintid'] . "'";
+    $sql = "UPDATE `facilitieslist` SET `facName` = '" . $_POST['staticfacName'] . "', `facDesc` = '" . $_POST['staticfacID'] . "', `facMaxPax` = '" . $_POST['staticfacMaxPax'] . "' 
+    WHERE `facilitieslist`.`facID` = '" . $_POST['staticfacID'] . "'";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The complaint has been modified.",
+                text: "The facility has been modified.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "facilitylist.php";
                }
             ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The complaint has not been modified.",
+                text: "The facility has not been modified.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "facilitylist.php";
                }
             ); </script>';
     }
 }
 
 if (isset($_POST['delete'])) {
-    $sql = "DELETE FROM `complaint` WHERE `complaint`.`complaintID` = '" . $_POST['complaintID'] . "'";
+    $sql = "DELETE FROM `facilitieslist` WHERE `facilitieslist`.`facID` = '" . $_POST['facID'] . "' ";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The complaint has been delete.",
+                text: "The facility has been deleted.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "facilitylist.php";
                }
             ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The complaint has not been deleted.",
+                text: "The facility has not been deleted.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "facilitylist.php";
                }
             ); </script>';
     }

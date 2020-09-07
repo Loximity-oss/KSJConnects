@@ -187,18 +187,12 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="addremoveusers.php">
-                                        <span class="site-menu-title">Manipulate User Accounts</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item">
                                     <a class="animsition-link" href="residentapplication.php">
                                         <span class="site-menu-title">Resident Application</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-
                         <!-- Complaint System Information Stuff-->
                         <li class="site-menu-category">Complaint System</li>
                         <li class="site-menu-item has-sub">

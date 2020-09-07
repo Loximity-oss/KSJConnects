@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (Add/Update/Delete User Complaints)</title>
+    <title>KSJConnects - Staff (Add/Update/Delete Booking Facility Records)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -45,12 +45,12 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
     <!--[if lt IE 9]>
-    <script src="../../../../global/vendor/html5shiv/html5shiv.min.js"></script>
+    <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
 
     <!--[if lt IE 10]>
-    <script src="../../../../global/vendor/media-match/media.match.min.js"></script>
-    <script src="../../../../global/vendor/respond/respond.min.js"></script>
+    <script src="../../../global/vendor/media-match/media.match.min.js"></script>
+    <script src="../../../global/vendor/respond/respond.min.js"></script>
     <![endif]-->
     <!-- Scripts -->
     <script src="../../../global/vendor/breakpoints/breakpoints.js"></script>
@@ -178,22 +178,6 @@
                             </ul>
                         </li>
 
-                        <!-- User Management Stuff-->
-                        <li class="site-menu-category">User Management</li>
-                        <li class="site-menu-item has-sub">
-                            <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-user" aria-hidden="true"></i>
-                                <span class="site-menu-title">User Management Submenu</span>
-                            </a>
-                            <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="residentapplication.php">
-                                        <span class="site-menu-title">Resident Application</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <!-- Complaint System Information Stuff-->
                         <li class="site-menu-category">Complaint System</li>
                         <li class="site-menu-item has-sub">
@@ -245,11 +229,6 @@
                                             <span class="site-menu-title">Resident's Merit</span>
                                         </a>
                                     </li>
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Create Programme</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </a>
                         </li>
@@ -264,23 +243,6 @@
                                     <li class="site-menu-item ">
                                         <a class="animsition-link" href="index.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </a>
-                        </li>
-
-
-                        <!-- Announcement System-->
-                        <li class="site-menu-category">Announcement System</li>
-                        <li class="site-menu-item has-sub">
-                            <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-info" aria-hidden="true"></i>
-                                <span class="site-menu-title">Announcement Submenu</span>
-                                <ul class="site-menu-sub">
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Annoucement CRUD</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -314,15 +276,15 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Complaint Management / (Add/Update/Delete User Complaints)</li>
+                <li class="breadcrumb-item active">Facility Management / Book a Facility</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete User Complaints</h1>
+            <h1 class="page-title">Book a Facility</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Complaint List</h3>
+                    <h3 class="panel-title">Facility Booking List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->
@@ -330,7 +292,7 @@
                         <div class="col-md-6">
                             <div class="mb-15">
                                 <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
-                                    <i class="icon wb-plus" aria-hidden="true"></i> Add
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Book New Facility
                                 </button>
                             </div>
                         </div>
@@ -340,43 +302,54 @@
                         <div class="modal-dialog modal-simple modal-center">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add User Complaint</h4>
+                                    <h4 class="modal-title">Book Facility</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">
                                         <!--user ID-->
                                         <div class="form-group ">
-                                            <label for="staticuserID" class="form-label">User ID</label>
-                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability()" required>
+                                            <label for="userID" class="form-label">User ID</label>
+                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability_user()" value="<?php echo $_SESSION["username"]; ?>" readonly>
                                             <span id="user-availability-status"></span>
                                         </div>
 
-                                        <!--complaint-->
+                                        <!--date start-->
                                         <div class="form-group ">
-                                            <label for="staticcomplaintid" class="form-label">Complaint ID</label>
-                                            <input type="text" class="form-control" id="complaintid" name="complaintid" value="Auto-assigned" disabled>
+                                            <label for="dateStart" class="form-label">Start Date</label>
+                                            <input type="date" class="form-control" id="dateStart" name="dateStart" value="" required>
                                         </div>
 
-                                        <!--reason-->
+                                        <!--days-->
                                         <div class="form-group ">
-                                            <label for="staticreason" class="form-label">Reason</label>
-                                            <input type="text" class="form-control" id="reason" name="reason" value="" required>
+                                            <label for="staticdays" class="form-label">Duration (in Days)</label>
+                                            <input type="number" class="form-control" onblur="checkAvailability_date()" id="days" name="days" required>
                                         </div>
 
-                                        <!--status-->
+                                        <!--date end-->
                                         <div class="form-group ">
-                                            <label for="staticstatus" class="form-label">Status</label>
-                                            <input type="text" class="form-control" id="status" name="status" required>
+                                            <label for="dateEnd" class="form-label">End Date</label>
+                                            <input type="date" class="form-control" id="dateEnd" name="dateEnd" value="" readonly>
                                         </div>
 
-                                        <!--supervisor-->
+                                        <!--Faciility Name-->
                                         <div class="form-group ">
-                                            <label for="staticsupervisor" class="form-label">Supervisor</label>
-                                            <input type="text" class="form-control" id="supervisor" name="supervisor" required>
+                                            <label for="facName" class="form-label">Facility Name</label>
+                                            <select class="form-control" id="facName" name="facName" onchange="append()" required>
+                                            </select>
+                                            <input type="hidden" id="hiddenfacname" name="hiddenfacname">
                                         </div>
+
+                                        <!--Facility ID-->
+                                        <div class="form-group ">
+                                            <label for="staticfacID" class="form-label">Facility ID</label>
+                                            <input type="text" class="form-control" id="facID" name="facID" readonly>
+                                            <span id="fac-availability-status"></span>
+                                        </div>
+
+
                                 </div>
 
                                 <div class="modal-footer">
@@ -392,132 +365,130 @@
                         </div>
                     </div>
 
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
 
-                                    <?php
-                                    $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                    if (!$con) {
-                                        echo  mysqli_connect_error();
-                                        exit;
-                                    }
-                                    $sql = "SELECT * FROM complaint";
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 0 AND `userID` = '".$_SESSION["username"]."' ";
 
-                                    $result = mysqli_query($con, $sql);
-                                    mysqli_close($con);
-                                    $qry = $result;
-                                    $list = mysqli_num_rows($qry);
-
-                                    $counter = 1;
-                                    if ($list > 0) {
-                                        echo '<thead>
-                                        <tr role="row">
-                                            <th>No</th>
-                                            <th>User ID</th>
-                                            <th>Complaint ID</th>
-                                            <th>Reason</th>
-                                            <th>Status</th>
-                                            <th>Supervisor</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                        </thead>
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
+                                echo '<thead>
+                                <tr role="row">
+                                    <th>No</th>
+                                    <th>Booking ID</th>
+                                    <th>Facility ID</th>
+                                    <th>Facility Name</th>
+                                    <th>Date Start</th>
+                                    <th>Date End</th>
+                                </tr>
+                                </thead>';
+                                $counter = 1;
+                                if ($list > 0) {
+                                    echo '
                                         <tbody>
 ';
-                                        while ($row = mysqli_fetch_assoc($qry)) {
-                                            echo '
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
                                             <tr>
-                                            <form action=""  method="POST">
-                                                <td class="nr">' . $counter . '</td>
-                                                <td>' . $row['userID'] . '</td>         
-                                                <td>' . $row['complaintID'] . '</td>    
-                                                <input type="hidden" name="complaintID" value="' . $row['complaintID'] . '">
-                                                <td>' . $row['complaint_str'] . '</td>  
-                                                <td>' . $row['status'] . '</td>                                                    
-                                                <td>' . $row['supervisor'] . '</td>     
-                                                <td class="actions">
-                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
-                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
-                                            
-                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                    data-toggle="tooltip" data-original-title="Remove" name="delete" onclick=""><i class="icon wb-trash" aria-hidden="true"></i></button>
-                                                </td>
-                                            </form>
+                                                <form action=""  method="POST">
+                                                    <td class="nr">' . $counter . '</td>
+                                                    <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
+                                                    <td>' . $row['BookID'] . '</td>         
+                                                    <td>' . $row['facID'] . '</td>    
+                                                    <td>' . $row['facName'] . '</td>            
+                                                    <td>' . $row['dateStart'] . '</td> 
+                                                    <td>' . $row['dateEnd'] . '</td>                                 
+                                                </form>
                                             </tr>
 ';
-                                            $counter++;
-                                        }
+                                        $counter++;
                                     }
+                                }
+                                ?>
 
-                                    //modal
-                                    echo '</tbody>                                                   
-                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog modal-simple modal-center">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                                <h4 class="modal-title">Edit User Complaint</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="" method="POST">
-                                                    <!--user ID-->
-                                                    <div class="form-group ">
-                                                        <label for="staticuserID" class="form-label">User ID</label>
-                                                        <input type="text" class="form-control" id="staticuserID" name="staticuserID" disabled>
-                                                        <span id="user-availability-status"></span>
-                                                    </div>
-                                                    
-                                                    <!--complaint-->
-                                                    <div class="form-group ">
-                                                        <label for="staticcomplaintid" class="form-label">Complaint ID</label>
-                                                        <input type="text" readonly class="form-control" id="staticcomplaintid" name="staticcomplaintid" size="50">
-                                                    </div>
-
-                                                    <!--reason-->
-                                                    <div class="form-group ">
-                                                        <label for="staticreason" class="form-label">Reason</label>
-                                                        <input type="text" class="form-control" id="staticreason" name="staticreason" value="" required>
-                                                    </div>
-
-                                                    <!--status-->
-                                                    <div class="form-group ">
-                                                        <label for="staticstatus" class="form-label">Status</label>
-                                                        <input type="text" class="form-control" id="staticstatus" name="staticstatus" required>
-                                                    </div>
-
-                                                    <!--supervisor-->
-                                                    <div class="form-group ">
-                                                        <label for="staticsupervisor" class="form-label">supervisor</label>
-                                                        <input type="text" class="form-control" id="staticsupervisor" name="staticsupervisor" required>
-                                                    </div>                                       
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <!--buttons-->
-                                                <div class="btn-toolbar" role="toolbar">
-                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                        <button type="submit" name="update" class="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>';
-                                    ?>
-
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
                 </div>
 
 
 
+
+            </div>
+        </div>
+        <div class="page-content container-fluid">
+            <div class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions"></div>
+                    <h3 class="panel-title">Past Bookings</h3>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+
+
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 2 AND `userID` = '".$_SESSION["username"]."' ";
+
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
+                                echo '<thead>
+                                <tr role="row">
+                                    <th>No</th>
+                                    <th>Booking ID</th>
+                                    <th>Facility ID</th>
+                                    <th>Facility Name</th>
+                                    <th>Date Start</th>
+                                    <th>Date End</th>
+                                </tr>
+                                </thead>';
+                                $counter = 1;
+                                if ($list > 0) {
+                                    echo '
+                                        <tbody>
+';
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
+                                            <tr>
+                                            <form action=""  method="POST">
+                                                <td class="nr">' . $counter . '</td>
+                                                <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
+                                                <td>' . $row['BookID'] . '</td>         
+                                                <td>' . $row['facID'] . '</td>    
+                                                <td>' . $row['facName'] . '</td>            
+                                                <td>' . $row['dateStart'] . '</td> 
+                                                <td>' . $row['dateEnd'] . '</td>                                 
+                                            </form>
+                                            </tr>
+';
+                                        $counter++;
+                                    }
+                                }
+                                ?>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -595,6 +566,9 @@
     <!-- for live editing -->
     <!--jQuery Stuff-->
     <script>
+        var list;
+        var i;
+
         function JSconfirm() {
             swal({
                     title: "Are you sure?",
@@ -610,41 +584,89 @@
                 });
         }
 
-        $(".edit_row").click(function() {
 
-            var $row = $(this).closest("tr"); // Find the row
-            var $text = $row.find(".nr").text(); // Find the text
-            var table = $('#exampleTableTools').DataTable();
+        function checkAvailability_date() {
 
-            var data = table.row($text - 1).data();
+            $('#facName').empty();
+            var dateStart_val = document.getElementById('dateStart').value;
+            var duration = parseInt(document.getElementById('days').value);
+            var newEndDate = new Date(dateStart_val);
+            var endDate;
 
-            $("#staticuserID").val(data[1]);
-            $("#staticcomplaintid").val(data[2]);
-            $("#staticreason").val(data[3]);
-            $("#staticstatus").val(data[4]);
-            $("#staticsupervisor").val(data[5]);
-        });
+            newEndDate.setDate(newEndDate.getDate() + duration);
+            endDate = newEndDate.toISOString().slice(0, 10);
+            document.getElementById('dateEnd').value = endDate;
 
-        function checkAvailability() {
+
             jQuery.ajax({
-                url: "verification/livedit.php",
-                data: 'username=' + $("#userID").val(),
+                url: "verification/liveeditfacbook.php",
+                data: {
+                    dateStart: $("#dateStart").val(),
+                    dateEnd: $("#dateEnd").val(),
+                },
                 type: "POST",
                 dataType: "json",
                 cache: false,
                 success: function(data) {
                     //conversion from object to array
-                    var userData = $.map(data, function(value, index) {
+                    list = $.map(data, function(value, index) {
                         return [value];
                     });
-                    //edit USERNAME AVAILABLE status
-                    $("#user-availability-status").html("<span class='status-available'> User ID available. </span>");
+                    console.log(list);
+                    for (i = 0; i < list.length; i++) {
+                        if (i % 2) {
+                            $('#facName').append($('<option>', {
+                                value: i,
+                                text: list[i]
+                            }));
+                        }
+
+                    }
+
+                    $('#facID').val(list[0]);
+                    $('#hiddenfacname').val(list[1]);
                 },
                 error: function(data) {
                     //append to input boxes...
-                    $("#user-availability-status").html("<span class='status-available'> User ID not available. </span>");
+                    console.log(data);
+
                 }
             });
+
+
+        }
+
+        function checkAvailability_user() {
+            jQuery.ajax({
+                url: "verification/check_availability.php",
+                data: 'username=' + $("#staticuserID").val(),
+                type: "POST",
+                success: function(data) {
+                    $("#user-availability-status").html(data);
+                },
+                error: function() {}
+            });
+        }
+
+        function append() {
+            var e = document.getElementById("facName");
+            var value = parseInt(e.options[e.selectedIndex].value);
+            var text = e.options[e.selectedIndex].text;
+            value--; //decerement because array odd = id of facility
+            document.getElementById("facID").value = list[value];
+            document.getElementById("hiddenfacname").value = text;
+
+        }
+
+        function unappend() {
+            $("#user-availability-status").html("<span class='status-available'></span>");
+            //clear html
+            $("#userID").val("");
+            $("#dateStart").val("");
+            $("#dateEnd").val("");
+            $("#days").val("");
+            $("#facName").val("");
+            $("#facID").val("");
         }
     </script>
 </body>
@@ -657,13 +679,10 @@ if (!$con) {
     echo  mysqli_connect_error();
     exit;
 }
-if (isset($_POST['add'])) {
-    $sql = "INSERT INTO `complaint` (`complaintID`, `userID`, `complaint_str`, `status`, `supervisor`) VALUES 
-(NULL, 
-'" . $_POST['userID'] . "',
-'" . $_POST['reason'] . "',
-'" . $_POST['status'] . "',
-'" . $_POST['supervisor'] . "')";
+
+if (isset($_POST['approve'])) {
+    $sql = "UPDATE `facilitiesbooking` SET `Approval` = '1' WHERE `facilitiesbooking`.`BookID` = '" . $_POST['BookID'] . "'";
+
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
 
@@ -671,81 +690,80 @@ if (isset($_POST['add'])) {
     if ($result) {
         echo '<script>swal({
             title: "Success",
-            text: "The complaint has been added.",
+            text: "The booking has been approved.",
             icon: "success",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "viewcomplaint.php";
+            window.location.href = "facilitybooking.php";
            }
         ); </script>';
     } else {
         echo '<script>swal({
             title: "Oh no",
-            text: "Complaint is not added.",
+            text: "The booking has not been approved.",
             icon: "error",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "viewcomplaint.php";
+            window.location.href = "facilitybooking.php";
            }
         ); </script>';
     }
 }
 
-if (isset($_POST['update'])) {
-    $sql = "UPDATE `complaint` SET
-     `complaint_str` = '" . $_POST['staticreason'] . "',
-     `status` = '" . $_POST['staticstatus'] . "',
-      `supervisor` = '" . $_POST['staticsupervisor'] . "' 
-      WHERE `complaint`.`complaintID` = '" . $_POST['staticcomplaintid'] . "'";
+if (isset($_POST['delete'])) {
+    $sql = "UPDATE `facilitiesbooking` SET `Approval` = '2' WHERE `facilitiesbooking`.`BookID` = '" . $_POST['BookID'] . "'";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
+
+
     if ($result) {
         echo '<script>swal({
-                title: "Success",
-                text: "The complaint has been modified.",
-                icon: "success",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
-               }
-            ); </script>';
+            title: "Success",
+            text: "The booking has been rejected.",
+            icon: "success",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "facilitybooking.php";
+           }
+        ); </script>';
     } else {
         echo '<script>swal({
-                title: "Oh no",
-                text: "The complaint has not been modified.",
-                icon: "error",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
-               }
-            ); </script>';
+            title: "Oh no",
+            text: "The booking has not been rejected.",
+            icon: "error",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "facilitybooking.php";
+           }
+        ); </script>';
     }
 }
 
-if (isset($_POST['delete'])) {
-    $sql = "DELETE FROM `complaint` WHERE `complaint`.`complaintID` = '" . $_POST['complaintID'] . "'";
+if (isset($_POST['add'])) {
+    $sql = "INSERT INTO `facilitiesbooking` (`BookID`, `facID`, `facName`, `userID`, `dateStart`, `dateEnd`, `Approval`) 
+    VALUES (NULL, '" . $_POST['facID'] . "', '" . $_POST['hiddenfacname'] . "', '" . $_POST['userID'] . "', '" . $_POST['dateStart'] . "', '" . $_POST['dateEnd'] . "', '0')";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The complaint has been delete.",
+                text: "The booking has been added.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "facilitybooking.php";
                }
             ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The complaint has not been deleted.",
+                text: "The booking has not been added.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "facilitybooking.php";
                }
             ); </script>';
     }

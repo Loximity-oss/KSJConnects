@@ -26,7 +26,7 @@ if (isset($_POST['login'])) {
 				header("Location: main/base/html/admin/index.php");
 			} else if ($row['userType'] == 'STAFF') {
 				header("Location: main/base/html/staff/index.php");
-			} else if ($row['userType'] == 'USER') {
+			} else if ($row['userType'] == 'RESIDENT') {
 				header("Location: main/base/html/resident/index.php");
 			} else if ($row['userType'] == 'GUEST') {
 				header("Location: main/base/html/guest/index.php");

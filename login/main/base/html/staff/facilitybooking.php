@@ -177,7 +177,7 @@
                                 </li>
                             </ul>
                         </li>
-
+                        
                         <!-- User Management Stuff-->
                         <li class="site-menu-category">User Management</li>
                         <li class="site-menu-item has-sub">
@@ -186,11 +186,6 @@
                                 <span class="site-menu-title">User Management Submenu</span>
                             </a>
                             <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="addremoveusers.php">
-                                        <span class="site-menu-title">Manipulate User Accounts</span>
-                                    </a>
-                                </li>
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="residentapplication.php">
                                         <span class="site-menu-title">Resident Application</span>

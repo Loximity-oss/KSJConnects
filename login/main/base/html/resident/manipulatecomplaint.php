@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (Add/Update/Delete User Complaints)</title>
+    <title>KSJConnects - Complaint List</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -178,22 +178,6 @@
                             </ul>
                         </li>
 
-                        <!-- User Management Stuff-->
-                        <li class="site-menu-category">User Management</li>
-                        <li class="site-menu-item has-sub">
-                            <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-user" aria-hidden="true"></i>
-                                <span class="site-menu-title">User Management Submenu</span>
-                            </a>
-                            <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="residentapplication.php">
-                                        <span class="site-menu-title">Resident Application</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <!-- Complaint System Information Stuff-->
                         <li class="site-menu-category">Complaint System</li>
                         <li class="site-menu-item has-sub">
@@ -245,11 +229,6 @@
                                             <span class="site-menu-title">Resident's Merit</span>
                                         </a>
                                     </li>
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Create Programme</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </a>
                         </li>
@@ -264,23 +243,6 @@
                                     <li class="site-menu-item ">
                                         <a class="animsition-link" href="index.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </a>
-                        </li>
-
-
-                        <!-- Announcement System-->
-                        <li class="site-menu-category">Announcement System</li>
-                        <li class="site-menu-item has-sub">
-                            <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-info" aria-hidden="true"></i>
-                                <span class="site-menu-title">Announcement Submenu</span>
-                                <ul class="site-menu-sub">
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Annoucement CRUD</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -314,9 +276,9 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Complaint Management / (Add/Update/Delete User Complaints)</li>
+                <li class="breadcrumb-item active">Complaint Management / User Complaints</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete User Complaints</h1>
+            <h1 class="page-title">User Complaints</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
@@ -330,7 +292,7 @@
                         <div class="col-md-6">
                             <div class="mb-15">
                                 <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
-                                    <i class="icon wb-plus" aria-hidden="true"></i> Add
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Add Complaint
                                 </button>
                             </div>
                         </div>
@@ -350,7 +312,7 @@
                                         <!--user ID-->
                                         <div class="form-group ">
                                             <label for="staticuserID" class="form-label">User ID</label>
-                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability()" required>
+                                            <input type="text" class="form-control" id="userID" name="userID" value="<?php echo $_SESSION["username"]; ?>" readonly>
                                             <span id="user-availability-status"></span>
                                         </div>
 
@@ -369,13 +331,13 @@
                                         <!--status-->
                                         <div class="form-group ">
                                             <label for="staticstatus" class="form-label">Status</label>
-                                            <input type="text" class="form-control" id="status" name="status" required>
+                                            <input type="text" class="form-control" id="status" name="status" value="1" readonly>
                                         </div>
 
                                         <!--supervisor-->
                                         <div class="form-group ">
                                             <label for="staticsupervisor" class="form-label">Supervisor</label>
-                                            <input type="text" class="form-control" id="supervisor" name="supervisor" required>
+                                            <input type="text" class="form-control" id="supervisor" name="supervisor" value="none" readonly>
                                         </div>
                                 </div>
 
@@ -404,7 +366,7 @@
                                         echo  mysqli_connect_error();
                                         exit;
                                     }
-                                    $sql = "SELECT * FROM complaint";
+                                    $sql = "SELECT * FROM complaint WHERE `userID` = '".$_SESSION["username"]."'  ";
 
                                     $result = mysqli_query($con, $sql);
                                     mysqli_close($con);
@@ -438,9 +400,6 @@
                                                 <td>' . $row['status'] . '</td>                                                    
                                                 <td>' . $row['supervisor'] . '</td>     
                                                 <td class="actions">
-                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
-                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
-                                            
                                                     <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
                                                     data-toggle="tooltip" data-original-title="Remove" name="delete" onclick=""><i class="icon wb-trash" aria-hidden="true"></i></button>
                                                 </td>
