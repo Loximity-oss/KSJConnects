@@ -1,4 +1,4 @@
-<?php include 'edit/dbconnection.php' ?>
+<?php include 'edit/dbconnect.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
