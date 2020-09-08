@@ -1,105 +1,55 @@
-<?php session_start();?>
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title>KSJConnects Login</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>KSJConnects Login</title>
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
-<body style="background-color: #666666;">
-	
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<form action="login.php" method="POST" class="login100-form validate-form">
 
-					<span class="login100-form-title p-b-43">
-						Login to continue
-					</span>
-					
-					<div class="wrap-input100 validate-input" data-validate = "Username is required">
-						<input class="input100" type="text" name="username">
-						<span class="focus-input100"></span>
-						<span class="label-input100">User ID</span>
-					</div>
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
-					</div>
-
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div>
-							<a href="forgetpass/index.php" class="txt1">
-								Forgot Password?
-							</a> <br>
-							<?php if(isset($_SESSION['error'])) echo ' <br> <span class="txt2"> Your username/password is incorrect. </span>  '; session_destroy();?>
-						</div>
-					</div>
-			
-					<!-- Login Button-->
-					<div class="container-login100-form-btn">
-						<input type="submit" name="login" value="Login" class="login100-form-btn"></input>
-					</div>
-					
-					<div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-							or <a href="../register/index.php">sign up</a> 
-						</span>
-					</div>	
-				</form>
-
-				<div class="login100-more" style="background-image: url('images/bg.jpg');">
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-
-	
-	
-<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
-
+<body>
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 login-section-wrapper">
+                    <div class="brand-wrapper">
+                        <img src="assets/images/logo.png" alt="logo" class="logo">
+                    </div>
+                    <div class="login-wrapper my-auto">
+                        <h1 class="login-title">Log in</h1>
+                        <form action="login.php" method="POST">
+                            <div class="form-group">
+                                <label for="email">Username</label>
+                                <input type="text" name="username" class="form-control" placeholder="enter your username" required>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="password">Password</label>
+                                <input type="password" name="pass" id="password" class="form-control" placeholder="enter your passsword" required>
+                            </div>
+                            <?php if(isset($_SESSION['error'])) echo ' <span style="color:red"> Your username/password is incorrect. </span>  <br>'; session_destroy();?>
+                            <br>
+                            <input name="login" id="login" class="btn btn-block login-btn" type="submit" value="Login">
+                        </form>
+                        <a href="forgetpass/index.php" class="forgot-password-link">Forgot password?</a>
+                        <p class="login-wrapper-footer-text">Don't have an account? <a href="../register/index.php" class="text-reset">Register here</a></p>
+                    </div>
+                </div>
+                <div class="col-sm-6 px-0 d-none d-sm-block">
+                    <img src="assets/images/login.jpg" alt="login image" class="login-img">
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
-</html>
 
+</html>

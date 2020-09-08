@@ -1,10 +1,4 @@
-<?php session_start();
-$con = mysqli_connect("localhost", "root", "", "ksjdb");
-if (!$con) {
-    echo  mysqli_connect_error();
-    exit;
-}
-?>
+<?php include 'edit/dbconnect.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -107,7 +101,11 @@ if (!$con) {
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                                <?php if (!$list['picture']) {
+                                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                                } else {
+                                    echo '<img class="card-img-top" src="imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                                } ?>
                                 <i></i>
                             </span>
                         </a>
@@ -317,7 +315,6 @@ if (!$con) {
     </div>
 
 
-
     <!-- Page -->
     <div class="page">
         <div class="page-header">
@@ -330,18 +327,20 @@ if (!$con) {
         <div class="page-content container-fluid">
             <div class="row">
                 <?php
-                $sql = "SELECT * FROM users where users.userID = '" . $_SESSION['username'] . "'";
-                $result = mysqli_query($con, $sql);
-                $count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
-                $list = mysqli_fetch_assoc($result);
                 echo '
                 <div class="col-sm-3">
-                    <div class="card">
-                        <img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">
-                        <div class="card-body">
+                    <div class="card">';
+                if (!$list['picture']) {
+                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                } else {
+                    echo '<img class="card-img-top" src="imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                }
+
+                echo '        <div class="card-body">
                             <h5 class="card-title">' . $_SESSION['username'] . '</h5>
                             <p class="card-text"><small class="text-muted">KSJConnects Administration Account</small></p>
                         </div>
+                
                     </div>
                 </div>';
                 if ($count == 1) {
@@ -402,7 +401,7 @@ if (!$con) {
                 <div class="col-sm-9">
                     <div class="card">
                         <div class="card-header card-header-transparent card-header-bordered">
-                            Edit Profile 
+                            Edit Profile
                         </div>
                         <div class="card-block">
                             <h6 class="card-subtitle mb-2">Change Password</h6>
@@ -559,8 +558,8 @@ if (!$con) {
             });
         }
 
-        function checkpass(){
-            if($("#newpass").val() != $("#confirmnewpass").val()){
+        function checkpass() {
+            if ($("#newpass").val() != $("#confirmnewpass").val()) {
                 $("#pass-status-2").html("Your password does not match.");
             } else {
                 $("#pass-status-2").html("Your password matches.");

@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include 'edit/dbconnection.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -106,7 +106,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                                <?php if (!$list['picture']) {
+                                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                                } else {
+                                    echo '<img class="card-img-top" src="imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                                } ?>
                                 <i></i>
                             </span>
                         </a>
@@ -438,7 +442,6 @@
                                             <th>No</th>
                                             <th>Username</th>
                                             <th>Fullname</th>
-                                            <th>Password</th>
                                             <th>Email</th>
                                             <th>Phone Number</th>
                                             <th>User Type</th>
@@ -456,7 +459,6 @@
                                                 <input type="hidden" name="userID" value="' . $row['userID'] . '">
                                                 <td>' . $row['userID'] . '</td>         
                                                 <td>' . $row['fullname'] . '</td>    
-                                                <td>' . $row['password'] . '</td>  
                                                 <td>' . $row['email'] . '</td> 
                                                 <td>' . $row['phone_no'] . '</td>    
                                                 <td>' . $row['userType'] . '</td> 
@@ -467,6 +469,9 @@
                                             
                                                     <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
                                                     data-toggle="tooltip" data-original-title="Remove" name="delete"><i class="icon wb-trash" aria-hidden="true"></i></button>
+
+                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                    data-toggle="tooltip" data-original-title="Reset Password" name="reset"><i class="icon wb-lock" aria-hidden="true"></i></button>
                                                 </td>
                                             </form>
                                             </tr>
@@ -527,6 +532,7 @@
                                                         <option>ADMIN</option>
                                                         <option>GUEST</option>
                                                         <option>STAFF</option>
+                                                        <option>RESIDENT</option>
                                                     </select>
                                                 </div>
 
@@ -829,6 +835,36 @@ if (isset($_POST['update'])) {
 }
 
 if (isset($_POST['delete'])) {
+    $sql = "DELETE FROM `users` WHERE `users`.`userID` = '" . $_POST['userID'] . "' ";
+    $sql2 = "DELETE FROM `merit` WHERE `merit`.`userID` = '" . $_POST['userID'] . "' );";
+    $result = mysqli_query($con, $sql);
+    $result2 = mysqli_query($con, $sql2);
+
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The user account has been deleted",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "User account is has not been deleted",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['reset'])) {
     $sql = "DELETE FROM `users` WHERE `users`.`userID` = '" . $_POST['userID'] . "' ";
     $sql2 = "DELETE FROM `merit` WHERE `merit`.`userID` = '" . $_POST['userID'] . "' );";
     $result = mysqli_query($con, $sql);

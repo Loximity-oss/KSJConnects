@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include 'edit/dbconnect.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -106,7 +106,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                                <?php if (!$list['picture']) {
+                                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                                } else {
+                                    echo '<img class="card-img-top" src="imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                                } ?>
                                 <i></i>
                             </span>
                         </a>
@@ -600,18 +604,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 54.992px;" aria-label="Phone: activate to sort column ascending">Phone</th>
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 54.992px;" aria-label="Verification: activate to sort column ascending">Status</th>
                                         </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">User ID</th>
-                                                <th rowspan="1" colspan="1" style="">Full Name</th>
-                                                <th rowspan="1" colspan="1" style="">ID</th>
-                                                <th rowspan="1" colspan="1" style="">Year/Course</th>
-                                                <th rowspan="1" colspan="1" style="">Matric ID</th>
-                                                <th rowspan="1" colspan="1" style="">Phone</th>
-                                                <th rowspan="1" colspan="1" style="">Status</th>
-                                            </tr>
-                                        </tfoot>';
+                                        </thead>';
                                         while ($row = mysqli_fetch_assoc($qry)) {
                                             echo '
                                             <tr role="row" >

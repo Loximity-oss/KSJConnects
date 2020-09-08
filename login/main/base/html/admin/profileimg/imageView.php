@@ -9,8 +9,14 @@
         $sql = "SELECT imageType,picture,userID FROM users WHERE userID = '" . $_GET['username'] . "'";
 		$result = mysqli_query($con, $sql) or die("<b>Error:</b> Problem on Retrieving Image BLOB<br/>" . mysqli_error($con));
 		$row = mysqli_fetch_array($result);
-		header("Content-type: " . $row["imageType"]);
-        echo $row["picture"];
+        header("Content-type: " . $row["imageType"]);
+        if(!$row){
+            echo "profileimg/default.jpg";
+            
+        } else {
+            echo $row["picture"];
+        }
+        
 	}
 	mysqli_close($con);
 ?>

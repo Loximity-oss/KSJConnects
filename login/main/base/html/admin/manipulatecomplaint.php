@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include 'edit/dbconnect.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -106,7 +106,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                                                                <?php if (!$list['picture']) {
+                                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                                } else {
+                                    echo '<img class="card-img-top" src="imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                                } ?>
                                 <i></i>
                             </span>
                         </a>
@@ -162,21 +166,20 @@
                             </ul>
                         </li>
 
-                        <!-- Payment Management-->
-                        <li class="site-menu-category">Payment Management</li>
+                        <!-- Payment Stuff-->
+                        <li class="site-menu-category">Payment System</li>
                         <li class="site-menu-item has-sub">
                             <a href="javascript:void(0)">
-                                <a>
-                                    <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Payment Submenu</span>
-                                </a>
-                                <ul class="site-menu-sub">
-                                    <li class="site-menu-item">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Payment </span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <i class="site-menu-icon wb-payment" aria-hidden="true"></i>
+                                <span class="site-menu-title">Payment Submenu</span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="index.php">
+                                        <span class="site-menu-title">Resident Payment</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <!-- User Management Stuff-->
@@ -187,16 +190,6 @@
                                 <span class="site-menu-title">User Management Submenu</span>
                             </a>
                             <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="addusers.php">
-                                        <span class="site-menu-title">Add User Accounts</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item active">
-                                    <a class="animsition-link" href="#">
-                                        <span class="site-menu-title">View User Accounts</span>
-                                    </a>
-                                </li>
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="addremoveusers.php">
                                         <span class="site-menu-title">Manipulate User Accounts</span>
@@ -243,7 +236,7 @@
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
                                     <a class="animsition-link" href="facilitybooking">
-                                        <span class="site-menu-title">Facility Booking</span>
+                                        <span class="site-menu-title">Facility Bookings</span>
                                     </a>
                                 </li>
                             </ul>
@@ -257,13 +250,8 @@
                                 <span class="site-menu-title">Merit Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="viewmerit.php">
-                                            <span class="site-menu-title">View Resident's Merit</span>
-                                        </a>
-                                    </li>
-                                    <li class="site-menu-item ">
                                         <a class="animsition-link" href="manipulatemerit.php">
-                                            <span class="site-menu-title">Manage Resident's Merit</span>
+                                            <span class="site-menu-title">Resident's Merit</span>
                                         </a>
                                     </li>
                                     <li class="site-menu-item ">
@@ -284,12 +272,7 @@
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
                                         <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">View Resident's Sticker App</span>
-                                        </a>
-                                    </li>
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
-                                            <span class="site-menu-title">Manage Resident's Sticker App</span>
+                                            <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -733,7 +716,7 @@ if (isset($_POST['update'])) {
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "manipulatecomplaint.php";
                }
             ); </script>';
     } else {
@@ -743,7 +726,7 @@ if (isset($_POST['update'])) {
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "manipulatecomplaint.php";
                }
             ); </script>';
     }
@@ -761,7 +744,7 @@ if (isset($_POST['delete'])) {
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "manipulatecomplaint.php";
                }
             ); </script>';
     } else {
@@ -771,7 +754,7 @@ if (isset($_POST['delete'])) {
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "manipulatecomplaint.php";
                }
             ); </script>';
     }
