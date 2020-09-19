@@ -440,27 +440,9 @@
                             <div class="form-group row">
                                 <label for="staticstatus_string" class="col-sm-2 col-form-label">Academic Results</label>
                                 <div class="col-sm-10">
-                                    <button class="btn btn-primary" data-target="#examplePositionCenter2" data-toggle="modal" type="button">View ACAD</button>
+                                    <a target="_blank" id="acadslipimg" href="" class="btn btn-primary" >View ACAD</a>
 
-                                    <div class="modal fade" id="examplePositionCenter2" aria-labelledby="examplePositionCenter2" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                                        <div class="modal-dialog modal-simple modal-center">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
-                                                    <h4 class="modal-title">Modal Title</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>One fine body…</p>
-                                                    <img class="modal-content" id="acadslipimg" src="" alt="Card image cap">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
 
@@ -468,28 +450,7 @@
                             <div class="form-group row">
                                 <label for="staticstatus_string" class="col-sm-2 col-form-label">Payslip</label>
                                 <div class="col-sm-10">
-                                    <button class="btn btn-primary" data-target="#examplePositionCenter1" data-toggle="modal" type="button" disabled>View Payslip</button>
-
-                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                                        <div class="modal-dialog modal-simple modal-center">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
-                                                    <h4 class="modal-title">Modal Title</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>One fine body…</p>
-                                                    <img class="modal-content" id="payslipimg" src="" alt="Card image cap">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    <a target="_blank" id="payslipimg" href="" class="btn btn-primary" >View Payslip</a>
                                 </div>
                             </div>
 
@@ -562,7 +523,7 @@
                                         }
                                     }
                                     ?>
-                                    </tbody>
+                                    
                                 </table>
                             </div>
                         </div>
@@ -620,7 +581,7 @@
                                         }
                                     }
                                     ?>
-                                    </tbody>
+                                    
                                 </table>
                             </div>
                         </div>
@@ -738,7 +699,7 @@
                     $("#roomlist").show();
                     $("#hide").show();
 
-                    document.getElementById("acadslipimg").src = "verification/viewslips.php?no=" + userData[0] + "&slip=2";
+                    document.getElementById("acadslipimg").href = "verification/viewslips.php?no=" + userData[0] + "&slip=2";
                     document.getElementById("payslipimg").src = "verification/viewslips.php?no=" + userData[0] + "&slip=1";
 
                 },
@@ -761,7 +722,7 @@
                     $("#staticparentjob").html("");
                     $("#status").val("");
                     $("#staticstatus_string").val("");
-                    document.getElementById("acadslipimg").src = "";
+                    document.getElementById("acadslipimg").href = "";
                     document.getElementById("payslipimg").src = "";
 
                 }
