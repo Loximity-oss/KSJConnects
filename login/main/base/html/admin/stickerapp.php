@@ -461,8 +461,8 @@
                                                                     <td class="nr">' . $counter . '</td>
                                                                     <input type="hidden" name="userID" value="' . $row['userID'] . '">
                                                                     <td>' . $row['userID'] . '</td>         
-                                                                    <td><a target="_blank" href="" class="btn btn-primary" >View</a></td>
-                                                                    <td><<a target="_blank" href="" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=1" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=2" class="btn btn-primary" >View</a></td>
                                                                     <td>' . $row['dateApplied'] . '</td>                                      
                                                                     <td class="actions">
                                                                         <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
@@ -512,8 +512,8 @@
                                                                     <td class="nr">' . $counter . '</td>
                                                                     <input type="hidden" name="userID" value="' . $row['userID'] . '">
                                                                     <td>' . $row['userID'] . '</td>         
-                                                                    <td><a target="_blank" href="" class="btn btn-primary" >View</a></td>
-                                                                    <td><<a target="_blank" href="" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=1" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=2" class="btn btn-primary" >View</a></td>
                                                                     <td>' . $row['dateApplied'] . '</td>                                      
                                                                 </form>
                                                             </tr>';
@@ -560,8 +560,8 @@
                                                                     <td class="nr">' . $counter . '</td>
                                                                     <input type="hidden" name="userID" value="' . $row['userID'] . '">
                                                                     <td>' . $row['userID'] . '</td>         
-                                                                    <td><a target="_blank" href="" class="btn btn-primary" >View</a></td>
-                                                                    <td><<a target="_blank" href="" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=1" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=2" class="btn btn-primary" >View</a></td>
                                                                     <td>' . $row['dateApplied'] . '</td>                                      
                                                                 </form>
                                                             </tr>';
@@ -699,7 +699,7 @@ if (!$con) {
 }
 
 if (isset($_POST['approve'])) {
-    $sql = "UPDATE `facilitiesbooking` SET `Approval` = '1' WHERE `facilitiesbooking`.`BookID` = '" . $_POST['BookID'] . "'";
+    $sql = "UPDATE `stickerapplication` SET `approval` = '1' WHERE `stickerapplication`.`userID` = '" . $_POST['userID'] . "'";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
@@ -708,7 +708,7 @@ if (isset($_POST['approve'])) {
     if ($result) {
         echo '<script>swal({
             title: "Success",
-            text: "The booking has been approved.",
+            text: "The sticker application  has been approved.",
             icon: "success",
             button: "Ok",
           }).then(function(){ 
@@ -718,7 +718,7 @@ if (isset($_POST['approve'])) {
     } else {
         echo '<script>swal({
             title: "Oh no",
-            text: "The booking has not been approved.",
+            text: "The sticker application  has not been approved.",
             icon: "error",
             button: "Ok",
           }).then(function(){ 
@@ -729,7 +729,7 @@ if (isset($_POST['approve'])) {
 }
 
 if (isset($_POST['delete'])) {
-    $sql = "UPDATE `facilitiesbooking` SET `Approval` = '2' WHERE `facilitiesbooking`.`BookID` = '" . $_POST['BookID'] . "'";
+    $sql = "UPDATE `stickerapplication` SET `approval` = '2' WHERE `stickerapplication`.`userID` = '" . $_POST['userID'] . "'";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
@@ -738,21 +738,21 @@ if (isset($_POST['delete'])) {
     if ($result) {
         echo '<script>swal({
             title: "Success",
-            text: "The booking has been rejected.",
+            text: "The sticker application has been rejected.",
             icon: "success",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "facilitybooking.php";
+            window.location.href = "stickerapp.php";
            }
         ); </script>';
     } else {
         echo '<script>swal({
             title: "Oh no",
-            text: "The booking has not been rejected.",
+            text: "The sticker application  has not been rejected.",
             icon: "error",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "facilitybooking.php";
+            window.location.href = "stickerapp.php";
            }
         ); </script>';
     }
@@ -779,7 +779,7 @@ if (isset($_POST['add'])) {
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The booking has been added.",
+                text: "The sticker application has been added.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
@@ -789,7 +789,7 @@ if (isset($_POST['add'])) {
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The booking has not been added.",
+                text: "The sticker application has not been added.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
