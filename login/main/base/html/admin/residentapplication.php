@@ -700,7 +700,7 @@
                     $("#hide").show();
 
                     document.getElementById("acadslipimg").href = "verification/viewslips.php?no=" + userData[0] + "&slip=2";
-                    document.getElementById("payslipimg").src = "verification/viewslips.php?no=" + userData[0] + "&slip=1";
+                    document.getElementById("payslipimg").href = "verification/viewslips.php?no=" + userData[0] + "&slip=1";
 
                 },
                 error: function(data) {
@@ -723,7 +723,7 @@
                     $("#status").val("");
                     $("#staticstatus_string").val("");
                     document.getElementById("acadslipimg").href = "";
-                    document.getElementById("payslipimg").src = "";
+                    document.getElementById("payslipimg").href = "";
 
                 }
             });

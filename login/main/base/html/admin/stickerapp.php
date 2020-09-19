@@ -446,6 +446,7 @@
                                                             <th>User ID</th>
                                                             <th>Vehicle Data</th>
                                                             <th>User License</th>
+                                                            <th>Date Applied</th>
                                                             <th>Actions</th> 
                                                         </tr>
                                                         </thead>';
@@ -460,7 +461,9 @@
                                                                     <td class="nr">' . $counter . '</td>
                                                                     <input type="hidden" name="userID" value="' . $row['userID'] . '">
                                                                     <td>' . $row['userID'] . '</td>         
-                                                                    <td><button class="btn btn-outline btn-primary" type="button"></td>                                   
+                                                                    <td><a target="_blank" href="" class="btn btn-primary" >View</a></td>
+                                                                    <td><<a target="_blank" href="" class="btn btn-primary" >View</a></td>
+                                                                    <td>' . $row['dateApplied'] . '</td>                                      
                                                                     <td class="actions">
                                                                         <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
                                                                         data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
@@ -485,7 +488,6 @@
                                                     exit;
                                                 }
                                                 $sql = "SELECT * FROM `stickerapplication` WHERE `approval` = 1";
-
                                                 $result = mysqli_query($con, $sql);
                                                 mysqli_close($con);
                                                 $qry = $result;
@@ -496,7 +498,7 @@
                                                             <th>User ID</th>
                                                             <th>Vehicle Data</th>
                                                             <th>User License</th>
-                                                            <th>Actions</th> 
+                                                            <th>Date Applied</th>
                                                         </tr>
                                                         </thead>';
                                                 $counter = 1;
@@ -510,14 +512,9 @@
                                                                     <td class="nr">' . $counter . '</td>
                                                                     <input type="hidden" name="userID" value="' . $row['userID'] . '">
                                                                     <td>' . $row['userID'] . '</td>         
-                                                                    <td><button class="btn btn-outline btn-primary" type="button"></td>                                   
-                                                                    <td class="actions">
-                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                                        data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
-                                                                
-                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                                        data-original-title="Remove" name="delete"><i class="icon wb-close" aria-hidden="true"></i></button>
-                                                                    </td>
+                                                                    <td><a target="_blank" href="" class="btn btn-primary" >View</a></td>
+                                                                    <td><<a target="_blank" href="" class="btn btn-primary" >View</a></td>
+                                                                    <td>' . $row['dateApplied'] . '</td>                                      
                                                                 </form>
                                                             </tr>';
                                                         $counter++;
@@ -548,7 +545,8 @@
                                                             <th>No</th>
                                                             <th>User ID</th>
                                                             <th>Vehicle Data</th>
-                                                            <th>Actions</th> 
+                                                            <th>User License</th>
+                                                            <th>Date Applied</th>
                                                         </tr>
                                                         </thead>';
                                                 $counter = 1;
@@ -562,14 +560,9 @@
                                                                     <td class="nr">' . $counter . '</td>
                                                                     <input type="hidden" name="userID" value="' . $row['userID'] . '">
                                                                     <td>' . $row['userID'] . '</td>         
-                                                                    <td><button class="btn btn-outline btn-primary" type="button"></td>                                   
-                                                                    <td class="actions">
-                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                                        data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
-                                                                
-                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                                        data-original-title="Remove" name="delete"><i class="icon wb-close" aria-hidden="true"></i></button>
-                                                                    </td>
+                                                                    <td><a target="_blank" href="" class="btn btn-primary" >View</a></td>
+                                                                    <td><<a target="_blank" href="" class="btn btn-primary" >View</a></td>
+                                                                    <td>' . $row['dateApplied'] . '</td>                                      
                                                                 </form>
                                                             </tr>';
                                                         $counter++;
@@ -766,8 +759,20 @@ if (isset($_POST['delete'])) {
 }
 
 if (isset($_POST['add'])) {
-    $sql = "INSERT INTO `facilitiesbooking` (`BookID`, `facID`, `facName`, `userID`, `dateStart`, `dateEnd`, `Approval`) 
-    VALUES (NULL, '" . $_POST['facID'] . "', '" . $_POST['hiddenfacname'] . "', '" . $_POST['userID'] . "', '" . $_POST['dateStart'] . "', '" . $_POST['dateEnd'] . "', '0')";
+
+    //properties for Image License...
+    $licenseData = addslashes(file_get_contents($_FILES['userLicense']['tmp_name']));
+    $licenseProperties = getimageSize($_FILES['userLicense']['tmp_name']);
+
+    //properties for pdf
+    $vehicleData = addslashes(file_get_contents($_FILES['userOwnership']['tmp_name']));
+    $vehicleProperties = "application/pdf";
+
+    //get curdate
+    $date = date('Y-m-d');
+
+    $sql = "INSERT INTO `stickerapplication` (`userID`, `approval`, `vehicleDataType`, `vehicleData`, `licenseData`, `licenseDataType`, `dateApplied`) 
+    VALUES ('" . $_POST['userID'] . "', '0', '$vehicleProperties', '{$vehicleData}' , '{$licenseData}', '{$licenseProperties['mime']}', '$date')";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
@@ -778,7 +783,7 @@ if (isset($_POST['add'])) {
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "facilitybooking.php";
+                window.location.href = "stickerapp.php";
                }
             ); </script>';
     } else {
@@ -788,7 +793,7 @@ if (isset($_POST['add'])) {
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "facilitybooking.php";
+                window.location.href = "stickerapp.php";
                }
             ); </script>';
     }
