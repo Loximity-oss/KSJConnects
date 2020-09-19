@@ -380,7 +380,15 @@
                                         <!--Car Information-->
                                         <div class="form-group ">
                                             <label for="userOwnership" class="form-label">Car Proof of Ownership</label>
-
+                                            <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                                <input type="text" class="form-control" readonly="">
+                                                <span class="input-group-btn">
+                                                    <span class="btn btn-success btn-file">
+                                                        <i class="icon wb-upload" aria-hidden="true"></i>
+                                                        <input type="file" onclick="" name="userOwnership" multiple="" accept="application/pdf" required>
+                                                    </span>
+                                                </span>
+                                            </div>
                                         </div>
                                 </div>
 
@@ -437,6 +445,7 @@
                                                             <th>No</th>
                                                             <th>User ID</th>
                                                             <th>Vehicle Data</th>
+                                                            <th>User License</th>
                                                             <th>Actions</th> 
                                                         </tr>
                                                         </thead>';
@@ -486,6 +495,7 @@
                                                             <th>No</th>
                                                             <th>User ID</th>
                                                             <th>Vehicle Data</th>
+                                                            <th>User License</th>
                                                             <th>Actions</th> 
                                                         </tr>
                                                         </thead>';
@@ -647,6 +657,8 @@
     <script src="../../assets/examples/js/tables/datatable.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+    <script src="../../../global/js/Plugin/input-group-file.js"></script>
+    <script src="../../../global/js/Plugin/jquery-placeholder.js"></script>
 
     <!-- for live editing -->
     <!--jQuery Stuff-->
