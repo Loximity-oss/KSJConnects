@@ -323,9 +323,9 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Facility Management / (Add/Update/Delete Facility Booking Records)</li>
+                <li class="breadcrumb-item active">Vehicle Sticker Management / Vehicle Sticker Records</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete Facility Booking Records</h1>
+            <h1 class="page-title">Vehicle Sticker List</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
@@ -339,7 +339,7 @@
                         <div class="col-md-6">
                             <div class="mb-15">
                                 <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
-                                    <i class="icon wb-plus" aria-hidden="true"></i> Add New Booking
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Add Vehicle Sticker Application
                                 </button>
                             </div>
                         </div>
@@ -352,10 +352,10 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add New Booking</h4>
+                                    <h4 class="modal-title">New Vehicle Sticker Application</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" method="POST">
+                                    <form action="" method="POST" enctype="multipart/form-data">
                                         <!--user ID-->
                                         <div class="form-group ">
                                             <label for="userID" class="form-label">User ID</label>
@@ -363,40 +363,25 @@
                                             <span id="user-availability-status"></span>
                                         </div>
 
-                                        <!--date start-->
+                                        <!--Driving License-->
                                         <div class="form-group ">
-                                            <label for="dateStart" class="form-label">Start Date</label>
-                                            <input type="date" class="form-control" id="dateStart" name="dateStart" value="" required>
+                                            <label for="userLicense" class="form-label">Driving License</label>
+                                            <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                                <input type="text" class="form-control" readonly="">
+                                                <span class="input-group-btn">
+                                                    <span class="btn btn-success btn-file">
+                                                        <i class="icon wb-upload" aria-hidden="true"></i>
+                                                        <input type="file" onclick="" name="userLicense" multiple="" accept="image/x-png,image/gif,image/jpeg" required>
+                                                    </span>
+                                                </span>
+                                            </div>
                                         </div>
 
-                                        <!--days-->
+                                        <!--Car Information-->
                                         <div class="form-group ">
-                                            <label for="staticdays" class="form-label">Duration (in Days)</label>
-                                            <input type="number" class="form-control" onblur="checkAvailability_date()" id="days" name="days" required>
+                                            <label for="userOwnership" class="form-label">Car Proof of Ownership</label>
+
                                         </div>
-
-                                        <!--date end-->
-                                        <div class="form-group ">
-                                            <label for="dateEnd" class="form-label">End Date</label>
-                                            <input type="date" class="form-control" id="dateEnd" name="dateEnd" value="" readonly>
-                                        </div>
-
-                                        <!--Faciility Name-->
-                                        <div class="form-group ">
-                                            <label for="facName" class="form-label">Facility Name</label>
-                                            <select class="form-control" id="facName" name="facName" onchange="append()" required>
-                                            </select>
-                                            <input type="hidden" id="hiddenfacname" name="hiddenfacname">
-                                        </div>
-
-                                        <!--Facility ID-->
-                                        <div class="form-group ">
-                                            <label for="staticfacID" class="form-label">Facility ID</label>
-                                            <input type="text" class="form-control" id="facID" name="facID" readonly>
-                                            <span id="fac-availability-status"></span>
-                                        </div>
-
-
                                 </div>
 
                                 <div class="modal-footer">
@@ -418,15 +403,15 @@
                             <div class="example-wrap">
                                 <div class="nav-tabs-horizontal" data-plugin="tabs">
                                     <ul class="nav nav-tabs" role="tablist">
-                                        <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Pending Bookings</a></li>
-                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Approved Bookings</a></li>
-                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab" aria-selected="false">Rejected Bookings</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Pending Sticker Applications</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Active Vehicle Stickers</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab" aria-selected="false">Rejected Applications</a></li>
                                         <li class="dropdown nav-item" role="presentation" style="display: none;">
                                             <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Menu</a>
                                             <div class="dropdown-menu" role="menu">
-                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Pending Bookings</a>
-                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Approved Bookings</a>
-                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Rejected Bookings</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Pending Sticker Applications</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Active Vehicle Stickers</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Rejected Applications</a>
                                             </div>
                                         </li>
                                     </ul>
@@ -451,11 +436,7 @@
                                                         <tr role="row">
                                                             <th>No</th>
                                                             <th>User ID</th>
-                                                            <th>Facility ID</th>
-                                                            <th>Facility Name</th>
-                                                            <th>User ID</th>
-                                                            <th>Date Start</th>
-                                                            <th>Date End</th>
+                                                            <th>Vehicle Data</th>
                                                             <th>Actions</th> 
                                                         </tr>
                                                         </thead>';
@@ -465,25 +446,21 @@
                                                         <tbody>';
                                                     while ($row = mysqli_fetch_assoc($qry)) {
                                                         echo '
-                                            <tr>
-                                                <form action=""  method="POST">
-                                                    <td class="nr">' . $counter . '</td>
-                                                    <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
-                                                    <td>' . $row['BookID'] . '</td>         
-                                                    <td>' . $row['facID'] . '</td>    
-                                                    <td>' . $row['facName'] . '</td>  
-                                                    <td>' . $row['userID'] . '</td>            
-                                                    <td>' . $row['dateStart'] . '</td> 
-                                                    <td>' . $row['dateEnd'] . '</td>                                 
-                                                    <td class="actions">
-                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                        data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
-                                                
-                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                        data-original-title="Remove" name="delete"><i class="icon wb-close" aria-hidden="true"></i></button>
-                                                    </td>
-                                                </form>
-                                            </tr>';
+                                                            <tr>
+                                                                <form action=""  method="POST">
+                                                                    <td class="nr">' . $counter . '</td>
+                                                                    <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                                    <td>' . $row['userID'] . '</td>         
+                                                                    <td><button class="btn btn-outline btn-primary" type="button"></td>                                   
+                                                                    <td class="actions">
+                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                                        data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
+                                                                
+                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                                        data-original-title="Remove" name="delete"><i class="icon wb-close" aria-hidden="true"></i></button>
+                                                                    </td>
+                                                                </form>
+                                                            </tr>';
                                                         $counter++;
                                                     }
                                                 }
@@ -498,7 +475,7 @@
                                                     echo  mysqli_connect_error();
                                                     exit;
                                                 }
-                                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 1 ";
+                                                $sql = "SELECT * FROM `stickerapplication` WHERE `approval` = 1";
 
                                                 $result = mysqli_query($con, $sql);
                                                 mysqli_close($con);
@@ -507,34 +484,32 @@
                                                 echo '<thead>
                                                         <tr role="row">
                                                             <th>No</th>
-                                                            <th>Booking ID</th>
-                                                            <th>Facility ID</th>
-                                                            <th>Facility Name</th>
                                                             <th>User ID</th>
-                                                            <th>Date Start</th>
-                                                            <th>Date End</th>
+                                                            <th>Vehicle Data</th>
+                                                            <th>Actions</th> 
                                                         </tr>
                                                         </thead>';
                                                 $counter = 1;
                                                 if ($list > 0) {
                                                     echo '
-                                                                <tbody>
-                                                        ';
+                                                        <tbody>';
                                                     while ($row = mysqli_fetch_assoc($qry)) {
                                                         echo '
-                                                                    <tr>
-                                                                    <form action=""  method="POST">
-                                                                        <td class="nr">' . $counter . '</td>
-                                                                        <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
-                                                                        <td>' . $row['BookID'] . '</td>         
-                                                                        <td>' . $row['facID'] . '</td>    
-                                                                        <td>' . $row['facName'] . '</td>  
-                                                                        <td>' . $row['userID'] . '</td>            
-                                                                        <td>' . $row['dateStart'] . '</td> 
-                                                                        <td>' . $row['dateEnd'] . '</td>                                 
-                                                                    </form>
-                                                                    </tr>
-                                                        ';
+                                                            <tr>
+                                                                <form action=""  method="POST">
+                                                                    <td class="nr">' . $counter . '</td>
+                                                                    <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                                    <td>' . $row['userID'] . '</td>         
+                                                                    <td><button class="btn btn-outline btn-primary" type="button"></td>                                   
+                                                                    <td class="actions">
+                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                                        data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
+                                                                
+                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                                        data-original-title="Remove" name="delete"><i class="icon wb-close" aria-hidden="true"></i></button>
+                                                                    </td>
+                                                                </form>
+                                                            </tr>';
                                                         $counter++;
                                                     }
                                                 }
@@ -552,7 +527,7 @@
                                                     echo  mysqli_connect_error();
                                                     exit;
                                                 }
-                                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 2 ";
+                                                $sql = "SELECT * FROM `stickerapplication` WHERE `approval` = 2";
 
                                                 $result = mysqli_query($con, $sql);
                                                 mysqli_close($con);
@@ -561,34 +536,32 @@
                                                 echo '<thead>
                                                         <tr role="row">
                                                             <th>No</th>
-                                                            <th>Booking ID</th>
-                                                            <th>Facility ID</th>
-                                                            <th>Facility Name</th>
                                                             <th>User ID</th>
-                                                            <th>Date Start</th>
-                                                            <th>Date End</th>
+                                                            <th>Vehicle Data</th>
+                                                            <th>Actions</th> 
                                                         </tr>
                                                         </thead>';
                                                 $counter = 1;
                                                 if ($list > 0) {
                                                     echo '
-                                                        <tbody>
-                                                        ';
+                                                        <tbody>';
                                                     while ($row = mysqli_fetch_assoc($qry)) {
                                                         echo '
-                                                                    <tr>
-                                                                    <form action=""  method="POST">
-                                                                        <td class="nr">' . $counter . '</td>
-                                                                        <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
-                                                                        <td>' . $row['BookID'] . '</td>         
-                                                                        <td>' . $row['facID'] . '</td>    
-                                                                        <td>' . $row['facName'] . '</td>  
-                                                                        <td>' . $row['userID'] . '</td>            
-                                                                        <td>' . $row['dateStart'] . '</td> 
-                                                                        <td>' . $row['dateEnd'] . '</td>                                 
-                                                                    </form>
-                                                                    </tr>
-                                                        ';
+                                                            <tr>
+                                                                <form action=""  method="POST">
+                                                                    <td class="nr">' . $counter . '</td>
+                                                                    <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                                    <td>' . $row['userID'] . '</td>         
+                                                                    <td><button class="btn btn-outline btn-primary" type="button"></td>                                   
+                                                                    <td class="actions">
+                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                                        data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
+                                                                
+                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                                        data-original-title="Remove" name="delete"><i class="icon wb-close" aria-hidden="true"></i></button>
+                                                                    </td>
+                                                                </form>
+                                                            </tr>';
                                                         $counter++;
                                                     }
                                                 }
@@ -697,57 +670,6 @@
         }
 
 
-        function checkAvailability_date() {
-
-            $('#facName').empty();
-            var dateStart_val = document.getElementById('dateStart').value;
-            var duration = parseInt(document.getElementById('days').value);
-            var newEndDate = new Date(dateStart_val);
-            var endDate;
-
-            newEndDate.setDate(newEndDate.getDate() + duration);
-            endDate = newEndDate.toISOString().slice(0, 10);
-            document.getElementById('dateEnd').value = endDate;
-
-
-            jQuery.ajax({
-                url: "verification/liveeditfacbook.php",
-                data: {
-                    dateStart: $("#dateStart").val(),
-                    dateEnd: $("#dateEnd").val(),
-                },
-                type: "POST",
-                dataType: "json",
-                cache: false,
-                success: function(data) {
-                    //conversion from object to array
-                    list = $.map(data, function(value, index) {
-                        return [value];
-                    });
-                    console.log(list);
-                    for (i = 0; i < list.length; i++) {
-                        if (i % 2) {
-                            $('#facName').append($('<option>', {
-                                value: i,
-                                text: list[i]
-                            }));
-                        }
-
-                    }
-
-                    $('#facID').val(list[0]);
-                    $('#hiddenfacname').val(list[1]);
-                },
-                error: function(data) {
-                    //append to input boxes...
-                    console.log(data);
-
-                }
-            });
-
-
-        }
-
         function checkAvailability_user() {
             jQuery.ajax({
                 url: "verification/check_availability.php",
@@ -758,27 +680,6 @@
                 },
                 error: function() {}
             });
-        }
-
-        function append() {
-            var e = document.getElementById("facName");
-            var value = parseInt(e.options[e.selectedIndex].value);
-            var text = e.options[e.selectedIndex].text;
-            value--; //decerement because array odd = id of facility
-            document.getElementById("facID").value = list[value];
-            document.getElementById("hiddenfacname").value = text;
-
-        }
-
-        function unappend() {
-            $("#user-availability-status").html("<span class='status-available'></span>");
-            //clear html
-            $("#userID").val("");
-            $("#dateStart").val("");
-            $("#dateEnd").val("");
-            $("#days").val("");
-            $("#facName").val("");
-            $("#facID").val("");
         }
     </script>
 </body>
