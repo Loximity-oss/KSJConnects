@@ -1,4 +1,4 @@
-<?php include 'edit/dbconnect.php' ?>
+<?php include 'edit/userSessionCheck.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">

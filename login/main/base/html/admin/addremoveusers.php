@@ -1,4 +1,4 @@
-<?php include 'edit/dbconnect.php' ?>
+<?php include 'edit/userSessionCheck.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -350,7 +350,7 @@
                         <div class="modal-dialog modal-simple modal-center">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
                                     <h4 class="modal-title">Add New User</h4>
@@ -368,11 +368,7 @@
                                             <label for="fullname" class="form-label">Full Name</label>
                                             <input type="text" class="form-control" id="fullname" name="fullname" required>
                                         </div>
-                                        <!--password-->
-                                        <div class="form-group ">
-                                            <label for="password" class="form-label">Password</label>
-                                            <input type="text" class="form-control" id="password" name="password" required>
-                                        </div>
+
                                         <!--email-->
                                         <div class="form-group ">
                                             <label for="email" class="form-label">Email</label>
@@ -389,16 +385,9 @@
                                             <label for="exampleFormControlSelect1">User Type</label>
                                             <select class="form-control" id="usertype" name="usertype" required>
                                                 <option>ADMIN</option>
-                                                <option>GUEST</option>
                                                 <option>STAFF</option>
-                                            </select>
-                                        </div>
-                                        <!-- verification -->
-                                        <div class="form-group">
-                                            <label for="exampleFormControlSelect1">User Verification Level</label>
-                                            <select class="form-control" id="verification" name="verification" required>
-                                                <option>1</option>
-                                                <option>2</option>
+                                                <option>RESIDENT</option>
+                                                <option>GUEST</option>
                                             </select>
                                         </div>
                                 </div>
@@ -420,14 +409,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
-
-
                                 <?php
-                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                if (!$con) {
-                                    echo  mysqli_connect_error();
-                                    exit;
-                                }
+                                include 'edit/dbconnect.php';
                                 $sql = "SELECT * FROM users";
 
                                 $result = mysqli_query($con, $sql);
@@ -507,12 +490,6 @@
                         
                                                 </div>
 
-                                                <!--password-->
-                                                <div class="form-group ">
-                                                    <label for="staticpassword" class="form-label">Password</label>
-                                                    <input type="text" class="form-control" id="staticpassword" name="staticpassword" required>
-                                                </div>
-
                                                 <!--email-->
                                                 <div class="form-group ">
                                                     <label for="staticemail" class="form-label">Email</label>
@@ -530,9 +507,9 @@
                                                     <label for="exampleFormControlSelect1">User Type</label>
                                                     <select class="form-control" id="staticusertype" name="staticusertype" required>
                                                         <option>ADMIN</option>
-                                                        <option>GUEST</option>
                                                         <option>STAFF</option>
                                                         <option>RESIDENT</option>
+                                                        <option>GUEST</option>
                                                     </select>
                                                 </div>
 
@@ -682,7 +659,6 @@
             var data = table.row($text - 1).data();
             $("#staticuserID").val(data[1]);
             $("#staticfullname").val(data[2]);
-            $("#staticpassword").val(data[3]);
             $("#staticemail").val(data[4]);
             $("#staticphoneno").val(data[5]);
             $("#staticusertype").val(data[6]);
@@ -709,76 +685,39 @@
 </html>
 
 <?php
-$con = mysqli_connect("localhost", "root", "", "ksjdb");
-if (!$con) {
-    echo  mysqli_connect_error();
-    exit;
-}
-
+include 'edit/dbconnect.php';
 if (isset($_POST['submit'])) {
-    $con = mysqli_connect("localhost", "root", "", "ksjdb");
-    if (!$con) {
-        echo  mysqli_connect_error();
-        exit;
-    }
-    //todo check userid
-    if ($_POST['verification'] == 2) {
-        $hash = md5(rand(0, 1000));
-    } else {
-        $hash = $_POST['verification'];
-    }
+    //hash = verification
+    $hash = md5(rand(0, 1000));
 
+    //encryption as per lecturer requirement
     $salt = "palsdkas;lkdasl;kd";
-    $password = $_POST['password'];
+    $password = md5(rand(0, 1));
     $hash2 = md5($password, $salt);
 
     $sql = "INSERT INTO `users` (`imageType`,`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) 
-    VALUES ('','0x0','" . $_POST['userID'] . "',
-    '" . $_POST['fullname'] . "',
-     '$hash2', 
-     '" . $_POST['email'] . "',
-      '" . $_POST['phoneno'] . "', '" . $_POST['usertype'] . "' , '" . $hash . "', 'Default Bio');";
+    VALUES ('image/jpeg','','" . $_POST['userID'] . "','" . $_POST['fullname'] . "','$hash2', '" . $_POST['email'] . "', '" . $_POST['phoneno'] . "', '" . $_POST['usertype'] . "' , '" . $hash . "', 'Default Bio');";
+
     $sql2 = "INSERT INTO `merit` (`userID`,`merit`) VALUES ('" . $_POST['userID'] . "','0');";
     $result = mysqli_query($con, $sql);
     $result2 = mysqli_query($con, $sql2);
 
     if ($result) {
-        if ($hash != 1) {
-            $to = $_POST['email'];
-            $subject = 'KSJConnects SIGN UP | Verification E-mail';
-            $message = '
+        $to = $_POST['email'];
+        $subject = 'KSJConnects SIGN UP | Verification E-mail';
+        $message = '
      
             Thanks for signing up!
             Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
-            
+            Your pre-created password is as follows: ' . $password . '
              
             Please click this link to activate your account:
             http://118.101.107.162/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
              
             ';
-            $headers = 'From: ssah37@gmail.com';
+        $headers = 'From: ssah37@gmail.com';
 
-            if (mail($to, $subject, $message, $headers))
-                echo '<script>swal({
-                title: "Success",
-                text: "The user account has been added!",
-                icon: "success",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "addremoveusers.php";
-               }
-            ); </script>';
-            else
-                echo '<script>swal({
-                title: "Oh no",
-                text: "The verification email was not sent. However the account has been added.",
-                icon: "error",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "addremoveusers.php";
-               }
-            ); </script>';
-        } else {
+        if (mail($to, $subject, $message, $headers))
             echo '<script>swal({
                 title: "Success",
                 text: "The user account has been added!",
@@ -788,7 +727,16 @@ if (isset($_POST['submit'])) {
                 window.location.href = "addremoveusers.php";
                }
             ); </script>';
-        }
+        else
+            echo '<script>swal({
+                title: "Oh no",
+                text: "The verification email was not sent. However the account has been added.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
     } else {
         echo '<script>swal({
             title: "Oh no",
@@ -807,7 +755,7 @@ if (isset($_POST['update'])) {
     $password = $_POST['staticpassword'];
     $hash2 = md5($password, $salt);
 
-    $sql = "UPDATE `users` SET `fullname` = '" . $_POST['staticfullname'] . "', `password` = '" . $hash2 . "', `email` = '" . $_POST['staticemail'] . "', `phone_no` = '" . $_POST['staticphoneno'] . "', 
+    $sql = "UPDATE `users` SET `fullname` = '" . $_POST['staticfullname'] . "', `email` = '" . $_POST['staticemail'] . "', `phone_no` = '" . $_POST['staticphoneno'] . "', 
     `userType` = '" . $_POST['staticusertype'] . "', `verification` = '" . $_POST['staticverification'] . "' WHERE `users`.`userID` = '" . $_POST['staticuserID'] . "' ";
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
@@ -865,12 +813,7 @@ if (isset($_POST['delete'])) {
 }
 
 if (isset($_POST['reset'])) {
-    $sql = "DELETE FROM `users` WHERE `users`.`userID` = '" . $_POST['userID'] . "' ";
-    $sql2 = "DELETE FROM `merit` WHERE `merit`.`userID` = '" . $_POST['userID'] . "' );";
-    $result = mysqli_query($con, $sql);
-    $result2 = mysqli_query($con, $sql2);
 
-    mysqli_close($con);
     if ($result) {
         echo '<script>swal({
                 title: "Success",
