@@ -104,7 +104,7 @@
                                 <?php if (!$list['picture']) {
                                     echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
                                 } else {
-                                    echo '<img class="card-img-top" src="imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                                    echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
                                 } ?>
                                 <i></i>
                             </span>
@@ -333,7 +333,7 @@
                 if (!$list['picture']) {
                     echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
                 } else {
-                    echo '<img class="card-img-top" src="imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                    echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
                 }
 
                 echo '        <div class="card-body">

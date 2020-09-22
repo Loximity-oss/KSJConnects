@@ -98,11 +98,11 @@
           <li class="nav-item dropdown">
             <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
               <span class="avatar avatar-online">
-                                                <?php if (!$list['picture']) {
-                                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
-                                } else {
-                                    echo '<img class="card-img-top" src="imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
-                                } ?>
+                <?php if (!$list['picture']) {
+                  echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                } else {
+                  echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                } ?>
                 <i></i>
               </span>
             </a>
@@ -386,11 +386,11 @@
           <div class="card card-shadow">
             <div class="card-block text-center bg-white p-40">
               <div class="avatar avatar-100 mb-20">
-                                                <?php if (!$list['picture']) {
-                                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
-                                } else {
-                                    echo '<img class="card-img-top" src="imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
-                                } ?>
+                <?php if (!$list['picture']) {
+                  echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                } else {
+                  echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                } ?>
               </div>
               <?php
               echo '
@@ -427,6 +427,19 @@
 
         <div class="col-xxl-9">
 
+          <div class="card border border-primary">
+            <div class="card-block">
+              <h4 class="card-title">KSJConnects Disclaimer</h4>
+              <p class="card-text">This web application contains confidential information and is intended only for the individual named and the management of KSJConnects.
+                If you are not the individual or managment you should not disseminate, distribute or copy this of this information..
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-xxl-3 col-xl-4"></div>
+        <div class="col-xxl-9">
           <div class="card border border-primary">
             <div class="card-block">
               <h4 class="card-title">KSJConnects Disclaimer</h4>
