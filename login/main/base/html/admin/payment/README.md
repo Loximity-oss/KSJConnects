@@ -1,19 +1,33 @@
-# Accept a Card Payment
+# PHP & Stripe API PayPage App
 
-Stripe Checkout is the fastest way to get started with payments. Included are some basic build and run scripts you can use to start up the application.
+> Product payment page built with PHP, MYSQL, PDO and the Stripe API.
 
-## Running the sample
+## Quick Start
 
-1. Build the server
-
-```
+```bash
+# Install dependencies
 composer install
+
+# Import paypage.sql into your DB
+
+# Add your DB params in config/db.php
+
+# Add your stripe pk and sk keys into chare.js and charge.php
+
+# Visit server location
 ```
 
-2. Run the server
+## App Info
 
-```
-php -S 127.0.0.1:4242
-```
+### Author
 
-3. Go to [http://localhost:4242/checkout.html](http://localhost:4242/checkout.html)
+Brad Traversy
+[Traversy Media](http://www.traversymedia.com)
+
+### Version
+
+1.0.0
+
+### License
+
+This project is licensed under the MIT License
