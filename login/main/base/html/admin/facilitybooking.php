@@ -751,7 +751,7 @@
         function checkAvailability_user() {
             jQuery.ajax({
                 url: "verification/check_availability.php",
-                data: 'username=' + $("#staticuserID").val(),
+                data: 'username=' + $("#userID").val(),
                 type: "POST",
                 success: function(data) {
                     $("#user-availability-status").html(data);
