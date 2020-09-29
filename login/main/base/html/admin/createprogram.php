@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin (Add/Update/Delete Payment Records)</title>
+    <title>KSJConnects - Admin (Add/Update/Delete Booking Facility Records)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -322,205 +322,236 @@
     <div class="page">
         <div class="page-header">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Payment Management / (Add/Update/Delete Payment Records)</li>
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active">Student Activity Management / (Add/Update/Delete Student Activity Records)</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete Payment Records</h1>
+            <h1 class="page-title">Add/Update/Delete Student Activity Records</h1>
         </div>
         <div class="page-content container-fluid">
-            <div class="card">
-                <div class="card-header">
-                    Semester Payments
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Semester Restart Controls</h5>
-                    <p class="card-text">To Restart for a new semester payment, kindly press DELETE (records for this semester) THEN insert</p>
-                    <form action="" method="post">
-                        <!--date-->
-                        <div class="form-group ">
-                            <label for="DateDue" class="form-label">Due Date</label>
-                            <input type="date" class="form-control" name="DateDue" required>
-                        </div>
-                        <!-- buttons -->
-                        <div class="btn-toolbar" role="toolbar">
-                            <div class="btn-group mr-2" role="group" aria-label="First group">
-                                <button type="submit" name="Insert" class="btn btn-primary">Insert</button>
-                            </div>
-                    </form>
-                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <form action="" method="post">
-                            <button type="submit" name="Delete" class="btn btn-default">Delete</button>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="panel">
-            <header class="panel-heading">
-                <div class="panel-actions"></div>
-                <h3 class="panel-title">Payment Records List</h3>
-            </header>
-            <div class="panel-body">
-                <!-- Modal for Data Button -->
-                <div class="modal fade" id="examplePositionCenter2" aria-labelledby="examplePositionCenter2" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-simple modal-center">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
+            <div class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions"></div>
+                    <h3 class="panel-title">Student Activity List</h3>
+                </header>
+                <div class="panel-body">
+                    <!-- Add Data Button -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-15">
+                                <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Add Student Activity
                                 </button>
-                                <h4 class="modal-title">Manual Payment</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form action="payment/charge.php" method="POST" id="payment-form">
-                                    <!--user ID-->
-                                    <div class="form-group ">
-                                        <label for="userID" class="form-label">User ID</label>
-                                        <input type="text" class="form-control" id="userID" name="userID" readonly>
-                                        <span id="user-availability-status"></span>
-                                    </div>
-                                    <!-- email -->
-                                    <div class="form-group ">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="email" id="email" readonly>
-                                    </div>
-                                    <div id="card-element" class="form-control">
-                                        <!-- a Stripe Element will be inserted here. -->
-                                    </div>
-                                    <div id="card-errors" role="alert"></div>
-                            </div>
-
-                            <div class="modal-footer">
-                                <!--buttons-->
-                                <div class="btn-toolbar" role="toolbar">
-                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                        <button class="btn btn-primary">Pay with Credit Card</button>
-                                    </div>
-                                </div>
-                                </form>
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="example-wrap">
-                            <div class="nav-tabs-horizontal" data-plugin="tabs">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Pending Payment</a></li>
-                                    <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Successful Payment</a></li>
-                                    <li class="dropdown nav-item" role="presentation" style="display: none;">
-                                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Menu</a>
-                                        <div class="dropdown-menu" role="menu">
-                                            <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Pending Payment</a>
-                                            <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Successful Payment</a>
+                    <!-- Modal for Data Button -->
+                    <div class="modal fade" id="examplePositionCenter2" aria-labelledby="examplePositionCenter2" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-simple modal-center">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h4 class="modal-title">Add Student Activity</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="POST">
+                                        <!--activity ID-->
+                                        <div class="form-group ">
+                                            <label for="userID" class="form-label">Activity ID</label>
+                                            <input type="text" class="form-control" value="Auto Generated" disabled>
+                                            <span id="user-availability-status"></span>
                                         </div>
-                                    </li>
-                                </ul>
-                                <div class="tab-content pt-20">
-                                    <div class="tab-pane active" id="exampleTabsOne" role="tabpanel">
-                                        <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
-                                            <?php
-                                            $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                            if (!$con) {
-                                                echo  mysqli_connect_error();
-                                                exit;
-                                            }
-                                            $sql = "SELECT payment.`userID`,payment.`transactionID`,payment.`paymentMethod`,payment.`dateDue`,payment.`status`,payment.`imageType`,payment.`imageData`, users.`email` 
-                                            FROM `payment` INNER JOIN users ON Payment.userID=users.userID WHERE `status` = 1";
+                                        <!-- program Title -->
+                                        <div class="form-group ">
+                                            <label for="userID" class="form-label">Title</label>
+                                            <input type="text" class="form-control" id="userID" name="title" required>
+                                            <span id="user-availability-status"></span>
+                                        </div>
+                                        <!--  program merit count -->
+                                        <div class="form-group ">
+                                            <label for="userID" class="form-label">Merit</label>
+                                            <input type="text" class="form-control" id="userID" name="merit" required>
+                                            <span id="user-availability-status"></span>
+                                        </div>
+                                </div>
 
-                                            $result = mysqli_query($con, $sql);
-                                            mysqli_close($con);
-                                            $qry = $result;
-                                            $list = mysqli_num_rows($qry);
-                                            echo '<thead>
+                                <div class="modal-footer">
+                                    <!--buttons-->
+                                    <div class="btn-toolbar" role="toolbar">
+                                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                                            <button type="submit" name="add" class="btn btn-primary">Add</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="example-wrap">
+                                <div class="nav-tabs-horizontal" data-plugin="tabs">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Active Activites</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Inactive Activites</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab" aria-selected="false">Student Activities List</a></li>
+                                        <li class="dropdown nav-item" role="presentation" style="display: none;">
+                                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Menu</a>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Active Activities</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Inactive Activities</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Inactive Activities</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content pt-20">
+                                        <div class="tab-pane active" id="exampleTabsOne" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `activitylist` WHERE `status` = 1";
+
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
                                                         <tr role="row">
-                                                            <th>No</th>
-                                                            <th>User ID</th>
-                                                            <th>Transaction ID</th>
-                                                            <th>Method of Payment</th>
-                                                            <th>Date Due</th>
-                                                            <th>Email</th>
+                                                            <th>Activity ID</th>
+                                                            <th>Program Title</th>
+                                                            <th>Program Link</th>
+                                                            <th>QR Code</th>
+                                                            <th>Merit Awarded</th>
                                                             <th>Actions</th> 
                                                         </tr>
                                                         </thead>';
-                                            $counter = 1;
-                                            if ($list > 0) {
-                                                echo '
-                                                        <tbody>';
-                                                while ($row = mysqli_fetch_assoc($qry)) {
+                                                if ($list > 0) {
                                                     echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
                                             <tr>
                                                 <form action=""  method="POST">
-                                                    <td class="nr">' . $counter . '</td>
-                                                    <input type="hidden" name="BookID" value="' . $row['userID'] . '">
-                                                    <td>' . $row['userID'] . '</td>         
-                                                    <td>' . $row['transactionID'] . '</td>    
-                                                    <td>' . $row['paymentMethod'] . '</td>  
-                                                    <td>' . $row['dateDue'] . '</td>
-                                                    <td>' . $row['email'] . '</td>                                              
-                                                    <td class="actions">
-                                                        <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
-                                                        data-original-title="Edit" data-target="#examplePositionCenter2" data-toggle="modal" type="button" ><i class="icon wb-payment" aria-hidden="true"></i></a>
-                                                        
+                                                    <input type="hidden" name="programID" value="' . $row['programID'] . '">
+                                                    <td>' . $row['programID'] . '</td>         
+                                                    <td>' . $row['programTitle'] . '</td>    
+                                                    <td><a href="' . $row['programLink'] . '">Go</a></td>  
+                                                    <td><a  target="_blank" href="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' . $row['programLink'] . '&choe=UTF-8" title="Generate QR"/>Generate</td>  
+                                                    <td>' . $row['merit'] . '</td>                                        
+                                                    <td class="actions">                                                                                                   
                                                         <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                        data-original-title="Remove" name="delete"><i class="icon wb-close" aria-hidden="true"></i></button>
+                                                        data-original-title="update" name="update"><i class="icon wb-close" aria-hidden="true"></i></button>
                                                     </td>
                                                 </form>
                                             </tr>';
-                                                    $counter++;
+                                                        
+                                                    }
                                                 }
-                                            }
-                                            ?>
-                                        </table>
-                                    </div>
-                                    <div class="tab-pane" id="exampleTabsTwo" role="tabpanel">
-                                        <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+                                                ?>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane" id="exampleTabsTwo" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
                                             <?php
-                                            $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                            if (!$con) {
-                                                echo  mysqli_connect_error();
-                                                exit;
-                                            }
-                                            $sql = "SELECT * FROM `payment` WHERE `status` = 2";
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `activitylist` WHERE `status` = 2";
 
-                                            $result = mysqli_query($con, $sql);
-                                            mysqli_close($con);
-                                            $qry = $result;
-                                            $list = mysqli_num_rows($qry);
-                                            echo '<thead>
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
                                                         <tr role="row">
-                                                            <th>No</th>
-                                                            <th>User ID</th>
-                                                            <th>Transaction ID</th>
-                                                            <th>Method of Payment</th>
-                                                            <th>Date Due</th>
+                                                            <th>Activity ID</th>
+                                                            <th>Program Title</th>
+                                                            <th>Program Link</th>
+                                                            <th>Merit Awarded</th>
+                                                            <th>Actions</th> 
                                                         </tr>
                                                         </thead>';
-                                            $counter = 1;
-                                            if ($list > 0) {
-                                                echo '
-                                                        <tbody>';
-                                                while ($row = mysqli_fetch_assoc($qry)) {
+                                                if ($list > 0) {
                                                     echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
                                             <tr>
                                                 <form action=""  method="POST">
-                                                    <td class="nr">' . $counter . '</td>
-                                                    <td>' . $row['userID'] . '</td>         
-                                                    <td>' . $row['transactionID'] . '</td>    
-                                                    <td>' . $row['paymentMethod'] . '</td>  
-                                                    <td>' . $row['dateDue'] . '</td>                                            
+                                                    <input type="hidden" name="programID" value="' . $row['programID'] . '">
+                                                    <td>' . $row['programID'] . '</td>         
+                                                    <td>' . $row['programTitle'] . '</td>    
+                                                    <td>' . $row['programLink'] . '</td>  
+                                                    <td>' . $row['merit'] . '</td>                                        
+                                                    <td class="actions">                                                                                                   
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                        data-original-title="delete-prg" name="delete-prg"><i class="icon wb-trash" aria-hidden="true"></i></button>
+                                                    </td>
                                                 </form>
                                             </tr>';
-                                                    $counter++;
+                                                        
+                                                    }
                                                 }
-                                            }
-                                            ?>
+                                                ?>
 
-                                        </table>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane" id="exampleTabsThree" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+                                            <?php
+                                            $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `studentActivityList`";
+
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>Activity ID</th>
+                                                            <th>User ID</th>
+                                                            <th>Program Title</th>
+                                                            <th>Merit Awarded</th>
+                                                            <th>Actions</th> 
+                                                        </tr>
+                                                        </thead>';
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
+                                            <tr>
+                                                <form action=""  method="POST">
+                                                     <input type="hidden" name="activityID" value="' . $row['activityID'] . '">
+                                                    <td>'. $row['activityID']. '</td>
+                                                    <td>' . $row['userID'] . '</td>         
+                                                    <td>' . $row['programTitle'] . '</td>    
+                                                    <td>' . $row['programMerit'] . '</td>
+                                                    
+                                                    <td class="actions">                                                                                                   
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                        data-original-title="delete-user" name="delete-user"><i class="icon wb-trash" aria-hidden="true"></i></button>
+                                                    </td>                               
+                                                </form>
+                                            </tr>';
+                                                        
+                                                    }
+                                                }
+                                                ?>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -530,9 +561,7 @@
             </div>
         </div>
     </div>
-    </div>
     <!-- End Page -->
-
 
 
     <!-- Footer -->
@@ -602,8 +631,6 @@
     <script src="../../assets/examples/js/tables/datatable.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="payment/js/charge.js"></script>
 
     <!-- for live editing -->
     <!--jQuery Stuff-->
@@ -626,28 +653,7 @@
                 });
         }
 
-        $(".edit_row").click(function() {
 
-            var $row = $(this).closest("tr"); // Find the row
-            var $text = $row.find(".nr").text(); // Find the text
-            var table = $('#exampleTableTools').DataTable();
-            var data = table.row($text - 1).data();
-            $("#userID").val(data[1]);
-            $("#email").val(data[5]);
-        });
-
-
-        function checkAvailability_user() {
-            jQuery.ajax({
-                url: "verification/check_availability.php",
-                data: 'username=' + $("#userID").val(),
-                type: "POST",
-                success: function(data) {
-                    $("#user-availability-status").html(data);
-                },
-                error: function() {}
-            });
-        }
     </script>
 </body>
 
@@ -660,55 +666,122 @@ if (!$con) {
     exit;
 }
 
-if (isset($_POST['Insert'])) {
-    $sql = "INSERT INTO `payment` (`userID`, `transactionID`, `paymentMethod`, `dateDue`, `status`,`imageType`,`imageData`) SELECT userID,NULL,NULL,'2020-09-01',1,NULL,NULL FROM users where userType ='RESIDENT'";
+if (isset($_POST['delete-user'])) {
+    $sql = "DELETE FROM `studentactivitylist` WHERE `studentactivitylist`.`activityID` = '" . $_POST['activityID'] . "'";
+
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
+
+
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The semester data has been purged.",
+                text: "The user has been removed.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "payment.php";
+                window.location.href = "createprogram.php";
                }
             ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The semester has not been purged",
+                text: "The user has not been removed.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "payment.php";
+                window.location.href = "createprogram.php";
                }
             ); </script>';
     }
 }
 
-if (isset($_POST['Delete'])) {
-    $sql = "DELETE FROM Payment";
+if (isset($_POST['delete-prg'])) {
+    $sql = "DELETE FROM `activitylist` WHERE `activitylist`.`programID` = '" . $_POST['programID'] . "'";
+
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
+
+
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The semester has been resetted.",
+                text: "The program has been removed.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "payment.php";
+                window.location.href = "createprogram.php";
                }
             ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The semester has not been resetted.",
+                text: "The program has not been removed.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "payment.php";
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['update'])) {
+    $sql = "UPDATE `activityList` SET `status` = '2' WHERE `activityList`.`programID` = '" . $_POST['programID'] . "'";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The program has been removed.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The program has not been removed.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['add'])) {
+    $hash = md5(rand(0, 1000));
+
+    $sql = "INSERT INTO `activitylist` (`programID`, `programTitle`, `programLink`, `programKey`, `merit`, `status`) 
+    VALUES (NULL, '".$_POST['title']."', 'http://localhost/ksjconnects/activityLogin/index.php?program=".$hash."', '$hash', '".$_POST['merit']."', '1')";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The program has been added.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The program has not been added.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
                }
             ); </script>';
     }

@@ -1,4 +1,9 @@
-<?php include 'edit/userSessionCheck.php' ?>
+<?php
+include 'edit/userSessionCheck.php';
+require_once 'edit/dbconnect.php';
+$sql = "SELECT * FROM `announcement` ORDER BY `date` DESC";
+$result = mysqli_query($con, $sql);
+?>
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
 
@@ -18,6 +23,15 @@
   <link rel="stylesheet" href="../../../global/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../global/css/bootstrap-extend.min.css">
   <link rel="stylesheet" href="../../assets/css/site.min.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-bs4/dataTables.bootstrap4.css">
+        <link rel="stylesheet" href="../../../global/vendor/datatables.net-fixedheader-bs4/dataTables.fixedheader.bootstrap4.css">
+        <link rel="stylesheet" href="../../../global/vendor/datatables.net-fixedcolumns-bs4/dataTables.fixedcolumns.bootstrap4.css">
+        <link rel="stylesheet" href="../../../global/vendor/datatables.net-rowgroup-bs4/dataTables.rowgroup.bootstrap4.css">
+        <link rel="stylesheet" href="../../../global/vendor/datatables.net-scroller-bs4/dataTables.scroller.bootstrap4.css">
+        <link rel="stylesheet" href="../../../global/vendor/datatables.net-select-bs4/dataTables.select.bootstrap4.css">
+        <link rel="stylesheet" href="../../../global/vendor/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.css">
+        <link rel="stylesheet" href="../../../global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.css">
+        <link rel="stylesheet" href="../../assets/examples/css/tables/datatable.css">
 
   <!-- Plugins -->
   <link rel="stylesheet" href="../../../global/vendor/animsition/animsition.css">
@@ -436,20 +450,82 @@
             </div>
           </div>
         </div>
+<?php
 
-
-        <div class="col-xxl-3 col-xl-4"></div>
-        <div class="col-xxl-9">
-          <div class="card border border-primary">
-            <div class="card-block">
-              <h4 class="card-title">KSJConnects Disclaimer</h4>
-              <p class="card-text">This web application contains confidential information and is intended only for the individual named and the management of KSJConnects.
-                If you are not the individual or managment you should not disseminate, distribute or copy this of this information..
-              </p>
+  $result = mysqli_query($con, $sql);
+  mysqli_close($con);
+  $qry = $result;
+  $list = mysqli_num_rows($qry);
+  $row = mysqli_fetch_assoc($qry);
+  echo'
+          <div class="col-xxl-3 col-xl-4"></div>
+          <div class="col-xxl-9">
+            <div class="card border border-primary">
+              <div class="card-block">
+                <h4 class="card-title">Latest News</h4>
+                <p class="card-text">This web application contains confidential information and is intended only for the individual named and the management of KSJConnects.
+                  If you are not the individual or managment you should not disseminate, distribute or copy this of this information..
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
+          <div class="col-xxl-3 col-xl-4"></div>
+
+          <div class="col-xxl-9">
+            <div class="panel">
+                <h3 class="panel-title">Merit List</h3>
+
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                  <table class="table table-hover dataTable table-striped w-half" id="exampleTableTools">';
+
+
+                    
+
+                    echo '<thead>
+                    <tr role="row">
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Text</th>
+                    <th>Date</th>
+                    <th>Actions</th> 
+                    </tr>
+                    </thead>';
+                    $counter = 1;
+                    if ($list > 0) {
+                      echo '
+                    <tbody>';
+                      while ($row = mysqli_fetch_assoc($qry)) {
+                        echo '
+                        <tr>
+                        <form action=""  method="POST">
+                            <td class="nr">' . $counter . '</td>
+                            <input type="hidden" name="BookID" value="' . $row['AnnouncmentID'] . '">
+                            <td>' . $row['Title'] . '</td>         
+                            <td>' . $row['Text'] . '</td>    
+                            <td>' . $row['date'] . '</td>                                
+                            <td class="actions">
+                                <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
+                            </td>
+                        </form>
+                        </tr>';
+                        $counter++;
+                      }
+                    }
+                    ?>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+        </div>
 
       </div>
     </div>
@@ -485,6 +561,21 @@
   <script src="../../../global/vendor/chartist/chartist.min.js"></script>
   <script src="../../../global/vendor/gmaps/gmaps.js"></script>
   <script src="../../../global/vendor/matchheight/jquery.matchHeight-min.js"></script>
+  <script src="../../assets/examples/js/tables/datatable.js"></script>
+  <script src="../../../global/vendor/datatables.net/jquery.dataTables.js"></script>
+  <script src="../../../global/vendor/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="../../../global/vendor/datatables.net-fixedheader/dataTables.fixedHeader.js"></script>
+  <script src="../../../global/vendor/datatables.net-fixedcolumns/dataTables.fixedColumns.js"></script>
+  <script src="../../../global/vendor/datatables.net-rowgroup/dataTables.rowGroup.js"></script>
+  <script src="../../../global/vendor/datatables.net-scroller/dataTables.scroller.js"></script>
+  <script src="../../../global/vendor/datatables.net-responsive/dataTables.responsive.js"></script>
+  <script src="../../../global/vendor/datatables.net-responsive-bs4/responsive.bootstrap4.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons/dataTables.buttons.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons/buttons.html5.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons/buttons.flash.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons/buttons.print.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons/buttons.colVis.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons-bs4/buttons.bootstrap4.js"></script>
 
   <!-- Scripts -->
   <script src="../../../global/js/Component.js"></script>
@@ -514,6 +605,8 @@
   <script src="../../../global/js/Plugin/asscrollable.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="../../assets/examples/js/dashboard/v2.js"></script>
+  <script src="../../../global/js/Plugin/datatables.js"></script>
+  <script src="../../assets/examples/js/tables/datatable.js"></script>
   <script>
     function JSconfirm() {
       swal({
