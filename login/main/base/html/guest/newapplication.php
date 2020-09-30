@@ -156,7 +156,7 @@ if (!$con) {
                         <span class="input-group-text" id="inputGroupFileAddon01">Pay Slip</span>
                       </div>
                       <div class="custom-file">
-                        <input type="file" name="payslip" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" required>
+                        <input type="file" name="payslip" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" accept="application/pdf" required>
                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                       </div>
                     </div>
@@ -170,7 +170,7 @@ if (!$con) {
                         <span class="input-group-text" id="inputGroupFileAddon02">Academic Slip</span>
                       </div>
                       <div class="custom-file">
-                        <input type="file" name="acadslip" class="custom-file-input" id="inputGroupFile02" aria-describedby="inputGroupFileAddon02" required>
+                        <input type="file" name="acadslip" class="custom-file-input" id="inputGroupFile02" aria-describedby="inputGroupFileAddon02" accept="application/pdf" required>
                         <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                       </div>
                     </div>
@@ -225,7 +225,7 @@ if (!$con) {
           })
           .then((logout) => {
             if (logout) {
-              location.href = '../../logout.php';
+              location.href = '../../../../logout.php';
             }
           });
       }

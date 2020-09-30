@@ -10,7 +10,7 @@
 		$result = mysqli_query($con, $sql) or die("<b>Error:</b> Problem on Retrieving Image BLOB<br/>" . mysqli_error($con));
 		$row = mysqli_fetch_array($result);
 		header("Content-type: " . $row["imgPaySlipType"]);
-        echo $row["parentpayslip "];
+        echo $row["parentpayslip"];
 
     } else if ($_GET['slip'] == 2){ //acaderesults
         

@@ -2,7 +2,16 @@
 include 'edit/userSessionCheck.php';
 require_once 'edit/dbconnect.php';
 $sql = "SELECT * FROM `announcement` ORDER BY `date` DESC";
+$sql2 = "SELECT complaintID FROM `complaint`";
+$sql3 = "SELECT userType from users where userType = 'RESIDENT'";
+$sql4 = "SELECT roomID from roomlist where userID =''";
 $result = mysqli_query($con, $sql);
+$result2 = mysqli_query($con, $sql2);
+$result3 = mysqli_query($con, $sql3);
+$result4 = mysqli_query($con, $sql4);
+$list2 = mysqli_num_rows($result2);
+$list3 = mysqli_num_rows($result3);
+$list4 = mysqli_num_rows($result4);
 ?>
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -24,14 +33,14 @@ $result = mysqli_query($con, $sql);
   <link rel="stylesheet" href="../../../global/css/bootstrap-extend.min.css">
   <link rel="stylesheet" href="../../assets/css/site.min.css">
   <link rel="stylesheet" href="../../../global/vendor/datatables.net-bs4/dataTables.bootstrap4.css">
-        <link rel="stylesheet" href="../../../global/vendor/datatables.net-fixedheader-bs4/dataTables.fixedheader.bootstrap4.css">
-        <link rel="stylesheet" href="../../../global/vendor/datatables.net-fixedcolumns-bs4/dataTables.fixedcolumns.bootstrap4.css">
-        <link rel="stylesheet" href="../../../global/vendor/datatables.net-rowgroup-bs4/dataTables.rowgroup.bootstrap4.css">
-        <link rel="stylesheet" href="../../../global/vendor/datatables.net-scroller-bs4/dataTables.scroller.bootstrap4.css">
-        <link rel="stylesheet" href="../../../global/vendor/datatables.net-select-bs4/dataTables.select.bootstrap4.css">
-        <link rel="stylesheet" href="../../../global/vendor/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.css">
-        <link rel="stylesheet" href="../../../global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.css">
-        <link rel="stylesheet" href="../../assets/examples/css/tables/datatable.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-fixedheader-bs4/dataTables.fixedheader.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-fixedcolumns-bs4/dataTables.fixedcolumns.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-rowgroup-bs4/dataTables.rowgroup.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-scroller-bs4/dataTables.scroller.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-select-bs4/dataTables.select.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.css">
+  <link rel="stylesheet" href="../../assets/examples/css/tables/datatable.css">
 
   <!-- Plugins -->
   <link rel="stylesheet" href="../../../global/vendor/animsition/animsition.css">
@@ -146,6 +155,7 @@ $result = mysqli_query($con, $sql);
       <!-- End Site Navbar Seach -->
     </div>
   </nav>
+
   <div class="site-menubar">
     <div class="site-menubar-body">
       <div>
@@ -181,7 +191,7 @@ $result = mysqli_query($con, $sql);
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="index.php">
+                  <a class="animsition-link" href="payment.php">
                     <span class="site-menu-title">Resident Payment</span>
                   </a>
                 </li>
@@ -261,7 +271,7 @@ $result = mysqli_query($con, $sql);
                     </a>
                   </li>
                   <li class="site-menu-item ">
-                    <a class="animsition-link" href="index.php">
+                    <a class="animsition-link" href="createprogram.php">
                       <span class="site-menu-title">Create Programme</span>
                     </a>
                   </li>
@@ -277,7 +287,7 @@ $result = mysqli_query($con, $sql);
                 <span class="site-menu-title">Sticker Submenu</span>
                 <ul class="site-menu-sub">
                   <li class="site-menu-item ">
-                    <a class="animsition-link" href="index.php">
+                    <a class="animsition-link" href="stickerapp.php">
                       <span class="site-menu-title">Resident's Sticker App</span>
                     </a>
                   </li>
@@ -294,7 +304,7 @@ $result = mysqli_query($con, $sql);
                 <span class="site-menu-title">Announcement Submenu</span>
                 <ul class="site-menu-sub">
                   <li class="site-menu-item ">
-                    <a class="animsition-link" href="index.php">
+                    <a class="animsition-link" href="announcement.php">
                       <span class="site-menu-title">Annoucement CRUD</span>
                     </a>
                   </li>
@@ -307,17 +317,17 @@ $result = mysqli_query($con, $sql);
           <div class="site-menubar-section">
             <h5>
               Sprint 3 Progress
-              <span class="float-right">1%</span>
+              <span class="float-right">100%</span>
             </h5>
             <div class="progress progress-xs">
-              <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+              <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
             </div>
             <h5>
               Product Release
-              <span class="float-right">80%</span>
+              <span class="float-right">100%</span>
             </h5>
             <div class="progress progress-xs">
-              <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+              <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
             </div>
           </div>
         </div>
@@ -362,7 +372,7 @@ $result = mysqli_query($con, $sql);
               </button>
               <span class="ml-15 font-weight-400">Current Students</span>
               <div class="content-text text-center mb-0">
-                <span class="font-size-40 font-weight-100">1200</span>
+                <span class="font-size-40 font-weight-100"><?php echo $list3 ?></span>
               </div>
             </div>
           </div>
@@ -375,7 +385,7 @@ $result = mysqli_query($con, $sql);
               </button>
               <span class="ml-15 font-weight-400">Unoccupied Rooms</span>
               <div class="content-text text-center mb-0">
-                <span class="font-size-40 font-weight-100">5</span>
+                <span class="font-size-40 font-weight-100"><?php echo $list4 ?></span>
               </div>
             </div>
           </div>
@@ -388,7 +398,7 @@ $result = mysqli_query($con, $sql);
               </button>
               <span class="ml-15 font-weight-400">Unresolved Complaints</span>
               <div class="content-text text-center mb-0">
-                <span class="font-size-40 font-weight-100">0</span>
+                <span class="font-size-40 font-weight-100"><?php echo $list2 ?></span>
               </div>
             </div>
           </div>
@@ -450,21 +460,23 @@ $result = mysqli_query($con, $sql);
             </div>
           </div>
         </div>
-<?php
 
-  $result = mysqli_query($con, $sql);
-  mysqli_close($con);
-  $qry = $result;
-  $list = mysqli_num_rows($qry);
-  $row = mysqli_fetch_assoc($qry);
-  echo'
+
+
+        <?php
+
+        $result = mysqli_query($con, $sql);
+        mysqli_close($con);
+        $qry = $result;
+        $list = mysqli_num_rows($qry);
+        $row = mysqli_fetch_assoc($qry);
+        echo '
           <div class="col-xxl-3 col-xl-4"></div>
           <div class="col-xxl-9">
             <div class="card border border-primary">
               <div class="card-block">
-                <h4 class="card-title">Latest News</h4>
-                <p class="card-text">This web application contains confidential information and is intended only for the individual named and the management of KSJConnects.
-                  If you are not the individual or managment you should not disseminate, distribute or copy this of this information..
+                <h4 class="card-title">Latest News: ' . $row['Title'] . ' : ' . $row['date'] . '</h4>
+                <p class="card-text">' . $row['Text'] . '
                 </p>
               </div>
             </div>
@@ -474,7 +486,7 @@ $result = mysqli_query($con, $sql);
 
           <div class="col-xxl-9">
             <div class="panel">
-                <h3 class="panel-title">Merit List</h3>
+                <h3 class="panel-title">News Table</h3>
 
               <div class="panel-body">
                 <div class="row">
@@ -482,9 +494,9 @@ $result = mysqli_query($con, $sql);
                   <table class="table table-hover dataTable table-striped w-half" id="exampleTableTools">';
 
 
-                    
 
-                    echo '<thead>
+
+        echo '<thead>
                     <tr role="row">
                     <th>No</th>
                     <th>Title</th>
@@ -493,12 +505,12 @@ $result = mysqli_query($con, $sql);
                     <th>Actions</th> 
                     </tr>
                     </thead>';
-                    $counter = 1;
-                    if ($list > 0) {
-                      echo '
+        $counter = 1;
+        if ($list > 0) {
+          echo '
                     <tbody>';
-                      while ($row = mysqli_fetch_assoc($qry)) {
-                        echo '
+          while ($row = mysqli_fetch_assoc($qry)) {
+            echo '
                         <tr>
                         <form action=""  method="POST">
                             <td class="nr">' . $counter . '</td>
@@ -507,28 +519,54 @@ $result = mysqli_query($con, $sql);
                             <td>' . $row['Text'] . '</td>    
                             <td>' . $row['date'] . '</td>                                
                             <td class="actions">
-                                <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
+                              <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
+                              data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-link-intact" aria-hidden="true"></i></a>
                             </td>
                         </form>
                         </tr>';
-                        $counter++;
-                      }
-                    }
-                    ?>
-                  </table>
-                </div>
+            $counter++;
+          }
+        }
+        ?>
+        </table>
+      </div>
+      <!-- modal -->
+      <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">Edit Facility Details</h4>
+            </div>
+            <div class="modal-body">
+              <!--ancTitleID-->
+              <div class="form-group ">
+                <label for="ancTitleID1" class="form-label">Announcement Title</label>
+                <input type="text" class="form-control" id="ancTitleID1" name="ancTitleID" value="" required>
+              </div>
+
+              <!--AnnouncmentContent-->
+              <div class="form-group ">
+                <label for="ancContent1" class="form-label">Content</label>
+                <textarea class="form-control" id="ancContent1" name="ancContent" maxlength="100" placeholder="Enter your announcement (max 100)" required></textarea>
               </div>
             </div>
-
-
-
-
           </div>
         </div>
-
       </div>
     </div>
+  </div>
+
+
+
+
+  </div>
+  </div>
+
+  </div>
+  </div>
   </div>
   <!-- End Page -->
 
@@ -576,6 +614,9 @@ $result = mysqli_query($con, $sql);
   <script src="../../../global/vendor/datatables.net-buttons/buttons.print.js"></script>
   <script src="../../../global/vendor/datatables.net-buttons/buttons.colVis.js"></script>
   <script src="../../../global/vendor/datatables.net-buttons-bs4/buttons.bootstrap4.js"></script>
+  <script src="../../../global/vendor/flot/jquery.flot.js"></script>
+
+
 
   <!-- Scripts -->
   <script src="../../../global/js/Component.js"></script>
@@ -622,6 +663,19 @@ $result = mysqli_query($con, $sql);
           }
         });
     }
+
+    $(".edit_row").click(function() {
+
+      var $row = $(this).closest("tr"); // Find the row
+      var $text = $row.find(".nr").text(); // Find the text
+      var table = $('#exampleTableTools').DataTable();
+
+      var data = table.row($text - 1).data();
+      console.log(data);
+
+      $("#ancTitleID1").val(data[1]);
+      $("#ancContent").val(data[2]);
+    });
   </script>
 </body>
 

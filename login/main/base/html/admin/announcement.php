@@ -176,7 +176,7 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
+                                    <a class="animsition-link" href="payment.php">
                                         <span class="site-menu-title">Resident Payment</span>
                                     </a>
                                 </li>
@@ -256,7 +256,7 @@
                                         </a>
                                     </li>
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="createprogram.php">
                                             <span class="site-menu-title">Create Programme</span>
                                         </a>
                                     </li>
@@ -272,7 +272,7 @@
                                 <span class="site-menu-title">Sticker Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="stickerapp.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
@@ -289,7 +289,7 @@
                                 <span class="site-menu-title">Announcement Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="announcement.php">
                                             <span class="site-menu-title">Annoucement CRUD</span>
                                         </a>
                                     </li>
@@ -302,17 +302,17 @@
                     <div class="site-menubar-section">
                         <h5>
                             Sprint 3 Progress
-                            <span class="float-right">1%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">80%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>

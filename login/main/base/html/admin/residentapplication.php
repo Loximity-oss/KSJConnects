@@ -175,7 +175,7 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
+                                    <a class="animsition-link" href="payment.php">
                                         <span class="site-menu-title">Resident Payment</span>
                                     </a>
                                 </li>
@@ -255,7 +255,7 @@
                                         </a>
                                     </li>
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="createprogram.php">
                                             <span class="site-menu-title">Create Programme</span>
                                         </a>
                                     </li>
@@ -271,7 +271,7 @@
                                 <span class="site-menu-title">Sticker Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="stickerapp.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
@@ -288,7 +288,7 @@
                                 <span class="site-menu-title">Announcement Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="announcement.php">
                                             <span class="site-menu-title">Annoucement CRUD</span>
                                         </a>
                                     </li>
@@ -301,17 +301,17 @@
                     <div class="site-menubar-section">
                         <h5>
                             Sprint 3 Progress
-                            <span class="float-right">1%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">80%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>
@@ -440,9 +440,9 @@
                             <div class="form-group row">
                                 <label for="staticstatus_string" class="col-sm-2 col-form-label">Academic Results</label>
                                 <div class="col-sm-10">
-                                    <a target="_blank" id="acadslipimg" href="" class="btn btn-primary" >View ACAD</a>
+                                    <a target="_blank" id="acadslipimg" href="" class="btn btn-primary">View ACAD</a>
 
-                                    
+
                                 </div>
                             </div>
 
@@ -450,7 +450,7 @@
                             <div class="form-group row">
                                 <label for="staticstatus_string" class="col-sm-2 col-form-label">Payslip</label>
                                 <div class="col-sm-10">
-                                    <a target="_blank" id="payslipimg" href="" class="btn btn-primary" >View Payslip</a>
+                                    <a target="_blank" id="payslipimg" href="" class="btn btn-primary">View Payslip</a>
                                 </div>
                             </div>
 
@@ -487,7 +487,7 @@
                     <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full dtr-inline" data-plugin="dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="width: 823px;">
+                                <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
                                     <?php
                                     $con = mysqli_connect("localhost", "root", "", "ksjdb");
                                     if (!$con) {
@@ -503,27 +503,21 @@
                                     if ($list > 0) {
                                         echo '<thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 127.992px;" aria-sort="ascending" aria-label="Room ID: activate to sort column descending">Room ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 162.992px;" aria-label="Block: activate to sort column ascending">Block</th>
+                                            <th> Room ID </th>
+                                            <th> Block </th>
                                         </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">Room ID</th>
-                                                <th rowspan="1" colspan="1" style="">Block</th>
-                                            </tr>
-                                        </tfoot>';
+                                        </thead>';
                                         while ($row = mysqli_fetch_assoc($qry)) {
                                             echo '
-                                            <tr role="row" >
-                                                <td class="sorting_1" tabindex="0">' . $row['roomID'] . '</td>
-                                                <td style="">' . $row['block'] . '</td>
+                                            <tr >
+                                                <td>' . $row['roomID'] . '</td>
+                                                <td>' . $row['block'] . '</td>
                                             </tr>
                                             ';
                                         }
                                     }
                                     ?>
-                                    
+
                                 </table>
                             </div>
                         </div>
@@ -538,52 +532,51 @@
                     <h3 class="panel-title">Application List</h3>
                 </header>
                 <div class="panel-body">
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full dtr-inline" data-plugin="dataTable" id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info" style="width: 823px;">
-                                    <?php
-                                    $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                    if (!$con) {
-                                        echo  mysqli_connect_error();
-                                        exit;
-                                    }
-                                    $sql = "SELECT * FROM registration WHERE `status` = '1'";
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+                            <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM registration WHERE `status` = '1'";
 
-                                    $result = mysqli_query($con, $sql);
-                                    mysqli_close($con);
-                                    $qry = $result;
-                                    $list = mysqli_num_rows($qry);
-                                    if ($list > 0) {
-                                        echo '<thead>
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
+                                if ($list > 0) {
+                                    echo '<thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 127.992px;" aria-sort="ascending" aria-label="User: activate to sort column descending">User ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 162.992px;" aria-label="Full Name: activate to sort column ascending">Full Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 142.992px;" aria-label="ID: activate to sort column ascending">ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 36.992px;" aria-label="Year/Course: activate to sort column ascending">Year/Course</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 68.992px;" aria-label="Matric ID: activate to sort column ascending">Matric ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 54.992px;" aria-label="Phone: activate to sort column ascending">Phone</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 54.992px;" aria-label="Verification: activate to sort column ascending">Status</th>
+                                            <th>User ID</th>
+                                            <th>Full Name</th>
+                                            <th>ID</th>
+                                            <th>Year/Course</th>
+                                            <th>Matric ID</th>
+                                            <th>Phone</th>
+                                            <th>Status</th>
                                         </tr>
                                         </thead>';
-                                        while ($row = mysqli_fetch_assoc($qry)) {
-                                            echo '
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
                                             <tr role="row" >
-                                                <td class="sorting_1" tabindex="0">' . $row['userID'] . '</td>
-                                                <td style="">' . $row['name'] . '</td>
-                                                <td style="">' . $row['id'] . '</td>
-                                                <td style="">' . $row['year/course'] . '</td>
-                                                <td style="">' . $row['matric'] . '</td>
-                                                <td style="">' . $row['phone'] . '</td>
-                                                <td style="">' . $row['status'] . '</td>
+                                                <td>' . $row['userID'] . '</td>
+                                                <td>' . $row['name'] . '</td>
+                                                <td>' . $row['id'] . '</td>
+                                                <td>' . $row['year/course'] . '</td>
+                                                <td>' . $row['matric'] . '</td>
+                                                <td>' . $row['phone'] . '</td>
+                                                <td>' . $row['status'] . '</td>
                                             </tr>
                                             ';
-                                        }
                                     }
-                                    ?>
-                                    
-                                </table>
-                            </div>
+                                }
+                                ?>
+
+                            </table>
+
                         </div>
                     </div>
                 </div>

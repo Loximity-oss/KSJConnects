@@ -78,7 +78,7 @@ if (!$con) {
             echo '
           <div class="col-sm-3">
             <div class="card mb-3">';
-            if ($list['picture'] == "0x0") {
+            if (!$list['picture']) {
               echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
             } else {
               echo '<img class="card-img-top" src="imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
@@ -246,7 +246,7 @@ if (!$con) {
         })
         .then((logout) => {
           if (logout) {
-            location.href = '../../logout.php';
+            location.href = '../../../../logout.php';
           }
         });
     }

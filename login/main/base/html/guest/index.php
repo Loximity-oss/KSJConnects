@@ -205,7 +205,7 @@
           })
           .then((logout) => {
             if (logout) {
-              location.href = '../../logout.php';
+              location.href = '../../../../logout.php';
             }
           });
       }
