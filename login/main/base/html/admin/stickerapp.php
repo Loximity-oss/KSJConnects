@@ -331,7 +331,7 @@
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Facility Booking List</h3>
+                    <h3 class="panel-title">Sticker List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->
@@ -676,9 +676,10 @@
 
 
         function checkAvailability_user() {
+            console.log($("#userID").val());
             jQuery.ajax({
-                url: "verification/check_availability.php",
-                data: 'username=' + $("#staticuserID").val(),
+                url: "verification/livedit.php",
+                data: 'username=' + $("#userID").val(),
                 type: "POST",
                 success: function(data) {
                     $("#user-availability-status").html(data);

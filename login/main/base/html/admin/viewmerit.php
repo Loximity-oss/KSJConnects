@@ -324,15 +324,15 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Merit Management / (Add/Update/Delete Activities with QR)</li>
+                <li class="breadcrumb-item active">Merit Management / Student Merit Records</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete Activities with QR</h1>
+            <h1 class="page-title">Student Merit Records Management</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Activity List</h3>
+                    <h3 class="panel-title">Student Merit List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->

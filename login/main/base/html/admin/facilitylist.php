@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin (Add/Update/Delete Facility Records)</title>
+    <title>KSJConnects - Admin (Facility Records)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -325,9 +325,9 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Facility Management / (Add/Update/Delete Facility Records)</li>
+                <li class="breadcrumb-item active">Facility Management / (Facility List Records)</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete Facility Records</h1>
+            <h1 class="page-title">Facility List Records</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">

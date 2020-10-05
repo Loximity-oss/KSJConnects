@@ -487,7 +487,7 @@
                     <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+                                <table class="table table-hover dataTable table-striped w-full" >
                                     <?php
                                     $con = mysqli_connect("localhost", "root", "", "ksjdb");
                                     if (!$con) {
@@ -500,13 +500,13 @@
                                     mysqli_close($con);
                                     $qry = $result;
                                     $list = mysqli_num_rows($qry);
+                                    echo '<thead>
+                                    <tr role="row">
+                                        <th> Room ID </th>
+                                        <th> Block </th>
+                                    </tr>
+                                    </thead>';
                                     if ($list > 0) {
-                                        echo '<thead>
-                                        <tr role="row">
-                                            <th> Room ID </th>
-                                            <th> Block </th>
-                                        </tr>
-                                        </thead>';
                                         while ($row = mysqli_fetch_assoc($qry)) {
                                             echo '
                                             <tr >
@@ -547,18 +547,18 @@
                                 mysqli_close($con);
                                 $qry = $result;
                                 $list = mysqli_num_rows($qry);
+                                echo '<thead>
+                                <tr role="row">
+                                    <th>User ID</th>
+                                    <th>Full Name</th>
+                                    <th>ID</th>
+                                    <th>Year/Course</th>
+                                    <th>Matric ID</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>';
                                 if ($list > 0) {
-                                    echo '<thead>
-                                        <tr role="row">
-                                            <th>User ID</th>
-                                            <th>Full Name</th>
-                                            <th>ID</th>
-                                            <th>Year/Course</th>
-                                            <th>Matric ID</th>
-                                            <th>Phone</th>
-                                            <th>Status</th>
-                                        </tr>
-                                        </thead>';
                                     while ($row = mysqli_fetch_assoc($qry)) {
                                         echo '
                                             <tr role="row" >

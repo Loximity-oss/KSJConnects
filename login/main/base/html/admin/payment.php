@@ -41,6 +41,7 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="../../../global/fonts/font-awesome/font-awesome.css">
     <link rel="stylesheet" href="../../../global/fonts/web-icons/web-icons.min.css">
+    <link rel="stylesheet" href="../../../global/fonts/material-design/material-design.css">
     <link rel="stylesheet" href="../../../global/fonts/brand-icons/brand-icons.min.css">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
@@ -175,7 +176,7 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="payment.php">
+                                    <a class="animsition-link" href="index.php">
                                         <span class="site-menu-title">Resident Payment</span>
                                     </a>
                                 </li>
@@ -255,7 +256,7 @@
                                         </a>
                                     </li>
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="createprogram.php">
+                                        <a class="animsition-link" href="index.php">
                                             <span class="site-menu-title">Create Programme</span>
                                         </a>
                                     </li>
@@ -271,7 +272,7 @@
                                 <span class="site-menu-title">Sticker Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="stickerapp.php">
+                                        <a class="animsition-link" href="index.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
@@ -288,7 +289,7 @@
                                 <span class="site-menu-title">Announcement Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="announcement.php">
+                                        <a class="animsition-link" href="index.php">
                                             <span class="site-menu-title">Annoucement CRUD</span>
                                         </a>
                                     </li>
@@ -301,17 +302,17 @@
                     <div class="site-menubar-section">
                         <h5>
                             Sprint 3 Progress
-                            <span class="float-right">100%</span>
+                            <span class="float-right">1%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">100%</span>
+                            <span class="float-right">80%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>
@@ -323,9 +324,9 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="../index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Payment Management / (Add/Update/Delete Payment Records)</li>
+                <li class="breadcrumb-item active">Payment Management / Payment Records Management</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete Payment Records</h1>
+            <h1 class="page-title">Payment Records</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="card">
@@ -396,27 +397,82 @@
                                 <div class="btn-toolbar" role="toolbar">
                                     <div class="btn-group mr-2" role="group" aria-label="First group">
                                         <button class="btn btn-primary">Pay with Credit Card</button>
+                                        </form>
                                     </div>
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Modal for Data Button -->
+                <div class="modal fade" id="examplePositionCenter3" aria-labelledby="examplePositionCenter3" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-simple modal-center">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <h4 class="modal-title">Manual Payment</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST" enctype="multipart/form-data">
+                                    <!--user ID-->
+                                    <div class="form-group ">
+                                        <label for="userID" class="form-label">User ID</label>
+                                        <input type="text" class="form-control" id="userID-c" name="userID_c" readonly>
+                                        <span id="user-availability-status"></span>
+                                    </div>
+                                    <!-- email -->
+                                    <div class="form-group ">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" name="email_c" id="email-c" readonly>
+                                    </div>
+
+                                    <!-- proof -->
+                                    <div class="form-group ">
+                                        <label for="proof" class="form-label">Proof of Transaction</label>
+                                        <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                            <input type="text" class="form-control" readonly="">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-success btn-file">
+                                                    <i class="icon wb-upload" aria-hidden="true"></i>
+                                                    <input type="file" onclick="" name="proof" multiple="" accept="image/*" required>
+                                                </span>
+                                            </span>
+
+                                        </div>
+                                        <span> Please pay in full. </span>
+                                    </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <!--buttons-->
+                                <div class="btn-toolbar" role="toolbar">
+                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                        <button type="submit" name="cash" class="btn btn-primary">Pay with Cash</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="example-wrap">
                             <div class="nav-tabs-horizontal" data-plugin="tabs">
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Pending Payment</a></li>
+                                    <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Unpaid</a></li>
                                     <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Successful Payment</a></li>
+                                    <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab" aria-selected="false">Pending Verification</a></li>
                                     <li class="dropdown nav-item" role="presentation" style="display: none;">
                                         <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Menu</a>
                                         <div class="dropdown-menu" role="menu">
-                                            <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Pending Payment</a>
+                                            <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Unpaid</a>
                                             <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Successful Payment</a>
+                                            <a class="dropdown-item" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Pending Verification</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -456,7 +512,6 @@
                                             <tr>
                                                 <form action=""  method="POST">
                                                     <td class="nr">' . $counter . '</td>
-                                                    <input type="hidden" name="BookID" value="' . $row['userID'] . '">
                                                     <td>' . $row['userID'] . '</td>         
                                                     <td>' . $row['transactionID'] . '</td>    
                                                     <td>' . $row['paymentMethod'] . '</td>  
@@ -466,8 +521,8 @@
                                                         <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
                                                         data-original-title="Edit" data-target="#examplePositionCenter2" data-toggle="modal" type="button" ><i class="icon wb-payment" aria-hidden="true"></i></a>
                                                         
-                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                        data-original-title="Remove" name="delete"><i class="icon wb-close" aria-hidden="true"></i></button>
+                                                        <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row_1"
+                                                        data-original-title="Edit" data-target="#examplePositionCenter3" data-toggle="modal" type="button" ><i class="icon md-balance-wallet" aria-hidden="true"></i></a>
                                                     </td>
                                                 </form>
                                             </tr>';
@@ -513,6 +568,62 @@
                                                     <td>' . $row['transactionID'] . '</td>    
                                                     <td>' . $row['paymentMethod'] . '</td>  
                                                     <td>' . $row['dateDue'] . '</td>                                            
+                                                </form>
+                                            </tr>';
+                                                    $counter++;
+                                                }
+                                            }
+                                            ?>
+
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane" id="exampleTabsThree" role="tabpanel">
+                                        <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+                                            <?php
+                                            $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                            if (!$con) {
+                                                echo  mysqli_connect_error();
+                                                exit;
+                                            }
+                                            $sql = "SELECT * FROM `payment` WHERE `status` = 3";
+
+                                            $result = mysqli_query($con, $sql);
+                                            mysqli_close($con);
+                                            $qry = $result;
+                                            $list = mysqli_num_rows($qry);
+                                            echo '<thead>
+                                                        <tr role="row">
+                                                            <th>No</th>
+                                                            <th>User ID</th>
+                                                            <th>Transaction ID</th>
+                                                            <th>Proof of Payment</th>
+                                                            <th>Method of Payment</th>
+                                                            <th>Date Due</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                        </thead>';
+                                            $counter = 1;
+                                            if ($list > 0) {
+                                                echo '
+                                                        <tbody>';
+                                                while ($row = mysqli_fetch_assoc($qry)) {
+                                                    echo '
+                                            <tr>
+                                                <form action=""  method="POST">
+                                                    <td class="nr">' . $counter . '</td>
+                                                    <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                    <td>' . $row['userID'] . '</td>         
+                                                    <td>' . $row['transactionID'] . '</td>   
+                                                    <td><a target="_blank" href="verification/viewpaymentslip.php?no='.$row['userID'].'" class="btn btn-primary" >View</a></td> 
+                                                    <td>' . $row['paymentMethod'] . '</td>  
+                                                    <td>' . $row['dateDue'] . '</td>      
+                                                    <td class="actions">
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                        data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
+                                                
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                        data-original-title="Remove" name="reject"><i class="icon wb-close" aria-hidden="true"></i></button>
+                                                    </td>                                      
                                                 </form>
                                             </tr>';
                                                     $counter++;
@@ -604,6 +715,11 @@
     <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="payment/js/charge.js"></script>
+    <script src="../../../global/js/Plugin/input-group-file.js"></script>
+    <script src="../../../global/js/Plugin/jquery-placeholder.js"></script>
+
+
+
 
     <!-- for live editing -->
     <!--jQuery Stuff-->
@@ -635,6 +751,17 @@
             $("#userID").val(data[1]);
             $("#email").val(data[5]);
         });
+
+        $(".edit_row_1").click(function() {
+
+            var $row = $(this).closest("tr"); // Find the row
+            var $text = $row.find(".nr").text(); // Find the text
+            var table = $('#exampleTableTools').DataTable();
+            var data = table.row($text - 1).data();
+            $("#userID-c").val(data[1]);
+            $("#email-c").val(data[5]);
+        });
+
 
 
         function checkAvailability_user() {
@@ -705,6 +832,93 @@ if (isset($_POST['Delete'])) {
         echo '<script>swal({
                 title: "Oh no",
                 text: "The semester has not been resetted.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "payment.php";
+               }
+            ); </script>';
+    }
+}
+if (isset($_POST['cash'])) {
+    $imgData = addslashes(file_get_contents($_FILES['proof']['tmp_name']));
+    $imageProperties = getimageSize($_FILES['proof']['tmp_name']);
+    $pstr = rand();
+    $pystr = "ch_" . sha1($pstr);
+
+    $sql = "UPDATE `payment` SET `imageData` = '{$imgData}' ,`transactionID`= '" . $pystr . "', `imageType` = '{$imageProperties['mime']}',  `paymentMethod` = 'Manual Payment', `status` = '3'
+    WHERE `payment`.`userID` = '" . $_POST['userID_c'] . "'";
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+    if ($result) {
+        echo '<script>swal({
+                    title: "Success",
+                    text: "Student payment has been inserted.",
+                    icon: "success",
+                    button: "Ok",
+                  }).then(function(){ 
+                    window.location.href = "payment.php";
+                   }
+                ); </script>';
+    } else {
+        echo '<script>swal({
+                    title: "Oh no",
+                    text: "Student payment has not been inserted.",
+                    icon: "error",
+                    button: "Ok",
+                  }).then(function(){ 
+                    window.location.href = "payment.php";
+                   }
+                ); </script>';
+    }
+}
+
+if (isset($_POST['approve'])){
+    $sql = "UPDATE `payment` SET `status` = '2' WHERE `payment`.`userID` = '" . $_POST['userID'] . "'";
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "Payment approved.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "payment.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "There is a problem with payment approval.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "payment.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['reject'])){
+    $sql = "UPDATE `payment` SET `transactionID` = NULL, `paymentMethod` = NULL, `status` = '1', `imageType` = NULL, `imageData` = NULL WHERE `payment`.`userID` = '" . $_POST['userID'] . "'";
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "Payment successfully rejected.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "payment.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "Payment has not been rejected.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 

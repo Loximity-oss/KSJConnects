@@ -448,7 +448,32 @@ $list4 = mysqli_num_rows($result4);
           </div>
           <!-- End Panel Web Designer -->
         </div>
+      <!-- modal -->
+      <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">Announcement Details</h4>
+            </div>
+            <div class="modal-body">
+              <!--ancTitleID-->
+              <div class="form-group ">
+                <label for="ancTitleID1" class="form-label">Announcement Title</label>
+                <input type="text" class="form-control" id="ancTitleID1" name="ancTitleID" value="" readonly>
+              </div>
 
+              <!--AnnouncmentContent-->
+              <div class="form-group ">
+                <label for="ancContent1" class="form-label">Content</label>
+                <textarea class="form-control" id="ancContent1"  maxlength="100" placeholder="Enter your announcement (max 100)" readonly></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
         <div class="col-xxl-9">
 
           <div class="card border border-primary">
@@ -529,32 +554,6 @@ $list4 = mysqli_num_rows($result4);
         }
         ?>
         </table>
-      </div>
-      <!-- modal -->
-      <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-simple modal-center">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-              <h4 class="modal-title">Edit Facility Details</h4>
-            </div>
-            <div class="modal-body">
-              <!--ancTitleID-->
-              <div class="form-group ">
-                <label for="ancTitleID1" class="form-label">Announcement Title</label>
-                <input type="text" class="form-control" id="ancTitleID1" name="ancTitleID" value="" required>
-              </div>
-
-              <!--AnnouncmentContent-->
-              <div class="form-group ">
-                <label for="ancContent1" class="form-label">Content</label>
-                <textarea class="form-control" id="ancContent1" name="ancContent" maxlength="100" placeholder="Enter your announcement (max 100)" required></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -674,7 +673,7 @@ $list4 = mysqli_num_rows($result4);
       console.log(data);
 
       $("#ancTitleID1").val(data[1]);
-      $("#ancContent").val(data[2]);
+      $("#ancContent1").val(data[2]);
     });
   </script>
 </body>

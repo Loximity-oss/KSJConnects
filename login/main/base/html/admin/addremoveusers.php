@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin (manipulate accounts)</title>
+    <title>KSJConnects - Admin (Account Management)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -324,9 +324,9 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">User Management / Add-Search-Update-Delete User Accounts</li>
+                <li class="breadcrumb-item active">User Management / User Accounts Management</li>
             </ol>
-            <h1 class="page-title">Add-Search-Update-Delete User Account</h1>
+            <h1 class="page-title">User Account Management</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">

@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin (Booking Facility Management)</title>
+    <title>KSJConnects - Admin (Room Records)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -45,12 +45,12 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
     <!--[if lt IE 9]>
-    <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
+    <script src="../../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
 
     <!--[if lt IE 10]>
-    <script src="../../../global/vendor/media-match/media.match.min.js"></script>
-    <script src="../../../global/vendor/respond/respond.min.js"></script>
+    <script src="../../../../global/vendor/media-match/media.match.min.js"></script>
+    <script src="../../../../global/vendor/respond/respond.min.js"></script>
     <![endif]-->
     <!-- Scripts -->
     <script src="../../../global/vendor/breakpoints/breakpoints.js"></script>
@@ -106,7 +106,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                <?php if (!$list['picture']) {
+                                                                <?php if (!$list['picture']) {
                                     echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
                                 } else {
                                     echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
@@ -140,6 +140,7 @@
             <!-- End Site Navbar Seach -->
         </div>
     </nav>
+
     <div class="site-menubar">
         <div class="site-menubar-body">
             <div>
@@ -318,20 +319,21 @@
             </div>
         </div>
     </div>
+
     <!-- Page -->
     <div class="page">
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Facility Management / (Facility Booking Records)</li>
+                <li class="breadcrumb-item active">Facility Management / (Add/Update/Delete Room Records)</li>
             </ol>
-            <h1 class="page-title">Facility Booking Records</h1>
+            <h1 class="page-title">Add/Update/Delete Room Records</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Facility Booking List</h3>
+                    <h3 class="panel-title">Room List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->
@@ -339,7 +341,7 @@
                         <div class="col-md-6">
                             <div class="mb-15">
                                 <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
-                                    <i class="icon wb-plus" aria-hidden="true"></i> Add New Booking
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Add
                                 </button>
                             </div>
                         </div>
@@ -352,48 +354,33 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add New Booking</h4>
+                                    <h4 class="modal-title">Add New Room</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">
                                         <!--user ID-->
                                         <div class="form-group ">
-                                            <label for="userID" class="form-label">User ID</label>
-                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability_user()" required>
-                                            <span id="user-availability-status"></span>
-                                        </div>
-
-                                        <!--date start-->
-                                        <div class="form-group ">
-                                            <label for="dateStart" class="form-label">Start Date</label>
-                                            <input type="date" class="form-control" id="dateStart" name="dateStart" value="" required>
-                                        </div>
-
-                                        <!--days-->
-                                        <div class="form-group ">
-                                            <label for="staticdays" class="form-label">Duration (in Days)</label>
-                                            <input type="number" class="form-control" onblur="checkAvailability_date()" id="days" name="days" required>
-                                        </div>
-
-                                        <!--date end-->
-                                        <div class="form-group ">
-                                            <label for="dateEnd" class="form-label">End Date</label>
-                                            <input type="date" class="form-control" id="dateEnd" name="dateEnd" value="" readonly>
+                                            <label for="staticfacID" class="form-label">Facility ID</label>
+                                            <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
+                                            <span id="fac-availability-status"></span>
                                         </div>
 
                                         <!--Faciility Name-->
                                         <div class="form-group ">
-                                            <label for="facName" class="form-label">Facility Name</label>
-                                            <select class="form-control" id="facName" name="facName" onchange="append()" required>
-                                            </select>
-                                            <input type="hidden" id="hiddenfacname" name="hiddenfacname">
+                                            <label for="staticfacName" class="form-label">Facility Name</label>
+                                            <input type="text" class="form-control" id="facName" name="facName" required>
                                         </div>
 
-                                        <!--Facility ID-->
+                                        <!--facDesc-->
                                         <div class="form-group ">
-                                            <label for="staticfacID" class="form-label">Facility ID</label>
-                                            <input type="text" class="form-control" id="facID" name="facID" readonly>
-                                            <span id="fac-availability-status"></span>
+                                            <label for="staticfacDesc" class="form-label">Facility Description</label>
+                                            <input type="text" class="form-control" id="facDesc" name="facDesc" value="" required>
+                                        </div>
+
+                                        <!--Maximum Occupants-->
+                                        <div class="form-group ">
+                                            <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
+                                            <input type="number" class="form-control" id="facMaxPax" name="facMaxPax" required>
                                         </div>
 
 
@@ -415,192 +402,121 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="example-wrap">
-                                <div class="nav-tabs-horizontal" data-plugin="tabs">
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Pending Bookings</a></li>
-                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Approved Bookings</a></li>
-                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab" aria-selected="false">Rejected Bookings</a></li>
-                                        <li class="dropdown nav-item" role="presentation" style="display: none;">
-                                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Menu</a>
-                                            <div class="dropdown-menu" role="menu">
-                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Pending Bookings</a>
-                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Approved Bookings</a>
-                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Rejected Bookings</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content pt-20">
-                                        <div class="tab-pane active" id="exampleTabsOne" role="tabpanel">
-                                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
 
-                                                <?php
-                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                                if (!$con) {
-                                                    echo  mysqli_connect_error();
-                                                    exit;
-                                                }
-                                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 0";
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                if (!$con) {
+                                    echo  mysqli_connect_error();
+                                    exit;
+                                }
+                                $sql = "SELECT * FROM roomlist";
 
-                                                $result = mysqli_query($con, $sql);
-                                                mysqli_close($con);
-                                                $qry = $result;
-                                                $list = mysqli_num_rows($qry);
-                                                echo '<thead>
-                                                        <tr role="row">
-                                                            <th>No</th>
-                                                            <th>Booking ID</th>
-                                                            <th>Facility ID</th>
-                                                            <th>Facility Name</th>
-                                                            <th>User ID</th>
-                                                            <th>Date Start</th>
-                                                            <th>Date End</th>
-                                                            <th>Actions</th> 
-                                                        </tr>
-                                                        </thead>';
-                                                $counter = 1;
-                                                if ($list > 0) {
-                                                    echo '
-                                                        <tbody>';
-                                                    while ($row = mysqli_fetch_assoc($qry)) {
-                                                        echo '
+                                $result = mysqli_query($con, $sql);
+                                mysqli_close($con);
+                                $qry = $result;
+                                $list = mysqli_num_rows($qry);
+
+                                $counter = 1;
+                                if ($list > 0) {
+                                    echo '<thead>
+                                        <tr role="row">
+                                            <th>No</th>
+                                            <th>Facility ID</th>
+                                            <th>Facility Name</th>
+                                            <th>Description</th>
+                                            <th>Max Occupants</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>';
+                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                        echo '
                                             <tr>
-                                                <form action=""  method="POST">
-                                                    <td class="nr">' . $counter . '</td>
-                                                    <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
-                                                    <td>' . $row['BookID'] . '</td>         
-                                                    <td>' . $row['facID'] . '</td>    
-                                                    <td>' . $row['facName'] . '</td>  
-                                                    <td>' . $row['userID'] . '</td>            
-                                                    <td>' . $row['dateStart'] . '</td> 
-                                                    <td>' . $row['dateEnd'] . '</td>                                 
-                                                    <td class="actions">
-                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                        data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
-                                                
-                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                        data-original-title="Remove" name="delete"><i class="icon wb-close" aria-hidden="true"></i></button>
-                                                    </td>
+                                            <form action=""  method="POST">
+                                                <td class="nr">' . $counter . '</td>
+                                                <input type="hidden" name="facID" value="' . $row['facID'] . '">
+                                                <td>' . $row['facID'] . '</td>         
+                                                <td>' . $row['facName'] . '</td>    
+                                                <td>' . $row['facDesc'] . '</td>  
+                                                <td>' . $row['facMaxPax'] . '</td>                                                     
+                                                <td class="actions">
+                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
+                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
+                                            
+                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                    data-toggle="tooltip" data-original-title="Remove" name="delete"><i class="icon wb-trash" aria-hidden="true"></i></button>
+                                                </td>
+                                            </form>
+                                            </tr>
+';
+                                        $counter++;
+                                    }
+                                }
+
+                                //modal
+                                echo '</tbody>                                                   
+                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog modal-simple modal-center">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title">Edit Facility Details</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="" method="POST">
+                                                    <!--facID-->
+                                                    <div class="form-group ">
+                                                        <label for="staticfacID" class="form-label">Facility ID</label>
+                                                        <input type="text" class="form-control" id="staticfacID" name="staticfacID" readonly>
+                                                        <span id="fac-availability-status"></span>
+                                                    </div>
+                                                    
+                                                    <!--fac Name-->
+                                                    <div class="form-group ">
+                                                        <label for="staticfacName" class="form-label">Facility Name</label>
+                                                        <input type="text" class="form-control" id="staticfacName" name="staticfacName" size="50" required>
+                                                    </div>
+
+                                                    <!--facDesc-->
+                                                    <div class="form-group ">
+                                                        <label for="staticfacDesc" class="form-label">Facility Description</label>
+                                                        <input type="text" class="form-control" id="staticfacDesc" name="staticfacDesc" value="" required>
+                                                    </div>
+
+                                                    <!--Maximum Occupants-->
+                                                    <div class="form-group ">
+                                                        <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
+                                                        <input type="number" class="form-control" id="staticfacMaxPax" name="staticfacMaxPax" required>
+                                                    </div>
+                                 
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <!--buttons-->
+                                                <div class="btn-toolbar" role="toolbar">
+                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                                        <button type="submit" name="update" class="btn btn-primary">Update</button>
+                                                    </div>
+                                                </div>
                                                 </form>
-                                            </tr>';
-                                                        $counter++;
-                                                    }
-                                                }
-                                                ?>
-                                            </table>
-                                        </div>
-                                        <div class="tab-pane" id="exampleTabsTwo" role="tabpanel">
-                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
-                                                <?php
-                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                                if (!$con) {
-                                                    echo  mysqli_connect_error();
-                                                    exit;
-                                                }
-                                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 1 ";
-
-                                                $result = mysqli_query($con, $sql);
-                                                mysqli_close($con);
-                                                $qry = $result;
-                                                $list = mysqli_num_rows($qry);
-                                                echo '<thead>
-                                                        <tr role="row">
-                                                            <th>No</th>
-                                                            <th>Booking ID</th>
-                                                            <th>Facility ID</th>
-                                                            <th>Facility Name</th>
-                                                            <th>User ID</th>
-                                                            <th>Date Start</th>
-                                                            <th>Date End</th>
-                                                        </tr>
-                                                        </thead>';
-                                                $counter = 1;
-                                                if ($list > 0) {
-                                                    echo '
-                                                                <tbody>
-                                                        ';
-                                                    while ($row = mysqli_fetch_assoc($qry)) {
-                                                        echo '
-                                                                    <tr>
-                                                                    <form action=""  method="POST">
-                                                                        <td class="nr">' . $counter . '</td>
-                                                                        <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
-                                                                        <td>' . $row['BookID'] . '</td>         
-                                                                        <td>' . $row['facID'] . '</td>    
-                                                                        <td>' . $row['facName'] . '</td>  
-                                                                        <td>' . $row['userID'] . '</td>            
-                                                                        <td>' . $row['dateStart'] . '</td> 
-                                                                        <td>' . $row['dateEnd'] . '</td>                                 
-                                                                    </form>
-                                                                    </tr>
-                                                        ';
-                                                        $counter++;
-                                                    }
-                                                }
-                                                ?>
-
-                                            </table>
-                                        </div>
-                                        <div class="tab-pane" id="exampleTabsThree" role="tabpanel">
-                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
-
-
-                                                <?php
-                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                                if (!$con) {
-                                                    echo  mysqli_connect_error();
-                                                    exit;
-                                                }
-                                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 2 ";
-
-                                                $result = mysqli_query($con, $sql);
-                                                mysqli_close($con);
-                                                $qry = $result;
-                                                $list = mysqli_num_rows($qry);
-                                                echo '<thead>
-                                                        <tr role="row">
-                                                            <th>No</th>
-                                                            <th>Booking ID</th>
-                                                            <th>Facility ID</th>
-                                                            <th>Facility Name</th>
-                                                            <th>User ID</th>
-                                                            <th>Date Start</th>
-                                                            <th>Date End</th>
-                                                        </tr>
-                                                        </thead>';
-                                                $counter = 1;
-                                                if ($list > 0) {
-                                                    echo '
-                                                        <tbody>
-                                                        ';
-                                                    while ($row = mysqli_fetch_assoc($qry)) {
-                                                        echo '
-                                                                    <tr>
-                                                                    <form action=""  method="POST">
-                                                                        <td class="nr">' . $counter . '</td>
-                                                                        <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
-                                                                        <td>' . $row['BookID'] . '</td>         
-                                                                        <td>' . $row['facID'] . '</td>    
-                                                                        <td>' . $row['facName'] . '</td>  
-                                                                        <td>' . $row['userID'] . '</td>            
-                                                                        <td>' . $row['dateStart'] . '</td> 
-                                                                        <td>' . $row['dateEnd'] . '</td>                                 
-                                                                    </form>
-                                                                    </tr>
-                                                        ';
-                                                        $counter++;
-                                                    }
-                                                }
-                                                ?>
-                                            </table>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div>';
+                                ?>
+
+                            </table>
                         </div>
                     </div>
                 </div>
+
+
+
+
             </div>
         </div>
     </div>
@@ -678,9 +594,6 @@
     <!-- for live editing -->
     <!--jQuery Stuff-->
     <script>
-        var list;
-        var i;
-
         function JSconfirm() {
             swal({
                     title: "Are you sure?",
@@ -696,90 +609,53 @@
                 });
         }
 
+        $(".edit_row").click(function() {
 
-        function checkAvailability_date() {
+            var $row = $(this).closest("tr"); // Find the row
+            var $text = $row.find(".nr").text(); // Find the text
+            var table = $('#exampleTableTools').DataTable();
 
-            $('#facName').empty();
-            var dateStart_val = document.getElementById('dateStart').value;
-            var duration = parseInt(document.getElementById('days').value);
-            var newEndDate = new Date(dateStart_val);
-            var endDate;
+            var data = table.row($text - 1).data();
 
-            newEndDate.setDate(newEndDate.getDate() + duration);
-            endDate = newEndDate.toISOString().slice(0, 10);
-            document.getElementById('dateEnd').value = endDate;
+            $("#staticfacID").val(data[1]);
+            $("#staticfacName").val(data[2]);
+            $("#staticfacDesc").val(data[3]);
+            $("#staticfacMaxPax").val(data[4]);
+        });
 
+        function checkAvailability() {
 
             jQuery.ajax({
-                url: "verification/liveeditfacbook.php",
-                data: {
-                    dateStart: $("#dateStart").val(),
-                    dateEnd: $("#dateEnd").val(),
-                },
+                url: "verification/liveeditfaclist.php",
+                data: 'facID=' + $("#facID").val(),
                 type: "POST",
                 dataType: "json",
                 cache: false,
                 success: function(data) {
                     //conversion from object to array
-                    list = $.map(data, function(value, index) {
+                    var userData = $.map(data, function(value, index) {
                         return [value];
                     });
-                    console.log(list);
-                    for (i = 0; i < list.length; i++) {
-                        if (i % 2) {
-                            $('#facName').append($('<option>', {
-                                value: i,
-                                text: list[i]
-                            }));
-                        }
-
-                    }
-
-                    $('#facID').val(list[0]);
-                    $('#hiddenfacname').val(list[1]);
+                    //edit USERNAME AVAILABLE status
+                    $("#fac-availability-status").html("<span class='status-available'> Facility Name not available. </span>");
                 },
                 error: function(data) {
                     //append to input boxes...
-                    console.log(data);
-
+                    $("#fac-availability-status").html("<span class='status-available'> Facility Name available. </span>");
                 }
             });
 
 
-        }
 
-        function checkAvailability_user() {
-            console.log($("#userID").val());
-            jQuery.ajax({
-                url: "verification/livedit.php",
-                data: 'username=' + $("#userID").val(),
-                type: "POST",
-                success: function(data) {
-                    $("#user-availability-status").html(data);
-                },
-                error: function() {}
-            });
-        }
 
-        function append() {
-            var e = document.getElementById("facName");
-            var value = parseInt(e.options[e.selectedIndex].value);
-            var text = e.options[e.selectedIndex].text;
-            value--; //decerement because array odd = id of facility
-            document.getElementById("facID").value = list[value];
-            document.getElementById("hiddenfacname").value = text;
+
+
+
 
         }
 
         function unappend() {
-            $("#user-availability-status").html("<span class='status-available'></span>");
-            //clear html
-            $("#userID").val("");
-            $("#dateStart").val("");
-            $("#dateEnd").val("");
-            $("#days").val("");
-            $("#facName").val("");
-            $("#facID").val("");
+            $("#fac-availability-status").html("<span class='status-available'></span>");
         }
     </script>
 </body>
@@ -792,91 +668,89 @@ if (!$con) {
     echo  mysqli_connect_error();
     exit;
 }
-
-if (isset($_POST['approve'])) {
-    $sql = "UPDATE `facilitiesbooking` SET `Approval` = '1' WHERE `facilitiesbooking`.`BookID` = '" . $_POST['BookID'] . "'";
-
-    $result = mysqli_query($con, $sql);
-    mysqli_close($con);
-
-
-    if ($result) {
-        echo '<script>swal({
-            title: "Success",
-            text: "The booking has been approved.",
-            icon: "success",
-            button: "Ok",
-          }).then(function(){ 
-            window.location.href = "facilitybooking.php";
-           }
-        ); </script>';
-    } else {
-        echo '<script>swal({
-            title: "Oh no",
-            text: "The booking has not been approved.",
-            icon: "error",
-            button: "Ok",
-          }).then(function(){ 
-            window.location.href = "facilitybooking.php";
-           }
-        ); </script>';
-    }
-}
-
-if (isset($_POST['delete'])) {
-    $sql = "UPDATE `facilitiesbooking` SET `Approval` = '2' WHERE `facilitiesbooking`.`BookID` = '" . $_POST['BookID'] . "'";
-
-    $result = mysqli_query($con, $sql);
-    mysqli_close($con);
-
-
-    if ($result) {
-        echo '<script>swal({
-            title: "Success",
-            text: "The booking has been rejected.",
-            icon: "success",
-            button: "Ok",
-          }).then(function(){ 
-            window.location.href = "facilitybooking.php";
-           }
-        ); </script>';
-    } else {
-        echo '<script>swal({
-            title: "Oh no",
-            text: "The booking has not been rejected.",
-            icon: "error",
-            button: "Ok",
-          }).then(function(){ 
-            window.location.href = "facilitybooking.php";
-           }
-        ); </script>';
-    }
-}
-
 if (isset($_POST['add'])) {
-    $sql = "INSERT INTO `facilitiesbooking` (`BookID`, `facID`, `facName`, `userID`, `dateStart`, `dateEnd`, `Approval`) 
-    VALUES (NULL, '" . $_POST['facID'] . "', '" . $_POST['hiddenfacname'] . "', '" . $_POST['userID'] . "', '" . $_POST['dateStart'] . "', '" . $_POST['dateEnd'] . "', '0')";
+    $sql = "INSERT INTO `facilitieslist` (`facID`, `facName`, `facDesc`, `facMaxPax`) 
+    VALUES ('" . $_POST['facID'] . "', '" . $_POST['facName'] . "', '" . $_POST['facDesc'] . "', '" . $_POST['facMaxPax'] . "')";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+            title: "Success",
+            text: "The facility has been added.",
+            icon: "success",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "facilitylist.php";
+           }
+        ); </script>';
+    } else {
+        echo '<script>swal({
+            title: "Oh no",
+            text: "Facility is not added.",
+            icon: "error",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "facilitylist.php";
+           }
+        ); </script>';
+    }
+}
+
+if (isset($_POST['update'])) {
+    $sql = "UPDATE `facilitieslist` SET `facName` = '" . $_POST['staticfacName'] . "', `facDesc` = '" . $_POST['staticfacID'] . "', `facMaxPax` = '" . $_POST['staticfacMaxPax'] . "' 
+    WHERE `facilitieslist`.`facID` = '" . $_POST['staticfacID'] . "'";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The booking has been added.",
+                text: "The facility has been modified.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "facilitybooking.php";
+                window.location.href = "facilitylist.php";
                }
             ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The booking has not been added.",
+                text: "The facility has not been modified.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "facilitybooking.php";
+                window.location.href = "facilitylist.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['delete'])) {
+    $sql = "DELETE FROM `facilitieslist` WHERE `facilitieslist`.`facID` = '" . $_POST['facID'] . "' ";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The facility has been deleted.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "facilitylist.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The facility has not been deleted.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "facilitylist.php";
                }
             ); </script>';
     }

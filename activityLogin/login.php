@@ -22,7 +22,7 @@ if (isset($_POST['login'])) {
 		if ($row['verification'] != 1) {
 			header("Location: error.html");
 		} else {
-			$sql2 = "SELECT programTitle, programKey FROM activityList WHERE programKey = '".$_POST['program']."'";
+			$sql2 = "SELECT merit,programTitle, programKey FROM activityList WHERE programKey = '".$_POST['program']."'";
 			$result2 = mysqli_query($con, $sql2);
 			$count2 = mysqli_num_rows($result2); //check how many matching record - should be 1 if correct
 			echo $count2;
@@ -32,7 +32,14 @@ if (isset($_POST['login'])) {
 				$sql3 = "INSERT INTO `studentactivitylist` (`activityID`, `userID`, `programTitle`, `programMerit`) 
 				VALUES (NULL, '".$row['userID']."', '".$row2['programTitle']."', '".$row2['merit']."')";
 				$result3 = mysqli_query($con, $sql3);
-				header("Location: succesful.html");
+				$sql4 = "UPDATE `merit` SET `merit` = `merit`+ '".$row2['merit']."' WHERE `merit`.`userID` = '".$row['userID']."'";
+				$result4 = mysqli_query($con, $sql4);
+				if($result3 && $result4){
+					header("Location: succesful.html");
+				} else {
+					header("Location: notsuccessfull.html");
+				}
+				
 			} else {
 				header("Location: notfound.html");
 			}

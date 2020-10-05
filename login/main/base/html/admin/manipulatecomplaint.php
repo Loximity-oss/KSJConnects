@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin (Add/Update/Delete User Complaints)</title>
+    <title>KSJConnects - Admin (User Complaints)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -323,9 +323,9 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Complaint Management / (Add/Update/Delete User Complaints)</li>
+                <li class="breadcrumb-item active">Complaint Management / User Complaints Management</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete User Complaints</h1>
+            <h1 class="page-title">User Complaints Management</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
@@ -635,24 +635,15 @@
         });
 
         function checkAvailability() {
+            console.log($("#userID").val());
             jQuery.ajax({
                 url: "verification/livedit.php",
                 data: 'username=' + $("#userID").val(),
                 type: "POST",
-                dataType: "json",
-                cache: false,
                 success: function(data) {
-                    //conversion from object to array
-                    var userData = $.map(data, function(value, index) {
-                        return [value];
-                    });
-                    //edit USERNAME AVAILABLE status
-                    $("#user-availability-status").html("<span class='status-available'> User ID available. </span>");
+                    $("#user-availability-status").html(data);
                 },
-                error: function(data) {
-                    //append to input boxes...
-                    $("#user-availability-status").html("<span class='status-available'> User ID not available. </span>");
-                }
+                error: function() {}
             });
         }
     </script>

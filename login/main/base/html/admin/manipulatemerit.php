@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin (manipulate accounts)</title>
+    <title>KSJConnects - Admin (Manipulate Merit)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -324,7 +324,7 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Merit Management / Search-Update-Delete User Merit</li>
+                <li class="breadcrumb-item active">Merit Management / User Merit Manipulation</li>
             </ol>
             <h1 class="page-title">User Merit Manipulation</h1>
         </div>

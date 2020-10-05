@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin (Add/Update/Delete Booking Facility Records)</title>
+    <title>KSJConnects - Admin (Student Activity Management)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -323,9 +323,9 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Student Activity Management / (Add/Update/Delete Student Activity Records)</li>
+                <li class="breadcrumb-item active">Student Activity Management / Student Activity Records</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete Student Activity Records</h1>
+            <h1 class="page-title">Student Activity Records</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
