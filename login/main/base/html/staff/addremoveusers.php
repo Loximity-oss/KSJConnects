@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (View Merit of Residents)</title>
+    <title>KSJConnects - Staff (Account Management)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -106,7 +106,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                                                <?php if (!$list['picture']) {
+                                <?php if (!$list['picture']) {
                                     echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
                                 } else {
                                     echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
@@ -115,7 +115,7 @@
                             </span>
                         </a>
                         <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="profile.php" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Profile</a>
+                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Profile</a>
                             <div class="dropdown-divider" role="presentation"></div>
                             <a class="dropdown-item" onclick="JSconfirm();" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
                         </div>
@@ -319,20 +319,20 @@
         </div>
     </div>
 
-       <!-- Page -->
-       <div class="page">
+    <!-- Page -->
+    <div class="page">
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Merit Management / Student Merit Records</li>
+                <li class="breadcrumb-item active">User Management / User Accounts Management</li>
             </ol>
-            <h1 class="page-title">Student Merit Records Management</h1>
+            <h1 class="page-title">User Account Management</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Student Merit List</h3>
+                    <h3 class="panel-title">User List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->
@@ -350,46 +350,53 @@
                         <div class="modal-dialog modal-simple modal-center">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add New Facility</h4>
+                                    <h4 class="modal-title">Add New User</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">
                                         <!--user ID-->
                                         <div class="form-group ">
-                                            <label for="staticfacID" class="form-label">Facility ID</label>
-                                            <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
-                                            <span id="fac-availability-status"></span>
+                                            <label for="userID" class="form-label">Username</label>
+                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability()" required>
+                                            <span id="user-availability-status"></span>
                                         </div>
-
-                                        <!--Faciility Name-->
+                                        <!--fullname-->
                                         <div class="form-group ">
-                                            <label for="staticfacName" class="form-label">Facility Name</label>
-                                            <input type="text" class="form-control" id="facName" name="facName" required>
+                                            <label for="fullname" class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" id="fullname" name="fullname" required>
                                         </div>
 
-                                        <!--facDesc-->
+                                        <!--email-->
                                         <div class="form-group ">
-                                            <label for="staticfacDesc" class="form-label">Facility Description</label>
-                                            <input type="text" class="form-control" id="facDesc" name="facDesc" value="" required>
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="text" class="form-control" id="email" name="email" onblur="checkAvailability_email()" required>
+                                            <span id="email-availability-status"></span>
                                         </div>
-
-                                        <!--Maximum Occupants-->
+                                        <!--phone_no-->
                                         <div class="form-group ">
-                                            <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                            <input type="number" class="form-control" id="facMaxPax" name="facMaxPax" required>
+                                            <label for="phoneno" class="form-label">Phone Number</label>
+                                            <input type="text" class="form-control" id="phoneno" name="phoneno" required>
                                         </div>
-
-
+                                        <!-- user type -->
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect1">User Type</label>
+                                            <select class="form-control" id="usertype" name="usertype" required>
+                                                <option>ADMIN</option>
+                                                <option>STAFF</option>
+                                                <option>RESIDENT</option>
+                                                <option>GUEST</option>
+                                            </select>
+                                        </div>
                                 </div>
 
                                 <div class="modal-footer">
                                     <!--buttons-->
                                     <div class="btn-toolbar" role="toolbar">
                                         <div class="btn-group mr-2" role="group" aria-label="First group">
-                                            <button type="submit" name="add" class="btn btn-primary">Add</button>
+                                            <button type="submit" name="submit" class="btn btn-primary">Add User</button>
                                         </div>
                                     </div>
                                     </form>
@@ -402,15 +409,9 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
-
-
                                 <?php
-                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                if (!$con) {
-                                    echo  mysqli_connect_error();
-                                    exit;
-                                }
-                                $sql = "SELECT * FROM facilitieslist";
+                                include 'edit/dbconnect.php';
+                                $sql = "SELECT * FROM users";
 
                                 $result = mysqli_query($con, $sql);
                                 mysqli_close($con);
@@ -422,10 +423,12 @@
                                     echo '<thead>
                                         <tr role="row">
                                             <th>No</th>
-                                            <th>Facility ID</th>
-                                            <th>Facility Name</th>
-                                            <th>Description</th>
-                                            <th>Max Occupants</th>
+                                            <th>Username</th>
+                                            <th>Fullname</th>
+                                            <th>Email</th>
+                                            <th>Phone Number</th>
+                                            <th>User Type</th>
+                                            <th>Verification</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
@@ -436,17 +439,22 @@
                                             <tr>
                                             <form action=""  method="POST">
                                                 <td class="nr">' . $counter . '</td>
-                                                <input type="hidden" name="facID" value="' . $row['facID'] . '">
-                                                <td>' . $row['facID'] . '</td>         
-                                                <td>' . $row['facName'] . '</td>    
-                                                <td>' . $row['facDesc'] . '</td>  
-                                                <td>' . $row['facMaxPax'] . '</td>                                                     
+                                                <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                <td>' . $row['userID'] . '</td>         
+                                                <td>' . $row['fullname'] . '</td>    
+                                                <td>' . $row['email'] . '</td> 
+                                                <td>' . $row['phone_no'] . '</td>    
+                                                <td>' . $row['userType'] . '</td> 
+                                                <td>' . $row['verification'] . '</td>                                                         
                                                 <td class="actions">
                                                     <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
                                                     data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
                                             
                                                     <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
                                                     data-toggle="tooltip" data-original-title="Remove" name="delete"><i class="icon wb-trash" aria-hidden="true"></i></button>
+
+                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                    data-toggle="tooltip" data-original-title="Reset Password" name="reset"><i class="icon wb-lock" aria-hidden="true"></i></button>
                                                 </td>
                                             </form>
                                             </tr>
@@ -464,35 +472,56 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                                     <span aria-hidden="true">×</span>
                                                 </button>
-                                                <h4 class="modal-title">Edit Facility Details</h4>
+                                                <h4 class="modal-title">Edit User Details</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <form action="" method="POST">
-                                                    <!--facID-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacID" class="form-label">Facility ID</label>
-                                                        <input type="text" class="form-control" id="staticfacID" name="staticfacID" readonly>
-                                                        <span id="fac-availability-status"></span>
-                                                    </div>
-                                                    
-                                                    <!--fac Name-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacName" class="form-label">Facility Name</label>
-                                                        <input type="text" class="form-control" id="staticfacName" name="staticfacName" size="50" required>
-                                                    </div>
+                                                <!--user ID-->
+                                                <div class="form-group ">
+                                                    <label for="staticuserID" class="form-label">Username</label>
+                                                    <input type="text" class="form-control" id="staticuserID" name="staticuserID" onblur="checkAvailability()" required>
+                                                    <span id="user-availability-status"></span>
+                                                </div>
+                                                <!--fullname-->
+                                                <div class="form-group ">
+                                                    <label for="staticfullname" class="form-label">Full Name</label>
+                        
+                                                    <input type="text" class="form-control" id="staticfullname" name="staticfullname" required>
+                        
+                                                </div>
 
-                                                    <!--facDesc-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacDesc" class="form-label">Facility Description</label>
-                                                        <input type="text" class="form-control" id="staticfacDesc" name="staticfacDesc" value="" required>
-                                                    </div>
+                                                <!--email-->
+                                                <div class="form-group ">
+                                                    <label for="staticemail" class="form-label">Email</label>
+                                                    <input type="text" class="form-control" id="staticemail" name="staticemail" required>
+                                                </div>
 
-                                                    <!--Maximum Occupants-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                                        <input type="number" class="form-control" id="staticfacMaxPax" name="staticfacMaxPax" required>
-                                                    </div>
-                                 
+                                                <!--phone_no-->
+                                                <div class="form-group ">
+                                                    <label for="staticphoneno" class="form-label">Phone Number</label>
+                                                    <input type="text" class="form-control" id="staticphoneno" name="staticphoneno" required>
+                                                </div>
+
+                                                <!-- user type -->
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">User Type</label>
+                                                    <select class="form-control" id="staticusertype" name="staticusertype" required>
+                                                        <option>ADMIN</option>
+                                                        <option>STAFF</option>
+                                                        <option>RESIDENT</option>
+                                                        <option>GUEST</option>
+                                                    </select>
+                                                </div>
+
+                                                <!-- verification -->
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">User Verification Level</label>
+                                                    <select class="form-control" id="staticverification" name="staticverification" required>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                    </select>
+                                                </div>
+                            
                                             </div>
 
                                             <div class="modal-footer">
@@ -594,6 +623,48 @@
     <!-- for live editing -->
     <!--jQuery Stuff-->
     <script>
+        function checkAvailability() {
+            console.log($("#userID").val());
+            jQuery.ajax({
+                url: "verification/check_availability.php",
+                data: 'username=' + $("#userID").val(),
+                type: "POST",
+                success: function(data) {
+                    $("#user-availability-status").html(data);
+                },
+                error: function() {}
+            });
+        }
+
+        function checkAvailability_email() {
+            //if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(myForm.emailAddr.value))
+            console.log($("#staticemail").val());
+            jQuery.ajax({
+                url: "verification/check_email.php",
+                data: 'email=' + $("#email").val(),
+                type: "POST",
+                success: function(data) {
+                    $("#email-availability-status").html(data);
+                },
+                error: function() {}
+            });
+        }
+
+        $(".edit_row").click(function() {
+
+            var $row = $(this).closest("tr"); // Find the row
+            var $text = $row.find(".nr").text(); // Find the text
+            var table = $('#exampleTableTools').DataTable();
+
+            var data = table.row($text - 1).data();
+            $("#staticuserID").val(data[1]);
+            $("#staticfullname").val(data[2]);
+            $("#staticemail").val(data[4]);
+            $("#staticphoneno").val(data[5]);
+            $("#staticusertype").val(data[6]);
+            $("#staticverification").val(data[7]);
+        });
+
         function JSconfirm() {
             swal({
                     title: "Are you sure?",
@@ -613,3 +684,156 @@
 
 </html>
 
+<?php
+include 'edit/dbconnect.php';
+if (isset($_POST['submit'])) {
+    //hash = verification
+    $hash = md5(rand(0, 1000));
+
+    //encryption as per lecturer requirement
+    $salt = "palsdkas;lkdasl;kd";
+    $password = md5(rand(0, 1));
+    $hash2 = md5($password, $salt);
+
+    $sql = "INSERT INTO `users` (`imageType`,`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) 
+    VALUES ('image/jpeg','','" . $_POST['userID'] . "','" . $_POST['fullname'] . "','$hash2', '" . $_POST['email'] . "', '" . $_POST['phoneno'] . "', '" . $_POST['usertype'] . "' , '" . $hash . "', 'Default Bio');";
+
+    $sql2 = "INSERT INTO `merit` (`userID`,`merit`) VALUES ('" . $_POST['userID'] . "','0');";
+    $result = mysqli_query($con, $sql);
+    $result2 = mysqli_query($con, $sql2);
+
+    if ($result) {
+        $to = $_POST['email'];
+        $subject = 'KSJConnects SIGN UP | Verification E-mail';
+        $message = '
+     
+            Thanks for signing up!
+            Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+            Your pre-created password is as follows: ' . $password . '
+             
+            Please click this link to activate your account:
+            http://118.101.107.162/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
+             
+            ';
+        $headers = 'From: ssah37@gmail.com';
+
+        if (mail($to, $subject, $message, $headers))
+            echo '<script>swal({
+                title: "Success",
+                text: "The user account has been added!",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+        else
+            echo '<script>swal({
+                title: "Oh no",
+                text: "The verification email was not sent. However the account has been added.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+            title: "Oh no",
+            text: "The account has not been added.",
+            icon: "error",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "addremoveusers.php";
+           }
+        ); </script>';
+    }
+}
+
+if (isset($_POST['update'])) {
+    $salt = "palsdkas;lkdasl;kd";
+    $password = $_POST['staticpassword'];
+    $hash2 = md5($password, $salt);
+
+    $sql = "UPDATE `users` SET `fullname` = '" . $_POST['staticfullname'] . "', `email` = '" . $_POST['staticemail'] . "', `phone_no` = '" . $_POST['staticphoneno'] . "', 
+    `userType` = '" . $_POST['staticusertype'] . "', `verification` = '" . $_POST['staticverification'] . "' WHERE `users`.`userID` = '" . $_POST['staticuserID'] . "' ";
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The user account has been modified",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "User account is not modified.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['delete'])) {
+    $sql = "DELETE FROM `users` WHERE `users`.`userID` = '" . $_POST['userID'] . "' ";
+    $sql2 = "DELETE FROM `merit` WHERE `merit`.`userID` = '" . $_POST['userID'] . "' );";
+    $result = mysqli_query($con, $sql);
+    $result2 = mysqli_query($con, $sql2);
+
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The user account has been deleted",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "User account is has not been deleted",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['reset'])) {
+
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The user account has been deleted",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "User account is has not been deleted",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "addremoveusers.php";
+               }
+            ); </script>';
+    }
+}
+?>

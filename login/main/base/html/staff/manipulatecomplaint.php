@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include 'edit/userSessionCheck.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (Add/Update/Delete User Complaints)</title>
+    <title>KSJConnects - Staff (User Complaints)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -106,7 +106,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                                                                <?php if (!$list['picture']) {
+                                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                                } else {
+                                    echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                                } ?>
                                 <i></i>
                             </span>
                         </a>
@@ -136,7 +140,7 @@
             <!-- End Site Navbar Seach -->
         </div>
     </nav>
-    <div class="site-menubar">
+<div class="site-menubar">
         <div class="site-menubar-body">
             <div>
                 <div>
@@ -171,7 +175,7 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
+                                    <a class="animsition-link" href="payment.php">
                                         <span class="site-menu-title">Resident Payment</span>
                                     </a>
                                 </li>
@@ -187,8 +191,13 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="residentapplication.php">
-                                        <span class="site-menu-title">Resident Application</span>
+                                    <a class="animsition-link" href="addremoveusers.php">
+                                        <span class="site-menu-title">Manipulate User Accounts</span>
+                                    </a>
+                                </li>
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="roommgmt.php">
+                                        <span class="site-menu-title">Room List</span>
                                     </a>
                                 </li>
                             </ul>
@@ -246,7 +255,7 @@
                                         </a>
                                     </li>
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="createprogram.php">
                                             <span class="site-menu-title">Create Programme</span>
                                         </a>
                                     </li>
@@ -262,7 +271,7 @@
                                 <span class="site-menu-title">Sticker Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="stickerapp.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
@@ -279,7 +288,7 @@
                                 <span class="site-menu-title">Announcement Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="announcement.php">
                                             <span class="site-menu-title">Annoucement CRUD</span>
                                         </a>
                                     </li>
@@ -292,17 +301,17 @@
                     <div class="site-menubar-section">
                         <h5>
                             Sprint 3 Progress
-                            <span class="float-right">1%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">80%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>
@@ -314,9 +323,9 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Complaint Management / (Add/Update/Delete User Complaints)</li>
+                <li class="breadcrumb-item active">Complaint Management / User Complaints Management</li>
             </ol>
-            <h1 class="page-title">Add/Update/Delete User Complaints</h1>
+            <h1 class="page-title">User Complaints Management</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
@@ -626,24 +635,15 @@
         });
 
         function checkAvailability() {
+            console.log($("#userID").val());
             jQuery.ajax({
                 url: "verification/livedit.php",
                 data: 'username=' + $("#userID").val(),
                 type: "POST",
-                dataType: "json",
-                cache: false,
                 success: function(data) {
-                    //conversion from object to array
-                    var userData = $.map(data, function(value, index) {
-                        return [value];
-                    });
-                    //edit USERNAME AVAILABLE status
-                    $("#user-availability-status").html("<span class='status-available'> User ID available. </span>");
+                    $("#user-availability-status").html(data);
                 },
-                error: function(data) {
-                    //append to input boxes...
-                    $("#user-availability-status").html("<span class='status-available'> User ID not available. </span>");
-                }
+                error: function() {}
             });
         }
     </script>
@@ -707,7 +707,7 @@ if (isset($_POST['update'])) {
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "manipulatecomplaint.php";
                }
             ); </script>';
     } else {
@@ -717,7 +717,7 @@ if (isset($_POST['update'])) {
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "manipulatecomplaint.php";
                }
             ); </script>';
     }
@@ -735,7 +735,7 @@ if (isset($_POST['delete'])) {
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "manipulatecomplaint.php";
                }
             ); </script>';
     } else {
@@ -745,7 +745,7 @@ if (isset($_POST['delete'])) {
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "viewcomplaint.php";
+                window.location.href = "manipulatecomplaint.php";
                }
             ); </script>';
     }

@@ -1,10 +1,4 @@
-<?php session_start();
-$con = mysqli_connect("localhost", "root", "", "ksjdb");
-if (!$con) {
-    echo  mysqli_connect_error();
-    exit;
-}
-?>
+<?php include 'edit/userSessionCheck.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -107,7 +101,11 @@ if (!$con) {
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                                <?php if (!$list['picture']) {
+                                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                                } else {
+                                    echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                                } ?>
                                 <i></i>
                             </span>
                         </a>
@@ -137,7 +135,7 @@ if (!$con) {
             <!-- End Site Navbar Seach -->
         </div>
     </nav>
-    <div class="site-menubar">
+<div class="site-menubar">
         <div class="site-menubar-body">
             <div>
                 <div>
@@ -172,7 +170,7 @@ if (!$con) {
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
+                                    <a class="animsition-link" href="payment.php">
                                         <span class="site-menu-title">Resident Payment</span>
                                     </a>
                                 </li>
@@ -188,8 +186,13 @@ if (!$con) {
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="residentapplication.php">
-                                        <span class="site-menu-title">Resident Application</span>
+                                    <a class="animsition-link" href="addremoveusers.php">
+                                        <span class="site-menu-title">Manipulate User Accounts</span>
+                                    </a>
+                                </li>
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="roommgmt.php">
+                                        <span class="site-menu-title">Room List</span>
                                     </a>
                                 </li>
                             </ul>
@@ -247,7 +250,7 @@ if (!$con) {
                                         </a>
                                     </li>
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="createprogram.php">
                                             <span class="site-menu-title">Create Programme</span>
                                         </a>
                                     </li>
@@ -263,7 +266,7 @@ if (!$con) {
                                 <span class="site-menu-title">Sticker Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="stickerapp.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
@@ -280,7 +283,7 @@ if (!$con) {
                                 <span class="site-menu-title">Announcement Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="announcement.php">
                                             <span class="site-menu-title">Annoucement CRUD</span>
                                         </a>
                                     </li>
@@ -293,17 +296,17 @@ if (!$con) {
                     <div class="site-menubar-section">
                         <h5>
                             Sprint 3 Progress
-                            <span class="float-right">1%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">80%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>
@@ -324,18 +327,20 @@ if (!$con) {
         <div class="page-content container-fluid">
             <div class="row">
                 <?php
-                $sql = "SELECT * FROM users where users.userID = '" . $_SESSION['username'] . "'";
-                $result = mysqli_query($con, $sql);
-                $count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
-                $list = mysqli_fetch_assoc($result);
                 echo '
                 <div class="col-sm-3">
-                    <div class="card">
-                        <img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">
-                        <div class="card-body">
+                    <div class="card">';
+                if (!$list['picture']) {
+                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                } else {
+                    echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                }
+
+                echo '        <div class="card-body">
                             <h5 class="card-title">' . $_SESSION['username'] . '</h5>
                             <p class="card-text"><small class="text-muted">KSJConnects Administration Account</small></p>
                         </div>
+                
                     </div>
                 </div>';
                 if ($count == 1) {
@@ -396,7 +401,7 @@ if (!$con) {
                 <div class="col-sm-9">
                     <div class="card">
                         <div class="card-header card-header-transparent card-header-bordered">
-                            Edit Profile 
+                            Edit Profile
                         </div>
                         <div class="card-block">
                             <h6 class="card-subtitle mb-2">Change Password</h6>
@@ -553,8 +558,8 @@ if (!$con) {
             });
         }
 
-        function checkpass(){
-            if($("#newpass").val() != $("#confirmnewpass").val()){
+        function checkpass() {
+            if ($("#newpass").val() != $("#confirmnewpass").val()) {
                 $("#pass-status-2").html("Your password does not match.");
             } else {
                 $("#pass-status-2").html("Your password matches.");

@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (View Merit of Residents)</title>
+    <title>KSJConnects - Staff (Student Activity Management)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -45,12 +45,12 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
     <!--[if lt IE 9]>
-    <script src="../../../../global/vendor/html5shiv/html5shiv.min.js"></script>
+    <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
 
     <!--[if lt IE 10]>
-    <script src="../../../../global/vendor/media-match/media.match.min.js"></script>
-    <script src="../../../../global/vendor/respond/respond.min.js"></script>
+    <script src="../../../global/vendor/media-match/media.match.min.js"></script>
+    <script src="../../../global/vendor/respond/respond.min.js"></script>
     <![endif]-->
     <!-- Scripts -->
     <script src="../../../global/vendor/breakpoints/breakpoints.js"></script>
@@ -106,7 +106,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                                                <?php if (!$list['picture']) {
+                                <?php if (!$list['picture']) {
                                     echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
                                 } else {
                                     echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
@@ -318,21 +318,20 @@
             </div>
         </div>
     </div>
-
-       <!-- Page -->
-       <div class="page">
+    <!-- Page -->
+    <div class="page">
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Merit Management / Student Merit Records</li>
+                <li class="breadcrumb-item active">Student Activity Management / Student Activity Records</li>
             </ol>
-            <h1 class="page-title">Student Merit Records Management</h1>
+            <h1 class="page-title">Student Activity Records</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Student Merit List</h3>
+                    <h3 class="panel-title">Student Activity List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->
@@ -340,7 +339,7 @@
                         <div class="col-md-6">
                             <div class="mb-15">
                                 <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
-                                    <i class="icon wb-plus" aria-hidden="true"></i> Add
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Add Student Activity
                                 </button>
                             </div>
                         </div>
@@ -353,36 +352,28 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add New Facility</h4>
+                                    <h4 class="modal-title">Add Student Activity</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">
-                                        <!--user ID-->
+                                        <!--activity ID-->
                                         <div class="form-group ">
-                                            <label for="staticfacID" class="form-label">Facility ID</label>
-                                            <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
-                                            <span id="fac-availability-status"></span>
+                                            <label for="userID" class="form-label">Activity ID</label>
+                                            <input type="text" class="form-control" value="Auto Generated" disabled>
+                                            <span id="user-availability-status"></span>
                                         </div>
-
-                                        <!--Faciility Name-->
+                                        <!-- program Title -->
                                         <div class="form-group ">
-                                            <label for="staticfacName" class="form-label">Facility Name</label>
-                                            <input type="text" class="form-control" id="facName" name="facName" required>
+                                            <label for="userID" class="form-label">Title</label>
+                                            <input type="text" class="form-control" id="userID" name="title" required>
+                                            <span id="user-availability-status"></span>
                                         </div>
-
-                                        <!--facDesc-->
+                                        <!--  program merit count -->
                                         <div class="form-group ">
-                                            <label for="staticfacDesc" class="form-label">Facility Description</label>
-                                            <input type="text" class="form-control" id="facDesc" name="facDesc" value="" required>
+                                            <label for="userID" class="form-label">Merit</label>
+                                            <input type="text" class="form-control" id="userID" name="merit" required>
+                                            <span id="user-availability-status"></span>
                                         </div>
-
-                                        <!--Maximum Occupants-->
-                                        <div class="form-group ">
-                                            <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                            <input type="number" class="form-control" id="facMaxPax" name="facMaxPax" required>
-                                        </div>
-
-
                                 </div>
 
                                 <div class="modal-footer">
@@ -401,122 +392,172 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+                            <div class="example-wrap">
+                                <div class="nav-tabs-horizontal" data-plugin="tabs">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Active Activites</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Inactive Activites</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab" aria-selected="false">Student Activities List</a></li>
+                                        <li class="dropdown nav-item" role="presentation" style="display: none;">
+                                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Menu</a>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Active Activities</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Inactive Activities</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Inactive Activities</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content pt-20">
+                                        <div class="tab-pane active" id="exampleTabsOne" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `activitylist` WHERE `status` = 1";
 
-
-                                <?php
-                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                if (!$con) {
-                                    echo  mysqli_connect_error();
-                                    exit;
-                                }
-                                $sql = "SELECT * FROM facilitieslist";
-
-                                $result = mysqli_query($con, $sql);
-                                mysqli_close($con);
-                                $qry = $result;
-                                $list = mysqli_num_rows($qry);
-
-                                $counter = 1;
-                                if ($list > 0) {
-                                    echo '<thead>
-                                        <tr role="row">
-                                            <th>No</th>
-                                            <th>Facility ID</th>
-                                            <th>Facility Name</th>
-                                            <th>Description</th>
-                                            <th>Max Occupants</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-';
-                                    while ($row = mysqli_fetch_assoc($qry)) {
-                                        echo '
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>Activity ID</th>
+                                                            <th>Program Title</th>
+                                                            <th>Program Link</th>
+                                                            <th>QR Code</th>
+                                                            <th>Merit Awarded</th>
+                                                            <th>Actions</th> 
+                                                        </tr>
+                                                        </thead>';
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
                                             <tr>
-                                            <form action=""  method="POST">
-                                                <td class="nr">' . $counter . '</td>
-                                                <input type="hidden" name="facID" value="' . $row['facID'] . '">
-                                                <td>' . $row['facID'] . '</td>         
-                                                <td>' . $row['facName'] . '</td>    
-                                                <td>' . $row['facDesc'] . '</td>  
-                                                <td>' . $row['facMaxPax'] . '</td>                                                     
-                                                <td class="actions">
-                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
-                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
-                                            
-                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                    data-toggle="tooltip" data-original-title="Remove" name="delete"><i class="icon wb-trash" aria-hidden="true"></i></button>
-                                                </td>
-                                            </form>
-                                            </tr>
-';
-                                        $counter++;
-                                    }
-                                }
-
-                                //modal
-                                echo '</tbody>                                                   
-                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog modal-simple modal-center">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                                <h4 class="modal-title">Edit Facility Details</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="" method="POST">
-                                                    <!--facID-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacID" class="form-label">Facility ID</label>
-                                                        <input type="text" class="form-control" id="staticfacID" name="staticfacID" readonly>
-                                                        <span id="fac-availability-status"></span>
-                                                    </div>
-                                                    
-                                                    <!--fac Name-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacName" class="form-label">Facility Name</label>
-                                                        <input type="text" class="form-control" id="staticfacName" name="staticfacName" size="50" required>
-                                                    </div>
-
-                                                    <!--facDesc-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacDesc" class="form-label">Facility Description</label>
-                                                        <input type="text" class="form-control" id="staticfacDesc" name="staticfacDesc" value="" required>
-                                                    </div>
-
-                                                    <!--Maximum Occupants-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                                        <input type="number" class="form-control" id="staticfacMaxPax" name="staticfacMaxPax" required>
-                                                    </div>
-                                 
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <!--buttons-->
-                                                <div class="btn-toolbar" role="toolbar">
-                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                        <button type="submit" name="update" class="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
+                                                <form action=""  method="POST">
+                                                    <input type="hidden" name="programID" value="' . $row['programID'] . '">
+                                                    <td>' . $row['programID'] . '</td>         
+                                                    <td>' . $row['programTitle'] . '</td>    
+                                                    <td><a href="' . $row['programLink'] . '">Go</a></td>  
+                                                    <td><a  target="_blank" href="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' . $row['programLink'] . '&choe=UTF-8" title="Generate QR"/>Generate</td>  
+                                                    <td>' . $row['merit'] . '</td>                                        
+                                                    <td class="actions">                                                                                                   
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                        data-original-title="update" name="update"><i class="icon wb-close" aria-hidden="true"></i></button>
+                                                    </td>
                                                 </form>
-                                            </div>
+                                            </tr>';
+                                                        
+                                                    }
+                                                }
+                                                ?>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane" id="exampleTabsTwo" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+                                            <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `activitylist` WHERE `status` = 2";
+
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>Activity ID</th>
+                                                            <th>Program Title</th>
+                                                            <th>Program Link</th>
+                                                            <th>Merit Awarded</th>
+                                                            <th>Actions</th> 
+                                                        </tr>
+                                                        </thead>';
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
+                                            <tr>
+                                                <form action=""  method="POST">
+                                                    <input type="hidden" name="programID" value="' . $row['programID'] . '">
+                                                    <td>' . $row['programID'] . '</td>         
+                                                    <td>' . $row['programTitle'] . '</td>    
+                                                    <td>' . $row['programLink'] . '</td>  
+                                                    <td>' . $row['merit'] . '</td>                                        
+                                                    <td class="actions">                                                                                                   
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                        data-original-title="delete-prg" name="delete-prg"><i class="icon wb-trash" aria-hidden="true"></i></button>
+                                                    </td>
+                                                </form>
+                                            </tr>';
+                                                        
+                                                    }
+                                                }
+                                                ?>
+
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane" id="exampleTabsThree" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+                                            <?php
+                                            $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `studentActivityList`";
+
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>Activity ID</th>
+                                                            <th>User ID</th>
+                                                            <th>Program Title</th>
+                                                            <th>Merit Awarded</th>
+                                                            <th>Actions</th> 
+                                                        </tr>
+                                                        </thead>';
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
+                                            <tr>
+                                                <form action=""  method="POST">
+                                                     <input type="hidden" name="activityID" value="' . $row['activityID'] . '">
+                                                    <td>'. $row['activityID']. '</td>
+                                                    <td>' . $row['userID'] . '</td>         
+                                                    <td>' . $row['programTitle'] . '</td>    
+                                                    <td>' . $row['programMerit'] . '</td>
+                                                    
+                                                    <td class="actions">                                                                                                   
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                        data-original-title="delete-user" name="delete-user"><i class="icon wb-trash" aria-hidden="true"></i></button>
+                                                    </td>                               
+                                                </form>
+                                            </tr>';
+                                                        
+                                                    }
+                                                }
+                                                ?>
+                                            </table>
                                         </div>
                                     </div>
-                                </div>';
-                                ?>
-
-                            </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>
@@ -587,13 +628,16 @@
     <script src="../../../global/js/Plugin/slidepanel.js"></script>
     <script src="../../../global/js/Plugin/switchery.js"></script>
     <script src="../../../global/js/Plugin/datatables.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../assets/examples/js/tables/datatable.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
 
     <!-- for live editing -->
     <!--jQuery Stuff-->
     <script>
+        var list;
+        var i;
+
         function JSconfirm() {
             swal({
                     title: "Are you sure?",
@@ -608,8 +652,138 @@
                     }
                 });
         }
+
+
     </script>
 </body>
 
 </html>
 
+<?php
+$con = mysqli_connect("localhost", "root", "", "ksjdb");
+if (!$con) {
+    echo  mysqli_connect_error();
+    exit;
+}
+
+if (isset($_POST['delete-user'])) {
+    $sql = "DELETE FROM `studentactivitylist` WHERE `studentactivitylist`.`activityID` = '" . $_POST['activityID'] . "'";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The user has been removed.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The user has not been removed.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['delete-prg'])) {
+    $sql = "DELETE FROM `activitylist` WHERE `activitylist`.`programID` = '" . $_POST['programID'] . "'";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The program has been removed.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The program has not been removed.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['update'])) {
+    $sql = "UPDATE `activityList` SET `status` = '2' WHERE `activityList`.`programID` = '" . $_POST['programID'] . "'";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The program has been removed.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The program has not been removed.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['add'])) {
+    $hash = md5(rand(0, 1000));
+
+    $sql = "INSERT INTO `activitylist` (`programID`, `programTitle`, `programLink`, `programKey`, `merit`, `status`) 
+    VALUES (NULL, '".$_POST['title']."', 'http://localhost/ksjconnects/activityLogin/index.php?program=".$hash."', '$hash', '".$_POST['merit']."', '1')";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The program has been added.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The program has not been added.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    }
+}
+?>

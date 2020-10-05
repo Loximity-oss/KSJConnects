@@ -13,6 +13,7 @@ if (!empty($_POST["username"])) {
     echo "<span class='status-not-available'> Username Not Available.</span>";
   } else {
     echo "<span class='status-available'> Username Available.</span>";
+  
   }
 }
 ?>

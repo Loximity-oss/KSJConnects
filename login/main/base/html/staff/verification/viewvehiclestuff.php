@@ -5,20 +5,20 @@
         exit;
     }
 
-    if($_GET['slip'] == 1) { //payslip
-        $sql = "SELECT imgPaySlipType,parentpayslip FROM registration WHERE no = '".$_GET['no']."'";
+    if($_GET['slip'] == 1) { //vehicle data type
+        $sql = "SELECT vehicleDataType,vehicleData FROM stickerapplication WHERE userID = '".$_GET['no']."'";
 		$result = mysqli_query($con, $sql) or die("<b>Error:</b> Problem on Retrieving Image BLOB<br/>" . mysqli_error($con));
 		$row = mysqli_fetch_array($result);
-		header("Content-type: " . $row["imgPaySlipType"]);
-        echo $row["parentpayslip"];
+		header("Content-type: " . $row["vehicleDataType"]);
+        echo $row["vehicleData"];
 
-    } else if ($_GET['slip'] == 2){ //acaderesults
+    } else if ($_GET['slip'] == 2){ //licensedatatype
         
-        $sql = "SELECT imgAcadSlipType,acadslip FROM registration WHERE no = '".$_GET['no']."'";
+        $sql = "SELECT licenseDataType,licenseData FROM stickerapplication WHERE userID = '".$_GET['no']."'";
 		$result = mysqli_query($con, $sql) or die("<b>Error:</b> Problem on Retrieving Image BLOB<br/>" . mysqli_error($con));
         $row = mysqli_fetch_array($result);
-        header("Content-type: " . $row["imgAcadSlipType"]);
-        echo $row["acadslip"];
+        header("Content-type: " . $row["licenseDataType"]);
+        echo $row["licenseData"];
     
     }
 	mysqli_close($con);

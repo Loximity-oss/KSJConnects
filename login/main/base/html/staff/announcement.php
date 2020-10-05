@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (View Merit of Residents)</title>
+    <title>KSJConnects - Staff (Announcment Management))</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -140,6 +140,7 @@
             <!-- End Site Navbar Seach -->
         </div>
     </nav>
+
 <div class="site-menubar">
         <div class="site-menubar-body">
             <div>
@@ -319,20 +320,20 @@
         </div>
     </div>
 
-       <!-- Page -->
-       <div class="page">
+    <!-- Page -->
+    <div class="page">
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Merit Management / Student Merit Records</li>
+                <li class="breadcrumb-item active">Announcement Management / Announcement Records Manipulation</li>
             </ol>
-            <h1 class="page-title">Student Merit Records Management</h1>
+            <h1 class="page-title">Announcement Records</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Student Merit List</h3>
+                    <h3 class="panel-title">Announcement List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->
@@ -353,36 +354,27 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add New Facility</h4>
+                                    <h4 class="modal-title">Add New Announcement</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">
-                                        <!--user ID-->
+                                        <!--staticancID-->
                                         <div class="form-group ">
-                                            <label for="staticfacID" class="form-label">Facility ID</label>
-                                            <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
-                                            <span id="fac-availability-status"></span>
+                                            <label for="staticancID" class="form-label">Announcement ID</label>
+                                            <input type="text" class="form-control" id="staticancID" name="staticancID" disabled value="Auto-generated">
                                         </div>
 
-                                        <!--Faciility Name-->
+                                        <!--ancTitleID-->
                                         <div class="form-group ">
-                                            <label for="staticfacName" class="form-label">Facility Name</label>
-                                            <input type="text" class="form-control" id="facName" name="facName" required>
+                                            <label for="ancTitleID" class="form-label">Announcement Title</label>
+                                            <input type="text" class="form-control" id="ancTitleID" name="ancTitleID" value="" required>
                                         </div>
 
-                                        <!--facDesc-->
+                                        <!--AnnouncmentContent-->
                                         <div class="form-group ">
-                                            <label for="staticfacDesc" class="form-label">Facility Description</label>
-                                            <input type="text" class="form-control" id="facDesc" name="facDesc" value="" required>
+                                            <label for="ancContent" class="form-label">Content</label>
+                                            <textarea class="form-control" name="ancContent" maxlength="100" placeholder="Enter your announcement (max 100)" id="exampleFormControlTextarea1" required></textarea>
                                         </div>
-
-                                        <!--Maximum Occupants-->
-                                        <div class="form-group ">
-                                            <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                            <input type="number" class="form-control" id="facMaxPax" name="facMaxPax" required>
-                                        </div>
-
-
                                 </div>
 
                                 <div class="modal-footer">
@@ -410,7 +402,7 @@
                                     echo  mysqli_connect_error();
                                     exit;
                                 }
-                                $sql = "SELECT * FROM facilitieslist";
+                                $sql = "SELECT * FROM announcement";
 
                                 $result = mysqli_query($con, $sql);
                                 mysqli_close($con);
@@ -422,10 +414,9 @@
                                     echo '<thead>
                                         <tr role="row">
                                             <th>No</th>
-                                            <th>Facility ID</th>
-                                            <th>Facility Name</th>
-                                            <th>Description</th>
-                                            <th>Max Occupants</th>
+                                            <th>Announcement ID</th>
+                                            <th>Announcement Title</th>
+                                            <th>Announcement Content</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
@@ -436,11 +427,10 @@
                                             <tr>
                                             <form action=""  method="POST">
                                                 <td class="nr">' . $counter . '</td>
-                                                <input type="hidden" name="facID" value="' . $row['facID'] . '">
-                                                <td>' . $row['facID'] . '</td>         
-                                                <td>' . $row['facName'] . '</td>    
-                                                <td>' . $row['facDesc'] . '</td>  
-                                                <td>' . $row['facMaxPax'] . '</td>                                                     
+                                                <input type="hidden" name="staticancID" value="' . $row['AnnouncmentID'] . '">
+                                                <td>' . $row['AnnouncmentID'] . '</td>      
+                                                <td>' . $row['Title'] . '</td>    
+                                                <td>'. $row['Text'] .'</td>
                                                 <td class="actions">
                                                     <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
                                                     data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
@@ -461,37 +451,30 @@
                                     <div class="modal-dialog modal-simple modal-center">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">×</span>
                                                 </button>
-                                                <h4 class="modal-title">Edit Facility Details</h4>
+                                                <h4 class="modal-title">Edit Announcement Details</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <form action="" method="POST">
-                                                    <!--facID-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacID" class="form-label">Facility ID</label>
-                                                        <input type="text" class="form-control" id="staticfacID" name="staticfacID" readonly>
-                                                        <span id="fac-availability-status"></span>
-                                                    </div>
-                                                    
-                                                    <!--fac Name-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacName" class="form-label">Facility Name</label>
-                                                        <input type="text" class="form-control" id="staticfacName" name="staticfacName" size="50" required>
-                                                    </div>
-
-                                                    <!--facDesc-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacDesc" class="form-label">Facility Description</label>
-                                                        <input type="text" class="form-control" id="staticfacDesc" name="staticfacDesc" value="" required>
-                                                    </div>
-
-                                                    <!--Maximum Occupants-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                                        <input type="number" class="form-control" id="staticfacMaxPax" name="staticfacMaxPax" required>
-                                                    </div>
+                                                <!--staticancID-->
+                                                <div class="form-group ">
+                                                    <label for="staticancID1" class="form-label">Announcement ID</label>
+                                                    <input type="text" class="form-control" id="staticancID1" name="staticancID" readonly value="Auto-generated">
+                                                </div>
+        
+                                                <!--ancTitleID-->
+                                                <div class="form-group ">
+                                                    <label for="ancTitleID1" class="form-label">Announcement Title</label>
+                                                    <input type="text" class="form-control" id="ancTitleID1" name="ancTitleID" value="" required>
+                                                </div>
+        
+                                                <!--AnnouncmentContent-->
+                                                <div class="form-group ">
+                                                    <label for="ancContent1" class="form-label">Content</label>
+                                                    <textarea class="form-control" id="ancContent1" name="ancContent" maxlength="100" placeholder="Enter your announcement (max 100)" id="exampleFormControlTextarea1" required></textarea>
+                                                </div>
                                  
                                             </div>
 
@@ -587,9 +570,9 @@
     <script src="../../../global/js/Plugin/slidepanel.js"></script>
     <script src="../../../global/js/Plugin/switchery.js"></script>
     <script src="../../../global/js/Plugin/datatables.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../assets/examples/js/tables/datatable.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
 
     <!-- for live editing -->
     <!--jQuery Stuff-->
@@ -608,8 +591,116 @@
                     }
                 });
         }
+
+        $(".edit_row").click(function() {
+
+            var $row = $(this).closest("tr"); // Find the row
+            var $text = $row.find(".nr").text(); // Find the text
+            var table = $('#exampleTableTools').DataTable();
+
+            var data = table.row($text - 1).data();
+
+            $("#staticancID1").val(data[1]);
+            $("#ancTitleID1").val(data[2]);
+            $("#ancContent1").val(data[3]);
+        });
+
+
+
     </script>
 </body>
 
 </html>
 
+<?php
+$con = mysqli_connect("localhost", "root", "", "ksjdb");
+if (!$con) {
+    echo  mysqli_connect_error();
+    exit;
+}
+if (isset($_POST['add'])) {
+    $date = date('Y-m-d');
+    $sql = "INSERT INTO `announcement` (`AnnouncmentID`, `Title`, `Text`, `date`) VALUES (NULL, '" . $_POST['ancTitleID'] . "', '" . $_POST['ancContent'] . "', '$date')";
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+            title: "Success",
+            text: "The announcement has been added.",
+            icon: "success",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "announcement.php";
+           }
+        ); </script>';
+    } else {
+        echo '<script>swal({
+            title: "Oh no",
+            text: "The announcement is not added.",
+            icon: "error",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "announcement.php";
+           }
+        ); </script>';
+    }
+}
+
+if (isset($_POST['update'])) {
+    $sql = "UPDATE `announcement` SET `Title` = '" . $_POST['ancTitleID'] . "', `Text` = '" . $_POST['ancContent'] . "' WHERE `announcement`.`AnnouncmentID` = '" . $_POST['staticancID'] . "'";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The announcement  has been modified.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "announcement.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The announcement  has not been modified.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "announcement.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['delete'])) {
+    $sql = "DELETE FROM `announcement` WHERE `announcement`.`AnnouncmentID` = '" . $_POST['staticancID'] . "' ";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The announcement has been deleted.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "announcement.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The announcement has not been deleted.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "announcement.php";
+               }
+            ); </script>';
+    }
+}
+?>

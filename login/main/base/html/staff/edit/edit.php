@@ -18,16 +18,16 @@ if (isset($_POST['bioedit'])) {
 
 }
 else if (isset($_POST['passwordedit'])){
-    if($_SESSION['password'] == $_POST['oldpass']){
-        $sql  = "UPDATE `users` SET `password` = '" . $_POST['newpass'] . "' WHERE `users`.`userID` = '" . $_SESSION['username'] . "'";
+    $password = $_POST['newpass'];
+    $salt = "palsdkas;lkdasl;kd";
+    $hash2 = md5($password,$salt);
+
+        $sql  = "UPDATE `users` SET `password` = '" . $hash2 . "' WHERE `users`.`userID` = '" . $_SESSION['username'] . "'";
         $result = mysqli_query($con, $sql);
         if ($result) 
             header ("Location: ../profile.php");
         else
             header ("Location: ../profile.php");
-    } else {
-        header ("Location: ../profile.php");
-    }
 
 
 } else if(isset($_POST['editImage'])){

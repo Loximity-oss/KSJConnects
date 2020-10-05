@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (View Merit of Residents)</title>
+    <title>KSJConnects - Staff Sticker Vehicle Management</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -45,12 +45,12 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
     <!--[if lt IE 9]>
-    <script src="../../../../global/vendor/html5shiv/html5shiv.min.js"></script>
+    <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
 
     <!--[if lt IE 10]>
-    <script src="../../../../global/vendor/media-match/media.match.min.js"></script>
-    <script src="../../../../global/vendor/respond/respond.min.js"></script>
+    <script src="../../../global/vendor/media-match/media.match.min.js"></script>
+    <script src="../../../global/vendor/respond/respond.min.js"></script>
     <![endif]-->
     <!-- Scripts -->
     <script src="../../../global/vendor/breakpoints/breakpoints.js"></script>
@@ -106,7 +106,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                                                <?php if (!$list['picture']) {
+                                <?php if (!$list['picture']) {
                                     echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
                                 } else {
                                     echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
@@ -318,21 +318,20 @@
             </div>
         </div>
     </div>
-
-       <!-- Page -->
-       <div class="page">
+    <!-- Page -->
+    <div class="page">
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Merit Management / Student Merit Records</li>
+                <li class="breadcrumb-item active">Vehicle Sticker Management / Vehicle Sticker Records</li>
             </ol>
-            <h1 class="page-title">Student Merit Records Management</h1>
+            <h1 class="page-title">Vehicle Sticker List</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Student Merit List</h3>
+                    <h3 class="panel-title">Sticker List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->
@@ -340,7 +339,7 @@
                         <div class="col-md-6">
                             <div class="mb-15">
                                 <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
-                                    <i class="icon wb-plus" aria-hidden="true"></i> Add
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Add Vehicle Sticker Application
                                 </button>
                             </div>
                         </div>
@@ -353,36 +352,44 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add New Facility</h4>
+                                    <h4 class="modal-title">New Vehicle Sticker Application</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" method="POST">
+                                    <form action="" method="POST" enctype="multipart/form-data">
                                         <!--user ID-->
                                         <div class="form-group ">
-                                            <label for="staticfacID" class="form-label">Facility ID</label>
-                                            <input type="text" class="form-control" id="facID" name="facID" onblur="checkAvailability()" required>
-                                            <span id="fac-availability-status"></span>
+                                            <label for="userID" class="form-label">User ID</label>
+                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability_user()" required>
+                                            <span id="user-availability-status"></span>
                                         </div>
 
-                                        <!--Faciility Name-->
+                                        <!--Driving License-->
                                         <div class="form-group ">
-                                            <label for="staticfacName" class="form-label">Facility Name</label>
-                                            <input type="text" class="form-control" id="facName" name="facName" required>
+                                            <label for="userLicense" class="form-label">Driving License</label>
+                                            <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                                <input type="text" class="form-control" readonly="">
+                                                <span class="input-group-btn">
+                                                    <span class="btn btn-success btn-file">
+                                                        <i class="icon wb-upload" aria-hidden="true"></i>
+                                                        <input type="file" onclick="" name="userLicense" multiple="" accept="image/x-png,image/gif,image/jpeg" required>
+                                                    </span>
+                                                </span>
+                                            </div>
                                         </div>
 
-                                        <!--facDesc-->
+                                        <!--Car Information-->
                                         <div class="form-group ">
-                                            <label for="staticfacDesc" class="form-label">Facility Description</label>
-                                            <input type="text" class="form-control" id="facDesc" name="facDesc" value="" required>
+                                            <label for="userOwnership" class="form-label">Car Proof of Ownership</label>
+                                            <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                                <input type="text" class="form-control" readonly="">
+                                                <span class="input-group-btn">
+                                                    <span class="btn btn-success btn-file">
+                                                        <i class="icon wb-upload" aria-hidden="true"></i>
+                                                        <input type="file" onclick="" name="userOwnership" multiple="" accept="application/pdf" required>
+                                                    </span>
+                                                </span>
+                                            </div>
                                         </div>
-
-                                        <!--Maximum Occupants-->
-                                        <div class="form-group ">
-                                            <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                            <input type="number" class="form-control" id="facMaxPax" name="facMaxPax" required>
-                                        </div>
-
-
                                 </div>
 
                                 <div class="modal-footer">
@@ -401,122 +408,175 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
-
-
-                                <?php
-                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                if (!$con) {
-                                    echo  mysqli_connect_error();
-                                    exit;
-                                }
-                                $sql = "SELECT * FROM facilitieslist";
-
-                                $result = mysqli_query($con, $sql);
-                                mysqli_close($con);
-                                $qry = $result;
-                                $list = mysqli_num_rows($qry);
-
-                                $counter = 1;
-                                if ($list > 0) {
-                                    echo '<thead>
-                                        <tr role="row">
-                                            <th>No</th>
-                                            <th>Facility ID</th>
-                                            <th>Facility Name</th>
-                                            <th>Description</th>
-                                            <th>Max Occupants</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-';
-                                    while ($row = mysqli_fetch_assoc($qry)) {
-                                        echo '
-                                            <tr>
-                                            <form action=""  method="POST">
-                                                <td class="nr">' . $counter . '</td>
-                                                <input type="hidden" name="facID" value="' . $row['facID'] . '">
-                                                <td>' . $row['facID'] . '</td>         
-                                                <td>' . $row['facName'] . '</td>    
-                                                <td>' . $row['facDesc'] . '</td>  
-                                                <td>' . $row['facMaxPax'] . '</td>                                                     
-                                                <td class="actions">
-                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
-                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
-                                            
-                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                    data-toggle="tooltip" data-original-title="Remove" name="delete"><i class="icon wb-trash" aria-hidden="true"></i></button>
-                                                </td>
-                                            </form>
-                                            </tr>
-';
-                                        $counter++;
-                                    }
-                                }
-
-                                //modal
-                                echo '</tbody>                                                   
-                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog modal-simple modal-center">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                                <h4 class="modal-title">Edit Facility Details</h4>
+                            <div class="example-wrap">
+                                <div class="nav-tabs-horizontal" data-plugin="tabs">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Pending Sticker Applications</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Active Vehicle Stickers</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab" aria-selected="false">Rejected Applications</a></li>
+                                        <li class="dropdown nav-item" role="presentation" style="display: none;">
+                                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Menu</a>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Pending Sticker Applications</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Active Vehicle Stickers</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Rejected Applications</a>
                                             </div>
-                                            <div class="modal-body">
-                                                <form action="" method="POST">
-                                                    <!--facID-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacID" class="form-label">Facility ID</label>
-                                                        <input type="text" class="form-control" id="staticfacID" name="staticfacID" readonly>
-                                                        <span id="fac-availability-status"></span>
-                                                    </div>
-                                                    
-                                                    <!--fac Name-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacName" class="form-label">Facility Name</label>
-                                                        <input type="text" class="form-control" id="staticfacName" name="staticfacName" size="50" required>
-                                                    </div>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content pt-20">
+                                        <div class="tab-pane active" id="exampleTabsOne" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
-                                                    <!--facDesc-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacDesc" class="form-label">Facility Description</label>
-                                                        <input type="text" class="form-control" id="staticfacDesc" name="staticfacDesc" value="" required>
-                                                    </div>
 
-                                                    <!--Maximum Occupants-->
-                                                    <div class="form-group ">
-                                                        <label for="staticfacMaxPax" class="form-label">Maximum Occupants</label>
-                                                        <input type="number" class="form-control" id="staticfacMaxPax" name="staticfacMaxPax" required>
-                                                    </div>
-                                 
-                                            </div>
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `stickerapplication` WHERE `approval` = 0";
 
-                                            <div class="modal-footer">
-                                                <!--buttons-->
-                                                <div class="btn-toolbar" role="toolbar">
-                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                        <button type="submit" name="update" class="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
-                                                </form>
-                                            </div>
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>No</th>
+                                                            <th>User ID</th>
+                                                            <th>Vehicle Data</th>
+                                                            <th>User License</th>
+                                                            <th>Date Applied</th>
+                                                            <th>Actions</th> 
+                                                        </tr>
+                                                        </thead>';
+                                                $counter = 1;
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
+                                                            <tr>
+                                                                <form action=""  method="POST">
+                                                                    <td class="nr">' . $counter . '</td>
+                                                                    <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                                    <td>' . $row['userID'] . '</td>         
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=1" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=2" class="btn btn-primary" >View</a></td>
+                                                                    <td>' . $row['dateApplied'] . '</td>                                      
+                                                                    <td class="actions">
+                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                                        data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
+                                                                
+                                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
+                                                                        data-original-title="Remove" name="delete"><i class="icon wb-close" aria-hidden="true"></i></button>
+                                                                    </td>
+                                                                </form>
+                                                            </tr>';
+                                                        $counter++;
+                                                    }
+                                                }
+                                                ?>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane" id="exampleTabsTwo" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `stickerapplication` WHERE `approval` = 1";
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>No</th>
+                                                            <th>User ID</th>
+                                                            <th>Vehicle Data</th>
+                                                            <th>User License</th>
+                                                            <th>Date Applied</th>
+                                                        </tr>
+                                                        </thead>';
+                                                $counter = 1;
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
+                                                            <tr>
+                                                                <form action=""  method="POST">
+                                                                    <td class="nr">' . $counter . '</td>
+                                                                    <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                                    <td>' . $row['userID'] . '</td>         
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=1" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=2" class="btn btn-primary" >View</a></td>
+                                                                    <td>' . $row['dateApplied'] . '</td>                                      
+                                                                </form>
+                                                            </tr>';
+                                                        $counter++;
+                                                    }
+                                                }
+                                                ?>
+
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane" id="exampleTabsThree" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+
+
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `stickerapplication` WHERE `approval` = 2";
+
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>No</th>
+                                                            <th>User ID</th>
+                                                            <th>Vehicle Data</th>
+                                                            <th>User License</th>
+                                                            <th>Date Applied</th>
+                                                        </tr>
+                                                        </thead>';
+                                                $counter = 1;
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
+                                                            <tr>
+                                                                <form action=""  method="POST">
+                                                                    <td class="nr">' . $counter . '</td>
+                                                                    <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                                    <td>' . $row['userID'] . '</td>         
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=1" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=2" class="btn btn-primary" >View</a></td>
+                                                                    <td>' . $row['dateApplied'] . '</td>                                      
+                                                                </form>
+                                                            </tr>';
+                                                        $counter++;
+                                                    }
+                                                }
+                                                ?>
+                                            </table>
                                         </div>
                                     </div>
-                                </div>';
-                                ?>
-
-                            </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>
@@ -587,13 +647,18 @@
     <script src="../../../global/js/Plugin/slidepanel.js"></script>
     <script src="../../../global/js/Plugin/switchery.js"></script>
     <script src="../../../global/js/Plugin/datatables.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../assets/examples/js/tables/datatable.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+    <script src="../../../global/js/Plugin/input-group-file.js"></script>
+    <script src="../../../global/js/Plugin/jquery-placeholder.js"></script>
 
     <!-- for live editing -->
     <!--jQuery Stuff-->
     <script>
+        var list;
+        var i;
+
         function JSconfirm() {
             swal({
                     title: "Are you sure?",
@@ -608,8 +673,130 @@
                     }
                 });
         }
+
+
+        function checkAvailability_user() {
+            console.log($("#userID").val());
+            jQuery.ajax({
+                url: "verification/livedit.php",
+                data: 'username=' + $("#userID").val(),
+                type: "POST",
+                success: function(data) {
+                    $("#user-availability-status").html(data);
+                },
+                error: function() {}
+            });
+        }
     </script>
 </body>
 
 </html>
 
+<?php
+$con = mysqli_connect("localhost", "root", "", "ksjdb");
+if (!$con) {
+    echo  mysqli_connect_error();
+    exit;
+}
+
+if (isset($_POST['approve'])) {
+    $sql = "UPDATE `stickerapplication` SET `approval` = '1' WHERE `stickerapplication`.`userID` = '" . $_POST['userID'] . "'";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+            title: "Success",
+            text: "The sticker application  has been approved.",
+            icon: "success",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "facilitybooking.php";
+           }
+        ); </script>';
+    } else {
+        echo '<script>swal({
+            title: "Oh no",
+            text: "The sticker application  has not been approved.",
+            icon: "error",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "facilitybooking.php";
+           }
+        ); </script>';
+    }
+}
+
+if (isset($_POST['delete'])) {
+    $sql = "UPDATE `stickerapplication` SET `approval` = '2' WHERE `stickerapplication`.`userID` = '" . $_POST['userID'] . "'";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+            title: "Success",
+            text: "The sticker application has been rejected.",
+            icon: "success",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "stickerapp.php";
+           }
+        ); </script>';
+    } else {
+        echo '<script>swal({
+            title: "Oh no",
+            text: "The sticker application  has not been rejected.",
+            icon: "error",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "stickerapp.php";
+           }
+        ); </script>';
+    }
+}
+
+if (isset($_POST['add'])) {
+
+    //properties for Image License...
+    $licenseData = addslashes(file_get_contents($_FILES['userLicense']['tmp_name']));
+    $licenseProperties = getimageSize($_FILES['userLicense']['tmp_name']);
+
+    //properties for pdf
+    $vehicleData = addslashes(file_get_contents($_FILES['userOwnership']['tmp_name']));
+    $vehicleProperties = "application/pdf";
+
+    //get curdate
+    $date = date('Y-m-d');
+
+    $sql = "INSERT INTO `stickerapplication` (`userID`, `approval`, `vehicleDataType`, `vehicleData`, `licenseData`, `licenseDataType`, `dateApplied`) 
+    VALUES ('" . $_POST['userID'] . "', '0', '$vehicleProperties', '{$vehicleData}' , '{$licenseData}', '{$licenseProperties['mime']}', '$date')";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The sticker application has been added.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "stickerapp.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The sticker application has not been added.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "stickerapp.php";
+               }
+            ); </script>';
+    }
+}
+?>
