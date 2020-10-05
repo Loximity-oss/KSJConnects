@@ -201,6 +201,11 @@
                                         <span class="site-menu-title">Resident Application</span>
                                     </a>
                                 </li>
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="roommgmt.php">
+                                        <span class="site-menu-title">Room List</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 

@@ -176,7 +176,7 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
+                                    <a class="animsition-link" href="payment.php">
                                         <span class="site-menu-title">Resident Payment</span>
                                     </a>
                                 </li>
@@ -199,6 +199,11 @@
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="residentapplication.php">
                                         <span class="site-menu-title">Resident Application</span>
+                                    </a>
+                                </li>
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="roommgmt.php">
+                                        <span class="site-menu-title">Room List</span>
                                     </a>
                                 </li>
                             </ul>
@@ -256,7 +261,7 @@
                                         </a>
                                     </li>
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="createprogram.php">
                                             <span class="site-menu-title">Create Programme</span>
                                         </a>
                                     </li>
@@ -272,7 +277,7 @@
                                 <span class="site-menu-title">Sticker Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="stickerapp.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
@@ -289,7 +294,7 @@
                                 <span class="site-menu-title">Announcement Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="announcement.php">
                                             <span class="site-menu-title">Annoucement CRUD</span>
                                         </a>
                                     </li>
@@ -302,17 +307,17 @@
                     <div class="site-menubar-section">
                         <h5>
                             Sprint 3 Progress
-                            <span class="float-right">1%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">80%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>
@@ -614,7 +619,7 @@
                                                     <input type="hidden" name="userID" value="' . $row['userID'] . '">
                                                     <td>' . $row['userID'] . '</td>         
                                                     <td>' . $row['transactionID'] . '</td>   
-                                                    <td><a target="_blank" href="verification/viewpaymentslip.php?no='.$row['userID'].'" class="btn btn-primary" >View</a></td> 
+                                                    <td><a target="_blank" href="verification/viewpaymentslip.php?no=' . $row['userID'] . '" class="btn btn-primary" >View</a></td> 
                                                     <td>' . $row['paymentMethod'] . '</td>  
                                                     <td>' . $row['dateDue'] . '</td>      
                                                     <td class="actions">
@@ -874,7 +879,7 @@ if (isset($_POST['cash'])) {
     }
 }
 
-if (isset($_POST['approve'])){
+if (isset($_POST['approve'])) {
     $sql = "UPDATE `payment` SET `status` = '2' WHERE `payment`.`userID` = '" . $_POST['userID'] . "'";
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
@@ -901,7 +906,7 @@ if (isset($_POST['approve'])){
     }
 }
 
-if (isset($_POST['reject'])){
+if (isset($_POST['reject'])) {
     $sql = "UPDATE `payment` SET `transactionID` = NULL, `paymentMethod` = NULL, `status` = '1', `imageType` = NULL, `imageData` = NULL WHERE `payment`.`userID` = '" . $_POST['userID'] . "'";
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
