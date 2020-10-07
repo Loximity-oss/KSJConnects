@@ -1,4 +1,13 @@
-<?php include 'edit/userSessionCheck.php' ?>
+<?php
+include 'edit/userSessionCheck.php';
+require_once 'edit/dbconnect.php';
+$sql4 = "SELECT roomID from roomlist where userID ='" . $_SESSION['username'] . "'";
+$sql3 = "SELECT * from payment where userID ='" . $_SESSION['username'] . "' AND status != 2";
+$result3 = mysqli_query($con, $sql3);
+$result4 = mysqli_query($con, $sql4);
+$row4 = mysqli_fetch_assoc($result4);
+$row3 = mysqli_num_rows($result3);
+?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -10,7 +19,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Admin (Add/Update/Delete Payment Records)</title>
+    <title>KSJConnects - Resident Payment</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -36,9 +45,7 @@
     <link rel="stylesheet" href="../../../global/vendor/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.css">
     <link rel="stylesheet" href="../../../global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.css">
     <link rel="stylesheet" href="../../assets/examples/css/tables/datatable.css">
-    <link rel="stylesheet" href="../../../global/vendor/chartist/chartist.css">
-        <link rel="stylesheet" href="../../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
-        <link rel="stylesheet" href="../../assets/examples/css/charts/chartist.css">
+
 
 
     <!-- Fonts -->
@@ -180,37 +187,12 @@
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="payment.php">
-                                        <span class="site-menu-title">Resident Payment</span>
+                                        <span class="site-menu-title">Your Payment</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
 
-                        <!-- User Management Stuff-->
-                        <li class="site-menu-category">User Management</li>
-                        <li class="site-menu-item has-sub">
-                            <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-user" aria-hidden="true"></i>
-                                <span class="site-menu-title">User Management Submenu</span>
-                            </a>
-                            <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="addremoveusers.php">
-                                        <span class="site-menu-title">Manipulate User Accounts</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="residentapplication.php">
-                                        <span class="site-menu-title">Resident Application</span>
-                                    </a>
-                                </li>
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="roommgmt.php">
-                                        <span class="site-menu-title">Room List</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
 
                         <!-- Complaint System Information Stuff-->
                         <li class="site-menu-category">Complaint System</li>
@@ -222,7 +204,7 @@
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="manipulatecomplaint.php">
-                                        <span class="site-menu-title">Resident's Complaints</span>
+                                        <span class="site-menu-title">Your Complaints</span>
                                     </a>
                                 </li>
                             </ul>
@@ -237,14 +219,14 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitylist">
+                                    <a class="animsition-link" href="facilitylist.php">
                                         <span class="site-menu-title">Facility List</span>
                                     </a>
                                 </li>
                             </ul>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitybooking">
+                                    <a class="animsition-link" href="facilitybooking.php">
                                         <span class="site-menu-title">Facility Bookings</span>
                                     </a>
                                 </li>
@@ -259,13 +241,8 @@
                                 <span class="site-menu-title">Merit Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="manipulatemerit.php">
-                                            <span class="site-menu-title">Resident's Merit</span>
-                                        </a>
-                                    </li>
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="createprogram.php">
-                                            <span class="site-menu-title">Create Programme</span>
+                                        <a class="animsition-link" href="programlist.php">
+                                            <span class="site-menu-title">Program List</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -288,22 +265,6 @@
                             </a>
                         </li>
 
-
-                        <!-- Announcement System-->
-                        <li class="site-menu-category">Announcement System</li>
-                        <li class="site-menu-item has-sub">
-                            <a href="javascript:void(0)">
-                                <i class="site-menu-icon wb-info" aria-hidden="true"></i>
-                                <span class="site-menu-title">Announcement Submenu</span>
-                                <ul class="site-menu-sub">
-                                    <li class="site-menu-item ">
-                                        <a class="animsition-link" href="announcement.php">
-                                            <span class="site-menu-title">Annoucement CRUD</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </a>
-                        </li>
 
 
                     </ul>
@@ -336,247 +297,151 @@
             </ol>
             <h1 class="page-title">Payment Records</h1>
         </div>
+
         <div class="page-content container-fluid">
+            <div class="row" data-plugin="matchHeight" data-by-row="true">
 
-        <div class="panel">
-          <div class="panel-heading">
-            <h3 class="panel-title">Payment Statistics</h3>
-          </div>
-          <div class="panel-body">
-            <!-- Example css animation Chart -->
-            <div class="example-wrap">
-              <div class="row row-lg">
-                <div class="col-xl-12">
-                  <div class="example">
-                    <div class="ct-chart ct-golden-section" id="exampleLineAnimation"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Example css animation Chart -->
-          </div>
-        </div>
-
-
-            <div class="card">
-                <div class="card-header">
-                    Semester Payments
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Semester Restart Controls</h5>
-                    <p class="card-text">To Restart for a new semester payment, kindly press DELETE (records for this semester) THEN insert</p>
-                    <form action="" method="post">
-                        <!--date-->
-                        <div class="form-group ">
-                            <label for="DateDue" class="form-label">Due Date</label>
-                            <input type="date" class="form-control" name="DateDue" required>
-                        </div>
-                        <!-- buttons -->
-                        <div class="btn-toolbar" role="toolbar">
-                            <div class="btn-group mr-2" role="group" aria-label="First group">
-                                <button type="submit" name="Insert" class="btn btn-primary">Insert</button>
+                <div class="col-xl-3 col-md-6 info-panel">
+                    <div class="card card-shadow">
+                        <div class="card-block bg-white p-20">
+                            <button type="button" class="btn btn-floating btn-sm btn-success">
+                                <i class="icon wb-table"></i>
+                            </button>
+                            <span class="ml-15 font-weight-400">Your Room</span>
+                            <div class="content-text text-center mb-0">
+                                <span class="font-size-40 font-weight-100"><?php echo $row4['roomID'] ?></span>
                             </div>
-                    </form>
-                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <form action="" method="post">
-                            <button type="submit" name="Delete" class="btn btn-default">Delete</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
+
+                <div class="col-xl-9 col-md-6 info-panel">
+                    <div class="card card-shadow">
+                        <div class="card-block bg-white p-20">
+                            <button type="button" class="btn btn-floating btn-sm btn-primary">
+                                <i class="icon wb-user"></i>
+                            </button>
+                            <span class="ml-15 font-weight-400">Payments Overdue</span>
+                            <div class="content-text text-center mb-0">
+                                <span class="font-size-40 font-weight-100"><?php echo $row3 ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
-        </div>
-        <div class="panel">
-            <header class="panel-heading">
-                <div class="panel-actions"></div>
-                <h3 class="panel-title">Payment Records List</h3>
-            </header>
-            
-            <div class="panel-body">
-                <!-- Modal for Data Button -->
-                <div class="modal fade" id="examplePositionCenter2" aria-labelledby="examplePositionCenter2" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-simple modal-center">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                                <h4 class="modal-title">Manual Payment</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form action="payment/charge.php" method="POST" id="payment-form">
-                                    <!--user ID-->
-                                    <div class="form-group ">
-                                        <label for="userID" class="form-label">User ID</label>
-                                        <input type="text" class="form-control" id="userID" name="userID" readonly>
-                                        <span id="user-availability-status"></span>
-                                    </div>
-                                    <!-- email -->
-                                    <div class="form-group ">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="email" id="email" readonly>
-                                    </div>
-                                    <div id="card-element" class="form-control">
-                                        <!-- a Stripe Element will be inserted here. -->
-                                    </div>
-                                    <div id="card-errors" role="alert"></div>
-                            </div>
+            <div class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions"></div>
+                    <h3 class="panel-title">Payment Records List</h3>
+                </header>
 
-                            <div class="modal-footer">
-                                <!--buttons-->
-                                <div class="btn-toolbar" role="toolbar">
-                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                        <button class="btn btn-primary">Pay with Credit Card</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Modal for Data Button -->
-                <div class="modal fade" id="examplePositionCenter3" aria-labelledby="examplePositionCenter3" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-simple modal-center">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                                <h4 class="modal-title">Manual Payment</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form action="" method="POST" enctype="multipart/form-data">
-                                    <!--user ID-->
-                                    <div class="form-group ">
-                                        <label for="userID" class="form-label">User ID</label>
-                                        <input type="text" class="form-control" id="userID-c" name="userID_c" readonly>
-                                        <span id="user-availability-status"></span>
-                                    </div>
-                                    <!-- email -->
-                                    <div class="form-group ">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="email_c" id="email-c" readonly>
-                                    </div>
 
-                                    <!-- proof -->
-                                    <div class="form-group ">
-                                        <label for="proof" class="form-label">Proof of Transaction</label>
-                                        <div class="input-group input-group-file" data-plugin="inputGroupFile">
-                                            <input type="text" class="form-control" readonly="">
-                                            <span class="input-group-btn">
-                                                <span class="btn btn-success btn-file">
-                                                    <i class="icon wb-upload" aria-hidden="true"></i>
-                                                    <input type="file" onclick="" name="proof" multiple="" accept="image/*" required>
-                                                </span>
-                                            </span>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="example-wrap">
+                                <div class="nav-tabs-horizontal" data-plugin="tabs">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Pay</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Successful Payment</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab" aria-selected="false">Pending Verification</a></li>
+                                        <li class="dropdown nav-item" role="presentation" style="display: none;">
+                                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Menu</a>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Pay</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Successful Payment</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Pending Verification</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content pt-20">
+                                        <h1>Payment Guide</h1>
+                                        <p>You can pay either in manual or credit card.</p>
+                                        <div class="tab-pane active" id="exampleTabsOne" role="tabpanel">
+                                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Credit Card</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Cash</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                    <form action="payment/charge.php" method="POST" id="payment-form">
 
+                                                        <!--user ID-->
+                                                        <div class="form-group ">
+                                                            <br>
+                                                            <label for="userID" class="form-label">User ID</label>
+                                                            <input type="text" class="form-control" id="userID" name="userID" value="<?php echo $_SESSION['username'] ?>" readonly>
+                                                            <span id="user-availability-status"></span>
+                                                        </div>
+                                                        <!-- email -->
+                                                        <div class="form-group ">
+                                                            <label for="email" class="form-label">Email</label>
+                                                            <input type="email" class="form-control" name="email" id="email" required>
+                                                        </div>
+                                                        <div id="card-element" class="form-control">
+                                                            <!-- a Stripe Element will be inserted here. -->
+                                                        </div>
+                                                        <div id="card-errors" role="alert"></div>
+                                                        <br>
+                                                        <button class="btn btn-primary">Pay with Credit Card</button>
+                                                    </form>
+                                                </div>
+                                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                    <form action="" method="POST" enctype="multipart/form-data">
+                                                        <!--user ID-->
+                                                        <div class="form-group ">
+                                                            <label for="userID" class="form-label">User ID</label>
+                                                            <input type="text" class="form-control" id="userID-c" name="userID_c" value="<?php echo $_SESSION['username'] ?>" readonly>
+                                                            <span id="user-availability-status"></span>
+                                                        </div>
+                                                        <!-- email -->
+                                                        <div class="form-group ">
+                                                            <label for="email" class="form-label">Email</label>
+                                                            <input type="email" class="form-control" name="email_c" id="email-c" required>
+                                                        </div>
+
+                                                        <!-- proof -->
+                                                        <div class="form-group ">
+                                                            <label for="proof" class="form-label">Proof of Transaction</label>
+                                                            <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                                                <input type="text" class="form-control" readonly="">
+                                                                <span class="input-group-btn">
+                                                                    <span class="btn btn-success btn-file">
+                                                                        <i class="icon wb-upload" aria-hidden="true"></i>
+                                                                        <input type="file" onclick="" name="proof" multiple="" accept="image/*" required>
+                                                                    </span>
+                                                                </span>
+
+                                                            </div>
+                                                            <span> Please pay in full. </span>
+                                                        </div>
+                                                        <button type="submit" name="cash" class="btn btn-primary">Pay with Cash</button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <span> Please pay in full. </span>
-                                    </div>
-                            </div>
-
-                            <div class="modal-footer">
-                                <!--buttons-->
-                                <div class="btn-toolbar" role="toolbar">
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button type="submit" name="cash" class="btn btn-primary">Pay with Cash</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="example-wrap">
-                            <div class="nav-tabs-horizontal" data-plugin="tabs">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Unpaid</a></li>
-                                    <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Successful Payment</a></li>
-                                    <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab" aria-selected="false">Pending Verification</a></li>
-                                    <li class="dropdown nav-item" role="presentation" style="display: none;">
-                                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Menu</a>
-                                        <div class="dropdown-menu" role="menu">
-                                            <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Unpaid</a>
-                                            <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Successful Payment</a>
-                                            <a class="dropdown-item" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Pending Verification</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div class="tab-content pt-20">
-                                    <div class="tab-pane active" id="exampleTabsOne" role="tabpanel">
-                                        <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
-                                            <?php
-                                            $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                            if (!$con) {
-                                                echo  mysqli_connect_error();
-                                                exit;
-                                            }
-                                            $sql = "SELECT payment.`userID`,payment.`transactionID`,payment.`paymentMethod`,payment.`dateDue`,payment.`status`,payment.`imageType`,payment.`imageData`, users.`email` 
-                                            FROM `payment` INNER JOIN users ON Payment.userID=users.userID WHERE `status` = 1";
-
-                                            $result = mysqli_query($con, $sql);
-                                            mysqli_close($con);
-                                            $qry = $result;
-                                            $list = mysqli_num_rows($qry);
-                                            echo '<thead>
-                                                        <tr role="row">
-                                                            <th>No</th>
-                                                            <th>User ID</th>
-                                                            <th>Transaction ID</th>
-                                                            <th>Method of Payment</th>
-                                                            <th>Date Due</th>
-                                                            <th>Email</th>
-                                                            <th>Actions</th> 
-                                                        </tr>
-                                                        </thead>';
-                                            $counter = 1;
-                                            if ($list > 0) {
-                                                echo '
-                                                        <tbody>';
-                                                while ($row = mysqli_fetch_assoc($qry)) {
-                                                    echo '
-                                            <tr>
-                                                <form action=""  method="POST">
-                                                    <td class="nr">' . $counter . '</td>
-                                                    <td>' . $row['userID'] . '</td>         
-                                                    <td>' . $row['transactionID'] . '</td>    
-                                                    <td>' . $row['paymentMethod'] . '</td>  
-                                                    <td>' . $row['dateDue'] . '</td>
-                                                    <td>' . $row['email'] . '</td>                                              
-                                                    <td class="actions">
-                                                        <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
-                                                        data-original-title="Edit" data-target="#examplePositionCenter2" data-toggle="modal" type="button" ><i class="icon wb-payment" aria-hidden="true"></i></a>
-                                                        
-                                                        <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row_1"
-                                                        data-original-title="Edit" data-target="#examplePositionCenter3" data-toggle="modal" type="button" ><i class="icon md-balance-wallet" aria-hidden="true"></i></a>
-                                                    </td>
-                                                </form>
-                                            </tr>';
-                                                    $counter++;
+                                        <div class="tab-pane" id="exampleTabsTwo" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
                                                 }
-                                            }
-                                            ?>
-                                        </table>
-                                    </div>
-                                    <div class="tab-pane" id="exampleTabsTwo" role="tabpanel">
-                                        <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
-                                            <?php
-                                            $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                            if (!$con) {
-                                                echo  mysqli_connect_error();
-                                                exit;
-                                            }
-                                            $sql = "SELECT * FROM `payment` WHERE `status` = 2";
+                                                $sql = "SELECT * FROM `payment` WHERE `status` = 2 AND `userID` = '" . $_SESSION['username'] . "'";
 
-                                            $result = mysqli_query($con, $sql);
-                                            mysqli_close($con);
-                                            $qry = $result;
-                                            $list = mysqli_num_rows($qry);
-                                            echo '<thead>
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
                                                         <tr role="row">
                                                             <th>No</th>
                                                             <th>User ID</th>
@@ -585,12 +450,12 @@
                                                             <th>Date Due</th>
                                                         </tr>
                                                         </thead>';
-                                            $counter = 1;
-                                            if ($list > 0) {
-                                                echo '
-                                                        <tbody>';
-                                                while ($row = mysqli_fetch_assoc($qry)) {
+                                                $counter = 1;
+                                                if ($list > 0) {
                                                     echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
                                             <tr>
                                                 <form action=""  method="POST">
                                                     <td class="nr">' . $counter . '</td>
@@ -600,28 +465,28 @@
                                                     <td>' . $row['dateDue'] . '</td>                                            
                                                 </form>
                                             </tr>';
-                                                    $counter++;
+                                                        $counter++;
+                                                    }
                                                 }
-                                            }
-                                            ?>
+                                                ?>
 
-                                        </table>
-                                    </div>
-                                    <div class="tab-pane" id="exampleTabsThree" role="tabpanel">
-                                        <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
-                                            <?php
-                                            $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                            if (!$con) {
-                                                echo  mysqli_connect_error();
-                                                exit;
-                                            }
-                                            $sql = "SELECT * FROM `payment` WHERE `status` = 3";
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane" id="exampleTabsThree" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `payment` WHERE `status` = 3 AND `userID` = '" . $_SESSION['username'] . "'";
 
-                                            $result = mysqli_query($con, $sql);
-                                            mysqli_close($con);
-                                            $qry = $result;
-                                            $list = mysqli_num_rows($qry);
-                                            echo '<thead>
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
                                                         <tr role="row">
                                                             <th>No</th>
                                                             <th>User ID</th>
@@ -629,15 +494,14 @@
                                                             <th>Proof of Payment</th>
                                                             <th>Method of Payment</th>
                                                             <th>Date Due</th>
-                                                            <th>Actions</th>
                                                         </tr>
                                                         </thead>';
-                                            $counter = 1;
-                                            if ($list > 0) {
-                                                echo '
-                                                        <tbody>';
-                                                while ($row = mysqli_fetch_assoc($qry)) {
+                                                $counter = 1;
+                                                if ($list > 0) {
                                                     echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
                                             <tr>
                                                 <form action=""  method="POST">
                                                     <td class="nr">' . $counter . '</td>
@@ -646,22 +510,16 @@
                                                     <td>' . $row['transactionID'] . '</td>   
                                                     <td><a target="_blank" href="verification/viewpaymentslip.php?no=' . $row['userID'] . '" class="btn btn-primary" >View</a></td> 
                                                     <td>' . $row['paymentMethod'] . '</td>  
-                                                    <td>' . $row['dateDue'] . '</td>      
-                                                    <td class="actions">
-                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                        data-original-title="Remove" name="approve"><i class="icon wb-check" aria-hidden="true"></i></button>
-                                                
-                                                        <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                        data-original-title="Remove" name="reject"><i class="icon wb-close" aria-hidden="true"></i></button>
-                                                    </td>                                      
+                                                    <td>' . $row['dateDue'] . '</td>                                           
                                                 </form>
                                             </tr>';
-                                                    $counter++;
+                                                        $counter++;
+                                                    }
                                                 }
-                                            }
-                                            ?>
+                                                ?>
 
-                                        </table>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -670,7 +528,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- End Page -->
 
@@ -715,10 +572,8 @@
     <script src="../../../global/vendor/datatables.net-buttons-bs4/buttons.bootstrap4.js"></script>
     <script src="../../../global/vendor/asrange/jquery-asRange.min.js"></script>
 
-    <script src="../../../global/vendor/chartist/chartist.js"></script>
-        <script src="../../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.js"></script>
-        <script src="../../assets/examples/js/charts/chartist.js"></script>
-        
+
+
     <!-- Scripts -->
     <script src="../../../global/js/Component.js"></script>
     <script src="../../../global/js/Plugin.js"></script>

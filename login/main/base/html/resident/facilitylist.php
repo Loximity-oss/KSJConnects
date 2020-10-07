@@ -172,12 +172,13 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
-                                        <span class="site-menu-title">Resident Payment</span>
+                                    <a class="animsition-link" href="payment.php">
+                                        <span class="site-menu-title">Your Payment</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
 
                         <!-- Complaint System Information Stuff-->
                         <li class="site-menu-category">Complaint System</li>
@@ -189,7 +190,7 @@
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="manipulatecomplaint.php">
-                                        <span class="site-menu-title">Resident's Complaints</span>
+                                        <span class="site-menu-title">Your Complaints</span>
                                     </a>
                                 </li>
                             </ul>
@@ -204,14 +205,14 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitylist">
+                                    <a class="animsition-link" href="facilitylist.php">
                                         <span class="site-menu-title">Facility List</span>
                                     </a>
                                 </li>
                             </ul>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitybooking">
+                                    <a class="animsition-link" href="facilitybooking.php">
                                         <span class="site-menu-title">Facility Bookings</span>
                                     </a>
                                 </li>
@@ -226,8 +227,8 @@
                                 <span class="site-menu-title">Merit Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="manipulatemerit.php">
-                                            <span class="site-menu-title">Resident's Merit</span>
+                                        <a class="animsition-link" href="programlist.php">
+                                            <span class="site-menu-title">Program List</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -242,7 +243,7 @@
                                 <span class="site-menu-title">Sticker Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="stickerapp.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
@@ -251,21 +252,22 @@
                         </li>
 
 
+
                     </ul>
                     <div class="site-menubar-section">
                         <h5>
                             Sprint 3 Progress
-                            <span class="float-right">1%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">80%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>

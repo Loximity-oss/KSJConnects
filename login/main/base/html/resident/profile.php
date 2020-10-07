@@ -1,10 +1,4 @@
-<?php session_start();
-$con = mysqli_connect("localhost", "root", "", "ksjdb");
-if (!$con) {
-    echo  mysqli_connect_error();
-    exit;
-}
-?>
+<?php include 'edit/userSessionCheck.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -16,7 +10,7 @@ if (!$con) {
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff Homepage</title>
+    <title>KSJConnects - Resident Profile</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -107,7 +101,11 @@ if (!$con) {
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                                <?php if (!$list['picture']) {
+                                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                                } else {
+                                    echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                                } ?>
                                 <i></i>
                             </span>
                         </a>
@@ -172,12 +170,13 @@ if (!$con) {
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
-                                        <span class="site-menu-title">Resident Payment</span>
+                                    <a class="animsition-link" href="payment.php">
+                                        <span class="site-menu-title">Your Payment</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
 
                         <!-- Complaint System Information Stuff-->
                         <li class="site-menu-category">Complaint System</li>
@@ -189,7 +188,7 @@ if (!$con) {
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="manipulatecomplaint.php">
-                                        <span class="site-menu-title">Resident's Complaints</span>
+                                        <span class="site-menu-title">Your Complaints</span>
                                     </a>
                                 </li>
                             </ul>
@@ -204,14 +203,14 @@ if (!$con) {
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitylist">
+                                    <a class="animsition-link" href="facilitylist.php">
                                         <span class="site-menu-title">Facility List</span>
                                     </a>
                                 </li>
                             </ul>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitybooking">
+                                    <a class="animsition-link" href="facilitybooking.php">
                                         <span class="site-menu-title">Facility Bookings</span>
                                     </a>
                                 </li>
@@ -226,8 +225,8 @@ if (!$con) {
                                 <span class="site-menu-title">Merit Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="manipulatemerit.php">
-                                            <span class="site-menu-title">Resident's Merit</span>
+                                        <a class="animsition-link" href="programlist.php">
+                                            <span class="site-menu-title">Program List</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -242,7 +241,7 @@ if (!$con) {
                                 <span class="site-menu-title">Sticker Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="stickerapp.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
@@ -251,21 +250,22 @@ if (!$con) {
                         </li>
 
 
+
                     </ul>
                     <div class="site-menubar-section">
                         <h5>
                             Sprint 3 Progress
-                            <span class="float-right">1%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">80%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>
@@ -286,18 +286,20 @@ if (!$con) {
         <div class="page-content container-fluid">
             <div class="row">
                 <?php
-                $sql = "SELECT * FROM users where users.userID = '" . $_SESSION['username'] . "'";
-                $result = mysqli_query($con, $sql);
-                $count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
-                $list = mysqli_fetch_assoc($result);
                 echo '
                 <div class="col-sm-3">
-                    <div class="card">
-                        <img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">
-                        <div class="card-body">
+                    <div class="card">';
+                if (!$list['picture']) {
+                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                } else {
+                    echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                }
+
+                echo '        <div class="card-body">
                             <h5 class="card-title">' . $_SESSION['username'] . '</h5>
                             <p class="card-text"><small class="text-muted">KSJConnects Administration Account</small></p>
                         </div>
+                
                     </div>
                 </div>';
                 if ($count == 1) {
@@ -358,7 +360,7 @@ if (!$con) {
                 <div class="col-sm-9">
                     <div class="card">
                         <div class="card-header card-header-transparent card-header-bordered">
-                            Edit Profile 
+                            Edit Profile
                         </div>
                         <div class="card-block">
                             <h6 class="card-subtitle mb-2">Change Password</h6>
@@ -515,8 +517,8 @@ if (!$con) {
             });
         }
 
-        function checkpass(){
-            if($("#newpass").val() != $("#confirmnewpass").val()){
+        function checkpass() {
+            if ($("#newpass").val() != $("#confirmnewpass").val()) {
                 $("#pass-status-2").html("Your password does not match.");
             } else {
                 $("#pass-status-2").html("Your password matches.");

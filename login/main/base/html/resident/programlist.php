@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include 'edit/userSessionCheck.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (manipulate accounts)</title>
+    <title>KSJConnects - Resident (Student Activity Management)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -45,12 +45,12 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
     <!--[if lt IE 9]>
-    <script src="../../../../global/vendor/html5shiv/html5shiv.min.js"></script>
+    <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
 
     <!--[if lt IE 10]>
-    <script src="../../../../global/vendor/media-match/media.match.min.js"></script>
-    <script src="../../../../global/vendor/respond/respond.min.js"></script>
+    <script src="../../../global/vendor/media-match/media.match.min.js"></script>
+    <script src="../../../global/vendor/respond/respond.min.js"></script>
     <![endif]-->
     <!-- Scripts -->
     <script src="../../../global/vendor/breakpoints/breakpoints.js"></script>
@@ -106,12 +106,16 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                                <?php if (!$list['picture']) {
+                                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                                } else {
+                                    echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                                } ?>
                                 <i></i>
                             </span>
                         </a>
                         <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Profile</a>
+                            <a class="dropdown-item" href="profile.php" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Profile</a>
                             <div class="dropdown-divider" role="presentation"></div>
                             <a class="dropdown-item" onclick="JSconfirm();" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
                         </div>
@@ -171,12 +175,13 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
-                                        <span class="site-menu-title">Resident Payment</span>
+                                    <a class="animsition-link" href="payment.php">
+                                        <span class="site-menu-title">Your Payment</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
 
                         <!-- Complaint System Information Stuff-->
                         <li class="site-menu-category">Complaint System</li>
@@ -188,7 +193,7 @@
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="manipulatecomplaint.php">
-                                        <span class="site-menu-title">Resident's Complaints</span>
+                                        <span class="site-menu-title">Your Complaints</span>
                                     </a>
                                 </li>
                             </ul>
@@ -203,14 +208,14 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitylist">
+                                    <a class="animsition-link" href="facilitylist.php">
                                         <span class="site-menu-title">Facility List</span>
                                     </a>
                                 </li>
                             </ul>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitybooking">
+                                    <a class="animsition-link" href="facilitybooking.php">
                                         <span class="site-menu-title">Facility Bookings</span>
                                     </a>
                                 </li>
@@ -225,8 +230,8 @@
                                 <span class="site-menu-title">Merit Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="manipulatemerit.php">
-                                            <span class="site-menu-title">Resident's Merit</span>
+                                        <a class="animsition-link" href="programlist.php">
+                                            <span class="site-menu-title">Program List</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -241,7 +246,7 @@
                                 <span class="site-menu-title">Sticker Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="stickerapp.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
@@ -250,146 +255,95 @@
                         </li>
 
 
+
                     </ul>
                     <div class="site-menubar-section">
                         <h5>
                             Sprint 3 Progress
-                            <span class="float-right">1%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">80%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Page -->
     <div class="page">
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Merit Management / Search-Update-Delete User Merit</li>
+                <li class="breadcrumb-item active">Student Activity Management / Student Activity Records</li>
             </ol>
-            <h1 class="page-title">User Merit Manipulation</h1>
+            <h1 class="page-title">Student Activity Records</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Merit List</h3>
+                    <h3 class="panel-title">Student Activity List</h3>
                 </header>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
 
+                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
                                 <?php
                                 $con = mysqli_connect("localhost", "root", "", "ksjdb");
                                 if (!$con) {
                                     echo  mysqli_connect_error();
                                     exit;
                                 }
-                                $sql = "SELECT * FROM merit";
+                                $sql = "SELECT * FROM `studentActivityList` where `userID` = '" . $_SESSION['username'] . "'";
 
                                 $result = mysqli_query($con, $sql);
                                 mysqli_close($con);
                                 $qry = $result;
                                 $list = mysqli_num_rows($qry);
-
-                                $counter = 1;
+                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>Activity ID</th>
+                                                            <th>Program Title</th>
+                                                            <th>Merit Awarded</th>
+                                                        </tr>
+                                                        </thead>';
                                 if ($list > 0) {
-                                    echo '<thead>
-                                        <tr role="row">
-                                            <th>No</th>
-                                            <th>User ID</th>
-                                            <th>Merit</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-';
+                                    echo '
+                                                        <tbody>';
                                     while ($row = mysqli_fetch_assoc($qry)) {
                                         echo '
                                             <tr>
-                                            <form action=""  method="POST">
-                                                <td class="nr">' . $counter . '</td>
-                                                <input type="hidden" name="facID" value="' . $row['userID'] . '">
-                                                <td>' . $row['userID'] . '</td>         
-                                                <td>' . $row['merit'] . '</td>                                                        
-                                                <td class="actions">
-                                                    <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
-                                                    data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-edit" aria-hidden="true"></i></a>
-                                                </td>
-                                            </form>
-                                            </tr>
-';
-                                        $counter++;
+                                                <form action=""  method="POST">
+                                                    <input type="hidden" name="programID" value="' . $row['programID'] . '">
+                                                    <td>' . $row['programID'] . '</td>         
+                                                    <td>' . $row['programTitle'] . '</td>     
+                                                    <td>' . $row['merit'] . '</td>                                        
+                                                </form>
+                                            </tr>';
                                     }
                                 }
-
-                                //modal
-                                echo '</tbody>                                                   
-                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog modal-simple modal-center">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                                <h4 class="modal-title">Edit Facility Details</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="" method="POST">
-                                                <!--user ID-->
-                                                <div class="form-group ">
-                                                    <label for="staticuserID" class="form-label">User ID</label>
-                                                    <input type="text" class="form-control" id="staticuserID" name="staticuserID" onblur="checkAvailability()" required>
-                                                    <span id="user-availability-status"></span>
-                                                </div>
-                        
-                                                <!--Merit-->
-                                                <div class="form-group ">
-                                                    <label for="staticuserID" class="form-label">Current Merit</label>
-                                                    <input type="number" class="form-control" id="staticmerit" name="staticmerit" required>
-                                                    <span id="user-availability-status"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <!--buttons-->
-                                                <div class="btn-toolbar" role="toolbar">
-                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                        <button type="submit" name="update" class="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>';
                                 ?>
 
                             </table>
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>
+
+
+
     <!-- End Page -->
 
 
@@ -457,57 +411,16 @@
     <script src="../../../global/js/Plugin/slidepanel.js"></script>
     <script src="../../../global/js/Plugin/switchery.js"></script>
     <script src="../../../global/js/Plugin/datatables.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../assets/examples/js/tables/datatable.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
 
     <!-- for live editing -->
     <!--jQuery Stuff-->
     <script>
-        //check availability
-        function checkAvailability() {
-            jQuery.ajax({
-                url: "verification/liveeditemerit.php",
-                data: 'username=' + $("#staticuserID").val(),
-                type: "POST",
-                dataType: "json",
-                cache: false,
-                success: function(data) {
+        var list;
+        var i;
 
-                    //conversion from object to array
-                    var userData = $.map(data, function(value, index) {
-                        return [value];
-                    });
-
-                    //append to input boxes...
-                    $("#staticmerit").val(userData[1]);
-
-                    //edit USERNAME AVAILABLE status
-                    $("#user-availability-status").html("<span class='status-available'> User ID available. </span>");
-
-
-                },
-                error: function(data) {
-                    //append to input boxes...
-                    $("#staticmerit").val("");
-                    $("#user-availability-status").html("<span class='status-available'> User ID not available. </span>");
-                }
-            });
-        }
-
-        $(".edit_row").click(function() {
-
-            var $row = $(this).closest("tr"); // Find the row
-            var $text = $row.find(".nr").text(); // Find the text
-            var table = $('#exampleTableTools').DataTable();
-
-            var data = table.row($text - 1).data();
-
-            $("#staticuserID").val(data[1]);
-            $("#staticmerit").val(data[2]);
-        });
-
-        //exit
         function JSconfirm() {
             swal({
                     title: "Are you sure?",
@@ -534,31 +447,124 @@ if (!$con) {
     exit;
 }
 
+if (isset($_POST['delete-user'])) {
+    $sql = "DELETE FROM `studentactivitylist` WHERE `studentactivitylist`.`activityID` = '" . $_POST['activityID'] . "'";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The user has been removed.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The user has not been removed.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['delete-prg'])) {
+    $sql = "DELETE FROM `activitylist` WHERE `activitylist`.`programID` = '" . $_POST['programID'] . "'";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The program has been removed.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The program has not been removed.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    }
+}
+
 if (isset($_POST['update'])) {
-    $sql = "UPDATE `merit` SET `merit` = '" . $_POST["staticmerit"] . "' WHERE `merit`.`userID` = '" . $_POST["staticuserID"] . "'";
+    $sql = "UPDATE `activityList` SET `status` = '2' WHERE `activityList`.`programID` = '" . $_POST['programID'] . "'";
+
+    $result = mysqli_query($con, $sql);
+    mysqli_close($con);
+
+
+    if ($result) {
+        echo '<script>swal({
+                title: "Success",
+                text: "The program has been removed.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    } else {
+        echo '<script>swal({
+                title: "Oh no",
+                text: "The program has not been removed.",
+                icon: "error",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
+    }
+}
+
+if (isset($_POST['add'])) {
+    $hash = md5(rand(0, 1000));
+
+    $sql = "INSERT INTO `activitylist` (`programID`, `programTitle`, `programLink`, `programKey`, `merit`, `status`) 
+    VALUES (NULL, '" . $_POST['title'] . "', 'http://localhost/ksjconnects/activityLogin/index.php?program=" . $hash . "', '$hash', '" . $_POST['merit'] . "', '1')";
+
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
-            title: "Good job", 
-            text: "The merit marks is updated.", 
-            icon: "success",
-            button: "Ok"}).then(function(){ 
-                window.location.href = "manipulatemerit.php";
+                title: "Success",
+                text: "The program has been added.",
+                icon: "success",
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
                }
-            );
-              </script>';
+            ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The merit marks is not updated.",
+                text: "The program has not been added.",
                 icon: "error",
-                button: "Ok"}).then(function(){ 
-                    window.location.href = "manipulatemerit.php";
-                   }
-                );
-              </script>';
+                button: "Ok",
+              }).then(function(){ 
+                window.location.href = "createprogram.php";
+               }
+            ); </script>';
     }
 }
-
 ?>

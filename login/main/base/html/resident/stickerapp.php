@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include 'edit/userSessionCheck.php' ?>
 
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Complaint List</title>
+    <title>KSJConnects - Resident Sticker Vehicle Management</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -45,12 +45,12 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
     <!--[if lt IE 9]>
-    <script src="../../../../global/vendor/html5shiv/html5shiv.min.js"></script>
+    <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
 
     <!--[if lt IE 10]>
-    <script src="../../../../global/vendor/media-match/media.match.min.js"></script>
-    <script src="../../../../global/vendor/respond/respond.min.js"></script>
+    <script src="../../../global/vendor/media-match/media.match.min.js"></script>
+    <script src="../../../global/vendor/respond/respond.min.js"></script>
     <![endif]-->
     <!-- Scripts -->
     <script src="../../../global/vendor/breakpoints/breakpoints.js"></script>
@@ -106,7 +106,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
-                                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                                <?php if (!$list['picture']) {
+                                    echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                                } else {
+                                    echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                                } ?>
                                 <i></i>
                             </span>
                         </a>
@@ -278,15 +282,15 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Complaint Management / User Complaints</li>
+                <li class="breadcrumb-item active">Vehicle Sticker Management / Vehicle Sticker Records</li>
             </ol>
-            <h1 class="page-title">User Complaints</h1>
+            <h1 class="page-title">Vehicle Sticker List</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
-                    <h3 class="panel-title">Complaint List</h3>
+                    <h3 class="panel-title">Sticker List</h3>
                 </header>
                 <div class="panel-body">
                     <!-- Add Data Button -->
@@ -294,7 +298,7 @@
                         <div class="col-md-6">
                             <div class="mb-15">
                                 <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
-                                    <i class="icon wb-plus" aria-hidden="true"></i> Add Complaint
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Add Vehicle Sticker Application
                                 </button>
                             </div>
                         </div>
@@ -304,42 +308,46 @@
                         <div class="modal-dialog modal-simple modal-center">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Add User Complaint</h4>
+                                    <h4 class="modal-title">New Vehicle Sticker Application</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" method="POST">
+                                    <form action="" method="POST" enctype="multipart/form-data">
                                         <!--user ID-->
                                         <div class="form-group ">
-                                            <label for="staticuserID" class="form-label">User ID</label>
-                                            <input type="text" class="form-control" id="userID" name="userID" value="<?php echo $_SESSION["username"]; ?>" readonly>
+                                            <label for="userID" class="form-label">User ID</label>
+                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability_user()" required>
                                             <span id="user-availability-status"></span>
                                         </div>
 
-                                        <!--complaint-->
+                                        <!--Driving License-->
                                         <div class="form-group ">
-                                            <label for="staticcomplaintid" class="form-label">Complaint ID</label>
-                                            <input type="text" class="form-control" id="complaintid" name="complaintid" value="Auto-assigned" disabled>
+                                            <label for="userLicense" class="form-label">Driving License</label>
+                                            <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                                <input type="text" class="form-control" readonly="">
+                                                <span class="input-group-btn">
+                                                    <span class="btn btn-success btn-file">
+                                                        <i class="icon wb-upload" aria-hidden="true"></i>
+                                                        <input type="file" onclick="" name="userLicense" multiple="" accept="image/x-png,image/gif,image/jpeg" required>
+                                                    </span>
+                                                </span>
+                                            </div>
                                         </div>
 
-                                        <!--reason-->
+                                        <!--Car Information-->
                                         <div class="form-group ">
-                                            <label for="staticreason" class="form-label">Reason</label>
-                                            <input type="text" class="form-control" id="reason" name="reason" value="" required>
-                                        </div>
-
-                                        <!--status-->
-                                        <div class="form-group ">
-                                            <label for="staticstatus" class="form-label">Status</label>
-                                            <input type="text" class="form-control" id="status" name="status" value="1" readonly>
-                                        </div>
-
-                                        <!--supervisor-->
-                                        <div class="form-group ">
-                                            <label for="staticsupervisor" class="form-label">Supervisor</label>
-                                            <input type="text" class="form-control" id="supervisor" name="supervisor" value="none" readonly>
+                                            <label for="userOwnership" class="form-label">Car Proof of Ownership</label>
+                                            <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                                <input type="text" class="form-control" readonly="">
+                                                <span class="input-group-btn">
+                                                    <span class="btn btn-success btn-file">
+                                                        <i class="icon wb-upload" aria-hidden="true"></i>
+                                                        <input type="file" onclick="" name="userOwnership" multiple="" accept="application/pdf" required>
+                                                    </span>
+                                                </span>
+                                            </div>
                                         </div>
                                 </div>
 
@@ -356,129 +364,170 @@
                         </div>
                     </div>
 
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
-
-                                    <?php
-                                    $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                    if (!$con) {
-                                        echo  mysqli_connect_error();
-                                        exit;
-                                    }
-                                    $sql = "SELECT * FROM complaint WHERE `userID` = '" . $_SESSION["username"] . "'  ";
-
-                                    $result = mysqli_query($con, $sql);
-                                    mysqli_close($con);
-                                    $qry = $result;
-                                    $list = mysqli_num_rows($qry);
-
-                                    $counter = 1;
-                                    if ($list > 0) {
-                                        echo '<thead>
-                                        <tr role="row">
-                                            <th>No</th>
-                                            <th>User ID</th>
-                                            <th>Complaint ID</th>
-                                            <th>Reason</th>
-                                            <th>Status</th>
-                                            <th>Supervisor</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-';
-                                        while ($row = mysqli_fetch_assoc($qry)) {
-                                            echo '
-                                            <tr>
-                                            <form action=""  method="POST">
-                                                <td class="nr">' . $counter . '</td>
-                                                <td>' . $row['userID'] . '</td>         
-                                                <td>' . $row['complaintID'] . '</td>    
-                                                <input type="hidden" name="complaintID" value="' . $row['complaintID'] . '">
-                                                <td>' . $row['complaint_str'] . '</td>  
-                                                <td>' . $row['status'] . '</td>                                                    
-                                                <td>' . $row['supervisor'] . '</td>     
-                                                <td class="actions">
-                                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row"
-                                                    data-toggle="tooltip" data-original-title="Remove" name="delete" onclick=""><i class="icon wb-trash" aria-hidden="true"></i></button>
-                                                </td>
-                                            </form>
-                                            </tr>
-';
-                                            $counter++;
-                                        }
-                                    }
-
-                                    //modal
-                                    echo '</tbody>                                                   
-                                    <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog modal-simple modal-center">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                                <h4 class="modal-title">Edit User Complaint</h4>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="example-wrap">
+                                <div class="nav-tabs-horizontal" data-plugin="tabs">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Pending Sticker Applications</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Active Vehicle Stickers</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab" aria-selected="false">Rejected Applications</a></li>
+                                        <li class="dropdown nav-item" role="presentation" style="display: none;">
+                                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Menu</a>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Pending Sticker Applications</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Active Vehicle Stickers</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Rejected Applications</a>
                                             </div>
-                                            <div class="modal-body">
-                                                <form action="" method="POST">
-                                                    <!--user ID-->
-                                                    <div class="form-group ">
-                                                        <label for="staticuserID" class="form-label">User ID</label>
-                                                        <input type="text" class="form-control" id="staticuserID" name="staticuserID" disabled>
-                                                        <span id="user-availability-status"></span>
-                                                    </div>
-                                                    
-                                                    <!--complaint-->
-                                                    <div class="form-group ">
-                                                        <label for="staticcomplaintid" class="form-label">Complaint ID</label>
-                                                        <input type="text" readonly class="form-control" id="staticcomplaintid" name="staticcomplaintid" size="50">
-                                                    </div>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content pt-20">
+                                        <div class="tab-pane active" id="exampleTabsOne" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
-                                                    <!--reason-->
-                                                    <div class="form-group ">
-                                                        <label for="staticreason" class="form-label">Reason</label>
-                                                        <input type="text" class="form-control" id="staticreason" name="staticreason" value="" required>
-                                                    </div>
 
-                                                    <!--status-->
-                                                    <div class="form-group ">
-                                                        <label for="staticstatus" class="form-label">Status</label>
-                                                        <input type="text" class="form-control" id="staticstatus" name="staticstatus" required>
-                                                    </div>
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `stickerapplication` WHERE `approval` = 0 AND `userID` = '".$_SESSION["username"]."'";
 
-                                                    <!--supervisor-->
-                                                    <div class="form-group ">
-                                                        <label for="staticsupervisor" class="form-label">supervisor</label>
-                                                        <input type="text" class="form-control" id="staticsupervisor" name="staticsupervisor" required>
-                                                    </div>                                       
-                                            </div>
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>No</th>
+                                                            <th>User ID</th>
+                                                            <th>Vehicle Data</th>
+                                                            <th>User License</th>
+                                                            <th>Date Applied</th>
+                                                        </tr>
+                                                        </thead>';
+                                                $counter = 1;
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
+                                                            <tr>
+                                                                <form action=""  method="POST">
+                                                                    <td class="nr">' . $counter . '</td>
+                                                                    <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                                    <td>' . $row['userID'] . '</td>         
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=1" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=2" class="btn btn-primary" >View</a></td>
+                                                                    <td>' . $row['dateApplied'] . '</td>                                      
+                                                                </form>
+                                                            </tr>';
+                                                        $counter++;
+                                                    }
+                                                }
+                                                ?>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane" id="exampleTabsTwo" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `stickerapplication` WHERE `approval` = 1 AND `userID` = '".$_SESSION["username"]."'";
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>No</th>
+                                                            <th>User ID</th>
+                                                            <th>Vehicle Data</th>
+                                                            <th>User License</th>
+                                                            <th>Date Applied</th>
+                                                        </tr>
+                                                        </thead>';
+                                                $counter = 1;
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
+                                                            <tr>
+                                                                <form action=""  method="POST">
+                                                                    <td class="nr">' . $counter . '</td>
+                                                                    <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                                    <td>' . $row['userID'] . '</td>         
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=1" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=2" class="btn btn-primary" >View</a></td>
+                                                                    <td>' . $row['dateApplied'] . '</td>                                      
+                                                                </form>
+                                                            </tr>';
+                                                        $counter++;
+                                                    }
+                                                }
+                                                ?>
 
-                                            <div class="modal-footer">
-                                                <!--buttons-->
-                                                <div class="btn-toolbar" role="toolbar">
-                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                        <button type="submit" name="update" class="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
-                                                </form>
-                                            </div>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane" id="exampleTabsThree" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+
+
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `stickerapplication` WHERE `approval` = 2 AND `userID` = '".$_SESSION["username"]."'";
+
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>No</th>
+                                                            <th>User ID</th>
+                                                            <th>Vehicle Data</th>
+                                                            <th>User License</th>
+                                                            <th>Date Applied</th>
+                                                        </tr>
+                                                        </thead>';
+                                                $counter = 1;
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
+                                                            <tr>
+                                                                <form action=""  method="POST">
+                                                                    <td class="nr">' . $counter . '</td>
+                                                                    <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                                    <td>' . $row['userID'] . '</td>         
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=1" class="btn btn-primary" >View</a></td>
+                                                                    <td><a target="_blank" href="verification/viewvehiclestuff.php?no='.$row['userID'].'&slip=2" class="btn btn-primary" >View</a></td>
+                                                                    <td>' . $row['dateApplied'] . '</td>                                      
+                                                                </form>
+                                                            </tr>';
+                                                        $counter++;
+                                                    }
+                                                }
+                                                ?>
+                                            </table>
                                         </div>
                                     </div>
-                                </div>';
-                                    ?>
-
-                                </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
@@ -552,10 +601,15 @@
     <script src="../../assets/examples/js/tables/datatable.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+    <script src="../../../global/js/Plugin/input-group-file.js"></script>
+    <script src="../../../global/js/Plugin/jquery-placeholder.js"></script>
 
     <!-- for live editing -->
     <!--jQuery Stuff-->
     <script>
+        var list;
+        var i;
+
         function JSconfirm() {
             swal({
                     title: "Are you sure?",
@@ -571,40 +625,17 @@
                 });
         }
 
-        $(".edit_row").click(function() {
 
-            var $row = $(this).closest("tr"); // Find the row
-            var $text = $row.find(".nr").text(); // Find the text
-            var table = $('#exampleTableTools').DataTable();
-
-            var data = table.row($text - 1).data();
-
-            $("#staticuserID").val(data[1]);
-            $("#staticcomplaintid").val(data[2]);
-            $("#staticreason").val(data[3]);
-            $("#staticstatus").val(data[4]);
-            $("#staticsupervisor").val(data[5]);
-        });
-
-        function checkAvailability() {
+        function checkAvailability_user() {
+            console.log($("#userID").val());
             jQuery.ajax({
                 url: "verification/livedit.php",
                 data: 'username=' + $("#userID").val(),
                 type: "POST",
-                dataType: "json",
-                cache: false,
                 success: function(data) {
-                    //conversion from object to array
-                    var userData = $.map(data, function(value, index) {
-                        return [value];
-                    });
-                    //edit USERNAME AVAILABLE status
-                    $("#user-availability-status").html("<span class='status-available'> User ID available. </span>");
+                    $("#user-availability-status").html(data);
                 },
-                error: function(data) {
-                    //append to input boxes...
-                    $("#user-availability-status").html("<span class='status-available'> User ID not available. </span>");
-                }
+                error: function() {}
             });
         }
     </script>
@@ -618,13 +649,10 @@ if (!$con) {
     echo  mysqli_connect_error();
     exit;
 }
-if (isset($_POST['add'])) {
-    $sql = "INSERT INTO `complaint` (`complaintID`, `userID`, `complaint_str`, `status`, `supervisor`) VALUES 
-(NULL, 
-'" . $_POST['userID'] . "',
-'" . $_POST['reason'] . "',
-'" . $_POST['status'] . "',
-'" . $_POST['supervisor'] . "')";
+
+if (isset($_POST['approve'])) {
+    $sql = "UPDATE `stickerapplication` SET `approval` = '1' WHERE `stickerapplication`.`userID` = '" . $_POST['userID'] . "'";
+
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
 
@@ -632,81 +660,92 @@ if (isset($_POST['add'])) {
     if ($result) {
         echo '<script>swal({
             title: "Success",
-            text: "The complaint has been added.",
+            text: "The sticker application  has been approved.",
             icon: "success",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "manipulatecomplaint.php";
+            window.location.href = "facilitybooking.php";
            }
         ); </script>';
     } else {
         echo '<script>swal({
             title: "Oh no",
-            text: "Complaint is not added.",
+            text: "The sticker application  has not been approved.",
             icon: "error",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "manipulatecomplaint.php";
+            window.location.href = "facilitybooking.php";
            }
         ); </script>';
     }
 }
 
-if (isset($_POST['update'])) {
-    $sql = "UPDATE `complaint` SET
-     `complaint_str` = '" . $_POST['staticreason'] . "',
-     `status` = '" . $_POST['staticstatus'] . "',
-      `supervisor` = '" . $_POST['staticsupervisor'] . "' 
-      WHERE `complaint`.`complaintID` = '" . $_POST['staticcomplaintid'] . "'";
+if (isset($_POST['delete'])) {
+    $sql = "UPDATE `stickerapplication` SET `approval` = '2' WHERE `stickerapplication`.`userID` = '" . $_POST['userID'] . "'";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
+
+
     if ($result) {
         echo '<script>swal({
-                title: "Success",
-                text: "The complaint has been modified.",
-                icon: "success",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "manipulatecomplaint.php";
-               }
-            ); </script>';
+            title: "Success",
+            text: "The sticker application has been rejected.",
+            icon: "success",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "stickerapp.php";
+           }
+        ); </script>';
     } else {
         echo '<script>swal({
-                title: "Oh no",
-                text: "The complaint has not been modified.",
-                icon: "error",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "manipulatecomplaint.php";
-               }
-            ); </script>';
+            title: "Oh no",
+            text: "The sticker application  has not been rejected.",
+            icon: "error",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "stickerapp.php";
+           }
+        ); </script>';
     }
 }
 
-if (isset($_POST['delete'])) {
-    $sql = "DELETE FROM `complaint` WHERE `complaint`.`complaintID` = '" . $_POST['complaintID'] . "'";
+if (isset($_POST['add'])) {
+
+    //properties for Image License...
+    $licenseData = addslashes(file_get_contents($_FILES['userLicense']['tmp_name']));
+    $licenseProperties = getimageSize($_FILES['userLicense']['tmp_name']);
+
+    //properties for pdf
+    $vehicleData = addslashes(file_get_contents($_FILES['userOwnership']['tmp_name']));
+    $vehicleProperties = "application/pdf";
+
+    //get curdate
+    $date = date('Y-m-d');
+
+    $sql = "INSERT INTO `stickerapplication` (`userID`, `approval`, `vehicleDataType`, `vehicleData`, `licenseData`, `licenseDataType`, `dateApplied`) 
+    VALUES ('" . $_POST['userID'] . "', '0', '$vehicleProperties', '{$vehicleData}' , '{$licenseData}', '{$licenseProperties['mime']}', '$date')";
 
     $result = mysqli_query($con, $sql);
     mysqli_close($con);
     if ($result) {
         echo '<script>swal({
                 title: "Success",
-                text: "The complaint has been delete.",
+                text: "The sticker application has been added.",
                 icon: "success",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "manipulatecomplaint.php";
+                window.location.href = "stickerapp.php";
                }
             ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The complaint has not been deleted.",
+                text: "The sticker application has not been added.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 
-                window.location.href = "manipulatecomplaint.php";
+                window.location.href = "stickerapp.php";
                }
             ); </script>';
     }

@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (Add/Update/Delete Booking Facility Records)</title>
+    <title>KSJConnects - Resident (Add/Update/Delete Booking Facility Records)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -171,12 +171,13 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
-                                        <span class="site-menu-title">Resident Payment</span>
+                                    <a class="animsition-link" href="payment.php">
+                                        <span class="site-menu-title">Your Payment</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
 
                         <!-- Complaint System Information Stuff-->
                         <li class="site-menu-category">Complaint System</li>
@@ -188,7 +189,7 @@
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="manipulatecomplaint.php">
-                                        <span class="site-menu-title">Resident's Complaints</span>
+                                        <span class="site-menu-title">Your Complaints</span>
                                     </a>
                                 </li>
                             </ul>
@@ -203,14 +204,14 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitylist">
+                                    <a class="animsition-link" href="facilitylist.php">
                                         <span class="site-menu-title">Facility List</span>
                                     </a>
                                 </li>
                             </ul>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitybooking">
+                                    <a class="animsition-link" href="facilitybooking.php">
                                         <span class="site-menu-title">Facility Bookings</span>
                                     </a>
                                 </li>
@@ -225,8 +226,8 @@
                                 <span class="site-menu-title">Merit Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="manipulatemerit.php">
-                                            <span class="site-menu-title">Resident's Merit</span>
+                                        <a class="animsition-link" href="programlist.php">
+                                            <span class="site-menu-title">Program List</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -241,7 +242,7 @@
                                 <span class="site-menu-title">Sticker Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="stickerapp.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
@@ -250,21 +251,22 @@
                         </li>
 
 
+
                     </ul>
                     <div class="site-menubar-section">
                         <h5>
                             Sprint 3 Progress
-                            <span class="float-right">1%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">80%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>
@@ -276,9 +278,9 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Facility Management / Book a Facility</li>
+                <li class="breadcrumb-item active">Facility Management / (Facility Booking Records)</li>
             </ol>
-            <h1 class="page-title">Book a Facility</h1>
+            <h1 class="page-title">Facility Booking Records</h1>
         </div>
         <div class="page-content container-fluid">
             <div class="panel">
@@ -292,7 +294,7 @@
                         <div class="col-md-6">
                             <div class="mb-15">
                                 <button class="btn btn-outline btn-primary" type="button" data-target="#examplePositionCenter2" data-toggle="modal">
-                                    <i class="icon wb-plus" aria-hidden="true"></i> Book New Facility
+                                    <i class="icon wb-plus" aria-hidden="true"></i> Add New Booking
                                 </button>
                             </div>
                         </div>
@@ -305,14 +307,14 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="unappend()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">Book Facility</h4>
+                                    <h4 class="modal-title">Add New Booking</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="" method="POST">
                                         <!--user ID-->
                                         <div class="form-group ">
                                             <label for="userID" class="form-label">User ID</label>
-                                            <input type="text" class="form-control" id="userID" name="userID" onblur="checkAvailability_user()" value="<?php echo $_SESSION["username"]; ?>" readonly>
+                                            <input type="text" class="form-control" id="userID" name="userID" value="<?php echo $_SESSION['username']?>" readonly>
                                             <span id="user-availability-status"></span>
                                         </div>
 
@@ -368,124 +370,181 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
+                            <div class="example-wrap">
+                                <div class="nav-tabs-horizontal" data-plugin="tabs">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab" aria-selected="true">Pending Bookings</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab" aria-selected="false">Approved Bookings</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab" aria-selected="false">Rejected Bookings</a></li>
+                                        <li class="dropdown nav-item" role="presentation" style="display: none;">
+                                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Menu</a>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Pending Bookings</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Approved Bookings</a>
+                                                <a class="dropdown-item" data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Rejected Bookings</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content pt-20">
+                                        <div class="tab-pane active" id="exampleTabsOne" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" id="exampleTableTools">
 
 
-                                <?php
-                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                if (!$con) {
-                                    echo  mysqli_connect_error();
-                                    exit;
-                                }
-                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 0 AND `userID` = '".$_SESSION["username"]."' ";
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 0 AND `userID` = '".$_SESSION["username"]."'";
 
-                                $result = mysqli_query($con, $sql);
-                                mysqli_close($con);
-                                $qry = $result;
-                                $list = mysqli_num_rows($qry);
-                                echo '<thead>
-                                <tr role="row">
-                                    <th>No</th>
-                                    <th>Booking ID</th>
-                                    <th>Facility ID</th>
-                                    <th>Facility Name</th>
-                                    <th>Date Start</th>
-                                    <th>Date End</th>
-                                </tr>
-                                </thead>';
-                                $counter = 1;
-                                if ($list > 0) {
-                                    echo '
-                                        <tbody>
-';
-                                    while ($row = mysqli_fetch_assoc($qry)) {
-                                        echo '
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>No</th>
+                                                            <th>Booking ID</th>
+                                                            <th>Facility ID</th>
+                                                            <th>Facility Name</th>
+                                                            <th>User ID</th>
+                                                            <th>Date Start</th>
+                                                            <th>Date End</th>
+                                                        </tr>
+                                                        </thead>';
+                                                $counter = 1;
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
                                             <tr>
                                                 <form action=""  method="POST">
                                                     <td class="nr">' . $counter . '</td>
                                                     <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
                                                     <td>' . $row['BookID'] . '</td>         
                                                     <td>' . $row['facID'] . '</td>    
-                                                    <td>' . $row['facName'] . '</td>            
+                                                    <td>' . $row['facName'] . '</td>  
+                                                    <td>' . $row['userID'] . '</td>            
                                                     <td>' . $row['dateStart'] . '</td> 
                                                     <td>' . $row['dateEnd'] . '</td>                                 
                                                 </form>
-                                            </tr>
-';
-                                        $counter++;
-                                    }
-                                }
-                                ?>
+                                            </tr>';
+                                                        $counter++;
+                                                    }
+                                                }
+                                                ?>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane" id="exampleTabsTwo" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 1 AND `userID` = '".$_SESSION["username"]."'";
 
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>No</th>
+                                                            <th>Booking ID</th>
+                                                            <th>Facility ID</th>
+                                                            <th>Facility Name</th>
+                                                            <th>User ID</th>
+                                                            <th>Date Start</th>
+                                                            <th>Date End</th>
+                                                        </tr>
+                                                        </thead>';
+                                                $counter = 1;
+                                                if ($list > 0) {
+                                                    echo '
+                                                                <tbody>
+                                                        ';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
+                                                                    <tr>
+                                                                    <form action=""  method="POST">
+                                                                        <td class="nr">' . $counter . '</td>
+                                                                        <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
+                                                                        <td>' . $row['BookID'] . '</td>         
+                                                                        <td>' . $row['facID'] . '</td>    
+                                                                        <td>' . $row['facName'] . '</td>  
+                                                                        <td>' . $row['userID'] . '</td>            
+                                                                        <td>' . $row['dateStart'] . '</td> 
+                                                                        <td>' . $row['dateEnd'] . '</td>                                 
+                                                                    </form>
+                                                                    </tr>
+                                                        ';
+                                                        $counter++;
+                                                    }
+                                                }
+                                                ?>
+
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane" id="exampleTabsThree" role="tabpanel">
+                                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
 
 
+                                                <?php
+                                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
+                                                if (!$con) {
+                                                    echo  mysqli_connect_error();
+                                                    exit;
+                                                }
+                                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 2 AND `userID` = '".$_SESSION["username"]."'";
 
-
-            </div>
-        </div>
-        <div class="page-content container-fluid">
-            <div class="panel">
-                <header class="panel-heading">
-                    <div class="panel-actions"></div>
-                    <h3 class="panel-title">Past Bookings</h3>
-                </header>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-hover dataTable table-striped w-full" data-plugin="dataTable">
-
-
-                                <?php
-                                $con = mysqli_connect("localhost", "root", "", "ksjdb");
-                                if (!$con) {
-                                    echo  mysqli_connect_error();
-                                    exit;
-                                }
-                                $sql = "SELECT * FROM `facilitiesbooking` WHERE `Approval` = 2 AND `userID` = '".$_SESSION["username"]."' ";
-
-                                $result = mysqli_query($con, $sql);
-                                mysqli_close($con);
-                                $qry = $result;
-                                $list = mysqli_num_rows($qry);
-                                echo '<thead>
-                                <tr role="row">
-                                    <th>No</th>
-                                    <th>Booking ID</th>
-                                    <th>Facility ID</th>
-                                    <th>Facility Name</th>
-                                    <th>Date Start</th>
-                                    <th>Date End</th>
-                                </tr>
-                                </thead>';
-                                $counter = 1;
-                                if ($list > 0) {
-                                    echo '
-                                        <tbody>
-';
-                                    while ($row = mysqli_fetch_assoc($qry)) {
-                                        echo '
-                                            <tr>
-                                            <form action=""  method="POST">
-                                                <td class="nr">' . $counter . '</td>
-                                                <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
-                                                <td>' . $row['BookID'] . '</td>         
-                                                <td>' . $row['facID'] . '</td>    
-                                                <td>' . $row['facName'] . '</td>            
-                                                <td>' . $row['dateStart'] . '</td> 
-                                                <td>' . $row['dateEnd'] . '</td>                                 
-                                            </form>
-                                            </tr>
-';
-                                        $counter++;
-                                    }
-                                }
-                                ?>
-
-                            </table>
+                                                $result = mysqli_query($con, $sql);
+                                                mysqli_close($con);
+                                                $qry = $result;
+                                                $list = mysqli_num_rows($qry);
+                                                echo '<thead>
+                                                        <tr role="row">
+                                                            <th>No</th>
+                                                            <th>Booking ID</th>
+                                                            <th>Facility ID</th>
+                                                            <th>Facility Name</th>
+                                                            <th>User ID</th>
+                                                            <th>Date Start</th>
+                                                            <th>Date End</th>
+                                                        </tr>
+                                                        </thead>';
+                                                $counter = 1;
+                                                if ($list > 0) {
+                                                    echo '
+                                                        <tbody>
+                                                        ';
+                                                    while ($row = mysqli_fetch_assoc($qry)) {
+                                                        echo '
+                                                                    <tr>
+                                                                    <form action=""  method="POST">
+                                                                        <td class="nr">' . $counter . '</td>
+                                                                        <input type="hidden" name="BookID" value="' . $row['BookID'] . '">
+                                                                        <td>' . $row['BookID'] . '</td>         
+                                                                        <td>' . $row['facID'] . '</td>    
+                                                                        <td>' . $row['facName'] . '</td>  
+                                                                        <td>' . $row['userID'] . '</td>            
+                                                                        <td>' . $row['dateStart'] . '</td> 
+                                                                        <td>' . $row['dateEnd'] . '</td>                                 
+                                                                    </form>
+                                                                    </tr>
+                                                        ';
+                                                        $counter++;
+                                                    }
+                                                }
+                                                ?>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

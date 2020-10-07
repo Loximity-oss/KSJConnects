@@ -1,4 +1,18 @@
-<?php session_start(); ?>
+<?php
+include 'edit/userSessionCheck.php';
+require_once 'edit/dbconnect.php';
+$sql = "SELECT * FROM `announcement` ORDER BY `date` DESC";
+$sql2 = "SELECT complaintID FROM `complaint` where userID ='".$_SESSION['username']."'";
+$sql3 = "SELECT merit from merit where userID ='".$_SESSION['username']."'";
+$sql4 = "SELECT roomID from roomlist where userID ='".$_SESSION['username']."'";
+$result = mysqli_query($con, $sql);
+$result2 = mysqli_query($con, $sql2);
+$result3 = mysqli_query($con, $sql3);
+$result4 = mysqli_query($con, $sql4);
+$list2 = mysqli_num_rows($result2);
+$row3 = mysqli_fetch_assoc($result3);
+$row4 = mysqli_fetch_assoc($result4);
+?>
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
 
@@ -9,7 +23,7 @@
   <meta name="description" content="bootstrap admin template">
   <meta name="author" content="">
 
-  <title>KSJConnects - Staff Homepage</title>
+  <title>KSJConnects - Resident Homepage</title>
 
   <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
   <link rel="shortcut icon" href="../../../assets/images/favicon.ico">
@@ -18,6 +32,15 @@
   <link rel="stylesheet" href="../../../global/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../global/css/bootstrap-extend.min.css">
   <link rel="stylesheet" href="../../assets/css/site.min.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-fixedheader-bs4/dataTables.fixedheader.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-fixedcolumns-bs4/dataTables.fixedcolumns.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-rowgroup-bs4/dataTables.rowgroup.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-scroller-bs4/dataTables.scroller.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-select-bs4/dataTables.select.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.css">
+  <link rel="stylesheet" href="../../../global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.css">
+  <link rel="stylesheet" href="../../assets/examples/css/tables/datatable.css">
 
   <!-- Plugins -->
   <link rel="stylesheet" href="../../../global/vendor/animsition/animsition.css">
@@ -98,7 +121,11 @@
           <li class="nav-item dropdown">
             <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
               <span class="avatar avatar-online">
-                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                <?php if (!$list['picture']) {
+                  echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                } else {
+                  echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                } ?>
                 <i></i>
               </span>
             </a>
@@ -128,6 +155,7 @@
       <!-- End Site Navbar Seach -->
     </div>
   </nav>
+
   <div class="site-menubar">
         <div class="site-menubar-body">
             <div>
@@ -163,12 +191,13 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
-                                    <a class="animsition-link" href="index.php">
-                                        <span class="site-menu-title">Resident Payment</span>
+                                    <a class="animsition-link" href="payment.php">
+                                        <span class="site-menu-title">Your Payment</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
 
                         <!-- Complaint System Information Stuff-->
                         <li class="site-menu-category">Complaint System</li>
@@ -180,7 +209,7 @@
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="manipulatecomplaint.php">
-                                        <span class="site-menu-title">Resident's Complaints</span>
+                                        <span class="site-menu-title">Your Complaints</span>
                                     </a>
                                 </li>
                             </ul>
@@ -195,14 +224,14 @@
                             </a>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitylist">
+                                    <a class="animsition-link" href="facilitylist.php">
                                         <span class="site-menu-title">Facility List</span>
                                     </a>
                                 </li>
                             </ul>
                             <ul class="site-menu-sub">
                                 <li class="site-menu-item ">
-                                    <a class="animsition-link" href="facilitybooking">
+                                    <a class="animsition-link" href="facilitybooking.php">
                                         <span class="site-menu-title">Facility Bookings</span>
                                     </a>
                                 </li>
@@ -217,8 +246,8 @@
                                 <span class="site-menu-title">Merit Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="manipulatemerit.php">
-                                            <span class="site-menu-title">Resident's Merit</span>
+                                        <a class="animsition-link" href="programlist.php">
+                                            <span class="site-menu-title">Program List</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -233,7 +262,7 @@
                                 <span class="site-menu-title">Sticker Submenu</span>
                                 <ul class="site-menu-sub">
                                     <li class="site-menu-item ">
-                                        <a class="animsition-link" href="index.php">
+                                        <a class="animsition-link" href="stickerapp.php">
                                             <span class="site-menu-title">Resident's Sticker App</span>
                                         </a>
                                     </li>
@@ -242,21 +271,22 @@
                         </li>
 
 
+
                     </ul>
                     <div class="site-menubar-section">
                         <h5>
                             Sprint 3 Progress
-                            <span class="float-right">1%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar active" style="width: 1%;" role="progressbar"></div>
+                            <div class="progress-bar active" style="width: 100%;" role="progressbar"></div>
                         </div>
                         <h5>
                             Product Release
-                            <span class="float-right">80%</span>
+                            <span class="float-right">100%</span>
                         </h5>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-warning" style="width: 80%;" role="progressbar"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 100%;" role="progressbar"></div>
                         </div>
                     </div>
                 </div>
@@ -287,7 +317,7 @@
               </button>
               <span class="ml-15 font-weight-400">USER ACCESS LEVEL</span>
               <div class="content-text text-center mb-0">
-                <span class="font-size-40 font-weight-100">User</span>
+                <span class="font-size-40 font-weight-100">Resident</span>
               </div>
             </div>
           </div>
@@ -298,9 +328,9 @@
               <button type="button" class="btn btn-floating btn-sm btn-info">
                 <i class="icon wb-users"></i>
               </button>
-              <span class="ml-15 font-weight-400">Room Name</span>
+              <span class="ml-15 font-weight-400">Merit</span>
               <div class="content-text text-center mb-0">
-                <span class="font-size-40 font-weight-100">A-1-01</span>
+                <span class="font-size-40 font-weight-100"><?php echo $row3['merit']?></span>
               </div>
             </div>
           </div>
@@ -311,9 +341,9 @@
               <button type="button" class="btn btn-floating btn-sm btn-success">
                 <i class="icon wb-table"></i>
               </button>
-              <span class="ml-15 font-weight-400">Merit</span>
+              <span class="ml-15 font-weight-400">Your Room</span>
               <div class="content-text text-center mb-0">
-                <span class="font-size-40 font-weight-100">-</span>
+                <span class="font-size-40 font-weight-100"><?php echo $row4['roomID'] ?></span>
               </div>
             </div>
           </div>
@@ -326,7 +356,7 @@
               </button>
               <span class="ml-15 font-weight-400">Unresolved Complaints</span>
               <div class="content-text text-center mb-0">
-                <span class="font-size-40 font-weight-100">0</span>
+                <span class="font-size-40 font-weight-100"><?php echo $list2 ?></span>
               </div>
             </div>
           </div>
@@ -338,7 +368,11 @@
           <div class="card card-shadow">
             <div class="card-block text-center bg-white p-40">
               <div class="avatar avatar-100 mb-20">
-                <?php echo '<img src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">'; ?>
+                <?php if (!$list['picture']) {
+                  echo '<img class="card-img-top" src="https://freepikpsd.com/wp-content/uploads/2019/10/default-profile-image-png-1-Transparent-Images.png" alt="Card image cap">';
+                } else {
+                  echo '<img class="card-img-top" src="profileimg/imageView.php?username=' . $_SESSION['username'] . '" alt="Card image cap">';
+                } ?>
               </div>
               <?php
               echo '
@@ -372,7 +406,32 @@
           </div>
           <!-- End Panel Web Designer -->
         </div>
+      <!-- modal -->
+      <div class="modal fade" id="examplePositionCenter1" aria-labelledby="examplePositionCenter1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">Announcement Details</h4>
+            </div>
+            <div class="modal-body">
+              <!--ancTitleID-->
+              <div class="form-group ">
+                <label for="ancTitleID1" class="form-label">Announcement Title</label>
+                <input type="text" class="form-control" id="ancTitleID1" name="ancTitleID" value="" readonly>
+              </div>
 
+              <!--AnnouncmentContent-->
+              <div class="form-group ">
+                <label for="ancContent1" class="form-label">Content</label>
+                <textarea class="form-control" id="ancContent1"  maxlength="100" placeholder="Enter your announcement (max 100)" readonly></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
         <div class="col-xxl-9">
 
           <div class="card border border-primary">
@@ -386,8 +445,85 @@
         </div>
 
 
+
+        <?php
+
+        $result = mysqli_query($con, $sql);
+        mysqli_close($con);
+        $qry = $result;
+        $list = mysqli_num_rows($qry);
+        $row = mysqli_fetch_assoc($qry);
+        echo '
+          <div class="col-xxl-3 col-xl-4"></div>
+          <div class="col-xxl-9">
+            <div class="card border border-primary">
+              <div class="card-block">
+                <h4 class="card-title">Latest News: ' . $row['Title'] . ' : ' . $row['date'] . '</h4>
+                <p class="card-text">' . $row['Text'] . '
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xxl-3 col-xl-4"></div>
+
+          <div class="col-xxl-9">
+            <div class="panel">
+                <h3 class="panel-title">News Table</h3>
+
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                  <table class="table table-hover dataTable table-striped w-half" id="exampleTableTools">';
+
+
+
+
+        echo '<thead>
+                    <tr role="row">
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Text</th>
+                    <th>Date</th>
+                    <th>Actions</th> 
+                    </tr>
+                    </thead>';
+        $counter = 1;
+        if ($list > 0) {
+          echo '
+                    <tbody>';
+          while ($row = mysqli_fetch_assoc($qry)) {
+            echo '
+                        <tr>
+                        <form action=""  method="POST">
+                            <td class="nr">' . $counter . '</td>
+                            <input type="hidden" name="BookID" value="' . $row['AnnouncmentID'] . '">
+                            <td>' . $row['Title'] . '</td>         
+                            <td>' . $row['Text'] . '</td>    
+                            <td>' . $row['date'] . '</td>                                
+                            <td class="actions">
+                              <a href="#" class="btn btn-sm btn-icon btn-pure btn-default on-default edit_row"
+                              data-original-title="Edit" data-target="#examplePositionCenter1" data-toggle="modal" type="button" ><i class="icon wb-link-intact" aria-hidden="true"></i></a>
+                            </td>
+                        </form>
+                        </tr>';
+            $counter++;
+          }
+        }
+        ?>
+        </table>
       </div>
     </div>
+  </div>
+
+
+
+
+  </div>
+  </div>
+
+  </div>
+  </div>
   </div>
   <!-- End Page -->
 
@@ -420,6 +556,24 @@
   <script src="../../../global/vendor/chartist/chartist.min.js"></script>
   <script src="../../../global/vendor/gmaps/gmaps.js"></script>
   <script src="../../../global/vendor/matchheight/jquery.matchHeight-min.js"></script>
+  <script src="../../assets/examples/js/tables/datatable.js"></script>
+  <script src="../../../global/vendor/datatables.net/jquery.dataTables.js"></script>
+  <script src="../../../global/vendor/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="../../../global/vendor/datatables.net-fixedheader/dataTables.fixedHeader.js"></script>
+  <script src="../../../global/vendor/datatables.net-fixedcolumns/dataTables.fixedColumns.js"></script>
+  <script src="../../../global/vendor/datatables.net-rowgroup/dataTables.rowGroup.js"></script>
+  <script src="../../../global/vendor/datatables.net-scroller/dataTables.scroller.js"></script>
+  <script src="../../../global/vendor/datatables.net-responsive/dataTables.responsive.js"></script>
+  <script src="../../../global/vendor/datatables.net-responsive-bs4/responsive.bootstrap4.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons/dataTables.buttons.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons/buttons.html5.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons/buttons.flash.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons/buttons.print.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons/buttons.colVis.js"></script>
+  <script src="../../../global/vendor/datatables.net-buttons-bs4/buttons.bootstrap4.js"></script>
+  <script src="../../../global/vendor/flot/jquery.flot.js"></script>
+
+
 
   <!-- Scripts -->
   <script src="../../../global/js/Component.js"></script>
@@ -449,6 +603,8 @@
   <script src="../../../global/js/Plugin/asscrollable.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="../../assets/examples/js/dashboard/v2.js"></script>
+  <script src="../../../global/js/Plugin/datatables.js"></script>
+  <script src="../../assets/examples/js/tables/datatable.js"></script>
   <script>
     function JSconfirm() {
       swal({
@@ -464,6 +620,19 @@
           }
         });
     }
+
+    $(".edit_row").click(function() {
+
+      var $row = $(this).closest("tr"); // Find the row
+      var $text = $row.find(".nr").text(); // Find the text
+      var table = $('#exampleTableTools').DataTable();
+
+      var data = table.row($text - 1).data();
+      console.log(data);
+
+      $("#ancTitleID1").val(data[1]);
+      $("#ancContent1").val(data[2]);
+    });
   </script>
 </body>
 

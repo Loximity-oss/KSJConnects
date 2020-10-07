@@ -37,6 +37,10 @@
     <link rel="stylesheet" href="../../../global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.css">
     <link rel="stylesheet" href="../../assets/examples/css/tables/datatable.css">
 
+    <link rel="stylesheet" href="../../../global/vendor/chartist/chartist.css">
+        <link rel="stylesheet" href="../../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
+        <link rel="stylesheet" href="../../assets/examples/css/charts/chartist.css">
+
 
     <!-- Fonts -->
     <link rel="stylesheet" href="../../../global/fonts/font-awesome/font-awesome.css">
@@ -334,6 +338,19 @@
             <h1 class="page-title">User Account Management</h1>
         </div>
         <div class="page-content container-fluid">
+        <div class="panel">
+          <div class="panel-body">
+                <!-- Example Simple Line Chart -->
+                <div class="example-wrap">
+                  <h4 class="example-title">User Account Registration</h4>
+                  <p>Statistics of accounts registered</p>
+                  <div class="example">
+                    <div class="ct-chart" id="exampleSimpleLine"></div>
+                  </div>
+                </div>
+                <!-- End Example Simple Line Chart -->
+          </div>
+        </div>
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
@@ -595,7 +612,11 @@
     <script src="../../../global/vendor/datatables.net-buttons/buttons.colVis.js"></script>
     <script src="../../../global/vendor/datatables.net-buttons-bs4/buttons.bootstrap4.js"></script>
     <script src="../../../global/vendor/asrange/jquery-asRange.min.js"></script>
-    <script src="../../../global/vendor/bootbox/bootbox.js"></script>
+        <script src="../../../global/vendor/bootbox/bootbox.js"></script>
+
+    <script src="../../../global/vendor/chartist/chartist.js"></script>
+        <script src="../../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.js"></script>
+        <script src="../../assets/examples/js/charts/chartist.js"></script>
 
     <!-- Scripts -->
     <script src="../../../global/js/Component.js"></script>
