@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (Add/Update/Delete Payment Records)</title>
+    <title>Staff (Add/Update/Delete Payment Records)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="../../../global/vendor/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.css">
     <link rel="stylesheet" href="../../../global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.css">
     <link rel="stylesheet" href="../../assets/examples/css/tables/datatable.css">
+    <link rel="stylesheet" href="../../../global/vendor/chartist/chartist.css">
+        <link rel="stylesheet" href="../../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
+        <link rel="stylesheet" href="../../assets/examples/css/charts/chartist.css">
 
 
     <!-- Fonts -->
@@ -141,7 +144,7 @@
             <!-- End Site Navbar Seach -->
         </div>
     </nav>
-<div class="site-menubar">
+    <div class="site-menubar">
         <div class="site-menubar-body">
             <div>
                 <div>
@@ -191,11 +194,6 @@
                                 <span class="site-menu-title">User Management Submenu</span>
                             </a>
                             <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="addremoveusers.php">
-                                        <span class="site-menu-title">Manipulate User Accounts</span>
-                                    </a>
-                                </li>
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="roommgmt.php">
                                         <span class="site-menu-title">Room List</span>
@@ -319,6 +317,14 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+plan kalau firdaus tk bangun:
+
     <!-- Page -->
     <div class="page">
         <div class="page-header">
@@ -329,6 +335,27 @@
             <h1 class="page-title">Payment Records</h1>
         </div>
         <div class="page-content container-fluid">
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">Payment Statistics</h3>
+          </div>
+          <div class="panel-body">
+            <!-- Example css animation Chart -->
+            <div class="example-wrap">
+              <div class="row row-lg">
+                <div class="col-xl-12">
+                  <div class="example">
+                    <div class="ct-chart ct-golden-section" id="exampleLineAnimation"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Example css animation Chart -->
+          </div>
+        </div>
+
+
             <div class="card">
                 <div class="card-header">
                     Semester Payments
@@ -362,6 +389,7 @@
                 <div class="panel-actions"></div>
                 <h3 class="panel-title">Payment Records List</h3>
             </header>
+            
             <div class="panel-body">
                 <!-- Modal for Data Button -->
                 <div class="modal fade" id="examplePositionCenter2" aria-labelledby="examplePositionCenter2" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
@@ -684,8 +712,11 @@
     <script src="../../../global/vendor/datatables.net-buttons/buttons.colVis.js"></script>
     <script src="../../../global/vendor/datatables.net-buttons-bs4/buttons.bootstrap4.js"></script>
     <script src="../../../global/vendor/asrange/jquery-asRange.min.js"></script>
-    <script src="../../../global/vendor/bootbox/bootbox.js"></script>
 
+    <script src="../../../global/vendor/chartist/chartist.js"></script>
+        <script src="../../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.js"></script>
+        <script src="../../assets/examples/js/charts/chartist.js"></script>
+        
     <!-- Scripts -->
     <script src="../../../global/js/Component.js"></script>
     <script src="../../../global/js/Plugin.js"></script>

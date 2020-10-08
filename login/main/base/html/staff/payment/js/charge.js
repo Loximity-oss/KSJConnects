@@ -14,7 +14,7 @@ card.mount('#card-element');
 card.addEventListener('change', function(event) {
     var displayError = document.getElementById('card-errors');
     if (event.error) {
-        displayError.textContent = "FUCK";
+        displayError.textContent = event.error.message;
     } else {
         displayError.textContent = '';
     }

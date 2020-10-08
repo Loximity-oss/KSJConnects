@@ -324,10 +324,10 @@
                                         echo '
                                             <tr>
                                                 <form action=""  method="POST">
-                                                    <input type="hidden" name="programID" value="' . $row['programID'] . '">
-                                                    <td>' . $row['programID'] . '</td>         
+                                                    <input type="hidden" name="programID" value="' . $row['activityID'] . '">
+                                                    <td>' . $row['activityID'] . '</td>         
                                                     <td>' . $row['programTitle'] . '</td>     
-                                                    <td>' . $row['merit'] . '</td>                                        
+                                                    <td>' . $row['programMerit'] . '</td>                                        
                                                 </form>
                                             </tr>';
                                     }

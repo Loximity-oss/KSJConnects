@@ -688,9 +688,6 @@
                     $("#staticparentjob").html(userData[9]);
                     $("#status").val(userData[10]);
 
-
-
-
                     //edit USERNAME AVAILABLE status
                     $("#user-availability-status").html("<span class='status-available'> User ID available. </span>");
                     $("#studentlist").hide();
@@ -761,24 +758,30 @@ $date = date('Y-m-d');
 if (isset($_POST['accept'])) {
     $sql = "UPDATE `registration` SET `status` = '2', `status_string` = '" . $_POST['staticstatus_string'] . "', `dateAccepted` = '" . $date . "' WHERE `registration`.`no` = '" . $_POST['appid'] . "' ";
     $sql2 = "UPDATE `roomlist` SET `userID` = '" . $_POST['staticuserID'] . "' WHERE `roomlist`.`roomID` = '" . $_POST['roomID'] . "'";
+    $sql3 = "UPDATE `users` SET `userType` = 'RESIDENT' where `userID` = '" . $_POST['staticuserID'] . "' ";
     $result = mysqli_query($con, $sql);
     $result2 = mysqli_query($con2, $sql2);
+    $result3 = mysqli_query($con2,$sql3);
     if ($result) {
-        echo '<script>
-               swal({
-                title: "Success",
-                text: "The user has been accepted.",
-                icon: "success",
-                button: "Ok",
-              }); </script>';
+        echo '<script>swal({
+            title: "Success",
+            text: "The student has been accepted to KSJ.",
+            icon: "success",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "residentapplication.php";
+           }
+        ); </script>';
     } else {
-        echo '<script>
-               swal({
-                title: "Oh no",
-                text: "Something went wrong.",
-                icon: "error",
-                button: "Ok",
-              }); </script>';
+        echo '<script>swal({
+            title: "Oh no",
+            text: "The student has not been added.",
+            icon: "error",
+            button: "Ok",
+          }).then(function(){ 
+            window.location.href = "residentapplication.php";
+           }
+        ); </script>';
     }
 }
 
@@ -791,14 +794,19 @@ if (isset($_POST['reject'])) {
                 text: "The user has been rejected.",
                 icon: "success",
                 button: "Ok",
-              }); </script>';
+            }).then(function(){ 
+                window.location.href = "residentapplication.php";
+               }
+            ); </script>';
     } else {
         echo '<script>swal({
                 title: "Oh no",
                 text: "Something went wrong.",
                 icon: "error",
                 button: "Ok",
-              }); </script>';
+            }).then(function(){ 
+                window.location.href = "residentapplication.php";
+               }</script>';
     }
 }
 ?>

@@ -741,7 +741,7 @@ if (isset($_POST['add'])) {
     } else {
         echo '<script>swal({
                 title: "Oh no",
-                text: "The sticker application has not been added.",
+                text: "You have applied for this semester.",
                 icon: "error",
                 button: "Ok",
               }).then(function(){ 

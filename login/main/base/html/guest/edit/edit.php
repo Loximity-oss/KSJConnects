@@ -18,8 +18,11 @@ if (isset($_POST['bioedit'])) {
 
 }
 else if (isset($_POST['passwordedit'])){
+    $password = $_POST['newpass'];
+    $salt = "fishcake";
+    $hash2 = sha1($password.$salt);
     if($_SESSION['password'] == $_POST['oldpass']){
-        $sql  = "UPDATE `users` SET `password` = '" . $_POST['newpass'] . "' WHERE `users`.`userID` = '" . $_SESSION['username'] . "'";
+        $sql  = "UPDATE `users` SET `password` = '$hash2' WHERE `users`.`userID` = '" . $_SESSION['username'] . "'";
         $result = mysqli_query($con, $sql);
         if ($result) 
             header ("Location: ../profile.php");

@@ -38,8 +38,8 @@
     <link rel="stylesheet" href="../../assets/examples/css/tables/datatable.css">
 
     <link rel="stylesheet" href="../../../global/vendor/chartist/chartist.css">
-        <link rel="stylesheet" href="../../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
-        <link rel="stylesheet" href="../../assets/examples/css/charts/chartist.css">
+    <link rel="stylesheet" href="../../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" href="../../assets/examples/css/charts/chartist.css">
 
 
     <!-- Fonts -->
@@ -338,19 +338,19 @@
             <h1 class="page-title">User Account Management</h1>
         </div>
         <div class="page-content container-fluid">
-        <div class="panel">
-          <div class="panel-body">
-                <!-- Example Simple Line Chart -->
-                <div class="example-wrap">
-                  <h4 class="example-title">User Account Registration</h4>
-                  <p>Statistics of accounts registered</p>
-                  <div class="example">
-                    <div class="ct-chart" id="exampleSimpleLine"></div>
-                  </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <!-- Example Simple Line Chart -->
+                    <div class="example-wrap">
+                        <h4 class="example-title">User Account Registration</h4>
+                        <p>Statistics of accounts registered</p>
+                        <div class="example">
+                            <div class="ct-chart" id="exampleSimpleLine"></div>
+                        </div>
+                    </div>
+                    <!-- End Example Simple Line Chart -->
                 </div>
-                <!-- End Example Simple Line Chart -->
-          </div>
-        </div>
+            </div>
             <div class="panel">
                 <header class="panel-heading">
                     <div class="panel-actions"></div>
@@ -462,6 +462,7 @@
                                             <form action=""  method="POST">
                                                 <td class="nr">' . $counter . '</td>
                                                 <input type="hidden" name="userID" value="' . $row['userID'] . '">
+                                                <input type="hidden" name="email" value="' . $row['email']  . '">
                                                 <td>' . $row['userID'] . '</td>         
                                                 <td>' . $row['fullname'] . '</td>    
                                                 <td>' . $row['email'] . '</td> 
@@ -501,7 +502,7 @@
                                                 <!--user ID-->
                                                 <div class="form-group ">
                                                     <label for="staticuserID" class="form-label">Username</label>
-                                                    <input type="text" class="form-control" id="staticuserID" name="staticuserID" onblur="checkAvailability()" required>
+                                                    <input type="text" class="form-control" id="staticuserID" name="staticuserID" onblur="checkAvailability()" readonly>
                                                     <span id="user-availability-status"></span>
                                                 </div>
                                                 <!--fullname-->
@@ -612,11 +613,11 @@
     <script src="../../../global/vendor/datatables.net-buttons/buttons.colVis.js"></script>
     <script src="../../../global/vendor/datatables.net-buttons-bs4/buttons.bootstrap4.js"></script>
     <script src="../../../global/vendor/asrange/jquery-asRange.min.js"></script>
-        <script src="../../../global/vendor/bootbox/bootbox.js"></script>
+    <script src="../../../global/vendor/bootbox/bootbox.js"></script>
 
     <script src="../../../global/vendor/chartist/chartist.js"></script>
-        <script src="../../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.js"></script>
-        <script src="../../assets/examples/js/charts/chartist.js"></script>
+    <script src="../../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.js"></script>
+    <script src="../../assets/examples/js/charts/chartist.js"></script>
 
     <!-- Scripts -->
     <script src="../../../global/js/Component.js"></script>
@@ -685,10 +686,10 @@
             var data = table.row($text - 1).data();
             $("#staticuserID").val(data[1]);
             $("#staticfullname").val(data[2]);
-            $("#staticemail").val(data[4]);
-            $("#staticphoneno").val(data[5]);
-            $("#staticusertype").val(data[6]);
-            $("#staticverification").val(data[7]);
+            $("#staticemail").val(data[3]);
+            $("#staticphoneno").val(data[4]);
+            $("#staticusertype").val(data[5]);
+            $("#staticverification").val(data[6]);
         });
 
         function JSconfirm() {
@@ -717,9 +718,9 @@ if (isset($_POST['submit'])) {
     $hash = md5(rand(0, 1000));
 
     //encryption as per lecturer requirement
-    $salt = "palsdkas;lkdasl;kd";
+    $salt = "fishcake";
     $password = md5(rand(0, 1));
-    $hash2 = md5($password, $salt);
+    $hash2 = sha1($password . $salt);
 
     $sql = "INSERT INTO `users` (`imageType`,`picture`,`userID`, `fullname`, `password`, `email`, `phone_no`, `userType`, `verification`, `bio`) 
     VALUES ('image/jpeg','','" . $_POST['userID'] . "','" . $_POST['fullname'] . "','$hash2', '" . $_POST['email'] . "', '" . $_POST['phoneno'] . "', '" . $_POST['usertype'] . "' , '" . $hash . "', 'Default Bio');";
@@ -735,10 +736,10 @@ if (isset($_POST['submit'])) {
      
             Thanks for signing up!
             Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
-            Your pre-created password is as follows: ' . $password . '
+            Your pre-created password is as follows: ' . $hash2 . '
              
             Please click this link to activate your account:
-            http://118.101.107.162/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
+            http://118.101.104.225/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
              
             ';
         $headers = 'From: ssah37@gmail.com';
@@ -777,9 +778,9 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_POST['update'])) {
-    $salt = "palsdkas;lkdasl;kd";
+    $salt = "fishcake";
     $password = $_POST['staticpassword'];
-    $hash2 = md5($password, $salt);
+    $hash2 = sha1($password . $salt);
 
     $sql = "UPDATE `users` SET `fullname` = '" . $_POST['staticfullname'] . "', `email` = '" . $_POST['staticemail'] . "', `phone_no` = '" . $_POST['staticphoneno'] . "', 
     `userType` = '" . $_POST['staticusertype'] . "', `verification` = '" . $_POST['staticverification'] . "' WHERE `users`.`userID` = '" . $_POST['staticuserID'] . "' ";
@@ -839,27 +840,52 @@ if (isset($_POST['delete'])) {
 }
 
 if (isset($_POST['reset'])) {
+    include 'edit/dbconnect.php';
+    $hash = md5(rand(0, 1000));
 
-    if ($result) {
+    //encryption as per lecturer requirement
+    $salt = "fishcake";
+    $password = md5(rand(0, 1));
+    $hash2 = sha1($password.$salt);
+
+    $sql = "UPDATE `users` SET `password` =  '$hash2', `verification` = '$hash' WHERE `userID` = '" . $_POST['userID'] . "'";
+    $result = mysqli_query($con, $sql);
+
+    $to = $_POST['email'];
+    $subject = 'KSJConnects SIGN UP | Verification E-mail';
+    $message = '
+         
+                Thanks for signing up!
+                Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+                Your pre-created password is as follows: '.$password.'
+                 
+                Please click this link to activate your account:
+                http://118.101.104.225/KSJConnects/verification/verify.php?email=' . $_POST['email'] . '&hash=' . $hash . '
+                 
+                ';
+    $headers = 'From: ssah37@gmail.com';
+
+    
+
+    if (mail($to, $subject, $message, $headers))
         echo '<script>swal({
-                title: "Success",
-                text: "The user account has been deleted",
-                icon: "success",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "addremoveusers.php";
-               }
-            ); </script>';
-    } else {
+                    title: "Success",
+                    text: "The password is resetted",
+                    icon: "success",
+                    button: "Ok",
+                  }).then(function(){ 
+                    window.location.href = "addremoveusers.php";
+                   }
+                ); </script>';
+    else
         echo '<script>swal({
-                title: "Oh no",
-                text: "User account is has not been deleted",
-                icon: "error",
-                button: "Ok",
-              }).then(function(){ 
-                window.location.href = "addremoveusers.php";
-               }
-            ); </script>';
-    }
+                    title: "Oh no",
+                    text: "The password was not reset.",
+                    icon: "error",
+                    button: "Ok",
+                  }).then(function(){ 
+                    window.location.href = "addremoveusers.php";
+                   }
+                ); </script>';
 }
 ?>

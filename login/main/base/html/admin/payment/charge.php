@@ -18,7 +18,7 @@ $customer = \Stripe\Customer::create(array(
 
 // Charge Customer
 $charge = \Stripe\Charge::create(array(
-  "amount" => 1200,
+  "amount" => 120000,
   "currency" => "myr",
   "description" => "Kolej Siswa Jaya Fee",
   "customer" => $customer->id

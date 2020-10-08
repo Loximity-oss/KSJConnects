@@ -718,7 +718,7 @@ if (isset($_POST['approve'])) {
             icon: "success",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "facilitybooking.php";
+            window.location.href = "stickerapp.php";
            }
         ); </script>';
     } else {
@@ -728,7 +728,7 @@ if (isset($_POST['approve'])) {
             icon: "error",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "facilitybooking.php";
+            window.location.href = "stickerapp.php";
            }
         ); </script>';
     }

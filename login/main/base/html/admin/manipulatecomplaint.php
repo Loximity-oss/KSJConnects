@@ -680,7 +680,7 @@ if (isset($_POST['add'])) {
             icon: "success",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "viewcomplaint.php";
+            window.location.href = "manipulatecomplaint.php";
            }
         ); </script>';
     } else {
@@ -690,7 +690,7 @@ if (isset($_POST['add'])) {
             icon: "error",
             button: "Ok",
           }).then(function(){ 
-            window.location.href = "viewcomplaint.php";
+            window.location.href = "manipulatecomplaint.php";
            }
         ); </script>';
     }

@@ -4,9 +4,14 @@ if (!$con) {
 	echo  mysqli_connect_error();
 	exit;
 }
+$password = $_GET['pass'];
+$salt = "fishcake";
+$hash2 = sha1($password.$salt);
 
-$sql = "UPDATE `users`SET `password`= '" . $_GET["pass"] . "' WHERE email = '" . $_GET["email"] . "'";
+$sql = "UPDATE `users` SET `password`= '$hash2' WHERE email = '" . $_GET["email"] . "'";
+
 $result = mysqli_query($con, $sql);
+
 if ($result) {
 	echo '<!DOCTYPE html>
 	<html lang="en">

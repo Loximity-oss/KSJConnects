@@ -6,8 +6,8 @@
       exit;
   }
 
-  $salt = "palsdkas;lkdasl;kd";
-  $hash2 = md5($_POST["oldpass"],$salt);
+  $salt = "fishcake";
+  $hash2 = sha1($_POST["oldpass"].$salt);
 
   $sql = "SELECT password FROM `users` WHERE userID ='" . $_POST["userID"] . "'";
   $result = mysqli_query($con, $sql);

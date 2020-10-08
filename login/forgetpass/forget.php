@@ -15,7 +15,7 @@ if (isset($_POST['Go'])) {
         
          
         Please click this link to reset your password:
-        http://118.101.107.162/KSJConnects/login/forgetpass/repforget.php?email=' . $_POST['email'] . '&pass=' . $_POST['pass'] . '
+        http://118.101.104.225/KSJConnects/login/forgetpass/repforget.php?email=' . $_POST['email'] . '&pass=' . $_POST['pass'] . '
          
         ';
 	$headers = 'From: ssah37@gmail.com';

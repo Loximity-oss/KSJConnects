@@ -10,7 +10,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>KSJConnects - Staff (Facility Records)</title>
+    <title>Staff (Facility Records)</title>
 
     <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../../assets/images/favicon.ico">
@@ -141,7 +141,7 @@
         </div>
     </nav>
 
-<div class="site-menubar">
+    <div class="site-menubar">
         <div class="site-menubar-body">
             <div>
                 <div>
@@ -191,11 +191,6 @@
                                 <span class="site-menu-title">User Management Submenu</span>
                             </a>
                             <ul class="site-menu-sub">
-                                <li class="site-menu-item">
-                                    <a class="animsition-link" href="addremoveusers.php">
-                                        <span class="site-menu-title">Manipulate User Accounts</span>
-                                    </a>
-                                </li>
                                 <li class="site-menu-item">
                                     <a class="animsition-link" href="roommgmt.php">
                                         <span class="site-menu-title">Room List</span>
@@ -319,6 +314,14 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+plan kalau firdaus tk bangun:
+
 
     <!-- Page -->
     <div class="page">

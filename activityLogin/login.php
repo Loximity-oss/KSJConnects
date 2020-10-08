@@ -5,15 +5,15 @@ if (isset($_POST['login'])) {
 	$_SESSION['password'] = $_POST['pass'];
 
 	$password = $_POST['pass'];
-	$salt = "palsdkas;lkdasl;kd";
-	$hash = md5($password,$salt);
+	$salt = "fishcake";
+	$hash = sha1($password.$salt);
 
 	$con = mysqli_connect("localhost", "root", "", "ksjdb");
 	if (!$con) {
 		echo  mysqli_connect_error();
 		exit;
 	}
-	$sql = "SELECT * FROM users where userID = '" . $_POST['username'] . "' and password ='" . $hash . "'";
+	$sql = "SELECT * FROM users where userID = '" . $_POST['username'] . "' and password ='$hash'";
 	$result = mysqli_query($con, $sql);
 	$count = mysqli_num_rows($result); //check how many matching record - should be 1 if correct
 	$row = mysqli_fetch_assoc($result);
