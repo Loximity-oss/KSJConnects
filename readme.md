@@ -1,12 +1,12 @@
 
-#KSJConnects Web-based Application System
+# KSJConnects Web-based Application System
 
 ![](https://i.imgur.com/MhYwrShl.png)
 
-##Brief Introduction
+## Brief Introduction
 Welcome, this project is constructed to fulfill requirements of DDWC3723 Software Development. Additionally, this serves as a project portfolio for its team members represented by the github contributors to this project.
 
-##Development 
+## Development 
 KSJConnects was developed using the SCRUM Methodology with semi-adherence to the
 documentation standards outlined by IEEE. 
 
@@ -27,7 +27,7 @@ Below outlines the basic features of KSJConnects.
 You may need to download Composer in order to use the payment gateway, Stripe.
 
 
-###Project Usernames/Passwords
+### Project Usernames/Passwords
 To simplify use we will provide standard passwords for others to access.
 
 ##### MYSQL Password
