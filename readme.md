@@ -24,7 +24,7 @@ Below outlines the basic features of KSJConnects.
 
 
 ### Project Dependencies
-You may need to download Composer in order to use the payment gateway, Stripe.
+You may need to download Composer in order to use the payment gateway, Stripe payment gateway.
 
 
 ### Project Usernames/Passwords
